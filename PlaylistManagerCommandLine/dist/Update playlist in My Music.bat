@@ -1,0 +1,1 @@
+java -jar PlaylistManager.jar updatePlaylists "C:\Users\nilsth\My Music\Playlists"
