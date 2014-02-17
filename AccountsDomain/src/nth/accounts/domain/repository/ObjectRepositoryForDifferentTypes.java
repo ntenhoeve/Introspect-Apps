@@ -14,7 +14,8 @@ import nth.introspect.filter.FilterUtil;
 import nth.introspect.util.xml.XmlUtil;
 
 /**
- * A very simple data access class for the {@link Introspect} framework that can be extended to store and read objects in an object database (an xml file)
+ * A very simple data access class for the {@link Introspect} framework that can
+ * be extended to store and read objects in an object database (an xml file)
  * 
  * @author nilsth
  * 
@@ -33,25 +34,32 @@ public class ObjectRepositoryForDifferentTypes {
 	 * See {@link ObjectRepositoryForDifferentTypes}
 	 * 
 	 * @param domainClass
-	 *            Type of the domain objects that this data access object handles
+	 *            Type of the domain objects that this data access object
+	 *            handles
 	 * @param xmlIndent
-	 *            True if the data in the XML file needs to be indented (indents make the XML easier to read by a human, but result in more data to store and process)
+	 *            True if the data in the XML file needs to be indented (indents
+	 *            make the XML easier to read by a human, but result in more
+	 *            data to store and process)
 	 */
 	// TODO add parameter String encryptionKey
-	public ObjectRepositoryForDifferentTypes(String databaseName, Boolean xmlIndent) {
+	public ObjectRepositoryForDifferentTypes(String databaseName,
+			Boolean xmlIndent) {
 		this.xmlIndent = xmlIndent;
 		String databaseFileName = databaseName + ".xml";
-		URI databaseUri = Introspect.getPathProvider().getConfigPath(databaseFileName);
+		URI databaseUri = Introspect.getPathProvider().getConfigPath(
+				databaseFileName);
 		xmlDatabaseFile = new File(databaseUri);
 		domainObjects = new ArrayList();
 	}
 
-	
 	public List<Object> getAll() throws Exception {
-		if (domainObjects.size()==0) {
-			//only reads the database file once, assuming that the domainObjects reference in this class is always kept synchronized with the database file. So we are dangerously assuming this class is the only class that makes changes to the database file!
+		if (domainObjects.size() == 0) {
+			// only reads the database file once, assuming that the
+			// domainObjects reference in this class is always kept synchronized
+			// with the database file. So we are dangerously assuming this class
+			// is the only class that makes changes to the database file!
 			String xml = readXmlDatabaseFile();
-			domainObjects = (List<Object>) XmlUtil.unmarshal(xml.toString());	
+			domainObjects = (List<Object>) XmlUtil.unmarshal(xml.toString());
 		}
 		return domainObjects;
 	}
