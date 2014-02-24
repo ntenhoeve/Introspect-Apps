@@ -1,5 +1,7 @@
 package nth.accounts.domain.account;
 
+import nth.introspect.util.TitleBuilder;
+
 public class AccountAttribute {
 	private String name;
 	private String value;
@@ -22,11 +24,10 @@ public class AccountAttribute {
 
 	@Override
 	public String toString() {
-		StringBuffer title = new StringBuffer();
-		title.append(name.trim());
-		title.append(": ");
-		title.append(value.trim());
-		return title.toString();
+		TitleBuilder titleBuilder=new TitleBuilder(":");
+		titleBuilder.append(name);
+		titleBuilder.append(value);
+		return titleBuilder.getTitle();
 	}
 
 }

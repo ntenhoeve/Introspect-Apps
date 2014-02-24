@@ -72,12 +72,15 @@ public class Account {
 	//TODO public void attributesAddUrlAttribute (like attributesAddEmailAttribute)
 	
 	
-	public void attributesAddCustomAttribute(AccountAttribute accountAttribute) {
-		AccountAttribute attribute=new AccountAttribute();
-		attribute.setName(accountAttribute.getName());
-		attribute.setValue(accountAttribute.getValue());
-		attributes.add(attribute);
+	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
+	public void attributesAddCustomAttribute(AccountAttribute newAttribute) {
+		attributes.add(newAttribute);
 	}
+	
+	public AccountAttribute attributesAddCustomAttributeParameterFactory() {
+		return new AccountAttribute();
+	}
+
 	
 	@FormMode(FormModeType.executeMethodAfterConformation)
 	public void attributesRemoveAttribute(AccountAttribute attribute) {
