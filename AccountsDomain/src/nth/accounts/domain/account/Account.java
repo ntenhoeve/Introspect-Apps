@@ -10,6 +10,7 @@ import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.util.TitleBuilder;
 
 public class Account {
 	private String accountName;
@@ -17,9 +18,9 @@ public class Account {
 	private List<AccountAttribute> attributes;
 
 	public Account() {
-		attributes=new ArrayList<AccountAttribute>();
+		attributes = new ArrayList<AccountAttribute>();
 	}
-	
+
 	@NotNull
 	@OrderInForm(1)
 	public String getAccountName() {
@@ -48,40 +49,66 @@ public class Account {
 	public void userPutUser(User user) {
 		setUser(user);
 	}
-	
+
 	public void userClearUser() {
-		setUser(null);
+		throw new RuntimeException("Test");
+		//setUser(null);
 	}
-	
+
 	public void setAttributes(List<AccountAttribute> attributes) {
 		this.attributes = attributes;
 	}
 
+	public void attributesAddEmailAttribute(AccountAttribute emailAttribute) {
+		attributes.add(emailAttribute);
+	}
 
-	public void attributesAddEmailAttribute(EmailAddress emailAddress) {
+	public AccountAttribute attributesAddEmailAttributeParameterFactory() {
 		AccountAttribute attribute=new AccountAttribute();
-		attribute.setName("e-mail");
-		attribute.setValue(emailAddress.getEmailAddress());
-		attributes.add(attribute);
+		attribute.setName("E-Mail");
+		return attribute;
+	}
+
+	public void attributesAddUserNameAttribute(AccountAttribute userNameAttribute) {
+		attributes.add(userNameAttribute);
+	}
+
+	public AccountAttribute attributesAddUserNameAttributeParameterFactory() {
+		AccountAttribute attribute=new AccountAttribute();
+		attribute.setName("User name");
+		return attribute;
 	}
 	
-	//TODO public void attributesAddUserNameAttribute (like attributesAddEmailAttribute)
+	public void attributesAddPasswordAttribute(AccountAttribute passwordAttribute) {
+		attributes.add(passwordAttribute);
+	}
 
-	//TODO public void attributesAddPasswordAttribute (like attributesAddEmailAttribute)
+	public AccountAttribute attributesAddPasswordAttributeParameterFactory() {
+		AccountAttribute attribute=new AccountAttribute();
+		attribute.setName("Password");
+		return attribute;
+	}
 	
-	//TODO public void attributesAddUrlAttribute (like attributesAddEmailAttribute)
-	
-	
+	public void attributesAddUrlAttribute(AccountAttribute urlAttribute) {
+		attributes.add(urlAttribute);
+	}
+
+	public AccountAttribute attributesAddUrlAttributeParameterFactory() {
+		AccountAttribute attribute=new AccountAttribute();
+		attribute.setName("URL");
+		return attribute;
+	}
+
+
 	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
 	public void attributesAddCustomAttribute(AccountAttribute newAttribute) {
 		attributes.add(newAttribute);
 	}
-	
+
 	public AccountAttribute attributesAddCustomAttributeParameterFactory() {
 		return new AccountAttribute();
 	}
 
-	
 	@FormMode(FormModeType.executeMethodAfterConformation)
 	public void attributesRemoveAttribute(AccountAttribute attribute) {
 		attributes.remove(attribute);
@@ -93,16 +120,12 @@ public class Account {
 
 	@Override
 	public String toString() {
-		StringBuffer title=new StringBuffer();
-		String userName = (user==null)?null: user.getName();
-		if (userName!=null && userName.trim().length()>0) {
-			title.append(user.getName().trim());
-			title.append("-");
+		TitleBuilder titleBuilder = new TitleBuilder("-");
+		if (user != null) {
+			titleBuilder.append(user.getName());
 		}
-		title.append(accountName);
-		return title.toString();
+		titleBuilder.append(accountName);
+		return titleBuilder.toString();
 	}
-	
-	
-	
+
 }

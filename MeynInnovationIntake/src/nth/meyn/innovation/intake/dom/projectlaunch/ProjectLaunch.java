@@ -1,4 +1,4 @@
-package nth.innoforce.domain.project.launch;
+package nth.meyn.innovation.intake.dom.projectlaunch;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,15 +6,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import nth.innoforce.domain.innovationrevenue.OrderLine;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.meyn.innovation.intake.dom.capitalsalesintake.OrderLine;
 
 public class ProjectLaunch {
 
 	private String projectName;
 	private Date releaseDate;
 	private List<String> productCodes;
-	private final int projectNumber;
+	private final Integer projectNumber;
 	private Date oldProductDate;
 
 	public ProjectLaunch(int projectNumber, String projectName, int releaseYear, int releaseMonth, int releaseDayOfMotnh, String productCodes) {
@@ -24,7 +24,7 @@ public class ProjectLaunch {
 		releaseDate.set(releaseYear, releaseMonth-1, releaseDayOfMotnh,0,0,0);
 		this.releaseDate=releaseDate.getTime();
 		Calendar oldProductDate=((Calendar) releaseDate.clone());
-		oldProductDate.add(Calendar.YEAR, 3);//the date after which the project is no longer considered new (3 years after release)
+		oldProductDate.add(Calendar.YEAR, 5);//the date after which the project is no longer considered new (5 years after release)
 		this.oldProductDate=oldProductDate.getTime();
 		StringTokenizer tokenizer = new StringTokenizer(productCodes, ";");
 		this.productCodes = new ArrayList<String>();
@@ -46,7 +46,7 @@ public class ProjectLaunch {
 		return productCodes;
 	}
 
-	public int getProjectNumber() {
+	public Integer getProjectNumber() {
 		return projectNumber;
 	}
 
