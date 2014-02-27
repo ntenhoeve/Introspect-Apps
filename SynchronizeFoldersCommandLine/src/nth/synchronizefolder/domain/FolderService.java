@@ -12,8 +12,8 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 
 import org.apache.commons.io.IOUtils;
 
@@ -64,7 +64,7 @@ public class FolderService {
 	 */
 	public static final long ONE_TB = ONE_KB * ONE_GB;
 
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void synchronize(SynchronizeArgument synchronizeArgument) throws IOException {
 		// source
 		File source = synchronizeArgument.getSource();

@@ -6,8 +6,8 @@ import java.util.List;
 
 import nth.innoforce.domain.resource.Resource;
 import nth.introspect.Introspect;
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class ProjectsService {
@@ -17,7 +17,7 @@ public class ProjectsService {
 	}
 	
 	// TODO this method was created for testing purposes. remove when no longer needed
-	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
+	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void modifyGibletHarvesterProject(Project project) {
 		getProjectDataAccess().set(project);
 	}
@@ -86,11 +86,12 @@ public class ProjectsService {
 		return null;
 	}
 
-	@FormMode(FormModeType.showParameterThenClose)
-	public void viewProject(Project project) {
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public Project viewProject(Project project) {
+		return project;
 	}
 
-	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
+	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void modifyProject(Project project) {
 	}
 
@@ -98,7 +99,7 @@ public class ProjectsService {
 		return Introspect.getAuthorizationProvider().userInRole("ProcessManager");
 	}
 
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public URL modifyProjectInEpm(Project project) throws MalformedURLException {
 		StringBuffer url = new StringBuffer("http://epm/PWA/_layouts/PWA/views/EditProjectSummary.aspx?_projectUid=");
 		url.append(project.getEpmId());
@@ -107,7 +108,7 @@ public class ProjectsService {
 	}
 
 	@GenericReturnType(Project.class)
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Project> findProjectsOfResource(Resource resource) {
 		return getProjectDataAccess().findProjectsOfResource(resource);
 	}

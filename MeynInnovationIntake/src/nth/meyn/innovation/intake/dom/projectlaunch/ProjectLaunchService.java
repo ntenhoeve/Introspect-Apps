@@ -3,8 +3,8 @@ package nth.meyn.innovation.intake.dom.projectlaunch;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class ProjectLaunchService {
@@ -29,8 +29,9 @@ public class ProjectLaunchService {
 		return projectLaunchs;
 	}
 
-	@FormMode(FormModeType.showParameterThenClose)
-	public void viewProjectLaunch(ProjectLaunch projectLaunch) {
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public ProjectLaunch viewProjectLaunch(ProjectLaunch projectLaunch) {
+		return projectLaunch;
 	}
 	
 	

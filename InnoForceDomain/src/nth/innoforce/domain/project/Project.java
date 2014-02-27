@@ -28,11 +28,11 @@ import nth.innoforce.domain.project.status.ProjectStatus;
 import nth.innoforce.domain.project.type.ProjectType;
 import nth.innoforce.domain.resource.Resource;
 import nth.introspect.dataaccess.hibernate.entity.DeletableEntity;
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.property.FieldModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ColumnWidth;
 import nth.introspect.provider.domain.info.valuemodel.annotations.FieldMode;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.Format;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.Icon;
@@ -299,10 +299,11 @@ public class Project extends DeletableEntity implements PriorityInProductGroupPr
 //		return reports;
 //	}
 
-	@FormMode(FormModeType.showParameterThenClose)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	@Icon("view")
-	public void viewEventItem(ProjectEvent report) {
+	public ProjectEvent viewEventItem(ProjectEvent report) {
 		// Do nothing, just show details to user
+		return report;
 	}
 
 	// public void addGate(Gate gate) {

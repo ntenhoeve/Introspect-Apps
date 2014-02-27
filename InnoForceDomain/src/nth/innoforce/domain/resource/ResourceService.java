@@ -8,8 +8,8 @@ import java.util.List;
 
 import nth.innoforce.domain.find.FindParameter;
 import nth.introspect.Introspect;
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.Icon;
 
@@ -32,7 +32,7 @@ public class ResourceService {
 		// TODO code to itterate to trough meynconnect persons and innoforce database persons and update innoforce persons
 	}
 
-	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
+	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	@GenericReturnType(Resource.class)
 	@Icon("find")
 	public List<Resource> findResources(FindParameter findParameter) {
@@ -43,11 +43,12 @@ public class ResourceService {
 		return new FindParameter("Test");
 	}
 
-	@FormMode(FormModeType.showParameterThenClose)
-	public void view(Resource resource) throws MalformedURLException {
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public Resource view(Resource resource) throws MalformedURLException {
+		return resource;
 	}
 
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public URI openInFacebook(Resource resource) throws Exception {
 		// http://facebook.meyn.nl/index.php/advanced-search/Nils%2Bten%2BHoeve?ordering=newest&searchphrase=all
 		StringBuffer url = new StringBuffer("http://facebook.meyn.nl/index.php/advanced-search/");
@@ -55,14 +56,14 @@ public class ResourceService {
 		return new URI(url.toString());
 	}
 
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public URI sendEmail(Resource resource) throws Exception {
 		StringBuffer uri = new StringBuffer("mailto:");
 		uri.append(resource.getEmailAddress());
 		return new URL(uri.toString()).toURI();
 	}
 
-	@FormMode(FormModeType.showParameterThenClose)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public Resource me() {
 		String userName = Introspect.getAuthorizationProvider().getCurrentUserName();
 		FindParameter findParameter = new FindParameter(userName);

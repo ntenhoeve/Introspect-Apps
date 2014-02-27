@@ -3,8 +3,8 @@
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.Icon;
 
 
@@ -33,12 +33,13 @@ public class ProductsService {
 	}
 
 	@Icon("View")
-	@FormMode(FormModeType.showParameterThenClose)
-	public void viewProductNode(ProductNode productNode) {
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public ProductNode viewProductNode(ProductNode productNode) {
+		return productNode;
 	}
 	
 	@Icon("Modify")
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void modifyProductNode(ProductNode productNode) {
 		throw new RuntimeException("The product can only be modified in Baan.<br>Please contact the responsible product manager for product changes in Baan.");
 	}

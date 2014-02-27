@@ -5,8 +5,8 @@ import java.util.List;
 
 import nth.accounts.domain.user.User;
 import nth.introspect.filter.FilterUtil;
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class AccountService {
@@ -20,7 +20,7 @@ public class AccountService {
 	}
 
 	@GenericReturnType(Account.class)
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Account> allAccountsOfUser(User userToFind) throws Exception {
 		List<Account> allAccounts = allAccounts();
 		AccountUserFilter filter = new AccountUserFilter(userToFind);
@@ -51,13 +51,14 @@ public class AccountService {
 		accountDataAccess.persist(account);
 	}
 
-	@FormMode(FormModeType.executeMethodAfterConformation)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void deleteAccount(Account account) throws Exception {
 		accountDataAccess.delete(account);
 	}
 
-	@FormMode(FormModeType.showParameterThenClose)
-	public void viewAccount(Account account) throws Exception {
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	public Account viewAccount(Account account) throws Exception {
+		return account;
 	}
 
 }

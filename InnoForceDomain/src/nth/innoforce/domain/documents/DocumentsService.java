@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.innoforce.domain.project.Project;
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class DocumentsService {
@@ -28,13 +28,13 @@ public class DocumentsService {
 		PROJECT_PARENT_FOLDERS = new File[] {PROJECTS_RUNNING, PROJECTS_ONHOLD, PROJECTS_FINISHED, PROJECTS_KILLED};
 	}
 
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public URI viewDocument(Document document) {
 		return document.getFile().toURI();
 	}
 
 	@GenericReturnType(Document.class)
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Document> findBusinessCases(Project project) throws Exception {
 		URI projectFolder = findProjectFolder(project);
 		List<Document> documents = findDocuments(new File(projectFolder), new String[] {"business", "case"});
@@ -42,7 +42,7 @@ public class DocumentsService {
 	}
 
 	@GenericReturnType(Document.class)
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Document> findHighLightReports(Project project) throws Exception {
 		URI projectFolder = findProjectFolder(project);
 		List<Document> documents = findDocuments(new File(projectFolder), new String[] {"high", "light"});
@@ -50,14 +50,14 @@ public class DocumentsService {
 	}
 
 	@GenericReturnType(Document.class)
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Document> findDeliverablesActionablesBotleneckLists(Project project) throws Exception {
 		URI projectFolder = findProjectFolder(project);
 		List<Document> documents = findDocuments(new File(projectFolder), new String[] {"dab"});
 		return documents;
 	}
 
-	@FormMode(FormModeType.executeMethodDirectly)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public URI findProjectFolder(Project project) throws Exception {
 		String projectNr = project.getNumber().toString();
 		for (File projectParentFolder : PROJECT_PARENT_FOLDERS) {

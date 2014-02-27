@@ -6,8 +6,8 @@ import java.util.List;
 import com.sun.istack.internal.NotNull;
 
 import nth.accounts.domain.user.User;
-import nth.introspect.provider.domain.info.method.MethodInfo.FormModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.FormMode;
+import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.OrderInForm;
 import nth.introspect.util.TitleBuilder;
@@ -100,7 +100,7 @@ public class Account {
 	}
 
 
-	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
+	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesAddCustomAttribute(AccountAttribute newAttribute) {
 		attributes.add(newAttribute);
 	}
@@ -109,12 +109,12 @@ public class Account {
 		return new AccountAttribute();
 	}
 
-	@FormMode(FormModeType.executeMethodAfterConformation)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void attributesRemoveAttribute(AccountAttribute attribute) {
 		attributes.remove(attribute);
 	}
 
-	@FormMode(FormModeType.editParameterThenExecuteMethodOrCancel)
+	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesModifyAttribute(AccountAttribute attribute) {
 	}
 
