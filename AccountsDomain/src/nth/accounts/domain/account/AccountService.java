@@ -56,7 +56,7 @@ public class AccountService {
 		accountDataAccess.delete(account);
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public Account viewAccount(Account account) throws Exception {
 		return account;
 	}

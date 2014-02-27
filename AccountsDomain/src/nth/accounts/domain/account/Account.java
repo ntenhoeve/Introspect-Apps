@@ -46,10 +46,12 @@ public class Account {
 		return attributes;
 	}
 
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void userPutUser(User user) {
 		setUser(user);
 	}
 
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void userClearUser() {
 		throw new RuntimeException("Test");
 		//setUser(null);
