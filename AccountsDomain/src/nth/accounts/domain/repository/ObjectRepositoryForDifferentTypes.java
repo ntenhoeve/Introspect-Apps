@@ -109,7 +109,7 @@ public class ObjectRepositoryForDifferentTypes {
 				.createCipherOutputStream(PASS_PHRASE, fileOutputStream);
 		PrintWriter printWriter = new PrintWriter(cipherOutputStream);
 		printWriter.print(xml);
-		fileOutputStream.close();
+		printWriter.close();
 	}
 
 	public void delete(Object domainObject) throws Exception {
