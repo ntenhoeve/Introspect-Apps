@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import nth.introspect.provider.domain.info.valuemodel.annotations.Format;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 import nth.meyn.innovation.intake.dom.capitalsalesintake.OrderLine;
 
@@ -37,6 +38,7 @@ public class ProjectLaunch {
 		return projectName;
 	}
 
+	@Format("yyyy-MM-dd")
 	public Date getReleaseDate() {
 		return releaseDate;
 	}

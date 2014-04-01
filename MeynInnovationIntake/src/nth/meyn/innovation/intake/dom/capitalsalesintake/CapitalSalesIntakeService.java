@@ -95,4 +95,9 @@ public class CapitalSalesIntakeService {
 		year.setYear(Calendar.getInstance().get(Calendar.YEAR));
 		return year;
 	}
+	
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public OrderLine viewOrderLine(OrderLine orderLine) {
+		return orderLine;
+	}
 }
