@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html style="background-color:#0F0F0F;">
+ <head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+  <title>
+   About the introspect Framework-Why develop yet another application framework
+  </title>
+ </head>
+ <body>
+  <div id="titleLogo" style="position:fixed;top:0;width:100%;height:100px;background-color:#0F0F0F;">
+   <img style="width:8cm;" src="../images/introspect.png"></img>
+   <div id="buttonBar" style="position:absolute;bottom:0;right:9px;width:110px;"></div>
+  </div>
+  <table style="margin-top:100px;width:100%;">
+   <tr>
+    <td style="width:100%;vertical-align:top;">
+     <div id="content" style="background-color:#F0F0F0;padding:7px;-webkit-border-radius:10px;-khtml-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;border-radius:10px;">
+      <div>
+       <h1>
+        About the introspect Framework
+       </h1>
+       Almost everyday new libraries, frameworks and tools are being released by the developer community, many of which reinvent the wheel.
+       <br>
+       <br>
+       This is called the ‘Yet Another Framework Syndrome’ (YAFS), or in more general terms ‘Not Invented Here’ (NIH). Whilst innovation is something we should all welcome, YAFS can lead to confusion and frustration for users because there’s a big risk of it introducing more noise than value.
+       <br>
+       <br>
+       So why develop a new framework while there are so many Java application frameworks out there? 
+       <br>
+       <br>
+       Answers:
+       <br>
+       <ul>
+        <li>
+         Because its fun (see 
+         <a href="http://www.sdn.nl/SDN/Artikelen/tabid/58/view/View/ArticleID/524/Just-because-its-fun.aspx">
+          Dutch article
+         </a>
+         )
+        </li>
+        <li>
+         The journey of developing yet another framework has thought me more than I could have learned implementing an existing framework. Specifically on how other frameworks solved 
+         issues that I run into.
+        </li>
+        <li>
+         I love the thoughts behind the 
+         <a href="http://nakedobjects.codeplex.com/">
+          Naked Objects Framework
+         </a>
+          (for 
+         <a href="http://en.wikipedia.org/wiki/.NET_Framework">
+          .
+         </a>
+         <a href="http://en.wikipedia.org/wiki/.NET_Framework">
+          net
+         </a>
+         ) and the 
+         <a href="http://isis.apache.org/">
+          Apache Isis Framework
+         </a>
+          (for 
+         <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">
+          Java
+         </a>
+         ). But looking at the Apache Isis Framework, there are several things I personally dislike which I tried to do better in the Introspect framework. Note that what I dislike does not mean I thinks is wrong in all cases!
+        </li>
+        <li>
+         The domain objects and service objects 
+         (often 
+         repository objects
+         )
+          usually extend a 
+         convenience
+          class that contains methods to interact with the framework
+         / object container
+         . Extending such a class is not mandatory, because you can implement these methods in your objects, but to me this ignores the principle of "Naked objects" or 
+         <a href="http://en.wikipedia.org/wiki/Plain_Old_Java_Object">
+          POJO’s
+         </a>
+          .
+        </li>
+        <li>
+         Apache Isis’s uses (depends on) Maven. Maven has its pros (managing 
+         dependencies
+         , and standardizing the build process), but is also famous for its cons (difficult to configure, steep learning curve, etc, etc).
+        </li>
+        <li>
+         I personally dislike the way Apache Isis 
+         manages the editing of
+          objects. 
+         This is very tightly linked to its persistence framework. I however believe that objects do not necessarily need to be persisted 
+         or need to be persisted after its been
+          edited.
+          I prefer to inverse the solution: domain objects can be passed to a method as a method parameter. This method parameter can be edited by a user before a method is executed (depending on how the method is 
+         <a>
+          annotated
+         </a>
+         ) the domain object/ method parameter may then be handled by a 
+         <a>
+          back end service
+         </a>
+          like a persistence service (or not at all). 
+          
+        </li>
+       </ul>
+       <br>
+      </div>
+     </div>
+    </td>
+   </tr>
+  </table>
+ </body>
+</html>

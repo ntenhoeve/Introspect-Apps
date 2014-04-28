@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html style="background-color:#0F0F0F;">
+ <head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+  <title>
+   Introspect Domain Concepts-Service Objects
+  </title>
+ </head>
+ <body>
+  <div id="titleLogo" style="position:fixed;top:0;width:100%;height:100px;background-color:#0F0F0F;">
+   <img style="width:8cm;" src="../images/introspect.png"></img>
+   <div id="buttonBar" style="position:absolute;bottom:0;right:9px;width:110px;"></div>
+  </div>
+  <table style="margin-top:100px;width:100%;">
+   <tr>
+    <td style="width:100%;vertical-align:top;">
+     <div id="content" style="background-color:#F0F0F0;padding:7px;-webkit-border-radius:10px;-khtml-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;border-radius:10px;">
+      <div>
+       <h1>
+        Introspect Domain Concepts
+       </h1>
+       <br>
+       <ul>
+        <li>
+         To provide methods for creating and retrieving domain objects where the user does not have an existing object to navigate from. Services that perform this role are often referred to as 'repositories'. (Some designers prefer to draw a distinction between a 'factory' service, which has responsibility for creating domain objects, and a 'repository' service for retrieving them. If you prefer to maintain this distinction, then they may be implemented in two separate services. However, there is merit in keeping the ideas together, and we tend to refer to the combination as a 'repository'. For more information see Section 2.2.5, “Repository”.
+        </li>
+        <li>
+         To provide a bridge to external functionality. For more information see Section 2.2.6, “External or System service”.
+        </li>
+        <li>
+         To provide functionality that is to be shared by multiple classes of domain objects which do not necessarily have any common 
+         superclass
+         . This is achieved through the concept of contributed actions whereby methods are written on a service but appear to the user as actions on a domain object. For more information see Section 2.2.7, “Contributed action”.
+        </li>
+       </ul>
+       <ul>
+        <li>
+         It makes the service's actions available to the user
+        </li>
+        <li>
+         It instructs the Naked Objects framework to inject that service into any domain object that needs access to it. See 
+         <a>
+          Dependency Injection
+         </a>
+         .
+        </li>
+       </ul>
+       only accepts methods with one parameter. You can use methods with multiple 
+       paramaters
+       , but these methods can only be used internally (calling from code) and won’t be visible for the outside world.
+       <br>
+       <br>
+      </div>
+     </div>
+    </td>
+   </tr>
+  </table>
+ </body>
+</html>

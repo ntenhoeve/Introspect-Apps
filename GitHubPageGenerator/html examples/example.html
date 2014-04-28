@@ -1,0 +1,35 @@
+<!DOCTYPE html>    
+<meta charset="utf-8" />
+<title>valid HTML5 / fixed header and footer / nada CSS sizing trouble</title>
+<style type="text/css">
+
+html, body, table { height:                 100% }    
+th {                height:                 80px }    
+#f {                height:                 40px }
+
+table {             width:                  100% }
+
+html, body {        margin:                 0 }
+table {             margin:                 0 auto }
+
+td {                text-align:             left }      
+html, body {        text-align:             center } /* important for old browsers */
+th {                text-align:             right }
+
+html, body {        background-color:       rgb(148,0,211) } 
+#m {                background-color:       #f39 }
+
+#m {                -webkit-border-radius:  25px;    
+                    -khtml-border-radius:   25px;    
+                    -moz-border-radius:     25px;    
+                    -ms-border-radius:      25px;      
+                    -o-border-radius:       25px;      
+                    border-radius:          25px; }
+</style>
+<table>      
+  <thead><tr><th>       head</th></tr></thead>
+  <tfoot><tr><td id="f">foot</td></tr></tfoot>
+  <tbody><tr><td id="m">main</td></tr></tbody>
+</table>
+
+<!--http://stackoverflow.com/questions/8257311/modern-way-to-markup-100-height-layout-in-html5-and-css3-->

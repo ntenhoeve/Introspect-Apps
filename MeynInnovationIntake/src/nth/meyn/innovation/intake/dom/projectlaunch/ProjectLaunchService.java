@@ -46,15 +46,15 @@ public class ProjectLaunchService {
 		// 2007
 		projectLaunchs.add(new ProjectLaunch(0, "Inside/ Outside Birdwasher", 2007, 1, 1, "1810;1812"));
 		projectLaunchs.add(new ProjectLaunch(0, "Outside washer", 2007, 1, 1, "1790"));
-		projectLaunchs.add(new ProjectLaunch(0, "Bonescan", 2007, 1, 1, "3880"));
-		projectLaunchs.add(new ProjectLaunch(0, "Rapid - Mark I", 2007, 5, 1, PRODUCT_CODES_RAPID));
-		projectLaunchs.add(new ProjectLaunch(0, "Rehanger Tendon Puller", 2007, 9, 1, "?"));
-		projectLaunchs.add(new ProjectLaunch(0, "Rapid - Mark II", 2007, 9, 1, PRODUCT_CODES_RAPID));
+		projectLaunchs.add(new ProjectLaunch(602610, "Bonescan", 2007, 1, 1, "3880"));
+		projectLaunchs.add(new ProjectLaunch(600237, "Rapid - Mark I", 2007, 5, 1, PRODUCT_CODES_RAPID));
+		projectLaunchs.add(new ProjectLaunch(600425, "Rehanger Turkey Tendon Puller", 2007, 9, 1, "0140"));
+		projectLaunchs.add(new ProjectLaunch(602235, "Rapid - Mark II", 2007, 9, 1, PRODUCT_CODES_RAPID));
 		projectLaunchs.add(new ProjectLaunch(602108, "Inside/ Outside Birdwasher (Brush type)", 2007, 11, 1, "1813"));
 		projectLaunchs.add(new ProjectLaunch(600308, "M4000 weighing computer", 2007, 11, 1, "2106"));
 		// 2008
 		projectLaunchs.add(new ProjectLaunch(602218, "Rapid - Improvement descinner", 2008, 1, 1, PRODUCT_CODES_RAPID));
-		projectLaunchs.add(new ProjectLaunch(0, "Hockcutter Rehanger Turkey", 2008, 5, 1, "?"));
+		projectLaunchs.add(new ProjectLaunch(602407, "Rehanger Turkey Hockcutter", 2008, 5, 1, "0141"));
 		projectLaunchs.add(new ProjectLaunch(602206, "Drum Thigh Separator", 2008, 5, 1, "1211"));
 		projectLaunchs.add(new ProjectLaunch(602005, "Jet stream scalder", 2008, 5, 1, PRODUCT_CODES_JET_STREAM_SCALDER));
 		projectLaunchs.add(new ProjectLaunch(602209, "Line Clearer", 2008, 5, 1, "2651;2655;2656"));// TODO all of them?
@@ -65,11 +65,11 @@ public class ProjectLaunchService {
 		projectLaunchs.add(new ProjectLaunch(602215, "Carcass trimmer", 2008, 9, 1, "0571"));
 		projectLaunchs.add(new ProjectLaunch(602109, "Opener ECP", 2008, 9, 1, "0451"));
 		projectLaunchs.add(new ProjectLaunch(602223, "Rapid - Improvement pre-scraper", 2008, 9, 1, PRODUCT_CODES_RAPID));
-		projectLaunchs.add(new ProjectLaunch(602407, "Turkey rehanger with hock cutter", 2008, 9, 1, "?"));
+		projectLaunchs.add(new ProjectLaunch(602407, "Turkey rehanger with hock cutter", 2008, 9, 1, "0141"));
 		projectLaunchs.add(new ProjectLaunch(602204, "Wing Stretcher", 2008, 11, 1, "0390;0391"));// TODO all of them?
-		projectLaunchs.add(new ProjectLaunch(602314, "Flex Line", 2008, 11, 1, "?"));
+		projectLaunchs.add(new ProjectLaunch(602314, "Flex Line", 2008, 11, 1, "0762;4560;4610;4630;4640;4650;4655;4660;4680;4690;4700;4710;4730;4750;4760;4770;4780;4790;4800;4810;4820;4840;4860;4865;4870;4871;4872;4880;4890;4900;4940"));
 		projectLaunchs.add(new ProjectLaunch(602228, "Rapid - Hygienic Redesign Deskinner", 2008, 11, 1, PRODUCT_CODES_RAPID));
-		projectLaunchs.add(new ProjectLaunch(602307, "Easy Track", 2008, 11, 1, ""));// TODO has always been booked on generic product code 9000, instead of 4000
+		projectLaunchs.add(new ProjectLaunch(602307, "Easy Track", 2008, 11, 1, "4000"));// TODO has always been booked on generic product code 9000, instead of 4000
 		// 2009
 		projectLaunchs.add(new ProjectLaunch(602308, "Product Counter", 2009, 6, 1, "3150;3151"));
 		projectLaunchs.add(new ProjectLaunch(602225, "Rapid - Automatic Harvesting, Butterflies tender out", 2009, 6, 1, PRODUCT_CODES_RAPID));
@@ -80,8 +80,8 @@ public class ProjectLaunchService {
 		// 2010
 		projectLaunchs.add(new ProjectLaunch(602005, "Jet stream scalder (interconnecting tanks)", 2010, 3, 1, PRODUCT_CODES_JET_STREAM_SCALDER));
 		projectLaunchs.add(new ProjectLaunch(602225, "Rapid - Automatic Harvesting, Half filets tender out", 2010, 3, 1, PRODUCT_CODES_RAPID));
-		projectLaunchs.add(new ProjectLaunch(602010, "Feet cutter", 2010, 10, 1, ""));
-		projectLaunchs.add(new ProjectLaunch(602208, "Leg Processor Obdam Type II ", 2010, 10, 1, ""));
+		projectLaunchs.add(new ProjectLaunch(602010, "Feet cutter", 2010, 10, 1, "3000;3003"));
+		projectLaunchs.add(new ProjectLaunch(602208, "Leg Processor Obdam Type II ", 2010, 10, 1, "0922"));
 		// 2011
 		projectLaunchs.add(new ProjectLaunch(604201, "Rapid - improvement Yield Wish Bone", 2011, 1, 1, PRODUCT_CODES_RAPID));
 		projectLaunchs.add(new ProjectLaunch(602221, "Rapid improvement 2nd 180 carousel breast cap solution", 2011, 1, 1, PRODUCT_CODES_RAPID));
