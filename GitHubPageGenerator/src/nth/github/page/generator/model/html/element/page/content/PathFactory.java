@@ -136,7 +136,7 @@ public class PathFactory {
 		StringBuilder fileNameBuilder = new StringBuilder();
 		fileNameBuilder.append(chapterLevel1.getTitle().trim());
 		if (chapterLevel2 != null) {
-			fileNameBuilder.append("-");
+			fileNameBuilder.append(" ~ ");
 			fileNameBuilder.append(chapterLevel2.getTitle().trim());
 		}
 		return createWikiFileName(fileNameBuilder.toString());
@@ -153,7 +153,8 @@ public class PathFactory {
 		fileName = fileName.replace("?", "%3F");
 		fileName = fileName.replace(";", ";");
 		fileName = fileName.replace("'", "'");
-		fileName = fileName.replace(":", ":");
+		//fileName = fileName.replace(":", ":");
+		fileName = fileName.replace(":", "%3A");
 		fileName = fileName.replace("\"", "%22");
 		fileName = fileName.replace("[", "%5B");
 		fileName = fileName.replace("]", "%5D");
@@ -165,7 +166,7 @@ public class PathFactory {
 		fileName = fileName.replace("@", "@");
 		fileName = fileName.replace("#", "%23");
 		fileName = fileName.replace("$", "$");
-		fileName = fileName.replace("%", "%25");
+		//fileName = fileName.replace("%", "%25");
 		fileName = fileName.replace("^", "%5E");
 		fileName = fileName.replace("&", "&");
 		fileName = fileName.replace("*", "*");

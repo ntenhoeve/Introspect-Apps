@@ -78,8 +78,8 @@ public class WikiPageSubChapter extends WikiPage {
 	public String getTitle() {
 		StringBuilder title=new StringBuilder();
 		title.append(textChapterLevel1.getTitle());
-		title.append("-");
-		title.append(textChapterLevel1.getTitle());
+		title.append(" ~ ");
+		title.append(textChapterLevel2.getTitle());
 		return title.toString();
 	}
 }
