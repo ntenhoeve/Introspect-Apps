@@ -4,23 +4,23 @@ import java.util.List;
 
 import nth.github.page.generator.Config;
 import nth.github.page.generator.model.html.element.page.content.PathFactory;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 import nth.github.page.generator.model.text.TextDocument;
 
 public class WikiPageHome extends WikiPage {
 
-	private final List<Node> chapters;
+	private final List<TextNode> chapters;
 
-	public WikiPageHome(Config config, List<Node> chapters) {
+	public WikiPageHome(Config config, List<TextNode> chapters) {
 		super(config);
 		this.chapters = chapters;
 	}
 
 	@Override
 	public void addContent() {
-		for (Node node : chapters) {
+		for (TextNode node : chapters) {
 			TextChapterLevel1 textChapterLevel1 = (TextChapterLevel1) node;
 			getChilderen().add(new WikiText("\n### "));//add text so that chapter has H3 style
 			getChilderen().add(
@@ -29,8 +29,8 @@ public class WikiPageHome extends WikiPage {
 									null)));
 			getChilderen().add(new WikiText("\n"));//end of H3 style
 			
-			List<Node> subChapters = textChapterLevel1.findChilderenOfType(TextChapterLevel2.class);
-			for (Node subChapter: subChapters) {
+			List<TextNode> subChapters = textChapterLevel1.findChilderenOfType(TextChapterLevel2.class);
+			for (TextNode subChapter: subChapters) {
 				TextChapterLevel2 textChapterLevel2=(TextChapterLevel2)subChapter;
 				getChilderen().add(
 						new WikiHyperlink(textChapterLevel2.getTitle(), PathFactory

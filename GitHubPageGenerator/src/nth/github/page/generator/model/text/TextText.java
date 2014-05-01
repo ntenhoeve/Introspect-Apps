@@ -1,7 +1,7 @@
 package nth.github.page.generator.model.text;
 
 
-public class TextText extends Node {
+public class TextText extends TextNode {
 
 	private final String text;
 

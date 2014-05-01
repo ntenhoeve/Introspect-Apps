@@ -5,7 +5,7 @@ import java.util.List;
 
 import nth.github.page.generator.model.pagefactories.StringDocumentFactory;
 
-public class Node {
+public class TextNode {
 
 	@Override
 	public String toString() {

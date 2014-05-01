@@ -21,7 +21,7 @@ public class WikiText extends WikiNode {
 	@Override
 	public String toString() {
 		if (text == null) {
-			return "\n";
+			return "<br>";
 		} else {
 			return text;
 		}

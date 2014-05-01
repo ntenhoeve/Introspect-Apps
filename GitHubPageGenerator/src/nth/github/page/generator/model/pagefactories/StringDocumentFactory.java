@@ -5,7 +5,7 @@ import java.util.List;
 
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextHyperLink;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextNodeContainer;
 import nth.github.page.generator.model.text.TextText;
 import nth.github.page.generator.model.text.ToDo;
@@ -15,7 +15,7 @@ public class StringDocumentFactory {
 	private static final String INDENT = " ";
 	private static final String NEW_LINE = "\n";
 
-	public static String create(Node node) {
+	public static String create(TextNode node) {
 		List<String> lines = print(node);
 		StringBuilder builder = new StringBuilder();
 		for (String line : lines) {
@@ -25,7 +25,7 @@ public class StringDocumentFactory {
 		return builder.toString();
 	}
 
-	private static List<String> print(Node node) {
+	private static List<String> print(TextNode node) {
 		List<String> lines = new ArrayList<>();
 
 		StringBuilder line = new StringBuilder();
@@ -57,7 +57,7 @@ public class StringDocumentFactory {
 		if (node instanceof TextNodeContainer && ((TextNodeContainer)node).getChilderen().size()>0) {
 			lines.add(line.toString());
 			TextNodeContainer nodeContainer = (TextNodeContainer) node;
-			for (Node child : nodeContainer.getChilderen()) {
+			for (TextNode child : nodeContainer.getChilderen()) {
 				// recursive call to print children
 				List<String> childLines = print(child);
 				for (String childLine : childLines) {

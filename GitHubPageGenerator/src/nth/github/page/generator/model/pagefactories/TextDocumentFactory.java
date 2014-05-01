@@ -8,8 +8,8 @@ import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 import nth.github.page.generator.model.text.TextChapterLevel3;
 import nth.github.page.generator.model.text.TextHyperLink;
-import nth.github.page.generator.model.text.ListItem;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextListItem;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextNodeContainer;
 import nth.github.page.generator.model.text.TextText;
 import nth.github.page.generator.model.text.TextDocument;
@@ -48,7 +48,7 @@ public class TextDocumentFactory {
 					textList = new TextList(listId);
 					currentChapter.getChilderen().add(textList);
 				}
-				ListItem listItem = new ListItem();
+				TextListItem listItem = new TextListItem();
 				textList.getChilderen().add(listItem);
 				addWordParagraphToTextNode(wordDocument, paragraph, listItem);
 			} else if (paragraph.getStyle() == null) {
@@ -82,8 +82,8 @@ public class TextDocumentFactory {
 	}
 
 	private static TextList findList(TextDocument textDoc, BigInteger listId) {
-		List<Node> lists = textDoc.findChilderenOfType(TextList.class);
-		for (Node node : lists) {
+		List<TextNode> lists = textDoc.findChilderenOfType(TextList.class);
+		for (TextNode node : lists) {
 			TextList textList = (TextList) node;
 			if (textList.getId().equals(listId)) {
 				return textList;
@@ -126,7 +126,7 @@ public class TextDocumentFactory {
 				}
 			}
 		}
-		if (!(nodeContainer instanceof ListItem)) {
+		if (!(nodeContainer instanceof TextListItem)) {
 			TextText text = new TextText(null);// close paragraph with new line
 			nodeContainer.getChilderen().add(text);
 		}

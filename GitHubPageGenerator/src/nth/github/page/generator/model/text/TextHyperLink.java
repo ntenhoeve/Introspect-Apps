@@ -2,7 +2,7 @@ package nth.github.page.generator.model.text;
 
 import java.net.URI;
 
-public class TextHyperLink extends Node {
+public class TextHyperLink extends TextNode {
 
 	private final String text;
 	private final String uri;

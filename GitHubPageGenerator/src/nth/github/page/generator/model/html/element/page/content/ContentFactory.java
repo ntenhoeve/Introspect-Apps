@@ -11,8 +11,8 @@ import nth.github.page.generator.model.html.element.ElementType;
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 import nth.github.page.generator.model.text.TextHyperLink;
-import nth.github.page.generator.model.text.ListItem;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextListItem;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextText;
 import nth.github.page.generator.model.text.TextList;
 
@@ -30,11 +30,11 @@ public class ContentFactory {
 			addNodesToElement(div, chapterLevel1.getChilderen());
 
 			// add links for all sub chapters
-			List<Node> subChapters = chapterLevel1
+			List<TextNode> subChapters = chapterLevel1
 					.findChilderenOfType(TextChapterLevel2.class);
 			Element list = div.addElement(ElementType.UL);
 
-			for (Node node : subChapters) {
+			for (TextNode node : subChapters) {
 				Element item = list.addElement(ElementType.LI);
 				;
 				Element link = item.addElement(ElementType.A);
@@ -50,8 +50,8 @@ public class ContentFactory {
 		return div;
 	}
 
-	private static void addNodesToElement(Element element, List<Node> children) {
-		for (Node node : children) {
+	private static void addNodesToElement(Element element, List<TextNode> children) {
+		for (TextNode node : children) {
 			if (node instanceof TextText) {
 				TextText textNode = (TextText) node;
 				String text = textNode.getText();
@@ -71,8 +71,8 @@ public class ContentFactory {
 			} else if (node instanceof TextList) {
 				TextList textList = (TextList) node;
 				Element ul = element.addElement(ElementType.UL);
-				for (Node item : textList.getChilderen()) {
-					ListItem listItem = (ListItem) item;
+				for (TextNode item : textList.getChilderen()) {
+					TextListItem listItem = (TextListItem) item;
 					Element li = ul.addElement(ElementType.LI);
 					addNodesToElement(li, listItem.getChilderen());
 				}

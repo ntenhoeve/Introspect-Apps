@@ -4,7 +4,7 @@ import java.util.List;
 
 import nth.github.page.generator.Config;
 import nth.github.page.generator.model.html.element.page.content.PathFactory;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 import nth.github.page.generator.model.text.TextChapterLevel3;
@@ -24,21 +24,21 @@ public class WikiPageChapter extends WikiPage {
 		
 		addChapterText();		
 		
-		List<Node> subChapters = textChapterLevel1.findChilderenOfType(TextChapterLevel2.class);
+		List<TextNode> subChapters = textChapterLevel1.findChilderenOfType(TextChapterLevel2.class);
 
-		for (Node node : subChapters) {
-			TextChapterLevel1 textChapterLevel1 = (TextChapterLevel1) node;
+		for (TextNode node : subChapters) {
+			TextChapterLevel2 textChapterLevel2 = (TextChapterLevel2) node;
 			getChilderen().add(
-					new WikiHyperlink(textChapterLevel1.getTitle(), PathFactory
+					new WikiHyperlink(textChapterLevel2.getTitle(), PathFactory
 							.createRemoteGitHubWikiPath(getConfig(), textChapterLevel1,
-									null)));
+									textChapterLevel2)));
 			getChilderen().add(new WikiText("<br>\n"));//new line
 		}
 
 	}
 
 	private void addChapterText() {
-		for (Node textNode : textChapterLevel1.getChilderen()) {
+		for (TextNode textNode : textChapterLevel1.getChilderen()) {
 			if (textNode.getClass() == TextText.class) {
 				TextText textText = (TextText) textNode;
 				WikiText wikiText = new WikiText(textText);

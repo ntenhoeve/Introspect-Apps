@@ -3,33 +3,33 @@ package nth.github.page.generator.model.text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextNodeContainer extends Node {
-	private List<Node> childeren;
+public class TextNodeContainer extends TextNode {
+	private List<TextNode> childeren;
 
 	public TextNodeContainer() {
 		childeren = new ArrayList<>();
 	}
 
-	public List<Node> getChilderen() {
+	public List<TextNode> getChilderen() {
 		return childeren;
 	}
 
-	public void setChilderen(List<Node> childeren) {
+	public void setChilderen(List<TextNode> childeren) {
 		this.childeren = childeren;
 	}
 	
-	public List<Node> findChilderenOfType(  Class<? extends Node> classToFind) {
+	public List<TextNode> findChilderenOfType(  Class<? extends TextNode> classToFind) {
 		return findChilderenOfType(this, classToFind);
 	}
 	
-	private List<Node> findChilderenOfType(Node node,  Class<? extends Node> classToFind) {
-		List<Node> results=new ArrayList<>();
+	private List<TextNode> findChilderenOfType(TextNode node,  Class<? extends TextNode> classToFind) {
+		List<TextNode> results=new ArrayList<>();
 		if (classToFind==node.getClass()) {
 			results.add(node);
 		}
 		if (node instanceof TextNodeContainer) {
 			TextNodeContainer nodeContainer = (TextNodeContainer) node;
-			for (Node child:nodeContainer.getChilderen()) {
+			for (TextNode child:nodeContainer.getChilderen()) {
 				//recursive call on children
 				results.addAll(findChilderenOfType(child,classToFind));
 			}	

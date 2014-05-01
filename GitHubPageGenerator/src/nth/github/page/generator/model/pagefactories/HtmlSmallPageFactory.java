@@ -10,7 +10,7 @@ import nth.github.page.generator.model.html.element.page.SmallPage;
 import nth.github.page.generator.model.html.element.page.content.ContentFactory;
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextDocument;
 
 public class HtmlSmallPageFactory {
@@ -19,10 +19,10 @@ public class HtmlSmallPageFactory {
 			TextDocument textDocument) {
 		List<Page> smallPages = new ArrayList<>();
 
-		List<Node> chapters = textDocument
+		List<TextNode> chapters = textDocument
 				.findChilderenOfType(TextChapterLevel1.class);
 
-		for (Node chapter : chapters) {
+		for (TextNode chapter : chapters) {
 			TextChapterLevel1 chapterLevel1 = (TextChapterLevel1) chapter;
 
 			// create page for the chapter
@@ -31,9 +31,9 @@ public class HtmlSmallPageFactory {
 			smallPages.add(smallPage);
 
 			// create pages for sub chapters
-			List<Node> subChapters = chapterLevel1
+			List<TextNode> subChapters = chapterLevel1
 					.findChilderenOfType(TextChapterLevel2.class);
-			for (Node node : subChapters) {
+			for (TextNode node : subChapters) {
 				TextChapterLevel2 chapterLevel2 = (TextChapterLevel2) node;
 				content = ContentFactory.create(config, chapterLevel1, chapterLevel2);
 				smallPage = new SmallPage(config, content, chapterLevel1, chapterLevel2);

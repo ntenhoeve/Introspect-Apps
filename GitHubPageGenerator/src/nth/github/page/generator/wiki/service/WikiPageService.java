@@ -7,7 +7,7 @@ import java.util.List;
 
 import nth.github.page.generator.Config;
 import nth.github.page.generator.model.html.element.page.content.PathFactory;
-import nth.github.page.generator.model.text.Node;
+import nth.github.page.generator.model.text.TextNode;
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 import nth.github.page.generator.model.text.TextDocument;
@@ -50,7 +50,7 @@ public class WikiPageService {
 			TextDocument textDocument) {
 		List<WikiPage> wikiPages = new ArrayList<>();
 
-		List<Node> chapters = textDocument
+		List<TextNode> chapters = textDocument
 				.findChilderenOfType(TextChapterLevel1.class);
 		chapters.remove(0);//Remove index chapter
 		
@@ -58,15 +58,15 @@ public class WikiPageService {
 		wikiPages.add(wikiHomePage);
 
 		
-		for (Node chapter : chapters) {
+		for (TextNode chapter : chapters) {
 			TextChapterLevel1 textChapterLevel1 = (TextChapterLevel1) chapter;
 				WikiPage wikiPage = new WikiPageChapter(config,
 						textChapterLevel1);
 				wikiPages.add(wikiPage);
 
-				List<Node> subChapters = textChapterLevel1
+				List<TextNode> subChapters = textChapterLevel1
 						.findChilderenOfType(TextChapterLevel2.class);
-				for (Node subChapter : subChapters) {
+				for (TextNode subChapter : subChapters) {
 					TextChapterLevel2 textChapterLevel2 = (TextChapterLevel2) subChapter;
 					wikiPage = new WikiPageSubChapter(config,
 							textChapterLevel1, textChapterLevel2);
