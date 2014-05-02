@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.List;
 
 import nth.github.page.generator.model.html.element.page.content.PathFactory;
+import nth.github.page.generator.model.pagefactories.HtmlIndexPageFactory;
 import nth.github.page.generator.model.pagefactories.HtmlSmallPageFactory;
 import nth.github.page.generator.model.pagefactories.TextDocumentFactory;
 import nth.github.page.generator.model.text.TextDocument;
@@ -34,6 +35,8 @@ public class GitHubPageService {
 			//create our own model from the POI word model
 			TextDocument textDocument=TextDocumentFactory.create(wordDocument);
 
+			HtmlIndexPageFactory.createFile(config);
+			
 			HtmlSmallPageFactory.createFiles(config, textDocument);
 
 			WikiPageService.updateWikiFiles(config,textDocument);
