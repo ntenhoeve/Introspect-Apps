@@ -2,7 +2,7 @@ package nth.introspect.accounts.swing;
 
 import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.user.UserService;
-import nth.introsepect.ui.swing.SwingIntrospectInitializer;
+import nth.introsepect.ui.swing.IntrospectInitializerForSwing;
 import nth.introspect.Introspect;
 
 public class AccountsForSwing {
@@ -11,9 +11,9 @@ public class AccountsForSwing {
 	 */
 	public static void main(String[] args) {
 
-		SwingIntrospectInitializer initializer = new SwingIntrospectInitializer(new AccountsForSwing());
-		initializer.addServiceClass(AccountService.class);
-		initializer.addServiceClass(UserService.class);
+		IntrospectInitializerForSwing initializer = new IntrospectInitializerForSwing(new AccountsForSwing());
+		initializer.registerFrontEndServiceClass(AccountService.class);
+		initializer.registerFrontEndServiceClass(UserService.class);
 		Introspect.init(initializer);
 	}
 }
