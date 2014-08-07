@@ -23,7 +23,7 @@ public class CapitalSalesIntakeService {
 	@SuppressWarnings("unchecked")
 	public List<OrderLine> capitalSalesIntake(Period period) throws Exception {
 		
-		BaanDatabase baanDatabase=(BaanDatabase) Introspect.getDataAccessProvider(BaanDatabase.class);
+		BaanDatabase baanDatabase=new BaanDatabase(); //TODO inject Introspect.getDataAccessProvider(BaanDatabase.class);
 		StringBuffer sql=new StringBuffer();
 		sql.append("select T2.T$ORNO as orderNumber, T2.T$ODAT as orderDate, to_number(T2.T$CPRJ) as projectNumber,T2.T$ITEM as productCode,T3.T$DSCA as description,T2.T$OQUA as count,T1.T$NAMA as customerName,T1.T$CCTY as country,T1.T$CREG as salesRegion,T2.T$AMTA as amount,T2.T$LPRC as listPrice,T2.T$MPRC as manufactoringPrice,T2.T$TPRC as transferPrice ");
 		sql.append(" from baan.ttccom010100 T1,baan.ttdsls041100 T2,baan.ttipcs020100 T3 ");

@@ -3,16 +3,16 @@ package nth.github.page.generator.model.html.element.page;
 import java.io.File;
 
 import nth.github.page.generator.Config;
+import nth.github.page.generator.PathFactory;
 import nth.github.page.generator.model.html.element.AttributeType;
 import nth.github.page.generator.model.html.element.Element;
 import nth.github.page.generator.model.html.element.ElementType;
-import nth.github.page.generator.model.html.element.page.content.PathFactory;
 import nth.github.page.generator.model.html.element.style.HtmlColor;
 import nth.github.page.generator.model.html.element.style.StyleBuilder;
 import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 
-public class SmallPage extends LargePage {
+public class SmallPage extends WidePage {
 
 
 	public SmallPage(Config config,  Element content, TextChapterLevel1 chapterLevel1,TextChapterLevel2 chapterLevel2) {
@@ -20,9 +20,15 @@ public class SmallPage extends LargePage {
 	}
 
 	@Override
-	public File getFile() {
+	public String getPath() {
 		String path = PathFactory.createSmallHtmlPagePath(config, chapterLevel1, chapterLevel2);
-		return new File(path);
+		return path;
+	}
+
+	
+	@Override
+	public Width getWidth() {
+		return Width.SMALL;
 	}
 
 	@Override

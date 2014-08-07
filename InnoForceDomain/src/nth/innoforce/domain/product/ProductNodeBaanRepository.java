@@ -8,6 +8,7 @@ import java.util.List;
 
 import nth.innoforce.dataaccess.BaanDatabase;
 import nth.introspect.Introspect;
+import nth.introspect.container.inject.annotation.Inject;
 
 public class ProductNodeBaanRepository {
 	private static final String POULTRY_PLANT = "POULTRY PLANT";
@@ -22,8 +23,8 @@ public class ProductNodeBaanRepository {
 	private static String NAME_IN_DUTCH = "nameInDutch";
 	private static String NAME_IN_ENGLISH = "nameInEnglish";
 
+	
 	static {
-		BAAN_DATABASE = (BaanDatabase) Introspect.getDataAccessProvider(BaanDatabase.class);
 		ALL_GENERIC_PRODUCTS_QUERY = createAllGenericProductsQuery();
 		GENERIC_PRODUCT_RELATIONS_QUERY = createGenericProductRelationsQuery();
 		ENGLISH_TRANSLATION_QUERY = createEnglishTranslationQuery();

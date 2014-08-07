@@ -1,6 +1,6 @@
 package nth.meyn.innovation.intake.app;
 
-import nth.introsepect.ui.swing.SwingIntrospectInitializer;
+import nth.introsepect.ui.swing.IntrospectInitializerForSwing;
 import nth.introspect.Introspect;
 import nth.meyn.innovation.intake.dom.capitalsalesintake.CapitalSalesIntakeService;
 import nth.meyn.innovation.intake.dom.projectlaunch.ProjectLaunchService;
@@ -8,10 +8,10 @@ import nth.meyn.innovation.intake.dom.projectlaunch.ProjectLaunchService;
 public class MeynInnovationIntake {
 
 	public static void main(String[] args) {
-		SwingIntrospectInitializer initializer = new SwingIntrospectInitializer(
+		IntrospectInitializerForSwing initializer = new IntrospectInitializerForSwing(
 				new MeynInnovationIntake());
-		initializer.addServiceClass(CapitalSalesIntakeService.class);
-		initializer.addServiceClass(ProjectLaunchService.class);
+		initializer.registerFrontEndServiceClass(CapitalSalesIntakeService.class);
+		initializer.registerFrontEndServiceClass(ProjectLaunchService.class);
 		Introspect.init(initializer);
 	}
 

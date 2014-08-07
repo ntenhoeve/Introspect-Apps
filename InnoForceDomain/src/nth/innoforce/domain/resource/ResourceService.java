@@ -8,6 +8,7 @@ import java.util.List;
 
 import nth.innoforce.domain.find.FindParameter;
 import nth.introspect.Introspect;
+import nth.introspect.container.inject.annotation.Inject;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
@@ -15,13 +16,12 @@ import nth.introspect.provider.domain.info.valuemodel.annotations.Icon;
 
 public class ResourceService {
 
-	private ResourceDataAccess getResourceDataAccess() {
-		return (ResourceDataAccess) Introspect.getDataAccessProvider(ResourceDataAccess.class);
-	}
+	@Inject
+	private ResourceDataAccess resourceDataAccess;
 
 	@GenericReturnType(Resource.class)
 	public List<Resource> allActiveResources() {
-		return getResourceDataAccess().getAllActiveResources();
+		return resourceDataAccess.getAllActiveResources();
 	}
 
 	@GenericReturnType(Resource.class)
@@ -36,7 +36,7 @@ public class ResourceService {
 	@GenericReturnType(Resource.class)
 	@Icon("find")
 	public List<Resource> findResources(FindParameter findParameter) {
-		return getResourceDataAccess().findResources(findParameter);
+		return resourceDataAccess.findResources(findParameter);
 	}
 
 	public FindParameter findResourcesParameterFactory() {
@@ -67,7 +67,7 @@ public class ResourceService {
 	public Resource me() {
 		String userName = Introspect.getAuthorizationProvider().getCurrentUserName();
 		FindParameter findParameter = new FindParameter(userName);
-		List<Resource> results = getResourceDataAccess().findResources(findParameter);
+		List<Resource> results = resourceDataAccess.findResources(findParameter);
 		if (results.size() < 1) {
 			throw new RuntimeException("Could not find user name:" + userName);
 		} else if (results.size() > 1) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.github.page.generator.Config;
+import nth.github.page.generator.PathFactory;
 import nth.github.page.generator.model.html.element.AttributeType;
 import nth.github.page.generator.model.html.element.Element;
 import nth.github.page.generator.model.html.element.ElementType;

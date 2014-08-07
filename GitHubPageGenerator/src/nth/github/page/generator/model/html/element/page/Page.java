@@ -9,14 +9,14 @@ import java.io.OutputStreamWriter;
 import nth.github.page.generator.model.html.element.Element;
 import nth.github.page.generator.model.html.element.Html5Element;
 
-public abstract class Page extends Html5Element {
+public abstract class Page extends Html5Element implements
+nth.github.page.generator.model.Page {
 
-	public abstract File getFile();
 	public abstract Element getElement();
 	
 	
 	public void createPageFile() {
-		File file = getFile();
+		File file = new File(getPath());
 		String html = toString();
 		try {
 			OutputStreamWriter out=new OutputStreamWriter(new FileOutputStream(file),"UTF8");

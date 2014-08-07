@@ -6,13 +6,16 @@ import java.util.List;
 import nth.innoforce.dataaccess.BaanDatabase;
 import nth.innoforce.domain.project.launch.ProjectLaunch;
 import nth.innoforce.domain.project.launch.ProjectLaunchService;
-import nth.introspect.Introspect;
+import nth.introspect.container.inject.annotation.Inject;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class InnovationRevenueService {
 
+	@Inject
+	private BaanDatabase baanDatabase;
+	
 	@GenericReturnType(OrderLine.class)
 	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	@SuppressWarnings("unchecked")
@@ -21,7 +24,6 @@ public class InnovationRevenueService {
 		period=new Period();
 		period.setYear(2013);
 		
-		BaanDatabase baanDatabase=(BaanDatabase) Introspect.getDataAccessProvider(BaanDatabase.class);
 		StringBuffer sql=new StringBuffer();
 		sql.append("select T2.T$ORNO as orderNumber, T2.T$ODAT as orderDate, to_number(T2.T$CPRJ) as projectNumber,T2.T$ITEM as productCode,T3.T$DSCA as description,T2.T$OQUA as count,T1.T$NAMA as customerName,T1.T$CCTY as country,T1.T$CREG as salesRegion,T2.T$AMTA as amount,T2.T$LPRC as listPrice,T2.T$MPRC as manufactoringPrice,T2.T$TPRC as transferPrice ");
 		sql.append(" from baan.ttccom010100 T1,baan.ttdsls041100 T2,baan.ttipcs020100 T3 ");

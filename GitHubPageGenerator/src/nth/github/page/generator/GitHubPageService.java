@@ -1,69 +1,33 @@
 package nth.github.page.generator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
-
-import nth.github.page.generator.model.html.element.page.content.PathFactory;
-import nth.github.page.generator.model.pagefactories.HtmlIndexPageFactory;
-import nth.github.page.generator.model.pagefactories.HtmlSmallPageFactory;
-import nth.github.page.generator.model.pagefactories.TextDocumentFactory;
+import nth.github.page.generator.dom.text.service.TextDocumentFactory;
+import nth.github.page.generator.dom.web.service.WebPageFactory;
+import nth.github.page.generator.dom.wiki.service.WikiPageFactory;
 import nth.github.page.generator.model.text.TextDocument;
-import nth.github.page.generator.wiki.model.WikiPage;
-import nth.github.page.generator.wiki.service.WikiPageService;
-
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import nth.introspect.Introspect;
 
 
 public class GitHubPageService {
 
+	private WikiPageFactory wikiPageFactory;
+	private WebPageFactory webPageFactory;
+	private TextDocumentFactory textDocumentFactory;
+
+	
 	public void createPages(Config config){
-		initFolders(config);
+		//TODO in DomainProvider: getBackEndServiceObject(..)
+		//TODO or even better: implement basic form of dependency injection
+		textDocumentFactory= (TextDocumentFactory) Introspect.getDomainProvider().getServiceObject(TextDocumentFactory.class);
+		webPageFactory= (WebPageFactory) Introspect.getDomainProvider().getServiceObject(WebPageFactory.class);
+		wikiPageFactory = (WikiPageFactory) Introspect.getDomainProvider().getServiceObject(WikiPageFactory.class);
+
 		
-		createHtmlFiles(config);
-	}
-
-	//TODO add description annotation
-	private void createHtmlFiles(Config config) {
-		try {
-			//TODO move file to config
-			File file = config.getWordDocumentLocation();
-			FileInputStream fis = new FileInputStream(file);
-
-			XWPFDocument wordDocument = new XWPFDocument(fis);
-
-			//create our own model from the POI word model
-			TextDocument textDocument=TextDocumentFactory.create(wordDocument);
-
-			HtmlIndexPageFactory.createFile(config);
-			
-			HtmlSmallPageFactory.createFiles(config, textDocument);
-
-			WikiPageService.updateWikiFiles(config,textDocument);
-//			for (WikiPage wikiPage : wikiPages) {
-//				System.out.println(wikiPage.toString());
-//				System.err.println("=================================");
-//			}
-			
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
-
+		TextDocument textDocument=textDocumentFactory.createTextDocument(config);
+		
+		wikiPageFactory.updateWikiPageFiles(config, textDocument);
+		
+		webPageFactory.updateWebPageFiles(config, textDocument);
 		
 	}
 
-	private void initFolders(Config config) {
-		
-		File htmlSmallFolder = PathFactory.createLocalGitHubWebSiteRepositorySmallPath(config);
-		if (htmlSmallFolder.exists()) {
-			htmlSmallFolder.delete();
-		}
-		htmlSmallFolder.mkdir();
-		
-		File htmlWideFolder = PathFactory.createLocalGitHubWebSiteRepositoryWidePath(config);
-		if (htmlWideFolder.exists()) {
-			htmlWideFolder.delete();
-		}
-		htmlWideFolder.mkdir();
-	}
 }
