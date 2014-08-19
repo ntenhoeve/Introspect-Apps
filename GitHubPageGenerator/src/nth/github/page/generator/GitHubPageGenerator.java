@@ -1,23 +1,32 @@
 package nth.github.page.generator;
 
-import nth.introspect.Introspect;
-import nth.introspect.ui.commandline.IntrospectInitializerForCommandLine;
+import java.util.ArrayList;
+import java.util.List;
 
-public class GitHubPageGenerator {
+import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
+
+public class GitHubPageGenerator extends IntrospectApplicationForCommandLine {
 
 	public GitHubPageGenerator(String[] arguments) {
-		// initialize introspect framework
-		IntrospectInitializerForCommandLine initializer = new IntrospectInitializerForCommandLine(
-				this, arguments);
-		initializer.registerFrontEndServiceClass(GitHubPageService.class);
-		Introspect.init(initializer);
+		super(arguments);
 	}
 
 	public static void main(String[] args) {
 		//destination C:\Users\nilsth\My Java\Workspace Introspect\IntrospectGitHubPageGenerator\html
 		//source= https://github.com/ntenhoeve/Introspect-Framework
-		
 		new GitHubPageGenerator(args);
+	}
+
+	@Override
+	public List<Class<?>> getFrontEndServiceClasses() {
+		List<Class<?>> frontEndServiceClasses = new ArrayList<Class<?>>();
+		frontEndServiceClasses.add(GitHubPageService.class);
+		return frontEndServiceClasses;
+	}
+
+	@Override
+	public List<Class<?>> getBackEndServiceClasses() {
+		return new ArrayList<Class<?>>();
 	}
 
 }

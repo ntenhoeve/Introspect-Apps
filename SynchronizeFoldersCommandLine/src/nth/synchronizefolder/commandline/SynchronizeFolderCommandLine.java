@@ -1,16 +1,15 @@
 package nth.synchronizefolder.commandline;
 
-import nth.introspect.Introspect;
-import nth.introspect.ui.commandline.IntrospectInitializerForCommandLine;
+import java.util.ArrayList;
+import java.util.List;
+
+import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 import nth.synchronizefolder.domain.FolderService;
 
-public class SynchronizeFolderCommandLine {
+public class SynchronizeFolderCommandLine extends IntrospectApplicationForCommandLine{
 
 	private SynchronizeFolderCommandLine(String[] arguments) {
-		// initialize introspect framework
-		IntrospectInitializerForCommandLine initializer = new IntrospectInitializerForCommandLine(this, arguments);
-		initializer.registerFrontEndServiceClass(FolderService.class);
-		Introspect.init(initializer);
+		super(arguments);
 	}
 
 	/**
@@ -18,6 +17,18 @@ public class SynchronizeFolderCommandLine {
 	 */
 	public static void main(String[] arguments) {
 		new SynchronizeFolderCommandLine(arguments);
+	}
+
+	@Override
+	public List<Class<?>> getFrontEndServiceClasses() {
+		List<Class<?>> initializer=new ArrayList<>();
+		initializer.add(FolderService.class);
+		return initializer;
+	}
+
+	@Override
+	public List<Class<?>> getBackEndServiceClasses() {
+		return new ArrayList<>();
 	}
 
 }
