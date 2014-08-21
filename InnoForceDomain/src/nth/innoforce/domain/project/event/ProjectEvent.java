@@ -29,7 +29,7 @@ public class ProjectEvent extends VersionedEntity {
 	@VisibleInForm(false)
 	@OrderInTable(2)
 	public String getType() {
-		ClassInfo classInfo = Introspect.getDomainProvider().getClassInfo(this.getClass());
+		ClassInfo classInfo = Introspect.getDomainInfoProvider().getClassInfo(this.getClass());
 		return classInfo.getText();
 	}
 
