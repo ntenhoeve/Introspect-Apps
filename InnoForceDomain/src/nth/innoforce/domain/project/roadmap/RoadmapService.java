@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.innoforce.domain.project.Project;
-import nth.innoforce.domain.project.ProjectDataAccess;
+import nth.innoforce.domain.project.ProjectRepository;
 import nth.introspect.Introspect;
 import nth.introspect.container.inject.annotation.Inject;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
@@ -15,7 +15,7 @@ import nth.introspect.util.CloneUtil;
 public class RoadmapService {
 
 @Inject
-private ProjectDataAccess projectDataAccess;
+private ProjectRepository projectDataAccess;
 	
 	@GenericReturnType(ProjectConcept.class)
 	public List<ProjectConcept> eviscerationRoadmap() {

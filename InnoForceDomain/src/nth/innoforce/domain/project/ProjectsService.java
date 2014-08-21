@@ -5,32 +5,37 @@ import java.net.URL;
 import java.util.List;
 
 import nth.innoforce.domain.resource.Resource;
-import nth.introspect.Introspect;
 import nth.introspect.container.inject.annotation.Inject;
+import nth.introspect.provider.authorization.AuthorizationProvider;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class ProjectsService {
 
-	@Inject
-	private ProjectDataAccess projectDataAccess;
+	private final ProjectRepository projectRepository;
+	private final AuthorizationProvider authorizationProvider;
+	
+	public ProjectsService(AuthorizationProvider authorizationProvider, ProjectRepository projectRepository){
+		this.authorizationProvider = authorizationProvider;
+		this.projectRepository = projectRepository;
+	}
 	
 	// TODO this method was created for testing purposes. remove when no longer needed
 	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void modifyGibletHarvesterProject(Project project) {
-		projectDataAccess.set(project);
+		projectRepository.set(project);
 	}
 	
 	// TODO this method was created for testing purposes. remove when no longer needed
 	public Project modifyGibletHarvesterProjectParameterFactory() {
-		return projectDataAccess.getGibletHarvesterProject();
+		return projectRepository.getGibletHarvesterProject();
 	}
 
 
 	@GenericReturnType(Project.class)
 	public List<Project> allProjects() {
-		return projectDataAccess.getAll();
+		return projectRepository.getAll();
 	}
 
 	@GenericReturnType(Project.class)
@@ -96,7 +101,7 @@ public class ProjectsService {
 	}
 
 	public boolean modifyProjectEnabled() {
-		return Introspect.getAuthorizationProvider().userInRole("ProcessManager");
+		return authorizationProvider.userInRole("ProcessManager");
 	}
 
 	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
@@ -110,7 +115,7 @@ public class ProjectsService {
 	@GenericReturnType(Project.class)
 	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Project> findProjectsOfResource(Resource resource) {
-		return projectDataAccess.findProjectsOfResource(resource);
+		return projectRepository.findProjectsOfResource(resource);
 	}
 
 	// TODO openBusinessCaseDocument which returns a list of files that can be opened with a FileService with the following method: public URL open(File file) {return file.toURI().toURL();}
