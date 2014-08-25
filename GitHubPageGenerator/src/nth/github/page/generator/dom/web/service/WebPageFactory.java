@@ -13,8 +13,12 @@ import nth.introspect.Introspect;
 public class WebPageFactory {
 	private GitRepository gitRepository;
 
-	public WebPageFactory(GitRepository gitRepository) {
-		this.gitRepository = gitRepository;
+//	public WebPageFactory(GitRepository gitRepository) {
+//		this.gitRepository = gitRepository;
+//	}
+	
+	public WebPageFactory(String test) {
+		this.gitRepository = null;
 	}
 
 	public void updateWebPageFiles(Config config, TextDocument textDocument) {
