@@ -13,11 +13,8 @@ import nth.introspect.Introspect;
 public class WebPageFactory {
 	private GitRepository gitRepository;
 
-	public WebPageFactory() {
-		// TODO in DomainProvider: getBackEndServiceObject(..)
-		// TODO or even better: implement basic form of dependency injection
-		gitRepository = (GitRepository) Introspect.getDomainProvider()
-				.getServiceObject(GitRepository.class);
+	public WebPageFactory(GitRepository gitRepository) {
+		this.gitRepository = gitRepository;
 	}
 
 	public void updateWebPageFiles(Config config, TextDocument textDocument) {

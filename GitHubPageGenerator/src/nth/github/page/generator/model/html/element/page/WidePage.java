@@ -185,7 +185,7 @@ public class WidePage extends Page  {
 		return Width.WIDE;
 	}
 
-	private void createHead(Element html) {
+	protected void createHead(Element html) {
 		Element head = html.addElement(ElementType.HEAD);
 
 		Element meta = head.addElement(ElementType.META);

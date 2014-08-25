@@ -129,7 +129,7 @@ public class TextDocumentFactory {
 				XWPFHyperlinkRun hyperlinkRun = (XWPFHyperlinkRun) run;
 				String text = hyperlinkRun.getText(0);
 				if ("annotated".equals(text)) {
-TODO					System.out.println("!!!!");
+					// FIXME !!! hier gaat iets fout!!!
 				}
 				String id = hyperlinkRun.getHyperlinkId();
 				String uriString = null;

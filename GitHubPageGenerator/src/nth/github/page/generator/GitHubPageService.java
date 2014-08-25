@@ -12,15 +12,18 @@ public class GitHubPageService {
 	private WikiPageFactory wikiPageFactory;
 	private WebPageFactory webPageFactory;
 	private TextDocumentFactory textDocumentFactory;
-
 	
-	public void createPages(Config config){
-		//TODO in DomainProvider: getBackEndServiceObject(..)
-		//TODO or even better: implement basic form of dependency injection
-		textDocumentFactory= (TextDocumentFactory) Introspect.getDomainProvider().getServiceObject(TextDocumentFactory.class);
-		webPageFactory= (WebPageFactory) Introspect.getDomainProvider().getServiceObject(WebPageFactory.class);
-		wikiPageFactory = (WikiPageFactory) Introspect.getDomainProvider().getServiceObject(WikiPageFactory.class);
+	public GitHubPageService(WikiPageFactory wikiPageFactory,
+			WebPageFactory webPageFactory,
+			TextDocumentFactory textDocumentFactory) {
+		this.wikiPageFactory = wikiPageFactory;
+		this.webPageFactory = webPageFactory;
+		this.textDocumentFactory = textDocumentFactory;
+	}
 
+
+
+	public void createPages(Config config){
 		
 		TextDocument textDocument=textDocumentFactory.createTextDocument(config);
 		

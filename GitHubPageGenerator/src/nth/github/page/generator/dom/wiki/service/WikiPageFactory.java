@@ -16,17 +16,12 @@ import nth.github.page.generator.model.text.TextChapterLevel1;
 import nth.github.page.generator.model.text.TextChapterLevel2;
 import nth.github.page.generator.model.text.TextDocument;
 import nth.github.page.generator.model.text.TextNode;
-import nth.github.page.generator.model.text.TextNodeContainer;
-import nth.introspect.Introspect;
 
 public class WikiPageFactory {
 	private GitRepository gitRepository;
 
-	public WikiPageFactory() {
-		// TODO in DomainProvider: getBackEndServiceObject(..)
-		// TODO or even better: implement basic form of dependency injection
-		gitRepository = (GitRepository) Introspect.getDomainProvider()
-				.getServiceObject(GitRepository.class);
+	public WikiPageFactory(GitRepository gitRepository) {
+		this.gitRepository = gitRepository;
 	}
 
 	public void updateWikiPageFiles(Config config, TextDocument textDocument) {

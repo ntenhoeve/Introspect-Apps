@@ -3,6 +3,10 @@ package nth.github.page.generator;
 import java.util.ArrayList;
 import java.util.List;
 
+import nth.github.page.generator.dom.git.GitRepository;
+import nth.github.page.generator.dom.text.service.TextDocumentFactory;
+import nth.github.page.generator.dom.web.service.WebPageFactory;
+import nth.github.page.generator.dom.wiki.service.WikiPageFactory;
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 
 public class GitHubPageGenerator extends IntrospectApplicationForCommandLine {
@@ -26,7 +30,12 @@ public class GitHubPageGenerator extends IntrospectApplicationForCommandLine {
 
 	@Override
 	public List<Class<?>> getBackEndServiceClasses() {
-		return new ArrayList<Class<?>>();
+		List<Class<?>> backEndServiceClasses = new ArrayList<Class<?>>();
+		backEndServiceClasses.add(WikiPageFactory.class);
+		backEndServiceClasses.add(WebPageFactory.class);
+		backEndServiceClasses.add(TextDocumentFactory .class);
+		backEndServiceClasses.add(GitRepository.class);
+		return backEndServiceClasses;
 	}
 
 }

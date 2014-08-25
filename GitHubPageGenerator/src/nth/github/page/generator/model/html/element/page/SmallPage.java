@@ -14,18 +14,34 @@ import nth.github.page.generator.model.text.TextChapterLevel2;
 
 public class SmallPage extends WidePage {
 
-
-	public SmallPage(Config config,  Element content, TextChapterLevel1 chapterLevel1,TextChapterLevel2 chapterLevel2) {
+	public SmallPage(Config config, Element content,
+			TextChapterLevel1 chapterLevel1, TextChapterLevel2 chapterLevel2) {
 		super(config, null, content, chapterLevel1, chapterLevel2);
 	}
 
 	@Override
 	public String getPath() {
-		String path = PathFactory.createSmallHtmlPagePath(config, chapterLevel1, chapterLevel2);
+		String path = PathFactory.createSmallHtmlPagePath(config,
+				chapterLevel1, chapterLevel2);
 		return path;
 	}
 
-	
+	@Override
+	public void createHead(Element html) {
+		Element head = html.addElement(ElementType.HEAD);
+
+		Element meta = head.addElement(ElementType.META);
+		meta.addAttribute("http-equiv", "Content-Type");
+		meta.addAttribute("content", "text/html; charset=UTF-8");
+
+		meta = head.addElement(ElementType.META);
+		meta.addAttribute("name", "viewport");
+		meta.addAttribute("content", "width=device-width, initial-scale=1");
+
+		Element title = head.addElement(ElementType.TITLE);
+		title.addText(this.getTitle());
+	}
+
 	@Override
 	public Width getWidth() {
 		return Width.SMALL;
@@ -59,6 +75,5 @@ public class SmallPage extends WidePage {
 		contentDiv.addAttribute(styleBuilder);
 		contentDiv.addElement(contentElement);
 	}
-
 
 }

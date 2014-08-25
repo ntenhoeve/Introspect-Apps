@@ -46,10 +46,15 @@ public class WikiHyperlink extends WikiNode {
 		} else {
 			TextChapterLevel1 textChapterLevel1 = findChapterLevel1();
 			TextChapterLevel2 textChapterLevel2 = findChapterLevel2();
-			string.append("(");
-			string.append(PathFactory.createRemoteGitHubWikiPath(config,
-					textChapterLevel1, textChapterLevel2));
-			string.append(")");
+			if (textChapterLevel1 == null) {
+				// FIXME: throw error; seems to go wrong when text=annotated????
+			} else {
+
+				string.append("(");
+				string.append(PathFactory.createRemoteGitHubWikiPath(config,
+						textChapterLevel1, textChapterLevel2));
+				string.append(")");
+			}
 		}
 		return string.toString();
 	}
