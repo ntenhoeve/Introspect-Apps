@@ -18,7 +18,7 @@ public class OrderLine {
 	private String salesRegion;
 	private BigDecimal amount;
 	private BigDecimal listPrice;
-	private BigDecimal manufactoringPrice;
+	private BigDecimal minimumSalesPrice;
 	private BigDecimal transferPrice;
 	private OrderLineType orderLineType;
 
@@ -131,12 +131,12 @@ public class OrderLine {
 
 	@OrderInTable(13)
 	@Format("###,###,##0.00")
-	public BigDecimal getManufactoringPrice() {
-		return manufactoringPrice;
+	public BigDecimal getMinimumSalesPrice() {
+		return minimumSalesPrice;
 	}
 
-	public void setManufactoringPrice(BigDecimal manufactoringPrice) {
-		this.manufactoringPrice = manufactoringPrice;
+	public void setMinimumSalesPrice(BigDecimal minimumSalesPrice) {
+		this.minimumSalesPrice = minimumSalesPrice;
 	}
 
 	@OrderInTable(14)
