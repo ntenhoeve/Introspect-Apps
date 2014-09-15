@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.List;
 
 import nth.innoforce.domain.resource.Resource;
-import nth.introspect.container.inject.annotation.Inject;
 import nth.introspect.provider.authorization.AuthorizationProvider;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;

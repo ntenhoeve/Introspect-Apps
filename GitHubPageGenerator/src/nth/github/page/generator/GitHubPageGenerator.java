@@ -22,14 +22,14 @@ public class GitHubPageGenerator extends IntrospectApplicationForCommandLine {
 	}
 
 	@Override
-	public List<Class<?>> getFrontEndServiceClasses() {
+	public List<Class<?>> getServiceClasses() {
 		List<Class<?>> frontEndServiceClasses = new ArrayList<Class<?>>();
 		frontEndServiceClasses.add(GitHubPageService.class);
 		return frontEndServiceClasses;
 	}
 
 	@Override
-	public List<Class<?>> getBackEndServiceClasses() {
+	public List<Class<?>> getInfrastructureClasses() {
 		List<Class<?>> backEndServiceClasses = new ArrayList<Class<?>>();
 		backEndServiceClasses.add(WikiPageFactory.class);
 		backEndServiceClasses.add(WebPageFactory.class);

@@ -20,14 +20,14 @@ public class PlaylistManagerCommandLine extends IntrospectApplicationForCommandL
 	}
 
 	@Override
-	public List<Class<?>> getFrontEndServiceClasses() {
+	public List<Class<?>> getServiceClasses() {
 		List<Class<?>> initializer=new ArrayList<Class<?>>();
 		initializer.add(PlaylistService.class);
 		return initializer;
 	}
 
 	@Override
-	public List<Class<?>> getBackEndServiceClasses() {
+	public List<Class<?>> getInfrastructureClasses() {
 		return new ArrayList<Class<?>>();
 	}
 

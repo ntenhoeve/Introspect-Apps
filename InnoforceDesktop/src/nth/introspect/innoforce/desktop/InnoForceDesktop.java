@@ -22,7 +22,7 @@ public class InnoForceDesktop extends IntrospectApplicationForSwing {
 	}
 
 	@Override
-	public List<Class<?>> getFrontEndServiceClasses() {
+	public List<Class<?>> getServiceClasses() {
 		List<Class<?>> frontEndServiceClasses = new ArrayList<>();
 		frontEndServiceClasses.add(RoadmapService.class);
 		frontEndServiceClasses.add( ProjectsService.class);
@@ -34,7 +34,7 @@ public class InnoForceDesktop extends IntrospectApplicationForSwing {
 	}
 
 	@Override
-	public List<Class<?>> getBackEndServiceClasses() {
+	public List<Class<?>> getInfrastructureClasses() {
 		return new ArrayList<>();
 	}
 

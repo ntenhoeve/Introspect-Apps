@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.innoforce.dataaccess.BaanDatabase;
-import nth.introspect.Introspect;
-import nth.introspect.container.inject.annotation.Inject;
 
 public class ProductNodeBaanRepository {
 	private static final String POULTRY_PLANT = "POULTRY PLANT";

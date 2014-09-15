@@ -20,14 +20,14 @@ public class SynchronizeFolderCommandLine extends IntrospectApplicationForComman
 	}
 
 	@Override
-	public List<Class<?>> getFrontEndServiceClasses() {
+	public List<Class<?>> getServiceClasses() {
 		List<Class<?>> initializer=new ArrayList<>();
 		initializer.add(FolderService.class);
 		return initializer;
 	}
 
 	@Override
-	public List<Class<?>> getBackEndServiceClasses() {
+	public List<Class<?>> getInfrastructureClasses() {
 		return new ArrayList<>();
 	}
 

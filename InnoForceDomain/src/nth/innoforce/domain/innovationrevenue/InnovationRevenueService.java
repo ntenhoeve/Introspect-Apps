@@ -6,16 +6,18 @@ import java.util.List;
 import nth.innoforce.dataaccess.BaanDatabase;
 import nth.innoforce.domain.project.launch.ProjectLaunch;
 import nth.innoforce.domain.project.launch.ProjectLaunchService;
-import nth.introspect.container.inject.annotation.Inject;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class InnovationRevenueService {
 
-	@Inject
-	private BaanDatabase baanDatabase;
+	private final BaanDatabase baanDatabase;
 	
+	public InnovationRevenueService(BaanDatabase baanDatabase) {
+		this.baanDatabase = baanDatabase;
+	}
+
 	@GenericReturnType(OrderLine.class)
 	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	@SuppressWarnings("unchecked")

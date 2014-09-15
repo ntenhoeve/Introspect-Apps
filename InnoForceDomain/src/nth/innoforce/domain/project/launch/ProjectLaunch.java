@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import nth.innoforce.domain.innovationrevenue.OrderLine;
-import nth.introspect.provider.domain.info.valuemodel.annotations.Format;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
 
 public class ProjectLaunch {
