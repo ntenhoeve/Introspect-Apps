@@ -3,41 +3,22 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar">
-        <jar destfile="J:/Workspace InnoForce/SynchronizeFoldersCommandLine/dist/SynchronizeFolders.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="C:/Users/nilsth/My Git/Introspect-Apps/SynchronizeFoldersCommandLine/dist/SynchronizeFolders.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="nth.synchronizefolder.commandline.SynchronizeFolderCommandLine"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="C:/Users/nilsth/My Java/Workspace InnoForce/SynchronizeFoldersCommandLine/bin"/>
-            <fileset dir="C:/Users/nilsth/My Java/Workspace InnoForce/IntrospectUserInterfaceCommandLine/bin"/>
-            <fileset dir="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/lib/commons-beanutils.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/lib/commons-jexl-1.0.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/lib/commons-logging.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/lib/ejb3-persistence.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/lib/log4j-1.2.9.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/Introspect/lib/xerces-2.6.2.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/annotations-api.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/catalina-ant.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/catalina-ha.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/catalina-tribes.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/catalina.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/ecj-4.2.2.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/el-api.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/jasper-el.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/jasper.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/jsp-api.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/servlet-api.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-api.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-coyote.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-dbcp.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-i18n-es.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-i18n-fr.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-i18n-ja.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-jdbc.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/apache-tomcat-7.0.42/lib/tomcat-util.jar"/>
-            <fileset dir="C:/Users/nilsth/My Java/Workspace InnoForce/IntrospectUserInterfaceUtil/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Java/Workspace InnoForce/SynchronizeFoldersCommandLine/lib/commons-io-2.4.jar"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Apps/SynchronizeFoldersCommandLine/bin"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/commons-beanutils.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/commons-jexl-1.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/commons-logging.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/ejb3-persistence.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/log4j-1.2.9.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/xerces-2.6.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Apps/SynchronizeFoldersCommandLine/lib/commons-io-2.4.jar"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Framework/IntrospectForCommandLine/bin"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Framework/IntrospectUserInterfaceUtil/bin"/>
         </jar>
     </target>
 </project>
