@@ -19,7 +19,7 @@ import javax.crypto.CipherOutputStream;
 import nth.introspect.Introspect;
 import nth.introspect.filter.Filter;
 import nth.introspect.filter.FilterUtil;
-import nth.introspect.util.xml.XmlUtil;
+import nth.introspect.util.xml.XmlConverter;
 
 /**
  * A very simple data access class for the {@link Introspect} framework that can
@@ -35,6 +35,7 @@ import nth.introspect.util.xml.XmlUtil;
 // TODO make crypto optional
 public class ObjectRepositoryForDifferentTypes {
 
+	
 	private static final String PASS_PHRASE = "89evJEWIJ9$*&(#J @E2DD(*ehhlju,>/x hw**3rh1~~@();hye";
 	private List<Object> domainObjects;
 	private Boolean xmlIndent;
@@ -69,7 +70,7 @@ public class ObjectRepositoryForDifferentTypes {
 			// with the database file. So we are dangerously assuming this class
 			// is the only class that makes changes to the database file!
 			String xml = readXmlDatabaseFile();
-			domainObjects = (List<Object>) XmlUtil.unmarshal(xml.toString());
+//	TODO		domainObjects = (List<Object>) XmlConverter.unmarshal(xml.toString());
 		}
 		return domainObjects;
 	}
@@ -102,14 +103,14 @@ public class ObjectRepositoryForDifferentTypes {
 	}
 
 	public void persistAll() throws Exception {
-		String xml = XmlUtil.marshal(domainObjects, xmlIndent);
-		FileOutputStream fileOutputStream = new FileOutputStream(
-				databaseFile);
-		CipherOutputStream cipherOutputStream = CipherUtil
-				.createCipherOutputStream(PASS_PHRASE, fileOutputStream);
-		PrintWriter printWriter = new PrintWriter(cipherOutputStream);
-		printWriter.print(xml);
-		printWriter.close();
+		//TODO String xml = XmlConverter.marshal(domainObjects, xmlIndent);
+//		FileOutputStream fileOutputStream = new FileOutputStream(
+//				databaseFile);
+//		CipherOutputStream cipherOutputStream = CipherUtil
+//				.createCipherOutputStream(PASS_PHRAS+\-=/+9*-eOutputStream);
+//		PrintWriter printWriter = new PrintWriter(cipherOutputStream);
+//		printWriter.print(xml);
+//		printWriter.close();
 	}
 
 	public void delete(Object domainObject) throws Exception {
