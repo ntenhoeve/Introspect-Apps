@@ -16,9 +16,11 @@ import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 
+import nth.accounts.domain.account.Account;
 import nth.introspect.Introspect;
 import nth.introspect.filter.Filter;
 import nth.introspect.filter.FilterUtil;
+import nth.introspect.provider.path.PathProvider;
 import nth.introspect.util.xml.XmlConverter;
 
 /**
@@ -33,8 +35,13 @@ import nth.introspect.util.xml.XmlConverter;
 // TODO implement DataAccess interface
 // TODO move this class to a new IntrospectDataAccessObjectRepositority
 // TODO make crypto optional
-public class ObjectRepositoryForDifferentTypes {
+public class XmlFileRepository {
 
+	private final PathProvider pathProvider;
+
+	public XmlFileRepository(PathProvider pathProvider) {
+		this.pathProvider = pathProvider;
+	}
 	
 	private static final String PASS_PHRASE = "89evJEWIJ9$*&(#J @E2DD(*ehhlju,>/x hw**3rh1~~@();hye";
 	private List<Object> domainObjects;
@@ -42,7 +49,7 @@ public class ObjectRepositoryForDifferentTypes {
 	private File databaseFile;
 
 	/**
-	 * See {@link ObjectRepositoryForDifferentTypes}
+	 * See {@link XmlFileRepository}
 	 * 
 	 * @param domainClass
 	 *            Type of the domain objects that this data access object
@@ -53,11 +60,12 @@ public class ObjectRepositoryForDifferentTypes {
 	 *            data to store and process)
 	 */
 	// TODO add parameter String encryptionKey
-	public ObjectRepositoryForDifferentTypes(String databaseName,
+	public XmlFileRepository(PathProvider pathProvider, String databaseName,
 			Boolean xmlIndent) {
+		this(pathProvider);
 		this.xmlIndent = xmlIndent;
 		String databaseFileName = databaseName + ".db";
-		URI databaseUri = Introspect.getPathProvider().getConfigPath(
+		URI databaseUri = pathProvider.getConfigPath(
 				databaseFileName);
 		databaseFile = new File(databaseUri);
 		domainObjects = new ArrayList();
@@ -116,6 +124,17 @@ public class ObjectRepositoryForDifferentTypes {
 	public void delete(Object domainObject) throws Exception {
 		domainObjects.remove(domainObject);
 		persistAll();
+	}
+	
+	public List<?> getAll(final Class<?> type) throws Exception {
+		Filter<Object> typeFilter = new Filter<Object>() {
+
+			@Override
+			public boolean isMatch(Object obj) {
+				return type == obj.getClass();
+			}
+		};
+		return getAll(typeFilter);
 	}
 
 }

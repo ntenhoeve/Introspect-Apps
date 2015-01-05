@@ -3,6 +3,7 @@ package nth.accounts.domain.account;
 import java.util.ArrayList;
 import java.util.List;
 
+import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.user.User;
 import nth.introspect.filter.FilterUtil;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
@@ -11,12 +12,10 @@ import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnT
 
 public class AccountService {
 
-	private AccountDataAccess accountDataAccess;
+	private AccountRepository accountRepository;
 
-	public AccountService() {
-		accountDataAccess = new AccountDataAccess(); // TODO
-														// (DataAccessProvider<Account>)
-														// Introspect.getDataAccess(AccountRepository.class);
+	public AccountService(AccountRepository accountRepository) {
+		this.accountRepository = accountRepository;
 	}
 
 	@GenericReturnType(Account.class)
@@ -29,11 +28,11 @@ public class AccountService {
 
 	@GenericReturnType(Account.class)
 	public List<Account> allAccounts() throws Exception {
-		return accountDataAccess.getAll();
+		return (List<Account>) accountRepository.getAll(Account.class);
 	}
 
 	public void createAccount(Account account) throws Exception {
-		accountDataAccess.persist(account);
+		accountRepository.persist(account);
 	}
 
 	public Account createAccountParameterFactory() {
@@ -48,12 +47,12 @@ public class AccountService {
 	}
 
 	public void modifyAccount(Account account) throws Exception {
-		accountDataAccess.persist(account);
+		accountRepository.persist(account);
 	}
 
 	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void deleteAccount(Account account) throws Exception {
-		accountDataAccess.delete(account);
+		accountRepository.delete(account);
 	}
 
 	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)

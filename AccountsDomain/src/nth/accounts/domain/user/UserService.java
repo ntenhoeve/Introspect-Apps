@@ -2,6 +2,8 @@ package nth.accounts.domain.user;
 
 import java.util.List;
 
+import nth.accounts.domain.account.Account;
+import nth.accounts.domain.repository.AccountRepository;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
@@ -9,18 +11,17 @@ import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnT
 public class UserService {
 
 
-	private UserDataAccess userDataAccess;
+	private AccountRepository userDataAccess;
 
-	public UserService() {
-		//userDataAccess = (DataAccessProvider<User>) Introspect.getDataAccess(UserDataAccess.class);
-		userDataAccess=new UserDataAccess();//TODO get instance via Introspect.getDataAccess
+	public UserService(AccountRepository accountRepository) {
+		this.userDataAccess = accountRepository;
 	}
 	
 	
 	
 	@GenericReturnType(User.class)
 	public List<User> allUsers() throws Exception {
-		return userDataAccess.getAll();
+		return (List<User>) userDataAccess.getAll(User.class);
 	}
 
 	

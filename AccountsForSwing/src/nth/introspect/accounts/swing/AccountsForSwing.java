@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.accounts.domain.account.AccountService;
+import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.user.UserService;
 import nth.introspect.ui.swing.IntrospectApplicationForSwing;
 
@@ -18,13 +19,15 @@ public class AccountsForSwing extends IntrospectApplicationForSwing {
 	}
 
 	public List<Class<?>> getServiceClasses() {
-		List<Class<?>> frontEndServiceClasses = new ArrayList<Class<?>>();
-		frontEndServiceClasses.add(AccountService.class);
-		frontEndServiceClasses.add(UserService.class);
-		return frontEndServiceClasses;
+		List<Class<?>> serviceClasses = new ArrayList<Class<?>>();
+		serviceClasses.add(AccountService.class);
+		serviceClasses.add(UserService.class);
+		return serviceClasses;
 	}
 
 	public List<Class<?>> getInfrastructureClasses() {
-		return new ArrayList<Class<?>>();
+		List<Class<?>> infrastructureClasses = new ArrayList<Class<?>>();
+		infrastructureClasses.add(AccountRepository.class);
+		return infrastructureClasses;
 	}
 }
