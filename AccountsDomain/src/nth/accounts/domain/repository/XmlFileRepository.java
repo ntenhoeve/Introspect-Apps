@@ -38,11 +38,9 @@ import nth.introspect.util.xml.XmlConverter;
 public class XmlFileRepository {
 
 	private final PathProvider pathProvider;
+	private final XmlConverter xmlConverter;
 
-	public XmlFileRepository(PathProvider pathProvider) {
-		this.pathProvider = pathProvider;
-	}
-	
+
 	private static final String PASS_PHRASE = "89evJEWIJ9$*&(#J @E2DD(*ehhlju,>/x hw**3rh1~~@();hye";
 	private List<Object> domainObjects;
 	private Boolean xmlIndent;
@@ -60,9 +58,10 @@ public class XmlFileRepository {
 	 *            data to store and process)
 	 */
 	// TODO add parameter String encryptionKey
-	public XmlFileRepository(PathProvider pathProvider, String databaseName,
+	public XmlFileRepository(PathProvider pathProvider, XmlConverter xmlConverter, String databaseName,
 			Boolean xmlIndent) {
-		this(pathProvider);
+		this.pathProvider = pathProvider;
+		this.xmlConverter = xmlConverter;
 		this.xmlIndent = xmlIndent;
 		String databaseFileName = databaseName + ".db";
 		URI databaseUri = pathProvider.getConfigPath(
@@ -111,14 +110,14 @@ public class XmlFileRepository {
 	}
 
 	public void persistAll() throws Exception {
-		//TODO String xml = XmlConverter.marshal(domainObjects, xmlIndent);
-//		FileOutputStream fileOutputStream = new FileOutputStream(
-//				databaseFile);
-//		CipherOutputStream cipherOutputStream = CipherUtil
-//				.createCipherOutputStream(PASS_PHRAS+\-=/+9*-eOutputStream);
-//		PrintWriter printWriter = new PrintWriter(cipherOutputStream);
-//		printWriter.print(xml);
-//		printWriter.close();
+		String xml = xmlConverter.marshal(domainObjects, xmlIndent);
+		FileOutputStream fileOutputStream = new FileOutputStream(
+				databaseFile);
+		CipherOutputStream cipherOutputStream = CipherUtil
+				.createCipherOutputStream(PASS_PHRASE,fileOutputStream);
+		PrintWriter printWriter = new PrintWriter(cipherOutputStream);
+		printWriter.print(xml);
+		printWriter.close();
 	}
 
 	public void delete(Object domainObject) throws Exception {

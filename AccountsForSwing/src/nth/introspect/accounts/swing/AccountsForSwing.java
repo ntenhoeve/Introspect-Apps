@@ -7,6 +7,7 @@ import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.user.UserService;
 import nth.introspect.ui.swing.IntrospectApplicationForSwing;
+import nth.introspect.util.xml.XmlConverter;
 
 public class AccountsForSwing extends IntrospectApplicationForSwing {
 
@@ -28,6 +29,7 @@ public class AccountsForSwing extends IntrospectApplicationForSwing {
 	public List<Class<?>> getInfrastructureClasses() {
 		List<Class<?>> infrastructureClasses = new ArrayList<Class<?>>();
 		infrastructureClasses.add(AccountRepository.class);
+		infrastructureClasses.add(XmlConverter.class);
 		return infrastructureClasses;
 	}
 }
