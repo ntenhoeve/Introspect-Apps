@@ -1,6 +1,7 @@
 package nth.accounts.domain.account;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import nth.accounts.domain.repository.AccountRepository;
@@ -9,13 +10,16 @@ import nth.introspect.filter.FilterUtil;
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
 import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
 import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.introspect.provider.notification.NotificationProvider;
 
 public class AccountService {
 
-	private AccountRepository accountRepository;
+	private final AccountRepository accountRepository;
+	private final NotificationProvider notificationProvider;
 
-	public AccountService(AccountRepository accountRepository) {
+	public AccountService(AccountRepository accountRepository, NotificationProvider notificationProvider) {
 		this.accountRepository = accountRepository;
+		this.notificationProvider = notificationProvider;
 	}
 
 	@GenericReturnType(Account.class)
@@ -37,12 +41,6 @@ public class AccountService {
 
 	public Account createAccountParameterFactory() {
 		Account account = new Account();
-		AccountAttribute attribute = new AccountAttribute();
-		attribute.setName("password");
-		attribute.setValue("secret");
-		ArrayList<AccountAttribute> attributes = new ArrayList<AccountAttribute>();
-		attributes.add(attribute);
-		account.setAttributes(attributes);
 		return account;
 	}
 
@@ -58,6 +56,28 @@ public class AccountService {
 	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public Account viewAccount(Account account) throws Exception {
 		return account;
+	}
+
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public void moveAccountUp(Account account) throws Exception {
+		List<Account> accounts = (List<Account>) accountRepository.getAll(Account.class);
+		int index = accounts.lastIndexOf(account);
+		if (index > 0 && accounts.size()>1) {
+			Collections.swap(accounts, index, index-1);
+		}//TODO does not work item is moved but not persisted
+		accountRepository.persistAll();
+		notificationProvider.refreshUserInterface();
+	}
+	
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public void moveAccountDown(Account account) throws Exception {
+		List<Account> accounts = (List<Account>) accountRepository.getAll(Account.class);
+		int index = accounts.lastIndexOf(account);
+		if (index <= accounts.size() && accounts.size()>1) {
+			Collections.swap(accounts, index, index+1);
+		}//TODO does not work item is moved but not persisted
+		accountRepository.persistAll();
+		notificationProvider.refreshUserInterface();
 	}
 
 }

@@ -1,5 +1,8 @@
 package nth.accounts.domain.account;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +56,7 @@ public class Account {
 
 	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void userClearUser() {
-		throw new RuntimeException("Test");
-		//setUser(null);
+		setUser(null);
 	}
 
 	public void setAttributes(List<AccountAttribute> attributes) {
@@ -115,11 +117,20 @@ public class Account {
 	public void attributesRemoveAttribute(AccountAttribute attribute) {
 		attributes.remove(attribute);
 	}
+	
 
 	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesModifyAttribute(AccountAttribute attribute) {
 	}
 
+
+	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public void attributesCopyAttributeValue(AccountAttribute attribute) {
+		StringSelection selection = new StringSelection(attribute.getValue());
+	    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	    clipboard.setContents(selection, selection);
+	}
+	
 	@Override
 	public String toString() {
 		TitleBuilder titleBuilder = new TitleBuilder("-");

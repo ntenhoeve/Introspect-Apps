@@ -77,7 +77,7 @@ public class XmlFileRepository {
 			// with the database file. So we are dangerously assuming this class
 			// is the only class that makes changes to the database file!
 			String xml = readXmlDatabaseFile();
-//	TODO		domainObjects = (List<Object>) XmlConverter.unmarshal(xml.toString());
+			domainObjects = (List<Object>) xmlConverter.unmarshal(xml);
 		}
 		return domainObjects;
 	}
