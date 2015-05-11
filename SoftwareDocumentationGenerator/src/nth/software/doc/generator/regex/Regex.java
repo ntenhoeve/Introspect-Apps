@@ -127,4 +127,61 @@ public class Regex {
 		return this;
 	}
 
+	public Regex caseUnsensativeMode() {
+		regex.append("(?iu)");
+		return this;
+	}
+
+	public java.util.regex.Pattern asPattern() {
+		return java.util.regex.Pattern.compile(regex.toString());
+	}
+
+	public Regex xmlStartElement(String elementName) {
+		literal("<");
+		whiteSpace(Repetition.zeroOrMoreTimes());
+		literal(elementName);
+		anyCharacter(Repetition.zeroOrMoreTimes().reluctant());
+		literal(">");
+		return this;
+	}
+	
+	public Regex xmlEndElement(String elementName) {
+		literal("</");
+		whiteSpace(Repetition.zeroOrMoreTimes());
+		literal(elementName);
+		whiteSpace(Repetition.zeroOrMoreTimes());
+		literal(">");
+		return this;
+	}
+
+	public Regex or() {
+		regex.append("|");
+		return this;
+	}
+
+	public Regex group(Regex group) {
+		regex.append("(");
+		regex.append(group);
+		regex.append(")");
+		return this;
+	}
+
+	public Regex letters() {
+		regex.append("[a-zA-Z]");
+		return this;
+	}
+
+	
+	public Regex letters(Repetition repetition) {
+		letters();
+		regex.append(repetition);
+		return this;
+	}
+
+	public Regex group(Regex group, Repetition repetition) {
+		group(group);
+		regex.append(repetition);
+		return this;
+	}
+	
 }

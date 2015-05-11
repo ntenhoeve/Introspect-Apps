@@ -1,5 +1,6 @@
 package nth.accounts.domain.repository;
 
+import nth.introspect.infrastructure.xmlfilerepository.XmlFileRepository;
 import nth.introspect.provider.path.PathProvider;
 import nth.introspect.util.xml.XmlConverter;
 

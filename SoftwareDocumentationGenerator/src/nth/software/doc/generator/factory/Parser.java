@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import nth.software.doc.generator.regex.Regex;
 
-
 public class Parser {
 
 	private static final int NOT_FOUND = -1;
@@ -18,17 +17,17 @@ public class Parser {
 	}
 
 	public List<String> findAll(Regex regEx) {
-		List<String> results=new ArrayList<>();
+		List<String> results = new ArrayList<>();
 		Matcher matcher = Pattern.compile(regEx.toString()).matcher(result);
-        while (matcher.find()) {
-            String result=matcher.group();
-            results.add(result);
-        }
+		while (matcher.find()) {
+			String result = matcher.group();
+			results.add(result);
+		}
 		return results;
 	}
 
-	public void removeAll(Regex regex) {
-		result=result.replaceAll(regex.toString(), "");
+	public void removeAll(Pattern pattern) {
+		result = pattern.matcher(result).replaceAll("");
 	}
 
 	public String getResult() {
@@ -41,21 +40,21 @@ public class Parser {
 
 	public void removeFirst(String textToRemove) {
 		int startPos = result.indexOf(textToRemove);
-		if (startPos!=NOT_FOUND) {
-			startPos+=textToRemove.length();
-			result=result.substring(startPos);
+		if (startPos != NOT_FOUND) {
+			startPos += textToRemove.length();
+			result = result.substring(startPos);
 		}
 	}
 
 	public void removeFrom(String textToFind) {
 		int startPos = result.indexOf(textToFind);
-		if (startPos!=NOT_FOUND) {
-			result=result.substring(0,startPos);
+		if (startPos != NOT_FOUND) {
+			result = result.substring(0, startPos);
 		}
 	}
 
-	public void replaceAll(Regex regex,String  replacement) {
-		result=result.replaceAll(regex.toString(), replacement);
+	public void replaceAll(Regex regex, String replacement) {
+		result = result.replaceAll(regex.toString(), replacement);
 	}
 
 	@Override
@@ -63,6 +62,54 @@ public class Parser {
 		return result;
 	}
 
-	
-	
+	public boolean startsWith(Pattern startPattern) {
+		return startPattern.matcher(result).lookingAt();
+	}
+
+	public void removeAllBehind(Pattern pattern) {
+		Matcher matcher = pattern.matcher(result);
+		if (matcher.find()) {
+			int endIndex = matcher.start();
+			result = result.substring(0, endIndex);
+		}
+	}
+
+	public void removeAllBeforeAndIncluding(Pattern pattern) {
+		Matcher matcher = pattern.matcher(result);
+		if (matcher.find()) {
+			int startIndex = matcher.end();
+			result = result.substring(startIndex);
+		} else {
+			System.out.println();
+		}
+	}
+
+	public String findFirst(Pattern pattern) {
+		Matcher matcher = pattern.matcher(result);
+		if (matcher.find()) {
+			return matcher.group();
+		}
+		return null;
+	}
+
+	public void removeFirst(Pattern pattern) {
+		result=pattern.matcher(result).replaceFirst("");
+	}
+
+	public void trim() {
+		result=result.trim();
+	}
+
+	public void insert(String textToInsert,  int offset) {
+		StringBuilder builder=new StringBuilder(result);
+		builder.insert(offset, textToInsert);
+		result=builder.toString();
+	}
+
+	public void append(String textToAppend) {
+		StringBuilder builder=new StringBuilder(result);
+		builder.append(textToAppend);
+		result=builder.toString();
+	}
+
 }

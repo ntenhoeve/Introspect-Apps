@@ -1,6 +1,8 @@
 package nth.software.doc.generator.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class NodeContainer<T extends Node> implements Node {
@@ -12,8 +14,15 @@ public class NodeContainer<T extends Node> implements Node {
 	}
 
 	public List<T> getChildren() {
-		return children;
+		return children ;
 	}
 	
+	public void add(T node) {
+		children.add(node);
+	}
+	
+	public void addAll(Collection<T> nodes) {
+		children.addAll(nodes);
+	}
 	
 }

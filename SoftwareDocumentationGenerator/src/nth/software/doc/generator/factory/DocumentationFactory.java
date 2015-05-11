@@ -4,37 +4,47 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import nth.software.doc.generator.framer.ConsoleFramer;
+import nth.software.doc.generator.framer.DocumentationFramer;
+import nth.software.doc.generator.framer.HtmlSingleFileFramer;
 import nth.software.doc.generator.javafile.MultipleFileException;
+import nth.software.doc.generator.model.DocumentationModel;
 import nth.software.doc.generator.model.Manual;
+import nth.software.doc.generator.model.Node;
+import nth.software.doc.generator.parser.JavaDocParser;
+import nth.software.doc.generator.parser.JavaDocParser;
+import nth.software.doc.generator.tokenizer.FoundToken;
+import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 
 public class DocumentationFactory {
-	public static Manual createManual(File projectsFolder, String className)
+	public static void createDocumentation(File projectsFolder, String className)
 			throws IOException, MultipleFileException {
 
-		String documentation=DocumentationReader.readAllDocumentation(projectsFolder, className);
+		String javaDoc=DocumentationReader.readAllDocumentation(projectsFolder, className);
 		
-		System.out.println(documentation);
-		Manual manual = new Manual();
-		return manual;//TODO addToManual(manual, projectsFolder, contentsFile);
+//		System.out.println(javaDoc);
+		
+		JavaDocTokenizer javaDocTokenizer=new JavaDocTokenizer(javaDoc);
+		while (javaDocTokenizer.hasNextToken())		{
+			FoundToken foundToken = javaDocTokenizer.nextToken();
+			System.out.println(foundToken);
+		}
+		
+		JavaDocParser javaDocParser=new JavaDocParser(javaDoc); 
+		List<Node> nodes = javaDocParser.parse();
+		DocumentationModel documentationModel=new DocumentationModel(projectsFolder, nodes);
+		
+
+//		ConsoleFramer framer=new ConsoleFramer();
+//		framer.frame(nodes);
+		
+		File destinationFile=new File("C:/Users/nilsth/My Git/Introspect-Apps/SoftwareDocumentationGenerator/dist/htmlOutput.html");
+		HtmlSingleFileFramer htmlSingleFileFramer=new HtmlSingleFileFramer(documentationModel, destinationFile);
+		htmlSingleFileFramer.frame();
 	}
 
-
-//	private static Manual addToManual(String documentation) throws IOException {
-//		
-//		DocParser docParser=new DocParser(documentation);
-//		
-//		
-//		
-//		for (String line : documentation) {
-//			System.out.println(line);
-//		}
-//
-//		return manual;
-//	}
-	
-	
 	public static void main(String[] args) throws IOException, MultipleFileException {
 		File projectsFolder = new File("M:/My Git/Introspect-Framework");
-		createManual(projectsFolder, "IntrospectManual");
+		createDocumentation(projectsFolder, "IntrospectDocumentation");
 	}
 }
