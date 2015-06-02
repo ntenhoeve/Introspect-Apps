@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project SoftwareDocumentationGenerator">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="M:/My Git/Introspect-Apps/SoftwareDocumentationGenerator/dist/SoftwareDocumentationGenerator.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="nth.software.doc.generator.SoftwareDocumentationGenerator"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Apps/SoftwareDocumentationGenerator/bin"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/commons-beanutils.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/commons-jexl-1.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/commons-logging.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/ejb3-persistence.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/log4j-1.2.9.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/nilsth/My Git/Introspect-Framework/Introspect/lib/xerces-2.6.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Framework/IntrospectForCommandLine/bin"/>
+            <fileset dir="C:/Users/nilsth/My Git/Introspect-Framework/IntrospectUserInterfaceUtil/bin"/>
+        </jar>
+    </target>
+</project>

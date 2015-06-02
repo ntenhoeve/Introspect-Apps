@@ -30,6 +30,8 @@ import nth.software.doc.generator.model.SubParagraph;
 import nth.software.doc.generator.model.TextNode;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
+import nth.software.doc.generator.service.DocumentationInfo;
+import nth.software.doc.generator.service.HtmlInfo;
 import nth.software.doc.generator.tokenizer.ElementName;
 import nth.software.doc.generator.tokenizer.InlineTagName;
 import nth.software.doc.generator.tokenizer.TokenFactory;
@@ -38,14 +40,23 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 
 	private static final int NOT_FOUND = -1;
 	private final PrintWriter writer;
-	private final File destination;
+	private File destinationFolder;
 
 	public HtmlSingleFileFramer(DocumentationModel documentationModel,
-			File destination) throws FileNotFoundException,
+			DocumentationInfo htmlInfo, File destinationFolder) throws FileNotFoundException,
 			UnsupportedEncodingException {
 		super(documentationModel);
-		this.destination = destination;
-		writer = new PrintWriter(destination, "UTF-8");
+		this.destinationFolder = destinationFolder;
+		File destinationFile = createDestinationFile(destinationFolder);
+		writer = new PrintWriter(destinationFile, "UTF-8");
+	}
+
+	private File createDestinationFile(File destinationFolder) {
+		StringBuilder destinationFile = new StringBuilder();
+		destinationFile.append(destinationFile);
+		destinationFile.append("/index.html");
+		File file=new File(destinationFile.toString());
+		return file;
 	}
 
 	private void outChildren(NodeContainer<Node> nodeContainer) {
@@ -262,9 +273,11 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 
 	private void copyImage(File imageFile) {
 		try {
-			String destinationFile = destination.getParent() + "/"
-					+ imageFile.getName();
-			FileOutputStream out = new FileOutputStream(destinationFile);
+			StringBuilder destinationFile = new StringBuilder();
+			destinationFile.append(destinationFolder);
+			destinationFile.append("/");
+			destinationFile.append(imageFile.getName());
+			FileOutputStream out = new FileOutputStream(destinationFile.toString());
 			Files.copy(imageFile.toPath(), out);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -38,9 +38,11 @@ public class DocumentationFactory {
 //		ConsoleFramer framer=new ConsoleFramer();
 //		framer.frame(nodes);
 		
-		File destinationFile=new File("C:/Users/nilsth/My Git/Introspect-Apps/SoftwareDocumentationGenerator/dist/htmlOutput.html");
-		HtmlSingleFileFramer htmlSingleFileFramer=new HtmlSingleFileFramer(documentationModel, destinationFile);
-		htmlSingleFileFramer.frame();
+//		File destinationFile=new File("C:/Users/nilsth/My Git/Introspect-Apps/SoftwareDocumentationGenerator/dist/htmlOutput.html");
+//		HtmlSingleFileFramer htmlSingleFileFramer=new HtmlSingleFileFramer(documentationModel, destinationFile);
+//		htmlSingleFileFramer.frame();
+		
+		System.out.println("Done...");
 	}
 
 	public static void main(String[] args) throws IOException, MultipleFileException {

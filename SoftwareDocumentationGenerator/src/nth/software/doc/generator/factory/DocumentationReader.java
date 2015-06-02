@@ -10,6 +10,7 @@ import nth.software.doc.generator.javafile.JavaFileFactory;
 import nth.software.doc.generator.javafile.MultipleFileException;
 import nth.software.doc.generator.regex.Regex;
 import nth.software.doc.generator.regex.Repetition;
+import nth.software.doc.generator.service.DocumentationInfo;
 
 import com.sun.tools.javadoc.resources.javadoc;
 
@@ -22,10 +23,13 @@ public class DocumentationReader {
 	private static final Regex INSERT_TAG_END = new Regex().whiteSpace(Repetition.zeroOrMoreTimes()).literal("}"); 
 	private static final Regex INSERT_TAG=new Regex().append(INSERT_TAG_BEGIN).append(INSERT_TAG_CLASSNAME).append( INSERT_TAG_END);
 	
+	public static String readAllDocumentation(DocumentationInfo documentationInfo) throws IOException, MultipleFileException {
+		return readAllDocumentation(documentationInfo.getProjectsFolder(), documentationInfo.getClassName());
+	}
+	
 	public static String readAllDocumentation(File projectsFolder, String className) throws IOException, MultipleFileException {
 		JavaFile javaDoc = JavaFileFactory.create(projectsFolder, className);
-	
-		
+
 		String documentation = javaDoc.getDocumentation();
 		
 		documentation=insertDocumentation(projectsFolder, documentation);

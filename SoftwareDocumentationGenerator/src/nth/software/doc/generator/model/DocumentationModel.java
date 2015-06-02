@@ -49,6 +49,9 @@ public class DocumentationModel extends NodeContainer<Node> {
 		do {
 			parent = findParent(currentNode, node);
 			beginOfFile = findBeginOffFile(parent);
+			if (beginOfFile==null) {
+				node=parent;
+			}
 		} while (beginOfFile == null && parent != this);
 		return beginOfFile;
 	}
