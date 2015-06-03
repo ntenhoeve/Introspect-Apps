@@ -8,6 +8,7 @@ import java.util.List;
 
 import nth.software.doc.generator.factory.DocumentationReader;
 import nth.software.doc.generator.framer.HtmlSingleFileFramer;
+import nth.software.doc.generator.framer.WikiFramer;
 import nth.software.doc.generator.javafile.MultipleFileException;
 import nth.software.doc.generator.model.DocumentationModel;
 import nth.software.doc.generator.model.Node;
@@ -59,8 +60,23 @@ public class DocumentationService {
 		this.gitRepository = gitRepository;
 	}
 	
-	public void createGitHubWikiDocumentation(GitHubWikiInfo gitHubWikiInfo) {
-		// TODO see createGitHubHtmlDocumentation for insperation
+	public void createGitHubWikiDocumentation(GitHubWikiInfo gitHubWikiInfo) throws IOException, MultipleFileException {
+		String javaDoc = DocumentationReader
+				.readAllDocumentation(gitHubWikiInfo);
+
+		JavaDocParser javaDocParser = new JavaDocParser(javaDoc);
+		List<Node> nodes = javaDocParser.parse();
+		DocumentationModel documentationModel = new DocumentationModel(
+				gitHubWikiInfo.getProjectsFolder(), nodes);
+
+
+		deleteFolderContents(gitHubWikiInfo.getGitHubWikiProjectLocation());
+
+		WikiFramer wikiFramer = new WikiFramer(
+				documentationModel, gitHubWikiInfo, gitHubWikiInfo.getGitHubWikiProjectLocation());
+		wikiFramer.frame();
+
+		gitRepository.commitAndPush(gitHubWikiInfo, gitHubWikiInfo.getGitHubWikiProjectLocation());
 	}
 
 	public void createGitHubHtmlDocumentation(GitHubHtmlInfo gitHubHtmlInfo)

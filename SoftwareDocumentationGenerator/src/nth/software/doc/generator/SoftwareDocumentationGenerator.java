@@ -31,8 +31,18 @@ import nth.software.doc.generator.service.DocumentationService;
  * <ul>
  * <li>You can use images with the HTM tag &lt;image href="pictureName.png"&gt;.
  * This image must be located in the same package.</li>
- * <li>You can import other class or interface files using the Javadoc in-line
+ * <li>You can include a main picture, which will be added at the beginning of
+ * the documentation. This image must have the same name as the class name, have
+ * the png extension and be located in the same package.This .</li>
+ * <li>You can insert other class or interface files using the Javadoc in-line
  * tag &lt;@insert ClassName&gt;</li>
+ * <li>You can include chapters by adding a title between &lt;H1&gt; &lt;/H1&gt;
+ * tags</li>
+ * <li>You can include paragraphs by adding a title between &lt;H2&gt;
+ * &lt;/H2&gt; tags</li>
+ * <li>You can include sub paragraphs by adding a title between &lt;H3&gt;
+ * &lt;/H3&gt; tags. Sub paragraphs are normally not rendered in the table of
+ * contents</li>
  * <li>It is good practice to create a documentation class that ties all the
  * java files together in one document.</li>
  * </ul>
@@ -46,7 +56,7 @@ import nth.software.doc.generator.service.DocumentationService;
  * in the {@link DocumentationService} class, followed by the properties of the
  * method parameter.
  * </p>
- * In example if you want to create HTML documentation you will need to run:
+ * In example: If you want to create HTML documentation you will need to run:
  * 
  * <pre>
  * {@link SoftwareDocumentationGenerator}: createHtmlDocumentation {location of the java projects} {class name} {destination folder}

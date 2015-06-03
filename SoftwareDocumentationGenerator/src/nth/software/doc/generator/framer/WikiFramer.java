@@ -19,188 +19,81 @@ import nth.software.doc.generator.model.SubParagraph;
 import nth.software.doc.generator.model.TextNode;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
+import nth.software.doc.generator.service.DocumentationInfo;
 import nth.software.doc.generator.tokenizer.ElementName;
 
-public class WikiFramer extends DocumentationFramer {
-
+public class WikiFramer extends HtmlSingleFileFramer {
 
 	private final File destinationFolder;
-	private PrintWriter writer;
+	private int chapterNumber = 0;
 
-	public WikiFramer(DocumentationModel documentationModel, File destinationFolder) throws FileNotFoundException, UnsupportedEncodingException {
-		super(documentationModel);
+	public WikiFramer(DocumentationModel documentationModel,
+			DocumentationInfo htmlInfo, File destinationFolder)
+			throws FileNotFoundException, UnsupportedEncodingException {
+		super(documentationModel, htmlInfo, destinationFolder);
 		this.destinationFolder = destinationFolder;
 	}
-	
 
 	@Override
-	public void onStartFraming()  {
+	public void onStartFraming() {
 		try {
-			writeHomePage();
+			createNewFile("Home.md");
+			writeImage();
+			writeTableOfContents();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	@Override
-	public void onCloseFraming() {
-		writer.flush();
-		writer.close();
-	}
-
-	
-	private void writeHomePage() throws FileNotFoundException, UnsupportedEncodingException {
-		createNewFile("Home");
-		writeHeaderBar();
-		writeImage();
-		writeTableOfContents();
-		writeBottomBar();
-	}
-
-	private void writeBottomBar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void writeHeaderBar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void writeImage() {
-		InlineTag beginOffFile = documentationModel.findBeginOffFile(documentationModel);
-		String javaFileName = beginOffFile.getValue();
-		File projectsFolder=documentationModel.getJavaProjectsFolder();
-		String imageFileName=javaFileName+".png";
-		frameImage(projectsFolder, javaFileName, imageFileName);
-	}
-
-	private void frameImage(File projectsFolder, String javaFileName,
-			String imageFileName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void writeTableOfContents() {
-		writer.print("Contents");
-		for (Node node : documentationModel.getChildren()) {
-			if (node instanceof Chapter) {
-				Chapter chapter = (Chapter) node;
-				writer.print("### [");
-				writer.print(chapter.getTitle());
-				writer.print("](");
-				writer.print(createReference(chapter));
-				writer.print(")");
-				java.util.List<Node> children = chapter.getChildren();
-				for (Node child : children) {
-					if (child instanceof Paragraph) {
-						Paragraph paragraph = (Paragraph) child;
-						writer.print("### [");
-						writer.print(paragraph.getTitle());
-						writer.print("](");
-						writer.print(createReference(paragraph));
-						writer.print(")");
-					}
-				}
-
-			}
+	public String createChapterLink(Chapter chapterOrParagraphOrSubParagraph) {
+		StringBuilder link = new StringBuilder();
+		Chapter chapter=documentationModel.findChapter(chapterOrParagraphOrSubParagraph);
+		java.util.List<Chapter> chapters=documentationModel.findChapters();
+		int chapterNr = chapters.indexOf(chapter)+1;
+		if (chapterNr<10) {
+			link.append("0");
 		}
-	}
-		
-
-	private char[] createReference(Chapter chapter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	private void createNewFile(String fileName) throws FileNotFoundException, UnsupportedEncodingException {
-		StringBuilder filePath = new StringBuilder();
-		filePath.append(destinationFolder.getAbsolutePath());
-		filePath.append("/");
-		filePath.append(fileName);
-		filePath.append(".md");
-		File file=new File(filePath.toString());
-		writer= new PrintWriter(file, "UTF-8");
+		link.append(chapterNr);
+		link.append("-");
+		link.append(chapter.getTitle().replace(" ", "-"));
+		if (chapterOrParagraphOrSubParagraph instanceof Paragraph) {
+			link.append("#");
+			link.append(chapterOrParagraphOrSubParagraph.getTitle().toLowerCase().replace(" ", "-"));
+		}
+		return link.toString();
 	}
 
-
-
-
-	@Override
-	public void frameImage(Image node) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameUnderline(Underline node) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameBold(Bold node) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameListItem(ListItem node) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameList(List node) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public void frameChapter(Chapter chapter) {
-		// TODO Auto-generated method stub
-
+		chapterNumber++;
+		String fileName = createChapterFileName(chapter);
+		try {
+			createNewFile(fileName);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		super.frameChapter(chapter);
 	}
 
-	@Override
-	public void frameParagarph(Paragraph node) {
-		// TODO Auto-generated method stub
-
+	private String createChapterFileName(Chapter chapter) {
+		StringBuilder fileName = new StringBuilder();
+		String chapterTitle = chapter.getTitle();
+		if (chapterNumber<10) {
+			fileName.append("0");
+		}
+		fileName.append(chapterNumber);
+		fileName.append("-");
+		fileName.append(chapterTitle.replace(" ", "-"));
+		fileName.append(".md");
+		return fileName.toString();
 	}
 
-	@Override
-	public void frameSubParagraph(SubParagraph node) {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void frameInlineTag(InlineTag inlineTag) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameText(TextNode node) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameLineBreak(LineBreak node) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void frameHyperlink(Hyperlink node) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }

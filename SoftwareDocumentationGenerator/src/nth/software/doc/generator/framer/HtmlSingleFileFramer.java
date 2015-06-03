@@ -39,24 +39,21 @@ import nth.software.doc.generator.tokenizer.TokenFactory;
 public class HtmlSingleFileFramer extends DocumentationFramer {
 
 	private static final int NOT_FOUND = -1;
-	private final PrintWriter writer;
+	private PrintWriter writer;
 	private File destinationFolder;
 
 	public HtmlSingleFileFramer(DocumentationModel documentationModel,
-			DocumentationInfo htmlInfo, File destinationFolder) throws FileNotFoundException,
-			UnsupportedEncodingException {
+			DocumentationInfo htmlInfo, File destinationFolder)
+			throws FileNotFoundException, UnsupportedEncodingException {
 		super(documentationModel);
 		this.destinationFolder = destinationFolder;
-		File destinationFile = createDestinationFile(destinationFolder);
-		writer = new PrintWriter(destinationFile, "UTF-8");
 	}
 
-	private File createDestinationFile(File destinationFolder) {
+	private String createDestinationFile(File destinationFolder) {
 		StringBuilder destinationFile = new StringBuilder();
-		destinationFile.append(destinationFile);
+		destinationFile.append(destinationFolder);
 		destinationFile.append("/index.html");
-		File file=new File(destinationFile.toString());
-		return file;
+		return destinationFile.toString();
 	}
 
 	private void outChildren(NodeContainer<Node> nodeContainer) {
@@ -65,55 +62,81 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 	}
 
 	private void outEndElement(ElementName elementName) {
-		writer.print("</");
-		writer.print(elementName.toLowerCase());
-		writer.print(">");
+		getWriter().print("</");
+		getWriter().print(elementName.toLowerCase());
+		getWriter().print(">");
 	}
 
 	private void outText(String text) {
 		String html = HtmlConverter.convertToHtml(text);
-		writer.print(html);
+		getWriter().print(html);
 	}
 
 	private void outStartElement(ElementName elementName) {
-		writer.print("<");
-		writer.print(elementName.toLowerCase());
-		writer.print(">");
+		getWriter().print("<");
+		getWriter().print(elementName.toLowerCase());
+		getWriter().print(">");
 	}
 
 	private void outStartElement(ElementName elementName, String attributeName,
 			String attributeValue) {
-		writer.print("<");
-		writer.print(elementName.toLowerCase());
-		writer.print(" ");
-		writer.print(attributeName);
-		writer.print("=\"");
-		writer.print(attributeValue);
-		writer.print("\"");
-		writer.print(">");
+		getWriter().print("<");
+		getWriter().print(elementName.toLowerCase());
+		getWriter().print(" ");
+		getWriter().print(attributeName);
+		getWriter().print("=\"");
+		getWriter().print(attributeValue);
+		getWriter().print("\"");
+		getWriter().print(">");
 	}
 
 	@Override
 	public void onCloseFraming() {
-		writer.flush();
-		writer.close();
+		closeCurrentFile();
 	}
 
 	@Override
 	public void onStartFraming() {
-		writeImage();
-		writeTableOfContents();
+		try {
+			String destinationFile = createDestinationFile(destinationFolder);
+			createNewFile(destinationFile);
+			writeImage();
+			writeTableOfContents();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void writeImage() {
-		InlineTag beginOffFile = documentationModel.findBeginOffFile(documentationModel);
+	protected void createNewFile(String fileName) throws FileNotFoundException,
+			UnsupportedEncodingException {
+		if (getWriter() != null) {
+			closeCurrentFile();
+		}
+		StringBuilder filePath = new StringBuilder();
+		filePath.append(destinationFolder.getAbsolutePath());
+		filePath.append("/");
+		filePath.append(fileName);
+		File file = new File(filePath.toString());
+		setWriter(new PrintWriter(file, "UTF-8"));
+	}
+
+	private void closeCurrentFile() {
+		getWriter().flush();
+		getWriter().close();
+	}
+
+	protected void writeImage() {
+		InlineTag beginOffFile = documentationModel
+				.findBeginOffFile(documentationModel);
 		String javaFileName = beginOffFile.getValue();
-		File projectsFolder=documentationModel.getJavaProjectsFolder();
-		String imageFileName=javaFileName+".png";
+		File projectsFolder = documentationModel.getJavaProjectsFolder();
+		String imageFileName = javaFileName + ".png";
 		frameImage(projectsFolder, javaFileName, imageFileName);
 	}
 
-	private void writeTableOfContents() {
+	protected void writeTableOfContents() {
 		outStartElement(ElementName.H1);
 		outText("Contents");
 		outEndElement(ElementName.H1);
@@ -121,7 +144,8 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 			if (node instanceof Chapter) {
 				Chapter chapter = (Chapter) node;
 				outStartElement(ElementName.H3);
-				outStartElement(ElementName.A, "href", "#" + chapter.getTitle());
+				outStartElement(ElementName.A, "href",
+						createChapterLink(chapter));
 				outText(chapter.getTitle());
 				outEndElement(ElementName.A);
 				outEndElement(ElementName.H3);
@@ -132,7 +156,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 						Paragraph paragraph = (Paragraph) child;
 						outStartElement(ElementName.LI);
 						outStartElement(ElementName.A, "href",
-								"#" + paragraph.getTitle());
+								createChapterLink(paragraph));
 						outText(paragraph.getTitle());
 						outEndElement(ElementName.A);
 						outEndElement(ElementName.LI);
@@ -239,7 +263,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 				outStartElement(ElementName.A);
 			} else {
 				Chapter chapter = (Chapter) chapterOrParagraph;
-				hRef = "#" + chapter.getTitle();
+				hRef = createChapterLink(chapter);
 				outStartElement(ElementName.A, "href", hRef);
 			}
 			outText(text);
@@ -250,10 +274,15 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 		}
 	}
 
+	public String createChapterLink(Chapter chapter) {
+		return "#" + chapter.getTitle();
+	}
+
 	@Override
 	public void frameImage(Image image) {
 		File projectsFolder = documentationModel.getJavaProjectsFolder();
-		InlineTag beginOffFile = documentationModel.findBeginOffFileInParent(image);
+		InlineTag beginOffFile = documentationModel
+				.findBeginOffFileInParent(image);
 		String JavaFileName = beginOffFile.getValue();
 		String imageFileName = image.getSrc();
 		frameImage(projectsFolder, JavaFileName, imageFileName);
@@ -262,7 +291,8 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 	private void frameImage(File projectsFolder, String JavaFileName,
 			String imageFileName) {
 		try {
-			JavaFile javaFile = JavaFileFactory.create(projectsFolder, JavaFileName);
+			JavaFile javaFile = JavaFileFactory.create(projectsFolder,
+					JavaFileName);
 			File imageFile = javaFile.getResourcePath(imageFileName);
 			copyImage(imageFile);
 			outStartElement(ElementName.IMAGE, "src", imageFileName);
@@ -277,12 +307,21 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 			destinationFile.append(destinationFolder);
 			destinationFile.append("/");
 			destinationFile.append(imageFile.getName());
-			FileOutputStream out = new FileOutputStream(destinationFile.toString());
+			FileOutputStream out = new FileOutputStream(
+					destinationFile.toString());
 			Files.copy(imageFile.toPath(), out);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	public PrintWriter getWriter() {
+		return writer;
+	}
+
+	public void setWriter(PrintWriter writer) {
+		this.writer = writer;
 	}
 
 }

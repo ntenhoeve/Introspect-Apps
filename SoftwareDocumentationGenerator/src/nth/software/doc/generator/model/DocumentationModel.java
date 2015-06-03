@@ -1,6 +1,7 @@
 package nth.software.doc.generator.model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import nth.software.doc.generator.model.inlinetag.InlineTag;
@@ -89,6 +90,36 @@ public class DocumentationModel extends NodeContainer<Node> {
 		}
 		// not found
 		return null;
+	}
+
+	public Chapter findChapter(Chapter chapterOrParagraphOrSubParagraph) {
+		if (isChapter(chapterOrParagraphOrSubParagraph) ){
+			return chapterOrParagraphOrSubParagraph;
+		}
+		NodeContainer<Node> parent = findParent(this, chapterOrParagraphOrSubParagraph);
+		if (isChapter(parent) ){
+			return (Chapter) parent;
+		}
+		parent = findParent(this,  parent);
+		if (isChapter(parent) ){
+			return (Chapter) parent;
+		}
+		return null;
+	}
+
+	private boolean isChapter(Node node) {
+		return node instanceof Chapter && !(node instanceof Paragraph) && !(node instanceof SubParagraph);
+	}
+
+	public List<Chapter> findChapters() {
+		List<Chapter> chapters=new ArrayList<Chapter>();
+		for (Node child : getChildren()) {
+			if (child instanceof Chapter) {
+				Chapter chapter=(Chapter) child;
+				chapters.add(chapter);
+			}
+		}
+		return chapters;
 	}
 
 }
