@@ -16,7 +16,7 @@ public enum ElementName {
 	// list
 	UL, LI,
 	// image
-	IMAGE,
+	IMG,
 	// table
 	TABLE, TR, TH, TD;
 	

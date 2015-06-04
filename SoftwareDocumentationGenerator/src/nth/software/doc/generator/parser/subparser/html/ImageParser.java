@@ -18,7 +18,7 @@ import nth.software.doc.generator.tokenizer.TokenFactory;
 
 public class ImageParser implements SubParser<Image> {
 
-	private static final HtmlToken HTML_IMAGE_START_TOKEN = new HtmlToken(ElementName.IMAGE, ElementType.START);
+	private static final HtmlToken HTML_IMAGE_START_TOKEN = new HtmlToken(ElementName.IMG, ElementType.START);
 
 	public Image parse(JavaDocTokenizer javaDocTokenizer) {
 		String src = parseSrc(javaDocTokenizer);

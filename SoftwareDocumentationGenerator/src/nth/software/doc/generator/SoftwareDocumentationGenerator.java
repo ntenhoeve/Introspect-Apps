@@ -9,9 +9,12 @@ import nth.software.doc.generator.service.DocumentationService;
 
 /**
  * The {@link SoftwareDocumentationGenerator} is a
- * {@link IntrospectApplicationForCommandLine} which will parse JavaDoc of a
- * given class to generate different styles of documents (see
- * {@link DocumentationService}).
+ * {@link IntrospectApplicationForCommandLine} which will parse <a
+ * href="http://en.wikipedia.org/wiki/Javadoc">JavaDoc</a> of a given class to
+ * generate different styles of documents (see {@link DocumentationService}).
+ * The {@link SoftwareDocumentationGenerator} will only use the class or
+ * interface description (the java doc before the class or interface keyword).
+ * It will ignore JavaDoc of fields, and methods
  * 
  * <h3>The advantages</h3>
  * <ul>
@@ -29,7 +32,7 @@ import nth.software.doc.generator.service.DocumentationService;
  * 
  * <h3>Conventions</h3>
  * <ul>
- * <li>You can use images with the HTM tag &lt;image href="pictureName.png"&gt;.
+ * <li>You can use images with the HTM tag &lt;img href="pictureName.png"&gt;.
  * This image must be located in the same package.</li>
  * <li>You can include a main picture, which will be added at the beginning of
  * the documentation. This image must have the same name as the class name, have

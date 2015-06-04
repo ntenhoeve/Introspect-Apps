@@ -295,7 +295,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 					JavaFileName);
 			File imageFile = javaFile.getResourcePath(imageFileName);
 			copyImage(imageFile);
-			outStartElement(ElementName.IMAGE, "src", imageFileName);
+			outStartElement(ElementName.IMG, "src", imageFileName);
 		} catch (FileNotFoundException | MultipleFileException e) {
 			e.printStackTrace();
 		}

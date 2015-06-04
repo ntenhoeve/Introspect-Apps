@@ -38,7 +38,7 @@ public class WikiFramer extends HtmlSingleFileFramer {
 	public void onStartFraming() {
 		try {
 			createNewFile("Home.md");
-			writeImage();
+			//writeImage(); TODO does not work in home ????
 			writeTableOfContents();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			e.printStackTrace();

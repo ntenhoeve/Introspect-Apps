@@ -111,7 +111,7 @@ public class ConsoleFramer extends DocumentationFramer {
 
 	@Override
 	public void frameImage(Image image) {
-		out(ElementName.IMAGE.toString(),image.getSrc());
+		out(ElementName.IMG.toString(),image.getSrc());
 	}
 
 }
