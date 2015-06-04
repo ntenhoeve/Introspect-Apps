@@ -122,4 +122,10 @@ public class DocumentationModel extends NodeContainer<Node> {
 		return chapters;
 	}
 
+	public int getChapterNumber(Chapter chapter) {
+		List<Chapter> chapters = findChapters();
+		int chapterNumber = chapters.indexOf(chapter)+1;
+		return chapterNumber;
+	}
+
 }
