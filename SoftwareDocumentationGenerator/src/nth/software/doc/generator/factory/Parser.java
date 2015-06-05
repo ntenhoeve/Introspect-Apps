@@ -79,8 +79,6 @@ public class Parser {
 		if (matcher.find()) {
 			int startIndex = matcher.end();
 			result = result.substring(startIndex);
-		} else {
-			System.out.println();
 		}
 	}
 

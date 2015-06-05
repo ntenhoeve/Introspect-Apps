@@ -16,7 +16,8 @@ import nth.software.doc.generator.model.ListItem;
 import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.Paragraph;
 import nth.software.doc.generator.model.SubParagraph;
-import nth.software.doc.generator.model.TextNode;
+import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.service.DocumentationInfo;
@@ -135,6 +136,15 @@ public class WikiFramer extends HtmlSingleFileFramer {
 		return fileName.toString();
 	}
 
+	@Override
+	public void frameTextWithFixedWidthFont(TextWithFixedWidthFont node) {
+		PrintWriter writer=getWriter();
+		writer.print("\r\n```");
+		writer.print(node.getText());
+		writer.print("\r\n```");
+	}
+
+	
 
 	
 }

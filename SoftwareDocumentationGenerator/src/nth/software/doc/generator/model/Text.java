@@ -1,10 +1,10 @@
 package nth.software.doc.generator.model;
 
-public class TextNode implements Node {
+public class Text implements Node {
 
 	private final String text;
 
-	public TextNode(String text) {
+	public Text(String text) {
 		this.text = text;
 	}
 

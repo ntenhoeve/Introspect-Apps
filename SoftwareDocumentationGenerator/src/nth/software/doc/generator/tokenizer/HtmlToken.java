@@ -20,8 +20,9 @@ public class HtmlToken implements Token {
 	private Pattern createHtmlElementPattern(ElementName elementName,
 			ElementType beginOrEnd) {
 		Regex attribute = new Regex().whiteSpace(Repetition.oneOrMoreTimes())
-				.letters(Repetition.oneOrMoreTimes()).literal("=")
+				.letters(Repetition.oneOrMoreTimes()).whiteSpace(Repetition.zeroOrMoreTimes()).literal("=").whiteSpace(Repetition.zeroOrMoreTimes())
 				.anyCharacter(Repetition.oneOrMoreTimes().reluctant());
+
 		Regex element = new Regex().caseUnsensativeMode().literal("<")
 				.whiteSpace(Repetition.zeroOrMoreTimes());
 		if (beginOrEnd == ElementType.START_OR_END) {
@@ -29,9 +30,11 @@ public class HtmlToken implements Token {
 		} else if (beginOrEnd == ElementType.END) {
 			element.literal(END_ELEMENT_INDICATOR);
 		}
-		element.whiteSpace(Repetition.zeroOrMoreTimes()).literal(elementName.toLowerCase())
+		element.whiteSpace(Repetition.zeroOrMoreTimes())
+				.literal(elementName.toLowerCase())
 				.whiteSpace(Repetition.zeroOrMoreTimes())
-				.group(attribute, Repetition.zeroOrMoreTimes()).literal(">");
+				.group(attribute, Repetition.zeroOrMoreTimes())
+				.whiteSpace(Repetition.zeroOrMoreTimes()).literal(">");
 		return element.asPattern();
 	}
 

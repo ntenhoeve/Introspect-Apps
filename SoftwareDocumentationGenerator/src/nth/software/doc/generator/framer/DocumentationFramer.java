@@ -12,7 +12,8 @@ import nth.software.doc.generator.model.ListItem;
 import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.Paragraph;
 import nth.software.doc.generator.model.SubParagraph;
-import nth.software.doc.generator.model.TextNode;
+import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.tokenizer.InlineTagName;
@@ -86,8 +87,8 @@ public abstract class DocumentationFramer {
 			frameUnderline((Underline) node);
 		} else if (node.getClass() == LineBreak.class) {
 			frameLineBreak((LineBreak) node);
-		} else if (node.getClass() == TextNode.class) {
-			frameText((TextNode) node);
+		} else if (node.getClass() == Text.class) {
+			frameText((Text) node);
 		}else if (node.getClass() == Image.class) {
 			frameImage((Image) node);
 		}
@@ -103,6 +104,8 @@ public abstract class DocumentationFramer {
 
 	public abstract void frameList(nth.software.doc.generator.model.List node);
 
+	public abstract void frameTextWithFixedWidthFont(TextWithFixedWidthFont node);
+	
 	private void frameChaptersAndParagraphs(Node node) {
 		if (node.getClass() == Chapter.class) {
 			frameChapter((Chapter) node);
@@ -110,9 +113,12 @@ public abstract class DocumentationFramer {
 			frameParagarph((Paragraph) node);
 		} else if (node.getClass() == SubParagraph.class) {
 			frameSubParagraph((SubParagraph) node);
+		} else if (node.getClass() == TextWithFixedWidthFont.class) {
+			frameTextWithFixedWidthFont((TextWithFixedWidthFont) node);
 		}
 	}
 
+	
 	// Chapters and paragraphs
 	public abstract void frameChapter(Chapter chapter);
 
@@ -125,7 +131,7 @@ public abstract class DocumentationFramer {
 
 
 	// comments
-	public abstract void frameText(TextNode node);
+	public abstract void frameText(Text node);
 
 	public abstract void frameLineBreak(LineBreak node);
 

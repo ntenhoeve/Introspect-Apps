@@ -43,8 +43,8 @@ public class JavaFile {
 			.literal("//").anyCharacter(Repetition.zeroOrMoreTimes()).endOfLine().asPattern();
 	private static final Pattern STARTS_WITH_ASTRIX = new Regex()
 			.multiLineMode().beginOfLine()
-			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).literals("*")
-			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).asPattern();
+			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).literals("*").asPattern();
+//			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).asPattern();
 	private static final Pattern EMPTY_LINE = new Regex().multiLineMode()
 			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().asPattern();
 	private static final String START_JAVADOC_COMMENTS = "/**";

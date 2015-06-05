@@ -1,12 +1,12 @@
 package nth.software.doc.generator.parser;
 
-import nth.software.doc.generator.model.TextNode;
+import nth.software.doc.generator.model.Text;
 import nth.software.doc.generator.tokenizer.FoundToken;
 import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 import nth.software.doc.generator.tokenizer.TextToken;
 import nth.software.doc.generator.tokenizer.Token;
 
-public class TextParser implements SubParser<TextNode> {
+public class TextParser implements SubParser<Text> {
 
 	private static final Token TEXT_TOKEN = new TextToken();
 
@@ -16,10 +16,10 @@ public class TextParser implements SubParser<TextNode> {
 	}
 
 	@Override
-	public TextNode parse(JavaDocTokenizer javaDocTokenizer) {
+	public Text parse(JavaDocTokenizer javaDocTokenizer) {
 		FoundToken foundToken=javaDocTokenizer.currentToken();
 		String text = foundToken.getText();
-		return new TextNode(text);
+		return new Text(text);
 	}
 
 

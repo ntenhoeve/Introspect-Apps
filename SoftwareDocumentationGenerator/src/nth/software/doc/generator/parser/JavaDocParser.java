@@ -13,9 +13,9 @@ public class JavaDocParser {
 
 	public JavaDocParser(JavaDocTokenizer javaDocTokenizer) {
 		this.javaDocTokenizer = javaDocTokenizer;
-		this.subParsers=SubParserFactory.create();
+		this.subParsers = SubParserFactory.create();
 	}
-	
+
 	public JavaDocParser(String javaDoc) {
 		this(new JavaDocTokenizer(javaDoc));
 	}
@@ -23,28 +23,27 @@ public class JavaDocParser {
 	public JavaDocParser(List<FoundToken> foundTokens) {
 		this(new JavaDocTokenizer(foundTokens));
 	}
-		
-		
+
 	public List<Node> parse() {
 		ArrayList<Node> nodes = new ArrayList<Node>();
 
 		while (javaDocTokenizer.hasNextToken()) {
 			FoundToken foundToken = javaDocTokenizer.nextToken();
-			SubParser<?> subParser=findSubParser(foundToken);
-			System.out.println(":"+foundToken+":"+((subParser==null)?"NULL":subParser.getClass().getSimpleName()));
-			if (subParser!=null) {
-				Node node=subParser.parse(javaDocTokenizer);
+			SubParser<?> subParser = findSubParser(foundToken);
+			//System.out.println(":"+foundToken+":"+((subParser==null)?"NULL":subParser.getClass().getSimpleName()));
+			if (subParser != null) {
+				Node node = subParser.parse(javaDocTokenizer);
 				nodes.add(node);
 			}
 		}
-		
+
 		return nodes;
 	}
 
 	private SubParser<? extends Node> findSubParser(FoundToken foundToken) {
 		for (SubParser<? extends Node> subParser : subParsers) {
 			if (foundToken.matches(subParser.getStartToken())) {
-//				System.out.println(foundToken+";"+subParser.getClass().getSimpleName());
+				// System.out.println(foundToken+";"+subParser.getClass().getSimpleName());
 				return subParser;
 			}
 		}

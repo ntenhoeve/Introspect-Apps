@@ -1,7 +1,6 @@
 package nth.software.doc.generator.parser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import nth.software.doc.generator.model.Node;
@@ -13,12 +12,12 @@ import nth.software.doc.generator.parser.subparser.html.LineBreakParser;
 import nth.software.doc.generator.parser.subparser.html.ListItemParser;
 import nth.software.doc.generator.parser.subparser.html.ListParser;
 import nth.software.doc.generator.parser.subparser.html.ParagraphParser;
+import nth.software.doc.generator.parser.subparser.html.TextWithFixedWidthFontParser;
 import nth.software.doc.generator.parser.subparser.html.SubParagraphParser;
 import nth.software.doc.generator.parser.subparser.html.UnderlineParser;
 import nth.software.doc.generator.parser.subparser.tag.TagParser;
 import nth.software.doc.generator.parser.subparser.tag.inline.InlineTagParser;
 import nth.software.doc.generator.tokenizer.InlineTagName;
-import nth.software.doc.generator.tokenizer.InlineTagToken;
 import nth.software.doc.generator.tokenizer.TagToken;
 import nth.software.doc.generator.tokenizer.Token;
 import nth.software.doc.generator.tokenizer.TokenFactory;
@@ -60,6 +59,7 @@ for (InlineTagName inlineTagToken:InlineTagName.values()) {
 		subParsers.add(new ChapterParser());
 		subParsers.add(new ParagraphParser());
 		subParsers.add(new SubParagraphParser());
+		subParsers.add(new TextWithFixedWidthFontParser());
 		return subParsers;
 	}
 

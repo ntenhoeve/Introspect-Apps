@@ -18,7 +18,9 @@ public enum ElementName {
 	// image
 	IMG,
 	// table
-	TABLE, TR, TH, TD;
+	TABLE, TR, TH, TD,
+	// pre-defined fixed width font
+	PRE;
 	
 	public String toLowerCase() {
 		String name = this.toString();

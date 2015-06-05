@@ -19,7 +19,7 @@ public class JavaDocTokenizer {
 	int currentIndex = -1;
 
 	public JavaDocTokenizer(String javaDoc) {
-		javaDoc = removeUneededWhiteSpaces(javaDoc);
+		//javaDoc = removeUneededWhiteSpaces(javaDoc);
 		List<Token> tokens = TokenFactory.create();
 		foundTokens = findTokens(javaDoc, tokens);
 	}

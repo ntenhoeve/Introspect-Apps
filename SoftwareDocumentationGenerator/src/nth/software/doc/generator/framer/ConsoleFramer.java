@@ -13,7 +13,8 @@ import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.NodeContainer;
 import nth.software.doc.generator.model.Paragraph;
 import nth.software.doc.generator.model.SubParagraph;
-import nth.software.doc.generator.model.TextNode;
+import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.tokenizer.ElementName;
@@ -50,7 +51,7 @@ public class ConsoleFramer extends DocumentationFramer {
 	}
 
 	@Override
-	public void frameText(TextNode textNode) {
+	public void frameText(Text textNode) {
 		out("text", textNode.getText());
 
 	}
@@ -112,6 +113,11 @@ public class ConsoleFramer extends DocumentationFramer {
 	@Override
 	public void frameImage(Image image) {
 		out(ElementName.IMG.toString(),image.getSrc());
+	}
+
+	@Override
+	public void frameTextWithFixedWidthFont(TextWithFixedWidthFont node) {
+		out(ElementName.PRE.toString(), node.getText());
 	}
 
 }

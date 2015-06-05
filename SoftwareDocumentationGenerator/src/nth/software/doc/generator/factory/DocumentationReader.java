@@ -28,9 +28,9 @@ public class DocumentationReader {
 	}
 	
 	public static String readAllDocumentation(File projectsFolder, String className) throws IOException, MultipleFileException {
-		JavaFile javaDoc = JavaFileFactory.create(projectsFolder, className);
+		JavaFile javaFile = JavaFileFactory.create(projectsFolder, className);
 
-		String documentation = javaDoc.getDocumentation();
+		String documentation = javaFile.getDocumentation();
 		
 		documentation=insertDocumentation(projectsFolder, documentation);
 		

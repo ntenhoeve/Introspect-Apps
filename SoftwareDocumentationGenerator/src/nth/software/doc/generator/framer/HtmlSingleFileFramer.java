@@ -27,7 +27,8 @@ import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.NodeContainer;
 import nth.software.doc.generator.model.Paragraph;
 import nth.software.doc.generator.model.SubParagraph;
-import nth.software.doc.generator.model.TextNode;
+import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.service.DocumentationInfo;
@@ -168,7 +169,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 	}
 
 	@Override
-	public void frameText(TextNode textNode) {
+	public void frameText(Text textNode) {
 		outText(textNode.getText());
 	}
 
@@ -322,6 +323,13 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 
 	public void setWriter(PrintWriter writer) {
 		this.writer = writer;
+	}
+
+	@Override
+	public void frameTextWithFixedWidthFont(TextWithFixedWidthFont node) {
+		outStartElement(ElementName.PRE);
+		outText(node.getText());
+		outEndElement(ElementName.PRE);
 	}
 
 }
