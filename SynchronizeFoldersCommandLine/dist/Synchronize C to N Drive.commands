@@ -1,0 +1,9 @@
+synchronize "C:\Users\nilsth\Documents" "N:\My Documents" false true
+synchronize "C:\Users\nilsth\My E Books" "N:\My E Books" false true
+synchronize "C:\Users\nilsth\My Favorites" "N:\My Favorites" false true
+synchronize "C:\Users\nilsth\My Galaxi" "N:\My Galaxi" true true
+synchronize "C:\Users\nilsth\My Java" "N:\My Java" true true
+synchronize "C:\Users\nilsth\My Music" "N:\My Music" true true
+synchronize "C:\Users\nilsth\My Outlook Archives" "N:\My Outlook Archives" true true
+synchronize "C:\Users\nilsth\My Pictures" "N:\My Pictures" false true
+synchronize "C:\Users\nilsth\My Videos" "N:\My Videos" false true

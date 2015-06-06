@@ -1,15 +1,12 @@
 package nth.synchronizefolder.domain;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.channels.FileChannel;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
@@ -339,33 +336,5 @@ public class FolderService {
 
 			return shortFilePath.toString();
 		}
-	}
-
-	public void synchronizeFromFile(FileLocation fileLocation) throws IOException {
-		FileReader commandFileReader = new FileReader(fileLocation.getLocationOfCommandFile());
-		BufferedReader br = new BufferedReader(commandFileReader);
-
-		String line = br.readLine();
-
-		while (line != null) {
-			List<String> arguments = CommandLineParser.parse(line);
-
-			String source = arguments.get(0);
-			String destination = arguments.get(1);
-			String removeOldFiles = arguments.get(2);
-			String skipSameNameAndSize = arguments.get(3);
-
-			SynchronizeArgument argument = new SynchronizeArgument();
-			File sourceFile = new File(source);
-			argument.setSource(sourceFile);
-			File destonationFile = new File(destination);
-			argument.setDestination(destonationFile);
-			argument.setRemoveOldFiles(removeOldFiles.trim().equals("true"));
-			argument.setSkipSameNameAndSize(skipSameNameAndSize.trim().equals("true"));
-			synchronize(argument);
-			line = br.readLine();
-
-		}
-		br.close();
 	}
 }

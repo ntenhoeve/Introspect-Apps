@@ -50,13 +50,6 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 		this.destinationFolder = destinationFolder;
 	}
 
-	private String createDestinationFile(File destinationFolder) {
-		StringBuilder destinationFile = new StringBuilder();
-		destinationFile.append(destinationFolder);
-		destinationFile.append("/index.html");
-		return destinationFile.toString();
-	}
-
 	private void outChildren(NodeContainer<Node> nodeContainer) {
 		List<Node> childern = nodeContainer.getChildren();
 		frameChildren(childern);
@@ -99,8 +92,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 	@Override
 	public void onStartFraming() {
 		try {
-			String destinationFile = createDestinationFile(destinationFolder);
-			createNewFile(destinationFile);
+			createNewFile("index.html");
 			writeImage();
 			writeTableOfContents();
 		} catch (FileNotFoundException e) {
