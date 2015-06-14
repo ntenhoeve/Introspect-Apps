@@ -11,14 +11,13 @@ import nth.software.doc.generator.model.LineBreak;
 import nth.software.doc.generator.model.ListItem;
 import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.NodeContainer;
-import nth.software.doc.generator.model.Paragraph;
-import nth.software.doc.generator.model.SubParagraph;
+import nth.software.doc.generator.model.SubChapter;
+import nth.software.doc.generator.model.SubSubChapter;
 import nth.software.doc.generator.model.Text;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.tokenizer.ElementName;
-import nth.software.doc.generator.tokenizer.InlineTagName;
 
 public class ConsoleFramer extends DocumentationFramer {
 
@@ -66,8 +65,8 @@ public class ConsoleFramer extends DocumentationFramer {
 	}
 
 	@Override
-	public void frameParagarph(Paragraph paragraph) {
-		out("paragraph", paragraph.getTitle(), paragraph);
+	public void frameSubChapter(SubChapter subChapter) {
+		out("subChapter", subChapter.getTitle(), subChapter);
 	}
 
 	@Override
@@ -76,8 +75,8 @@ public class ConsoleFramer extends DocumentationFramer {
 	}
 
 	@Override
-	public void frameSubParagraph(SubParagraph subParagraph) {
-		out("subParagraph", subParagraph.getTitle(), subParagraph);
+	public void frameSubSubChapter(SubSubChapter subSubChapter) {
+		out("subSubChapter", subSubChapter.getTitle(), subSubChapter);
 	}
 
 	@Override

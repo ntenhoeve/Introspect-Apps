@@ -11,9 +11,9 @@ import nth.software.doc.generator.parser.subparser.html.ImageParser;
 import nth.software.doc.generator.parser.subparser.html.LineBreakParser;
 import nth.software.doc.generator.parser.subparser.html.ListItemParser;
 import nth.software.doc.generator.parser.subparser.html.ListParser;
-import nth.software.doc.generator.parser.subparser.html.ParagraphParser;
+import nth.software.doc.generator.parser.subparser.html.SubChapterParser;
 import nth.software.doc.generator.parser.subparser.html.TextWithFixedWidthFontParser;
-import nth.software.doc.generator.parser.subparser.html.SubParagraphParser;
+import nth.software.doc.generator.parser.subparser.html.SubSubCharterParser;
 import nth.software.doc.generator.parser.subparser.html.UnderlineParser;
 import nth.software.doc.generator.parser.subparser.tag.TagParser;
 import nth.software.doc.generator.parser.subparser.tag.inline.InlineTagParser;
@@ -54,18 +54,18 @@ for (InlineTagName inlineTagToken:InlineTagName.values()) {
 		return subParsers;
 	}
 
-	private static List<SubParser<? extends Node>> createChapterAndParagraphParsers() {
+	private static List<SubParser<? extends Node>> createTextBlokParsers() {
 		List<SubParser<? extends Node>> subParsers = new ArrayList<SubParser<? extends Node>>();
 		subParsers.add(new ChapterParser());
-		subParsers.add(new ParagraphParser());
-		subParsers.add(new SubParagraphParser());
+		subParsers.add(new SubChapterParser());
+		subParsers.add(new SubSubCharterParser());
 		subParsers.add(new TextWithFixedWidthFontParser());
 		return subParsers;
 	}
 
 	private static List<SubParser<? extends Node>> createHtmlParsers() {
 		List<SubParser<? extends Node>> subParsers = new ArrayList<SubParser<? extends Node>>();
-		subParsers.addAll(createChapterAndParagraphParsers());
+		subParsers.addAll(createTextBlokParsers());
 		subParsers.add(new HyperlinkParser());
 		subParsers.add(new LineBreakParser());
 		subParsers.add(new ListParser());

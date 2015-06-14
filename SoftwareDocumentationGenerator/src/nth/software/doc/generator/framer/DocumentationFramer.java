@@ -10,13 +10,12 @@ import nth.software.doc.generator.model.Image;
 import nth.software.doc.generator.model.LineBreak;
 import nth.software.doc.generator.model.ListItem;
 import nth.software.doc.generator.model.Node;
-import nth.software.doc.generator.model.Paragraph;
-import nth.software.doc.generator.model.SubParagraph;
+import nth.software.doc.generator.model.SubChapter;
+import nth.software.doc.generator.model.SubSubChapter;
 import nth.software.doc.generator.model.Text;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
-import nth.software.doc.generator.tokenizer.InlineTagName;
 
 public abstract class DocumentationFramer {
 
@@ -54,7 +53,7 @@ public abstract class DocumentationFramer {
 
 
 	private void frame(Node node) {
-		frameChaptersAndParagraphs(node);
+		frameChapters(node);
 		frameInlineTags(node);
 		frameTags(node);
 		frameComments(node);
@@ -106,25 +105,25 @@ public abstract class DocumentationFramer {
 
 	public abstract void frameTextWithFixedWidthFont(TextWithFixedWidthFont node);
 	
-	private void frameChaptersAndParagraphs(Node node) {
+	private void frameChapters(Node node) {
 		if (node.getClass() == Chapter.class) {
 			frameChapter((Chapter) node);
-		} else if (node.getClass() == Paragraph.class) {
-			frameParagarph((Paragraph) node);
-		} else if (node.getClass() == SubParagraph.class) {
-			frameSubParagraph((SubParagraph) node);
+		} else if (node.getClass() == SubChapter.class) {
+			frameSubChapter((SubChapter) node);
+		} else if (node.getClass() == SubSubChapter.class) {
+			frameSubSubChapter((SubSubChapter) node);
 		} else if (node.getClass() == TextWithFixedWidthFont.class) {
 			frameTextWithFixedWidthFont((TextWithFixedWidthFont) node);
 		}
 	}
 
 	
-	// Chapters and paragraphs
+	// Chapters 
 	public abstract void frameChapter(Chapter chapter);
 
-	public abstract void frameParagarph(Paragraph node);
+	public abstract void frameSubChapter(SubChapter node);
 
-	public abstract void frameSubParagraph(SubParagraph node);
+	public abstract void frameSubSubChapter(SubSubChapter node);
 
 	// inline tags
 	public abstract void frameInlineTag(InlineTag inlineTag);

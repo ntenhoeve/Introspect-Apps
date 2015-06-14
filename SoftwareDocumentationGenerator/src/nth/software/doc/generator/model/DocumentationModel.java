@@ -18,7 +18,7 @@ public class DocumentationModel extends NodeContainer<Node> {
 		getChildren().addAll(nodes);
 	}
 
-	public Node findChapterOrParagraphWithBeginOfFileTag(String tagName) {
+	public Node findChapterOrSubChapterWithBeginOfFileTag(String tagName) {
 		for (Node node : getChildren()) {
 			if (node instanceof Chapter) {
 				Chapter chapter = (Chapter) node;
@@ -27,10 +27,10 @@ public class DocumentationModel extends NodeContainer<Node> {
 				}
 
 				for (Node child : chapter.getChildren()) {
-					if (child instanceof Paragraph) {
-						Paragraph paragraph = (Paragraph) child;
-						if (paragraph.containsBeginOfFileTag(tagName)) {
-							return paragraph;
+					if (child instanceof SubChapter) {
+						SubChapter subChapter = (SubChapter) child;
+						if (subChapter.containsBeginOfFileTag(tagName)) {
+							return subChapter;
 						}
 					}
 				}
@@ -92,11 +92,11 @@ public class DocumentationModel extends NodeContainer<Node> {
 		return null;
 	}
 
-	public Chapter findChapter(Chapter chapterOrParagraphOrSubParagraph) {
-		if (isChapter(chapterOrParagraphOrSubParagraph) ){
-			return chapterOrParagraphOrSubParagraph;
+	public Chapter findChapter(Chapter chapterOSubChapter) {
+		if (isChapter(chapterOSubChapter) ){
+			return chapterOSubChapter;
 		}
-		NodeContainer<Node> parent = findParent(this, chapterOrParagraphOrSubParagraph);
+		NodeContainer<Node> parent = findParent(this, chapterOSubChapter);
 		if (isChapter(parent) ){
 			return (Chapter) parent;
 		}
@@ -108,7 +108,7 @@ public class DocumentationModel extends NodeContainer<Node> {
 	}
 
 	private boolean isChapter(Node node) {
-		return node instanceof Chapter && !(node instanceof Paragraph) && !(node instanceof SubParagraph);
+		return node instanceof Chapter && !(node instanceof SubChapter) && !(node instanceof SubSubChapter);
 	}
 
 	public List<Chapter> findChapters() {

@@ -5,23 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import nth.software.doc.generator.model.Bold;
 import nth.software.doc.generator.model.Chapter;
 import nth.software.doc.generator.model.DocumentationModel;
 import nth.software.doc.generator.model.Hyperlink;
-import nth.software.doc.generator.model.Image;
-import nth.software.doc.generator.model.LineBreak;
-import nth.software.doc.generator.model.List;
-import nth.software.doc.generator.model.ListItem;
-import nth.software.doc.generator.model.Node;
-import nth.software.doc.generator.model.Paragraph;
-import nth.software.doc.generator.model.SubParagraph;
-import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.SubChapter;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
-import nth.software.doc.generator.model.Underline;
-import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.service.DocumentationInfo;
-import nth.software.doc.generator.tokenizer.ElementName;
 
 public class WikiFramer extends HtmlSingleFileFramer {
 
@@ -45,9 +34,9 @@ public class WikiFramer extends HtmlSingleFileFramer {
 
 
 	@Override
-	public String createChapterLink(Chapter chapterOrParagraphOrSubParagraph) {
+	public String createChapterLink(Chapter chapterOrSubChapter) {
 		StringBuilder link = new StringBuilder();
-		Chapter chapter=documentationModel.findChapter(chapterOrParagraphOrSubParagraph);
+		Chapter chapter=documentationModel.findChapter(chapterOrSubChapter);
 		java.util.List<Chapter> chapters=documentationModel.findChapters();
 		int chapterNr = chapters.indexOf(chapter)+1;
 		if (chapterNr<10) {
@@ -56,9 +45,9 @@ public class WikiFramer extends HtmlSingleFileFramer {
 		link.append(chapterNr);
 		link.append("-");
 		link.append(chapter.getTitle().replace(" ", "-"));
-		if (chapterOrParagraphOrSubParagraph instanceof Paragraph) {
+		if (chapterOrSubChapter instanceof SubChapter) {
 			link.append("#");
-			link.append(chapterOrParagraphOrSubParagraph.getTitle().toLowerCase().replace(" ", "-"));
+			link.append(chapterOrSubChapter.getTitle().toLowerCase().replace(" ", "-"));
 		}
 		return link.toString();
 	}

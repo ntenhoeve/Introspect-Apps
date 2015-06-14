@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
+import nth.software.doc.generator.model.Chapter;
+import nth.software.doc.generator.model.SubChapter;
+import nth.software.doc.generator.model.SubSubChapter;
 import nth.software.doc.generator.repository.GitRepository;
 import nth.software.doc.generator.service.DocumentationService;
 
@@ -39,12 +42,12 @@ import nth.software.doc.generator.service.DocumentationService;
  * the png extension and be located in the same package.This .</li>
  * <li>You can insert other class or interface files using the Javadoc in-line
  * tag &lt;@insert ClassName&gt;</li>
- * <li>You can include chapters by adding a title between &lt;H1&gt; &lt;/H1&gt;
+ * <li>You can include {@link Chapter}s by adding a title between &lt;H1&gt; &lt;/H1&gt;
  * tags</li>
- * <li>You can include paragraphs by adding a title between &lt;H2&gt;
+ * <li>You can include {@link SubChapter}s by adding a title between &lt;H2&gt;
  * &lt;/H2&gt; tags</li>
- * <li>You can include sub paragraphs by adding a title between &lt;H3&gt;
- * &lt;/H3&gt; tags. Sub paragraphs are normally not rendered in the table of
+ * <li>You can include {@link SubSubChapter}s by adding a title between &lt;H3&gt;
+ * &lt;/H3&gt; tags. Sub {@link SubSubChapter}s are normally not rendered in the table of
  * contents</li>
  * <li>It is good practice to create a documentation class that ties all the
  * java files together in one document.</li>

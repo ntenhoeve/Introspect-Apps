@@ -14,6 +14,8 @@ import nth.software.doc.generator.model.DocumentationModel;
 import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.parser.JavaDocParser;
 import nth.software.doc.generator.repository.GitRepository;
+import nth.software.doc.generator.service.robottxt.RobotsTxt;
+import nth.software.doc.generator.service.sitemap.SiteMap;
 import nth.software.doc.generator.tokenizer.FoundToken;
 import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 
@@ -95,14 +97,23 @@ public class DocumentationService {
 		HtmlSingleFileFramer htmlSingleFileFramer = new HtmlSingleFileFramer(
 				documentationModel, gitHubHtmlInfo, gitHubHtmlInfo.getGithubHtmlProjectLocation());
 		htmlSingleFileFramer.frame();
-
+		
+		//See http://www.wikihow.com/Get-Your-Website-Indexed-by-Google
+		//Google search console: https://www.google.com/webmasters/tools/home?hl=nl&siteUrl=http://ntenhoeve.github.io/&authuser=0
+		
+		RobotsTxt.writeFile(gitHubHtmlInfo.getGithubHtmlProjectLocation());
+		
+		SiteMap.witeFile(gitHubHtmlInfo);
+		
 		gitRepository.commitAndPush(gitHubHtmlInfo, gitHubHtmlInfo.getGithubHtmlProjectLocation());
 	}
 
-	// TODO does not work
+//	 TODO does not work
 	// public String createGitHubHtmlDocumentationDescription() {
 	// return "TODO";
 	// }
+
+	
 
 	public void createHtmlDocumentation(HtmlInfo htmlInfo) throws IOException,
 			MultipleFileException {

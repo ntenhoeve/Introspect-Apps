@@ -1,17 +1,13 @@
 package nth.software.doc.generator.framer;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FilePermission;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.util.List;
-
-import com.sun.tools.doclets.internal.toolkit.resources.doclets;
 
 import nth.software.doc.generator.javafile.JavaFile;
 import nth.software.doc.generator.javafile.JavaFileFactory;
@@ -25,21 +21,20 @@ import nth.software.doc.generator.model.LineBreak;
 import nth.software.doc.generator.model.ListItem;
 import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.NodeContainer;
-import nth.software.doc.generator.model.Paragraph;
-import nth.software.doc.generator.model.SubParagraph;
+import nth.software.doc.generator.model.SubChapter;
+import nth.software.doc.generator.model.SubSubChapter;
 import nth.software.doc.generator.model.Text;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.service.DocumentationInfo;
-import nth.software.doc.generator.service.HtmlInfo;
 import nth.software.doc.generator.tokenizer.ElementName;
-import nth.software.doc.generator.tokenizer.InlineTagName;
 import nth.software.doc.generator.tokenizer.TokenFactory;
 
 public class HtmlSingleFileFramer extends DocumentationFramer {
 
 	private static final int NOT_FOUND = -1;
+	public static final String FILE_NAME = "index.html";
 	private PrintWriter writer;
 	private File destinationFolder;
 
@@ -92,7 +87,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 	@Override
 	public void onStartFraming() {
 		try {
-			createNewFile("index.html");
+			createNewFile(FILE_NAME);
 			writeImage();
 			writeTableOfContents();
 		} catch (FileNotFoundException e) {
@@ -145,12 +140,12 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 				outStartElement(ElementName.UL);
 				List<Node> children = chapter.getChildren();
 				for (Node child : children) {
-					if (child instanceof Paragraph) {
-						Paragraph paragraph = (Paragraph) child;
+					if (child instanceof SubChapter) {
+						SubChapter subChapter = (SubChapter) child;
 						outStartElement(ElementName.LI);
 						outStartElement(ElementName.A, "href",
-								createChapterLink(paragraph));
-						outText(paragraph.getTitle());
+								createChapterLink(subChapter));
+						outText(subChapter.getTitle());
 						outEndElement(ElementName.A);
 						outEndElement(ElementName.LI);
 					}
@@ -183,21 +178,21 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 	}
 
 	@Override
-	public void frameParagarph(Paragraph paragraph) {
-		outStartElement(ElementName.A, "name", paragraph.getTitle());
+	public void frameSubChapter(SubChapter subChapter) {
+		outStartElement(ElementName.A, "name", subChapter.getTitle());
 		outStartElement(ElementName.H2);
-		outText(paragraph.getTitle());
+		outText(subChapter.getTitle());
 		outEndElement(ElementName.H2);
 		outEndElement(ElementName.A);
-		outChildren(paragraph);
+		outChildren(subChapter);
 	}
 
 	@Override
-	public void frameSubParagraph(SubParagraph subParagraph) {
+	public void frameSubSubChapter(SubSubChapter subSubChapter) {
 		outStartElement(ElementName.H3);
-		outText(subParagraph.getTitle());
+		outText(subSubChapter.getTitle());
 		outEndElement(ElementName.H3);
-		outChildren(subParagraph);
+		outChildren(subSubChapter);
 	}
 
 	@Override
@@ -249,13 +244,13 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 			}
 			String tagName = text.substring(0, endPos);
 
-			Node chapterOrParagraph = documentationModel
-					.findChapterOrParagraphWithBeginOfFileTag(tagName);
+			Node chapterOrSubChapter = documentationModel
+					.findChapterOrSubChapterWithBeginOfFileTag(tagName);
 			String hRef = null;
-			if (chapterOrParagraph == null) {
+			if (chapterOrSubChapter == null) {
 				outStartElement(ElementName.A);
 			} else {
-				Chapter chapter = (Chapter) chapterOrParagraph;
+				Chapter chapter = (Chapter) chapterOrSubChapter;
 				hRef = createChapterLink(chapter);
 				outStartElement(ElementName.A, "href", hRef);
 			}

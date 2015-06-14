@@ -3,7 +3,7 @@ package nth.software.doc.generator.parser.subparser.html;
 import java.util.List;
 
 import nth.software.doc.generator.model.Node;
-import nth.software.doc.generator.model.Paragraph;
+import nth.software.doc.generator.model.SubChapter;
 import nth.software.doc.generator.parser.JavaDocParser;
 import nth.software.doc.generator.parser.SubParser;
 import nth.software.doc.generator.tokenizer.ElementName;
@@ -14,17 +14,17 @@ import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 import nth.software.doc.generator.tokenizer.Token;
 import nth.software.doc.generator.tokenizer.TokenFactory;
 
-public class ParagraphParser implements SubParser<Paragraph> {
+public class SubChapterParser implements SubParser<SubChapter> {
 
 	private static final HtmlToken HTML_H2_END_TOKEN = new HtmlToken(ElementName.H2, ElementType.END);
 	private static final HtmlToken HTML_H1_START_TOKEN = new HtmlToken(ElementName.H1, ElementType.START);
 	private static final HtmlToken HTML_H2_START_TOKEN = new HtmlToken(ElementName.H2, ElementType.START);
 
-	public Paragraph parse(JavaDocTokenizer javaDocTokenizer) {
+	public SubChapter parse(JavaDocTokenizer javaDocTokenizer) {
 		String title = parseTitle(javaDocTokenizer);
 		List<Node> children = parseContent(javaDocTokenizer);
-		Paragraph paragraph= new Paragraph(title, children);
-		return paragraph;
+		SubChapter subChapter= new SubChapter(title, children);
+		return subChapter;
 	}
 
 	private List<Node> parseContent(JavaDocTokenizer javaDocTokenizer) {
