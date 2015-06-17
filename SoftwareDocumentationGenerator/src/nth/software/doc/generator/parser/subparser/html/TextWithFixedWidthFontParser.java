@@ -34,7 +34,6 @@ public class TextWithFixedWidthFontParser implements SubParser<TextWithFixedWidt
 
 	private String parseContent(JavaDocTokenizer javaDocTokenizer) {
 		List<FoundToken> titleTokens = javaDocTokenizer 
-				//TODO How do we prevent indentation being lost?
 				.getAllTokensUntil(HTML_PRE_END_TOKEN);
 		String text = TokenFactory.getAsText(titleTokens);
 		return text;

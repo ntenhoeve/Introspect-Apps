@@ -25,7 +25,7 @@ public class ListItemParser implements SubParser<ListItem> {
 	private java.util.List<Node> parseContent(JavaDocTokenizer javaDocTokenizer) {
 		javaDocTokenizer.nextToken();
 		java.util.List<FoundToken> contentsTokens = javaDocTokenizer
-				.getAllTokensUntil(HTML_LI_END_TOKEN);
+				.getAllTokensUntil(HTML_LI_END_TOKEN);//TODO does not work if list item contains a list itself!!! Can we use JSoup instead?
 		JavaDocParser javaDocParser = new JavaDocParser(contentsTokens);
 		java.util.List<Node> children = javaDocParser.parse();
 		return children;

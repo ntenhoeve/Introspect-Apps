@@ -13,6 +13,7 @@ import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.SubChapter;
 import nth.software.doc.generator.model.SubSubChapter;
 import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.TextBlock;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
@@ -53,7 +54,7 @@ public abstract class DocumentationFramer {
 
 
 	private void frame(Node node) {
-		frameChapters(node);
+		frameTextBlocks(node);
 		frameInlineTags(node);
 		frameTags(node);
 		frameComments(node);
@@ -102,29 +103,34 @@ public abstract class DocumentationFramer {
 	public abstract void frameListItem(ListItem node);
 
 	public abstract void frameList(nth.software.doc.generator.model.List node);
-
-	public abstract void frameTextWithFixedWidthFont(TextWithFixedWidthFont node);
 	
-	private void frameChapters(Node node) {
+	private void frameTextBlocks(Node node) {
 		if (node.getClass() == Chapter.class) {
 			frameChapter((Chapter) node);
 		} else if (node.getClass() == SubChapter.class) {
 			frameSubChapter((SubChapter) node);
 		} else if (node.getClass() == SubSubChapter.class) {
 			frameSubSubChapter((SubSubChapter) node);
+		} else if (node.getClass() == TextBlock.class) {
+			frameTextBlock((TextBlock) node);
 		} else if (node.getClass() == TextWithFixedWidthFont.class) {
 			frameTextWithFixedWidthFont((TextWithFixedWidthFont) node);
 		}
 	}
 
 	
-	// Chapters 
+	// textblocks 
 	public abstract void frameChapter(Chapter chapter);
 
 	public abstract void frameSubChapter(SubChapter node);
 
 	public abstract void frameSubSubChapter(SubSubChapter node);
 
+	public abstract void frameTextBlock(TextBlock node);
+	
+	public abstract void frameTextWithFixedWidthFont(TextWithFixedWidthFont node);
+
+	
 	// inline tags
 	public abstract void frameInlineTag(InlineTag inlineTag);
 

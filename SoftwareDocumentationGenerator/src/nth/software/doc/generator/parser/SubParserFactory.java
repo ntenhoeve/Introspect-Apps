@@ -12,6 +12,7 @@ import nth.software.doc.generator.parser.subparser.html.LineBreakParser;
 import nth.software.doc.generator.parser.subparser.html.ListItemParser;
 import nth.software.doc.generator.parser.subparser.html.ListParser;
 import nth.software.doc.generator.parser.subparser.html.SubChapterParser;
+import nth.software.doc.generator.parser.subparser.html.TextBlokParser;
 import nth.software.doc.generator.parser.subparser.html.TextWithFixedWidthFontParser;
 import nth.software.doc.generator.parser.subparser.html.SubSubCharterParser;
 import nth.software.doc.generator.parser.subparser.html.UnderlineParser;
@@ -59,6 +60,7 @@ for (InlineTagName inlineTagToken:InlineTagName.values()) {
 		subParsers.add(new ChapterParser());
 		subParsers.add(new SubChapterParser());
 		subParsers.add(new SubSubCharterParser());
+		subParsers.add(new TextBlokParser());
 		subParsers.add(new TextWithFixedWidthFontParser());
 		return subParsers;
 	}

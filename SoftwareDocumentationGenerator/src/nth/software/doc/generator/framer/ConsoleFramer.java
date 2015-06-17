@@ -14,6 +14,7 @@ import nth.software.doc.generator.model.NodeContainer;
 import nth.software.doc.generator.model.SubChapter;
 import nth.software.doc.generator.model.SubSubChapter;
 import nth.software.doc.generator.model.Text;
+import nth.software.doc.generator.model.TextBlock;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.model.Underline;
 import nth.software.doc.generator.model.inlinetag.InlineTag;
@@ -117,6 +118,11 @@ public class ConsoleFramer extends DocumentationFramer {
 	@Override
 	public void frameTextWithFixedWidthFont(TextWithFixedWidthFont node) {
 		out(ElementName.PRE.toString(), node.getText());
+	}
+
+	@Override
+	public void frameTextBlock(TextBlock node) {
+		out(ElementName.P.toString());
 	}
 
 }
