@@ -1,4 +1,0 @@
-index.html              (refers to home-small or <first wikipage>-large.html) 
-home-small.html         (build on WikiContentElement)
-<wikipage>-small.html   (build on WikiContentElement)
-<wikipage>-large.html   (build on WikiContentElement and menuContentElement)

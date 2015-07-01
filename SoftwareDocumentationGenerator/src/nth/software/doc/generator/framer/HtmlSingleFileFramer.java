@@ -32,8 +32,15 @@ import nth.software.doc.generator.service.DocumentationInfo;
 import nth.software.doc.generator.tokenizer.ElementName;
 import nth.software.doc.generator.tokenizer.TokenFactory;
 
+/**
+ * TODO For HTML: make it more like Wiki framer: split up in multiple files, extend sitemap, implement a title bar See {@link HtmlTitleBar} for inspiration 
+ * @author nilsth
+ *
+ */
 public class HtmlSingleFileFramer extends DocumentationFramer {
 
+	
+	
 	private static final int NOT_FOUND = -1;
 	public static final String FILE_NAME = "index.html";
 	private PrintWriter writer;
