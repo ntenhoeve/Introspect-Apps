@@ -32,7 +32,7 @@ public class SynchronizeArgument {
 		return removeOldFiles;
 	}
 
-	public void setRemoveOldFiles(boolean removeOldFiles) {
+	public void setRemoveOldFiles(Boolean removeOldFiles) {
 		this.removeOldFiles = removeOldFiles;
 	}
 
@@ -40,7 +40,7 @@ public class SynchronizeArgument {
 		return skipSameNameAndSize;
 	}
 
-	public void setSkipSameNameAndSize(boolean skipSameNameAndSize) {
+	public void setSkipSameNameAndSize(Boolean skipSameNameAndSize) {
 		this.skipSameNameAndSize = skipSameNameAndSize;
 	}
 
