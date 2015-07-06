@@ -25,7 +25,6 @@ import nth.software.doc.generator.service.DocumentationService;
  * site and Wiki)</li>
  * <li>All your project documentation is directly available to the developer in
  * the form of JavaDoc</li>
- * 
  * <li>Basic formating can be used with HTML in JavaDoc</li>
  * <li>GitHub Html page and or Wiki pages can automatically be committed
  * (uploaded)</li>
