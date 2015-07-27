@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 import nth.playlistmanager.domain.util.FileUtil;
 
 public class PlaylistService {
