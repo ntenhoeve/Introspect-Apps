@@ -6,11 +6,11 @@ import java.util.List;
 
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.user.User;
-import nth.introspect.filter.FilterUtil;
-import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
-import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
-import nth.introspect.provider.notification.NotificationProvider;
+import nth.introspect.generic.filter.FilterUtil;
+import nth.introspect.layer5provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.introspect.layer5provider.notification.NotificationProvider;
 
 public class AccountService {
 

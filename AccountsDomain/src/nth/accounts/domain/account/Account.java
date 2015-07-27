@@ -9,11 +9,11 @@ import java.util.List;
 import com.sun.istack.internal.NotNull;
 
 import nth.accounts.domain.user.User;
-import nth.introspect.provider.domain.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.ExecutionMode;
-import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
-import nth.introspect.provider.domain.info.valuemodel.annotations.OrderInForm;
-import nth.introspect.util.TitleBuilder;
+import nth.introspect.generic.titlebuilder.TitleBuilder;
+import nth.introspect.layer5provider.domain.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.OrderInForm;
 
 public class Account {
 	private String accountName;

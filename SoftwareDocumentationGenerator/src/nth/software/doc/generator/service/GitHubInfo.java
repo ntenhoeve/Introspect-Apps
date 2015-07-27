@@ -1,6 +1,6 @@
 package nth.software.doc.generator.service;
 
-import nth.introspect.provider.domain.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.OrderInForm;
 
 public class GitHubInfo extends DocumentationInfo {
 

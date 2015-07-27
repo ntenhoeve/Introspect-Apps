@@ -6,8 +6,8 @@ import java.util.List;
 import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.user.UserService;
+import nth.introspect.generic.xml.XmlConverter;
 import nth.introspect.ui.swing.IntrospectApplicationForSwing;
-import nth.introspect.util.xml.XmlConverter;
 
 public class AccountsForSwing extends IntrospectApplicationForSwing {
 

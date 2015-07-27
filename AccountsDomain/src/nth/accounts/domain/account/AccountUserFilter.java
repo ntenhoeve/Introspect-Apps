@@ -1,7 +1,7 @@
 package nth.accounts.domain.account;
 
 import nth.accounts.domain.user.User;
-import nth.introspect.filter.Filter;
+import nth.introspect.generic.filter.Filter;
 
 public class AccountUserFilter implements Filter<Account> {
 

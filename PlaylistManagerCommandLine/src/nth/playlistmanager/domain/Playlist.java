@@ -3,7 +3,7 @@ package nth.playlistmanager.domain;
 import java.io.File;
 import java.util.List;
 
-import nth.introspect.provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.introspect.layer5provider.domain.info.valuemodel.annotations.GenericReturnType;
 import nth.playlistmanager.domain.util.FileUtil;
 
 public class Playlist {
