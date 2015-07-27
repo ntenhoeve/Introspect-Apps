@@ -2,7 +2,7 @@ package nth.synchronizefolder.domain;
 
 import java.io.File;
 
-import nth.introspect.layer5provider.domain.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
 
 public class SynchronizeArgument {
 	private File source;

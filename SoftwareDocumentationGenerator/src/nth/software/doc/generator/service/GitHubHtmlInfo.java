@@ -2,7 +2,7 @@ package nth.software.doc.generator.service;
 
 import java.io.File;
 
-import nth.introspect.layer5provider.domain.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
 
 public class GitHubHtmlInfo extends GitHubInfo {
 

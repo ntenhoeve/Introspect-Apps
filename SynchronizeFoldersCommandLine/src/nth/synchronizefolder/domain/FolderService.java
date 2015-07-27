@@ -9,8 +9,8 @@ import java.math.BigInteger;
 import java.nio.channels.FileChannel;
 import java.util.regex.Pattern;
 
-import nth.introspect.layer5provider.domain.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.layer5provider.domain.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.reflection.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.ExecutionMode;
 
 import org.apache.commons.io.IOUtils;
 

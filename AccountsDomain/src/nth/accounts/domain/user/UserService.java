@@ -4,9 +4,9 @@ import java.util.List;
 
 import nth.accounts.domain.account.Account;
 import nth.accounts.domain.repository.AccountRepository;
-import nth.introspect.layer5provider.domain.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.layer5provider.domain.info.valuemodel.annotations.ExecutionMode;
-import nth.introspect.layer5provider.domain.info.valuemodel.annotations.GenericReturnType;
+import nth.introspect.layer5provider.reflection.info.method.MethodInfo.ExecutionModeType;
+import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 
 public class UserService {
 
