@@ -10,8 +10,8 @@ import com.sun.istack.internal.NotNull;
 
 import nth.accounts.domain.user.User;
 import nth.introspect.generic.titlebuilder.TitleBuilder;
-import nth.introspect.layer5provider.reflection.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
 
@@ -49,12 +49,12 @@ public class Account {
 		return attributes;
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void userPutUser(User user) {
 		setUser(user);
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void userClearUser() {
 		setUser(null);
 	}
@@ -104,7 +104,7 @@ public class Account {
 	}
 
 
-	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
+	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesAddCustomAttribute(AccountAttribute newAttribute) {
 		attributes.add(newAttribute);
 	}
@@ -113,18 +113,18 @@ public class Account {
 		return new AccountAttribute();
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void attributesRemoveAttribute(AccountAttribute attribute) {
 		attributes.remove(attribute);
 	}
 	
 
-	@ExecutionMode(ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
+	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesModifyAttribute(AccountAttribute attribute) {
 	}
 
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void attributesCopyAttributeValue(AccountAttribute attribute) {
 		StringSelection selection = new StringSelection(attribute.getValue());
 	    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

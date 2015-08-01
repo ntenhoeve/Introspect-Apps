@@ -9,8 +9,8 @@ import java.math.BigInteger;
 import java.nio.channels.FileChannel;
 import java.util.regex.Pattern;
 
-import nth.introspect.layer5provider.reflection.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 
 import org.apache.commons.io.IOUtils;
 
@@ -61,7 +61,7 @@ public class FolderService {
 	 */
 	public static final long ONE_TB = ONE_KB * ONE_GB;
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void synchronize(SynchronizeArgument synchronizeArgument) throws IOException {
 		// source
 		File source = synchronizeArgument.getSource();

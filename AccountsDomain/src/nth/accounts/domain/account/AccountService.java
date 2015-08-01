@@ -8,8 +8,8 @@ import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.user.User;
 import nth.introspect.generic.filter.FilterUtil;
 import nth.introspect.layer5provider.notification.NotificationProvider;
-import nth.introspect.layer5provider.reflection.info.method.MethodInfo.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.ExecutionMode;
+import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 
 public class AccountService {
@@ -23,7 +23,7 @@ public class AccountService {
 	}
 
 	@GenericReturnType(Account.class)
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Account> allAccountsOfUser(User userToFind) throws Exception {
 		List<Account> allAccounts = allAccounts();
 		AccountUserFilter filter = new AccountUserFilter(userToFind);
@@ -48,17 +48,17 @@ public class AccountService {
 		accountRepository.persist(account);
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void deleteAccount(Account account) throws Exception {
 		accountRepository.delete(account);
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public Account viewAccount(Account account) throws Exception {
 		return account;
 	}
 
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void moveAccountUp(Account account) throws Exception {
 		List<Account> accounts = (List<Account>) accountRepository.getAll(Account.class);
 		int index = accounts.lastIndexOf(account);
@@ -69,7 +69,7 @@ public class AccountService {
 		notificationProvider.refreshUserInterface();
 	}
 	
-	@ExecutionMode(ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void moveAccountDown(Account account) throws Exception {
 		List<Account> accounts = (List<Account>) accountRepository.getAll(Account.class);
 		int index = accounts.lastIndexOf(account);
