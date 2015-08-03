@@ -6,14 +6,14 @@ import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.istack.internal.NotNull;
-
 import nth.accounts.domain.user.User;
 import nth.introspect.generic.titlebuilder.TitleBuilder;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
+
+import com.sun.istack.internal.NotNull;
 
 public class Account {
 	private String accountName;
@@ -25,7 +25,7 @@ public class Account {
 	}
 
 	@NotNull
-	@OrderInForm(1)
+	@Order(sequenceNumber=1)
 	public String getAccountName() {
 		return accountName;
 	}
@@ -34,7 +34,7 @@ public class Account {
 		this.accountName = accountName;
 	}
 
-	@OrderInForm(2)
+	@Order(sequenceNumber=2)
 	public User getUser() {
 		return user;
 	}
@@ -43,7 +43,7 @@ public class Account {
 		this.user = user;
 	}
 
-	@OrderInForm(3)
+	@Order(sequenceNumber=3)
 	@GenericReturnType(AccountAttribute.class)
 	public List<AccountAttribute> getAttributes() {
 		return attributes;

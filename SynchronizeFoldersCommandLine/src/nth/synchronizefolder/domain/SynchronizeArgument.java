@@ -2,7 +2,7 @@ package nth.synchronizefolder.domain;
 
 import java.io.File;
 
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
 
 public class SynchronizeArgument {
 	private File source;
@@ -10,7 +10,7 @@ public class SynchronizeArgument {
 	private boolean removeOldFiles;
 	private boolean skipSameNameAndSize;
 
-	@OrderInForm(1)
+	@Order(sequenceNumber=1)
 	public File getSource() {
 		return source;
 	}
@@ -18,7 +18,7 @@ public class SynchronizeArgument {
 	public void setSource(File source) {
 		this.source = source;
 	}
-	@OrderInForm(2)
+	@Order(sequenceNumber=2)
 	public File getDestination() {
 		return destination;
 	}
@@ -27,7 +27,7 @@ public class SynchronizeArgument {
 		this.destination = destination;
 	}
 
-	@OrderInForm(3)
+	@Order(sequenceNumber=3)
 	public boolean isRemoveOldFiles() {
 		return removeOldFiles;
 	}

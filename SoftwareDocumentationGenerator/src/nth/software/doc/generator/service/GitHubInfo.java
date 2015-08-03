@@ -1,7 +1,6 @@
 package nth.software.doc.generator.service;
 
 import nth.introspect.layer5provider.reflection.behavior.order.Order;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
 
 public class GitHubInfo extends DocumentationInfo {
 
