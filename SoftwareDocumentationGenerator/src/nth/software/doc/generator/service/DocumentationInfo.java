@@ -2,21 +2,21 @@ package nth.software.doc.generator.service;
 
 import java.io.File;
 
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
 
 public class DocumentationInfo {
 
 	private File projectsFolder;
 	private String className;
 	
-	@OrderInForm(1)
+	@Order(sequenceNumber= 1)
 	public File getProjectsFolder() {
 		return projectsFolder;
 	}
 	public void setProjectsFolder(File projectsFolder) {
 		this.projectsFolder = projectsFolder;
 	}
-	@OrderInForm(2)
+	@Order(sequenceNumber=2)
 	public String getClassName() {
 		return className;
 	}

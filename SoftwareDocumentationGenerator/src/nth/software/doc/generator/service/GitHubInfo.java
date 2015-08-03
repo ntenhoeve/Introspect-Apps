@@ -1,5 +1,6 @@
 package nth.software.doc.generator.service;
 
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
 
 public class GitHubInfo extends DocumentationInfo {
@@ -7,14 +8,14 @@ public class GitHubInfo extends DocumentationInfo {
 	private String gitHubUserName;
 	private String gitHubPassword;
 	
-	@OrderInForm(11)
+	@Order(sequenceNumber=11)
 	public String getGitHubUserName() {
 		return gitHubUserName;
 	}
 	public void setGitHubUserName(String gitHubUserName) {
 		this.gitHubUserName = gitHubUserName;
 	}
-	@OrderInForm(12)
+	@Order(sequenceNumber=12)
 	public String getGitHubPassword() {
 		return gitHubPassword;
 	}

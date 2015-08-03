@@ -2,13 +2,13 @@ package nth.software.doc.generator.service;
 
 import java.io.File;
 
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.OrderInForm;
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
 
 public class GitHubWikiInfo extends GitHubInfo {
 
 	private File gitHubWikiProjectLocation;
 
-	@OrderInForm(21)
+	@Order(sequenceNumber=21)
 	public File getGitHubWikiProjectLocation() {
 		return gitHubWikiProjectLocation;
 	}

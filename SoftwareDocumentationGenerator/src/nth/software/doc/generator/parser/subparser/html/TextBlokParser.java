@@ -31,6 +31,7 @@ public class TextBlokParser implements SubParser<TextBlock> {
 	public TextBlock parse(JavaDocTokenizer javaDocTokenizer) {
 		List<Node> children = parseContent(javaDocTokenizer);
 		TextBlock textBlok = new TextBlock(children);
+		//FIXME Endless loop ???
 		return textBlok;
 	}
 
