@@ -7,7 +7,6 @@ import nth.software.doc.generator.tokenizer.InlineTagName;
 import nth.software.doc.generator.tokenizer.InlineTagToken;
 import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 import nth.software.doc.generator.tokenizer.Token;
-import nth.software.doc.generator.tokenizer.TokenFactory;
 
 public class InlineTagParser implements SubParser<InlineTag> {
 

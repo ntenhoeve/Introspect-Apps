@@ -30,7 +30,7 @@ public class JavaDocParser {
 		while (javaDocTokenizer.hasNextToken()) {
 			FoundToken foundToken = javaDocTokenizer.nextToken();
 			SubParser<?> subParser = findSubParser(foundToken);
-			System.out.println(":"+foundToken+":"+((subParser==null)?"NULL":subParser.getClass().getSimpleName()));
+			//System.out.println(":"+foundToken+":"+((subParser==null)?"NULL":subParser.getClass().getSimpleName()));
 			if (subParser != null) {
 				Node node = subParser.parse(javaDocTokenizer);
 				nodes.add(node);

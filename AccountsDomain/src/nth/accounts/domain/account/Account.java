@@ -11,7 +11,6 @@ import nth.introspect.generic.titlebuilder.TitleBuilder;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.introspect.layer5provider.reflection.behavior.order.Order;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 
 import com.sun.istack.internal.NotNull;
 
@@ -44,7 +43,6 @@ public class Account {
 	}
 
 	@Order(sequenceNumber=3)
-	@GenericReturnType(AccountAttribute.class)
 	public List<AccountAttribute> getAttributes() {
 		return attributes;
 	}

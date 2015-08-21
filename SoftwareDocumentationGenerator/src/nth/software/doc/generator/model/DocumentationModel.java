@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.software.doc.generator.model.inlinetag.InlineTag;
-import nth.software.doc.generator.tokenizer.ElementName;
 import nth.software.doc.generator.tokenizer.InlineTagName;
 
 public class DocumentationModel extends NodeContainer<Node> {

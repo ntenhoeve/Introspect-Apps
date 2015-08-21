@@ -1,6 +1,5 @@
 package nth.accounts.domain.account;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import nth.introspect.generic.filter.FilterUtil;
 import nth.introspect.layer5provider.notification.NotificationProvider;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 
 public class AccountService {
 
@@ -22,7 +20,6 @@ public class AccountService {
 		this.notificationProvider = notificationProvider;
 	}
 
-	@GenericReturnType(Account.class)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<Account> allAccountsOfUser(User userToFind) throws Exception {
 		List<Account> allAccounts = allAccounts();
@@ -30,7 +27,6 @@ public class AccountService {
 		return FilterUtil.filter(allAccounts, filter);
 	}
 
-	@GenericReturnType(Account.class)
 	public List<Account> allAccounts() throws Exception {
 		return (List<Account>) accountRepository.getAll(Account.class);
 	}

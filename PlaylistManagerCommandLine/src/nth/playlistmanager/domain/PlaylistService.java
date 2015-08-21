@@ -4,12 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 import nth.playlistmanager.domain.util.FileUtil;
 
 public class PlaylistService {
 
-	@GenericReturnType(Playlist.class)
 	public List<Playlist> allPlaylists(Source source) {
 		List<Playlist> playlists = new ArrayList<Playlist>();
 		File fileOrFolder = source.getFileOrFolder();

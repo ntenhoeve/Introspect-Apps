@@ -1,7 +1,6 @@
 package nth.software.doc.generator.factory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import nth.software.doc.generator.javafile.MultipleFileException;
 import nth.software.doc.generator.regex.Regex;
 import nth.software.doc.generator.regex.Repetition;
 import nth.software.doc.generator.service.DocumentationInfo;
-
-import com.sun.tools.javadoc.resources.javadoc;
 
 public class DocumentationReader {
 

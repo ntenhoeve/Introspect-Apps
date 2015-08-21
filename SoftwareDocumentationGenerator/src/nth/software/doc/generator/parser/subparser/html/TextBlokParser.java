@@ -4,7 +4,6 @@ import java.util.List;
 
 import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.TextBlock;
-import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.parser.JavaDocParser;
 import nth.software.doc.generator.parser.SubParser;
 import nth.software.doc.generator.tokenizer.ElementName;
@@ -13,7 +12,6 @@ import nth.software.doc.generator.tokenizer.FoundToken;
 import nth.software.doc.generator.tokenizer.HtmlToken;
 import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 import nth.software.doc.generator.tokenizer.Token;
-import nth.software.doc.generator.tokenizer.TokenFactory;
 
 /**
  * Parser for HTML element PRE (Predefined fixed width font)

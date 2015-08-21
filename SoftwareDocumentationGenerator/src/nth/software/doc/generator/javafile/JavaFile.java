@@ -12,7 +12,6 @@ import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.regex.Regex;
 import nth.software.doc.generator.regex.Repetition;
 import nth.software.doc.generator.tokenizer.InlineTagName;
-import nth.software.doc.generator.tokenizer.TokenFactory;
 
 /**
  * 

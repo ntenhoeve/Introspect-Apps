@@ -2,10 +2,7 @@ package nth.software.doc.generator.parser.subparser.html;
 
 import java.util.List;
 
-import nth.software.doc.generator.model.Chapter;
-import nth.software.doc.generator.model.Node;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
-import nth.software.doc.generator.parser.JavaDocParser;
 import nth.software.doc.generator.parser.SubParser;
 import nth.software.doc.generator.tokenizer.ElementName;
 import nth.software.doc.generator.tokenizer.ElementType;

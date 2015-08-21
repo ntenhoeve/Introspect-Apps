@@ -3,7 +3,6 @@ package nth.playlistmanager.domain;
 import java.io.File;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.info.valuemodel.annotations.GenericReturnType;
 import nth.playlistmanager.domain.util.FileUtil;
 
 public class Playlist {
@@ -45,7 +44,6 @@ public class Playlist {
 	
 	
 
-	@GenericReturnType(File.class)
 	public List<File> getInclusionPaths() {
 		return inclusionPaths;
 	}
@@ -54,7 +52,6 @@ public class Playlist {
 		this.inclusionPaths = inclusionPaths;
 	}
 
-	@GenericReturnType(File.class)
 	public List<File> getMusicFiles() {
 		return musicFiles;
 	}

@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import nth.software.doc.generator.framer.HtmlSingleFileFramer;
-import nth.software.doc.generator.model.DocumentationModel;
 import nth.software.doc.generator.service.GitHubHtmlInfo;
 
 public class SiteMap {

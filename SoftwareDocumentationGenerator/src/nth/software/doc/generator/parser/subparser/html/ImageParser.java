@@ -1,12 +1,6 @@
 package nth.software.doc.generator.parser.subparser.html;
 
-import java.util.List;
-
-import nth.software.doc.generator.model.Bold;
-import nth.software.doc.generator.model.Hyperlink;
 import nth.software.doc.generator.model.Image;
-import nth.software.doc.generator.model.Node;
-import nth.software.doc.generator.parser.JavaDocParser;
 import nth.software.doc.generator.parser.SubParser;
 import nth.software.doc.generator.tokenizer.ElementName;
 import nth.software.doc.generator.tokenizer.ElementType;
@@ -14,7 +8,6 @@ import nth.software.doc.generator.tokenizer.FoundToken;
 import nth.software.doc.generator.tokenizer.HtmlToken;
 import nth.software.doc.generator.tokenizer.JavaDocTokenizer;
 import nth.software.doc.generator.tokenizer.Token;
-import nth.software.doc.generator.tokenizer.TokenFactory;
 
 public class ImageParser implements SubParser<Image> {
 

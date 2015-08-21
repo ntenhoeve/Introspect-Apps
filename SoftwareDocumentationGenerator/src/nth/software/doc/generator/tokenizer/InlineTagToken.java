@@ -2,7 +2,6 @@ package nth.software.doc.generator.tokenizer;
 
 import java.util.regex.Pattern;
 
-import nth.software.doc.generator.model.tag.Tag;
 import nth.software.doc.generator.regex.Regex;
 import nth.software.doc.generator.regex.Repetition;
 
