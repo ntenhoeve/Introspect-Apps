@@ -24,20 +24,50 @@ public class DocumentationModel extends NodeContainer<Node> {
 				if (chapter.containsBeginOfFileTag(tagName)) {
 					return chapter;
 				}
+				Node foundSubChapter = findSubChapterWithBeginOfFileTag(
+						chapter, tagName);
+				if (foundSubChapter != null) {
+					return foundSubChapter;
+				}
 
-				for (Node child : chapter.getChildren()) {
-					if (child instanceof SubChapter) {
-						SubChapter subChapter = (SubChapter) child;
-						if (subChapter.containsBeginOfFileTag(tagName)) {
-							return subChapter;
-						}
-					}
+			}
+		}
+		return null;
+	}
+
+	private Node findSubChapterWithBeginOfFileTag(Chapter chapter,
+			String tagName) {
+		for (Node child : chapter.getChildren()) {
+			if (child instanceof SubChapter) {
+				SubChapter subChapter = (SubChapter) child;
+				if (subChapter.containsBeginOfFileTag(tagName)) {
+					return subChapter;
+				}
+				Node foundSubSubChapter = findSubSubChapterWithBeginOfFileTag(subChapter, tagName);
+				if (foundSubSubChapter!=null) {
+					return foundSubSubChapter;
 				}
 			}
 		}
 		return null;
 	}
 
+	private Node findSubSubChapterWithBeginOfFileTag(SubChapter subChapter,
+			String tagName) {
+		for (Node child : subChapter.getChildren()) {
+			if (child instanceof SubSubChapter) {
+				SubSubChapter subSubChapter = (SubSubChapter) child;
+				if (subSubChapter.containsBeginOfFileTag(tagName)) {
+					return subSubChapter;
+				}
+			}
+		}
+		return null;
+
+	}
+
+	
+	
 	public File getJavaProjectsFolder() {
 		return javaProjectsFolder;
 	}
@@ -49,23 +79,23 @@ public class DocumentationModel extends NodeContainer<Node> {
 		do {
 			parent = findParent(currentNode, node);
 			beginOfFile = findBeginOffFile(parent);
-			if (beginOfFile==null) {
-				node=parent;
+			if (beginOfFile == null) {
+				node = parent;
 			}
 		} while (beginOfFile == null && parent != this);
 		return beginOfFile;
 	}
 
 	public InlineTag findBeginOffFile(NodeContainer<Node> container) {
-		for (Node child :container.getChildren()) {
+		for (Node child : container.getChildren()) {
 			if (child instanceof InlineTag) {
 				InlineTag inlineTag = (InlineTag) child;
-				if (inlineTag.getName()==InlineTagName.BEGINOFFILE) {
+				if (inlineTag.getName() == InlineTagName.BEGINOFFILE) {
 					return inlineTag;
 				}
 			}
 		}
-		//not found;
+		// not found;
 		return null;
 	}
 
@@ -92,29 +122,30 @@ public class DocumentationModel extends NodeContainer<Node> {
 	}
 
 	public Chapter findChapter(Chapter chapterOSubChapter) {
-		if (isChapter(chapterOSubChapter) ){
+		if (isChapter(chapterOSubChapter)) {
 			return chapterOSubChapter;
 		}
 		NodeContainer<Node> parent = findParent(this, chapterOSubChapter);
-		if (isChapter(parent) ){
+		if (isChapter(parent)) {
 			return (Chapter) parent;
 		}
-		parent = findParent(this,  parent);
-		if (isChapter(parent) ){
+		parent = findParent(this, parent);
+		if (isChapter(parent)) {
 			return (Chapter) parent;
 		}
 		return null;
 	}
 
 	private boolean isChapter(Node node) {
-		return node instanceof Chapter && !(node instanceof SubChapter) && !(node instanceof SubSubChapter);
+		return node instanceof Chapter && !(node instanceof SubChapter)
+				&& !(node instanceof SubSubChapter);
 	}
 
 	public List<Chapter> findChapters() {
-		List<Chapter> chapters=new ArrayList<Chapter>();
+		List<Chapter> chapters = new ArrayList<Chapter>();
 		for (Node child : getChildren()) {
 			if (child instanceof Chapter) {
-				Chapter chapter=(Chapter) child;
+				Chapter chapter = (Chapter) child;
 				chapters.add(chapter);
 			}
 		}
@@ -123,7 +154,7 @@ public class DocumentationModel extends NodeContainer<Node> {
 
 	public int getChapterNumber(Chapter chapter) {
 		List<Chapter> chapters = findChapters();
-		int chapterNumber = chapters.indexOf(chapter)+1;
+		int chapterNumber = chapters.indexOf(chapter) + 1;
 		return chapterNumber;
 	}
 

@@ -177,6 +177,7 @@ public class DocumentationService {
 				gitHubWikiInfo.getGitHubWikiProjectLocation());
 	}
 
+	
 	public void createGitHubHtmlDocumentation(GitHubHtmlInfo gitHubHtmlInfo)
 			throws IOException, MultipleFileException {
 		String javaDoc = DocumentationReader

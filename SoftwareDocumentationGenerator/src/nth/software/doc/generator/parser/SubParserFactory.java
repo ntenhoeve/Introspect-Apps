@@ -37,20 +37,21 @@ public class SubParserFactory {
 
 	private static List<SubParser<? extends Node>> createInlineTagParsers() {
 		List<SubParser<? extends Node>> subParsers = new ArrayList<SubParser<? extends Node>>();
-for (InlineTagName inlineTagToken:InlineTagName.values()) {
-	InlineTagParser inlineTagParser = new InlineTagParser(inlineTagToken); 
-	subParsers.add(inlineTagParser); 
-} 		
+		for (InlineTagName inlineTagToken : InlineTagName.values()) {
+			InlineTagParser inlineTagParser = new InlineTagParser(
+					inlineTagToken);
+			subParsers.add(inlineTagParser);
+		}
 		return subParsers;
 	}
 
 	private static List<SubParser<? extends Node>> createTagParsers() {
 		List<SubParser<? extends Node>> subParsers = new ArrayList<SubParser<? extends Node>>();
 		List<Token> tagTokens = TokenFactory.createTagTokens();
-		for (Token token : tagTokens) {//TODO use ENUM
-			TagToken tagToken=(TagToken) token;
-			TagParser tagParser = new TagParser(tagToken.getTagName()); 
-			subParsers.add(tagParser); 
+		for (Token token : tagTokens) {// TODO use ENUM
+			TagToken tagToken = (TagToken) token;
+			TagParser tagParser = new TagParser(tagToken.getTagName());
+			subParsers.add(tagParser);
 		}
 		return subParsers;
 	}

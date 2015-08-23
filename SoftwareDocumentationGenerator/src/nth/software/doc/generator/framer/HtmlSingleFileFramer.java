@@ -31,7 +31,7 @@ import nth.software.doc.generator.model.inlinetag.InlineTag;
 import nth.software.doc.generator.service.DocumentationInfo;
 import nth.software.doc.generator.tokenizer.ElementName;
 import nth.software.doc.generator.tokenizer.TokenFactory;
-
+import static org.apache.commons.lang3.StringEscapeUtils.escapeHtml4;
 /**
  * TODO For HTML: make it more like Wiki framer: split up in multiple files, extend sitemap, implement a title bar See {@link HtmlTitleBar} for inspiration 
  * @author nilsth
@@ -64,8 +64,8 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 		getWriter().print(">");
 	}
 
-	private void outText(String text) {
-		String html = HtmlConverter.convertToHtml(text);
+	protected void outText(String text) {
+		String html = escapeHtml4(text);
 		getWriter().print(html);
 	}
 
@@ -256,6 +256,7 @@ public class HtmlSingleFileFramer extends DocumentationFramer {
 					.findChapterOrSubChapterWithBeginOfFileTag(tagName);
 			String hRef = null;
 			if (chapterOrSubChapter == null) {
+				System.out.println(text);
 				outStartElement(ElementName.A);
 			} else {
 				Chapter chapter = (Chapter) chapterOrSubChapter;

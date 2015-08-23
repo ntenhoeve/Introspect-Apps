@@ -21,13 +21,31 @@ public class Chapter extends NodeContainer<Node> {
 
 	public boolean containsBeginOfFileTag(String valueToFind) {
 		for (Node child : getChildren()) {
-			if (child instanceof InlineTag) {
-				InlineTag inlineTag = (InlineTag) child;
-				InlineTagName name = inlineTag.getName();
-				String value = inlineTag.getValue();
-				if (name == InlineTagName.BEGINOFFILE && value.equals(valueToFind)) {
+			if (containsBeginOfFileTag(child,valueToFind)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean containsBeginOfFileTag(Node node, String valueToFind) {
+		if (node instanceof InlineTag) {
+			InlineTag inlineTag = (InlineTag) node;
+			InlineTagName name = inlineTag.getName();
+			String value = inlineTag.getValue();
+			if (name == InlineTagName.BEGINOFFILE && value.equals(valueToFind)) {
+				return true;
+			}
+		}
+
+		if (node instanceof NodeContainer<?> && ! (node instanceof Chapter)) {
+			NodeContainer<?> nodeContainer = (NodeContainer<?>) node;
+			for (Node child : nodeContainer.getChildren()) {
+				// recursive call
+				if (containsBeginOfFileTag(child, valueToFind)) {
 					return true;
 				}
+
 			}
 		}
 		return false;

@@ -11,9 +11,9 @@ import nth.software.doc.generator.model.Hyperlink;
 import nth.software.doc.generator.model.SubChapter;
 import nth.software.doc.generator.model.TextWithFixedWidthFont;
 import nth.software.doc.generator.service.DocumentationInfo;
+import static org.apache.commons.lang3.StringEscapeUtils.unescapeHtml4;
 
 public class WikiFramer extends HtmlSingleFileFramer {
-
 	
 	public WikiFramer(DocumentationModel documentationModel,
 			DocumentationInfo htmlInfo, File destinationFolder)
@@ -33,6 +33,13 @@ public class WikiFramer extends HtmlSingleFileFramer {
 	}
 
 
+	@Override
+	protected void outText(String text) {
+		//no HTML encoding
+		getWriter().print(text);
+	}
+
+	
 	@Override
 	public String createChapterLink(Chapter chapterOrSubChapter) {
 		StringBuilder link = new StringBuilder();
@@ -129,10 +136,11 @@ public class WikiFramer extends HtmlSingleFileFramer {
 	public void frameTextWithFixedWidthFont(TextWithFixedWidthFont node) {
 		PrintWriter writer=getWriter();
 		writer.print("\r\n```");
-		writer.print(node.getText());
+		String t=unescapeHtml4(node.getText());
+		writer.print(t);
 		writer.print("\r\n```");
 	}
-
+	
 	
 
 	
