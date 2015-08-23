@@ -1,6 +1,6 @@
 package nth.accounts.domain.account;
 
-import nth.introspect.generic.titlebuilder.TitleBuilder;
+import nth.introspect.generic.util.TitleBuilder;
 
 public class AccountAttribute {
 	private String name;
@@ -27,7 +27,7 @@ public class AccountAttribute {
 		TitleBuilder titleBuilder=new TitleBuilder(":");
 		titleBuilder.append(name);
 		titleBuilder.append(value);
-		return titleBuilder.getTitle();
+		return titleBuilder.toString();
 	}
 
 }

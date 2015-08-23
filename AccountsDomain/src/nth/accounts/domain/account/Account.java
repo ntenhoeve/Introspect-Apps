@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.accounts.domain.user.User;
-import nth.introspect.generic.titlebuilder.TitleBuilder;
+import nth.introspect.generic.util.TitleBuilder;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.introspect.layer5provider.reflection.behavior.order.Order;
