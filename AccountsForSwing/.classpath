@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/IntrospectUserInterfaceUtil"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AccountsDomain"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/IntrospectForSwing"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IntrospectInfrastructureXmlConverter"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
