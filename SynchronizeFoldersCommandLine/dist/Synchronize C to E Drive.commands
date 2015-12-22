@@ -1,9 +1,0 @@
-synchronize "C:\Users\nilsth\Documents" "E:\My Documents" false true
-synchronize "C:\Users\nilsth\My E Books" "E:\My E Books" false true
-synchronize "C:\Users\nilsth\My Favorites" "E:\My Favorites" false true
-synchronize "C:\Users\nilsth\My Galaxi" "E:\My Galaxi" true true
-synchronize "C:\Users\nilsth\My Java" "E:\My Java" true true
-synchronize "C:\Users\nilsth\My Music" "E:\My Music" true true
-synchronize "C:\Users\nilsth\My Outlook Archives" "E:\My Outlook Archives" true true
-synchronize "C:\Users\nilsth\My Pictures" "E:\My Pictures" false true
-synchronize "C:\Users\nilsth\My Videos" "E:\My Videos" false true
