@@ -42,5 +42,17 @@ public class GitRepository {
 		return commitMessage.toString();
 	}
 
+	public void deleteFolderContents(File folder) {
+		File[] files = folder.listFiles();
+		if (files != null) { // some JVMs return null for empty dirs
+			for (File file : files) {
+				if (file.isDirectory() && !file.getName().equals(".git")) {
+					deleteFolderContents(file);
+				}
+				file.delete();
+			}
+		}
+	}
+
 
 }

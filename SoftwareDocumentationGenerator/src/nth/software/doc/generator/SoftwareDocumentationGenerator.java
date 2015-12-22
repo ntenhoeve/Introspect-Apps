@@ -3,6 +3,7 @@ package nth.software.doc.generator;
 import java.util.Arrays;
 import java.util.List;
 
+import nth.introspect.generic.util.ClassList;
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 import nth.software.doc.generator.model.Chapter;
 import nth.software.doc.generator.model.SubChapter;
@@ -92,12 +93,12 @@ public class SoftwareDocumentationGenerator extends
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return Arrays.asList(DocumentationService.class);
+		return new ClassList(DocumentationService.class);
 	}
 
 	@Override
 	public List<Class<?>> getInfrastructureClasses() {
-		return Arrays.asList(GitRepository.class);
+		return new ClassList(GitRepository.class);
 	}
 
 }
