@@ -29,6 +29,7 @@ public class GitRepository {
 					gitHubInfo.getGitHubUserName(), gitHubInfo.getGitHubPassword());
 			git.push().setPushAll().setRemote("origin")
 					.setCredentialsProvider(user).call();
+			git.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 

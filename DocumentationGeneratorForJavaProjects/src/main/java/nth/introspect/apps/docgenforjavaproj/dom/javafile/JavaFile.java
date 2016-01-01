@@ -3,7 +3,10 @@ package nth.introspect.apps.docgenforjavaproj.dom.javafile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.EndTag;
@@ -11,6 +14,7 @@ import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.HtmlLinkToReference
 
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
+import org.jsoup.select.Elements;
 
 /**
  * 
@@ -129,11 +133,32 @@ public class JavaFile {
 	public File getResourcePath(String resourceName){
 		String path = javaFile.getParent()+"/"+resourceName;
 		File file=new File(path);
+		if (file.exists()) {
 		return file;
+		} 
+		String mavenSourceFolder = createMainMavenFolder("java");
+		String mavenResourceFolder = createMainMavenFolder("resources");
+		if (file.getAbsolutePath().contains(mavenSourceFolder)) {
+			file=new File(file.getAbsolutePath().replace(mavenSourceFolder, mavenResourceFolder) );
+			if (file.exists()) {
+				return file;
+			}
+		}
+		return null;
 	}
 
 
-
+	private String createMainMavenFolder(String suffix) {
+		StringBuilder folder=new StringBuilder();
+		folder.append(File.separator);
+		folder.append("src");
+		folder.append(File.separator);
+		folder.append("main");
+		folder.append(File.separator);
+		folder.append(suffix);
+		folder.append(File.separator);
+		return folder.toString();
+	}
 
 	public static boolean isJavaFile(File file) {
 		return file.isFile()&&file.getName().toLowerCase().endsWith(JAVA_EXTENSION);

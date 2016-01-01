@@ -19,6 +19,7 @@ public abstract class WebPage extends Page {
 		fileName.append(".html");
 		return fileName.toString();
 	}
+
 	
 
 }

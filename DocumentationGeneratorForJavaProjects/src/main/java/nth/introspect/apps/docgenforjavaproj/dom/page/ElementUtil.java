@@ -80,9 +80,9 @@ public class ElementUtil {
 
 	public static Element findPreviousHElement(Elements sequence,
 			Element reference) {
-		int index=sequence.indexOf(reference);
-		for (index=sequence.indexOf(reference);index>=0;index--) {
-			Element element=sequence.get(index);
+		int index = sequence.indexOf(reference);
+		for (index = sequence.indexOf(reference); index >= 0; index--) {
+			Element element = sequence.get(index);
 			if (element.tagName().startsWith("h")) {
 				return element;
 			}

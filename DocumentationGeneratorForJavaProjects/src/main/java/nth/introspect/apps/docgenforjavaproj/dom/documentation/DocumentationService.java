@@ -239,36 +239,36 @@ public class DocumentationService {
 	public void createGitHubWebPages(GitHubHtmlInfo info) throws IOException {
 		gitHubWebPageFactory.createGitHubWebPages(info);
 	}
-
-	public void test(GitHubWikiInfo info) throws IOException {
-		Map<String, JavaFile> javaFiles = JavaFileFactory
-				.findAllJavaFilesInFolder(info.getProjectsFolder());
-
-		Document html = JavaDocFactory.getAllJavaDoc(info, javaFiles);
-
-		List<WikiPage> wikiPages = getWikiPages(html,
-				info.getGitHubWikiProjectLocation());
-
-		for (WikiPage wikiPage : wikiPages) {
-			System.out.println(wikiPage);
-		}
-		// TODO convert to wiki pages
-		// TODO publish
-
-		// TODO convert to web page
-		// TODO publish
-	}
-
-	private List<WikiPage> getWikiPages(Document html,
-			File gitHubWikiProjectLocation) {
-		List<WikiPage> wikiPages = new ArrayList<>();
-		Elements chapters = html.select("h1");
-		for (Element chapterElement : chapters) {
-			WikiPage wikiPage = new WikiPage(chapterElement,
-					gitHubWikiProjectLocation);
-			wikiPages.add(wikiPage);
-		}
-		return wikiPages;
-	}
+//
+//	public void test(GitHubWikiInfo info) throws IOException {
+//		Map<String, JavaFile> javaFiles = JavaFileFactory
+//				.findAllJavaFilesInFolder(info.getProjectsFolder());
+//
+//		Document html = JavaDocFactory.getAllJavaDoc(info, javaFiles);
+//
+//		List<WikiPage> wikiPages = getWikiPages(html,
+//				info.getGitHubWikiProjectLocation());
+//
+//		for (WikiPage wikiPage : wikiPages) {
+//			System.out.println(wikiPage);
+//		}
+//		// TODO convert to wiki pages
+//		// TODO publish
+//
+//		// TODO convert to web page
+//		// TODO publish
+//	}
+//
+//	private List<WikiPage> getWikiPages(Document html,
+//			File gitHubWikiProjectLocation) {
+//		List<WikiPage> wikiPages = new ArrayList<>();
+//		Elements chapters = html.select("h1");
+//		for (Element chapterElement : chapters) {
+//			WikiPage wikiPage = new WikiPage(chapterElement,
+//					gitHubWikiProjectLocation);
+//			wikiPages.add(wikiPage);
+//		}
+//		return wikiPages;
+//	}
 
 }

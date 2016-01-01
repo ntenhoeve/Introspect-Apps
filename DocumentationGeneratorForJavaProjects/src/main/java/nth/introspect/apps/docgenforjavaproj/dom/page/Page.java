@@ -26,8 +26,8 @@ public abstract class  Page {
 		this.javaDocClass = javaDocClass;
 		String title = createTitle( javaDoc);
 		this.document = createDocument( title, javaDoc);
-		updateInternalReferences(javaDoc.clone(), document);
-		verifyExternalResources(document);
+		updateInternalReferences(javaDoc.clone(), getDocument());
+		verifyExternalResources(getDocument());
 		this.file = createFile(title);
 	}
 	
@@ -104,7 +104,8 @@ public abstract class  Page {
 		FileOutputStream fos = new FileOutputStream(file);
 		OutputStreamWriter osw = new OutputStreamWriter(fos,
 				StandardCharsets.UTF_8);
-		osw.write(document.toString());
+		Document doc = getDocument();
+		osw.write(getDocument().outerHtml());
 		osw.flush();
 		osw.close();
 	}
@@ -116,13 +117,18 @@ public abstract class  Page {
 		string.append("file:");
 		string.append(file.getAbsolutePath());
 		string.append("\n");
-		string.append(document);
+		string.append(getDocument());
 		return string.toString();
 	}
 
 
 	public File getDestinationFolder() {
 		return destinationFolder;
+	}
+
+
+	public Document getDocument() {
+		return document;
 	}
 
 
