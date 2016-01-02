@@ -45,7 +45,7 @@ public class FileUtil {
 			while ((line = br.readLine()) != null) {
 				lines.add(line);
 			}
-
+			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class FileUtil {
 		String fileName = file.getName();
 		int startPosExtention = fileName.indexOf(".");
 		if (startPosExtention > 0) {
-			return fileName.substring(0,startPosExtention);
+			return fileName.substring(0, startPosExtention);
 		}
 		return fileName;
 	}

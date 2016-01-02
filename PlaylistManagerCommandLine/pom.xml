@@ -18,8 +18,8 @@
   </build>
   <dependencies>
   	<dependency>
-  		<groupId>nth.introspect.framework</groupId>
-  		<artifactId>IntrospectForCommandLine</artifactId>
+  		<groupId>nth.reflect.framework</groupId>
+  		<artifactId>reflect-for-commandline</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

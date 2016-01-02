@@ -17,14 +17,14 @@
   </build>
   <dependencies>
   	<dependency>
-  		<groupId>nth.introspect.framework</groupId>
-  		<artifactId>Introspect</artifactId>
+  		<groupId>nth.reflect.framework</groupId>
+  		<artifactId>reflect-core</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
-  		<groupId>nth.introspect.framework.infrastructure</groupId>
+  		<groupId>nth.reflect.framework</groupId>
   		<artifactId>
-  			IntrospectInfrastructureXmlFileRepositority
+  			reflect-infrastructure-xml-file-repository
   		</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>

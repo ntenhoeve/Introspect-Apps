@@ -20,13 +20,13 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>nth.introspect.framework</groupId>
-			<artifactId>IntrospectForSwing</artifactId>
+			<groupId>nth.introspect.apps</groupId>
+			<artifactId>AccountsDomain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>nth.introspect.apps</groupId>
-			<artifactId>AccountsDomain</artifactId>
+			<groupId>nth.reflect.framework</groupId>
+			<artifactId>reflect-for-swing</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
