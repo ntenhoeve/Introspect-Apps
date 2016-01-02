@@ -89,4 +89,35 @@ public class ElementUtil {
 		}
 		return null;
 	}
+
+	public static Element findPreviousH1Element(Element hElement) {
+		Elements hElements=findAllHElements(hElement);
+		Element currentH1 = null;
+		for (Element h : hElements) {
+			if (h.nodeName().equals("h1")) {
+				currentH1=h;
+			}
+			if (h.html().equals(hElement.html())) {
+				return currentH1;
+			}
+		}
+		return null;
+	}
+
+	private static Elements findAllHElements(Element element) {
+		Element root=findRootElement(element);
+		return  root.select("h1,h2,h3");
+	}
+
+	private static Element findRootElement(Element element) {
+		Element parent;
+		do {
+			parent=element.parent();
+			if (parent==null) {
+				return element;
+			}
+			element=parent;
+		} while (parent!=null); 
+		return null;
+	}
 }

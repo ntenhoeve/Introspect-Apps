@@ -1,8 +1,9 @@
-package nth.introspect.apps.docgenforjavaproj.dom.page;
+package nth.introspect.apps.docgenforjavaproj.dom.page.web;
 
 import java.util.List;
 
-import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubHtmlInfo;
+import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubWebInfo;
+import nth.introspect.apps.docgenforjavaproj.dom.page.ElementUtil;
 import nth.introspect.generic.util.StringUtil;
 
 import org.jsoup.nodes.DataNode;
@@ -14,16 +15,18 @@ import org.jsoup.select.Elements;
 
 public class FancyWebPage extends WebPage {
 
-	public FancyWebPage(GitHubHtmlInfo info, Document javaDoc) {
-		super(info.getGithubHtmlProjectLocation(), info.getClassName(), javaDoc);
+	public FancyWebPage(GitHubWebInfo info, Document javaDoc) {
+		super(info.getGithubWebProjectLocation(), info.getClassName(), javaDoc);
 	}
 
 	@Override
-	protected Document createDocument(String title, Document javaDoc) {
+	public Document createContents() {
 		// TODO wiki pages
 		// TODO rename project to IntrospectDocumentationGenerator and add
 		// IntrospectDocs to Maven resources
 		// TODO check doc
+		String title=getTitle();
+		
 		Document doc = createDocument(title);
 
 		createHead(doc);
@@ -33,9 +36,9 @@ public class FancyWebPage extends WebPage {
 
 		createTitleBar(title, divPage);
 
-		createContents(javaDoc.clone(), divPage);
+		createContents(getJavaDoc(), divPage);
 
-		createMenu(javaDoc.clone(), divPage);
+		createMenu(getJavaDoc(), divPage);
 
 		return doc;
 	}

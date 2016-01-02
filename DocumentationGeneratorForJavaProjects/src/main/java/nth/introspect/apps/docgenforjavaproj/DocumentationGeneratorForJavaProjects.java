@@ -6,8 +6,8 @@ import nth.introspect.apps.docgenforjavaproj.dom.documentation.DocumentationServ
 import nth.introspect.apps.docgenforjavaproj.dom.github.GitRepository;
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.JavaDocFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFileFactory;
-import nth.introspect.apps.docgenforjavaproj.dom.page.GitHubWebPageFactory;
-import nth.introspect.apps.docgenforjavaproj.dom.page.GitHubWikiPageFactory;
+import nth.introspect.apps.docgenforjavaproj.dom.page.web.GitHubWebPageFactory;
+import nth.introspect.apps.docgenforjavaproj.dom.page.wiki.GitHubWikiPageFactory;
 import nth.introspect.generic.util.ClassList;
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 

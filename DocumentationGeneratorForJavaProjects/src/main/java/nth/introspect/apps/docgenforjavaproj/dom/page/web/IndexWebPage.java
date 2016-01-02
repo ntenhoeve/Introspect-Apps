@@ -1,8 +1,8 @@
-package nth.introspect.apps.docgenforjavaproj.dom.page;
+package nth.introspect.apps.docgenforjavaproj.dom.page.web;
 
 import java.io.File;
 
-import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubHtmlInfo;
+import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubWebInfo;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,26 +15,32 @@ import org.jsoup.nodes.Element;
  */
 public class IndexWebPage extends WebPage {
 
-	public IndexWebPage(GitHubHtmlInfo info, Document javaDoc) {
-		super(info.getGithubHtmlProjectLocation(), info.getClassName(), javaDoc);
+	private static final String INDEX_HTML = "index.html";
+	private File homePage;
+
+	public IndexWebPage(GitHubWebInfo info, Document javaDoc, File homePage) {
+		super(info.getGithubWebProjectLocation(), info.getClassName(), javaDoc);
+		this.homePage = homePage;
 	}
 
 	@Override
-	protected Document createDocument(String title, Document javaDoc) {
+	public  Document createContents() {
 		Document doc = Document.createShell("");
 		StringBuilder content = new StringBuilder();
 		content.append("0; url=");
-		content.append(createFileName(title));
+		content.append(homePage.getName());
 		doc.head().appendElement("meta").attr("http-equiv", "refresh")
 				.attr("content", content.toString());
 		return doc;
-	};
+	}
+
 
 	@Override
 	protected File createFile(String title) {
 		StringBuilder filePath = new StringBuilder();
 		filePath.append(getDestinationFolder());
-		filePath.append("/Index.html");
+		filePath.append("/");
+		filePath.append(INDEX_HTML);
 		File file = new File(filePath.toString());
 		return file;
 	}

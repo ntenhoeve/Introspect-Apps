@@ -12,27 +12,24 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public abstract class  Page {
+public abstract class  Page implements WritableFile {
 
 	
 	protected static final String HREF = "href";
-	private final File file;
-	private final Document document;
+	private File file;
+	private Document contents;
 	private final File destinationFolder;
 	private final String javaDocClass;
+	private final Document javaDoc;
 
 	public Page( File destinationFolder, String javaDocClass , Document javaDoc) {
 		this.destinationFolder = destinationFolder;
 		this.javaDocClass = javaDocClass;
-		String title = createTitle( javaDoc);
-		this.document = createDocument( title, javaDoc);
-		updateInternalReferences(javaDoc.clone(), getDocument());
-		verifyExternalResources(getDocument());
-		this.file = createFile(title);
+		this.javaDoc = javaDoc;
 	}
 	
 	
-	private String createTitle( Document javaDoc) {
+	public  String getTitle() {
 		Element titleElement = javaDoc.select("title").first();
 		if (titleElement != null) {
 			return titleElement.html();
@@ -41,7 +38,6 @@ public abstract class  Page {
 		return title;
 	}
 
-	protected abstract Document createDocument( String title, Document javaDoc);
 	
 	protected File createFile(String title) {
 		StringBuilder filePath = new StringBuilder();
@@ -54,12 +50,6 @@ public abstract class  Page {
 
 
 	protected abstract String createFileName(String title);
-
-
-	private void verifyExternalResources(Element body) {
-		// TODO Auto-generated method stub
-
-	}
 
 	private void updateInternalReferences(Document javaDoc, Element body) {
 		Elements elementsToUpdate = body.select("a[href^=Reference_]");
@@ -100,12 +90,15 @@ public abstract class  Page {
 	protected abstract  String createReference(Element hElement) ;
 
 
+	/* (non-Javadoc)
+	 * @see nth.introspect.apps.docgenforjavaproj.dom.page.WritableFile#write()
+	 */
+	@Override
 	public void write() throws IOException {
-		FileOutputStream fos = new FileOutputStream(file);
+		FileOutputStream fos = new FileOutputStream(getFile());
 		OutputStreamWriter osw = new OutputStreamWriter(fos,
 				StandardCharsets.UTF_8);
-		Document doc = getDocument();
-		osw.write(getDocument().outerHtml());
+		osw.write(getContents().toString());
 		osw.flush();
 		osw.close();
 	}
@@ -115,10 +108,20 @@ public abstract class  Page {
 		StringBuilder string = new StringBuilder();
 		string.append("---------------------------------------------------------------\n");
 		string.append("file:");
-		string.append(file.getAbsolutePath());
+		string.append(getFile().getAbsolutePath());
 		string.append("\n");
-		string.append(getDocument());
+		string.append(getContents());
 		return string.toString();
+	}
+
+	
+
+	public File getFile() {
+		if (file==null) {
+			String title=getTitle();
+			file = createFile(title);
+		}
+		return file;
 	}
 
 
@@ -127,9 +130,27 @@ public abstract class  Page {
 	}
 
 
-	public Document getDocument() {
-		return document;
+	public Document getContents() {
+		if (contents ==null) {
+			contents=createContents();
+			updateInternalReferences(javaDoc.clone(), contents);
+		}
+		return contents;
 	}
+
+
+	public  abstract Document createContents() ;
+
+
+	public String getJavaDocClass() {
+		return javaDocClass;
+	}
+
+
+	public Document getJavaDoc() {
+		return javaDoc.clone();
+	}
+
 
 
 	

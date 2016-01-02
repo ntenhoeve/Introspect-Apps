@@ -1,8 +1,9 @@
-package nth.introspect.apps.docgenforjavaproj.dom.page;
+package nth.introspect.apps.docgenforjavaproj.dom.page.web;
 
 import java.util.List;
 
-import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubHtmlInfo;
+import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubWebInfo;
+import nth.introspect.apps.docgenforjavaproj.dom.page.ElementUtil;
 import nth.introspect.generic.util.StringUtil;
 
 import org.jsoup.nodes.Document;
@@ -13,8 +14,26 @@ import org.jsoup.select.Elements;
 
 public class PrintableWebPage extends WebPage {
 
-	public PrintableWebPage(GitHubHtmlInfo info, Document javaDoc) {
-		super(info.getGithubHtmlProjectLocation(), info.getClassName(), javaDoc);
+	public PrintableWebPage(GitHubWebInfo info, Document javaDoc) {
+		super(info.getGithubWebProjectLocation(), info.getClassName(), javaDoc);
+	}
+
+	@Override
+	public Document createContents() {
+		Document doc = createDocument(getTitle());
+		
+		createHead(doc);
+
+		Element body = doc.body();
+
+		createFrontCover(getJavaDoc(), body);
+
+		createTableOfContents(getJavaDoc(), body);
+
+		createContent(getJavaDoc(), body);
+
+		return doc;
+
 	}
 
 	@Override
@@ -25,24 +44,8 @@ public class PrintableWebPage extends WebPage {
 		return fileName.toString();
 	}
 
-	@Override
-	protected Document createDocument(String title, Document javaDoc) {
-		Document doc = createDocument(title);
-		
-		createHead(doc);
 
-		Element body = doc.body();
-
-		createFrontCover(javaDoc.clone(), body);
-
-		createTableOfContents(javaDoc.clone(), body);
-
-		createContent(javaDoc.clone(), body);
-
-		return doc;
-	}
-
-	private void createHead(Document doc) {
+	private static void createHead(Document doc) {
 		Element head = doc.head();
 		head.appendElement("meta").attr("charset", "utf-8");
 		head.appendElement("meta")
@@ -51,7 +54,7 @@ public class PrintableWebPage extends WebPage {
 						"width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes");
 	}
 
-	private Document createDocument(String title) {
+	private static Document createDocument(String title) {
 		Document doc = new Document("");
 		doc.appendChild(new DocumentType("html", "", "", ""));
 		Element html = doc.appendElement("html");
@@ -61,7 +64,7 @@ public class PrintableWebPage extends WebPage {
 		return doc;
 	}
 
-	private void createContent(Document javaDoc, Element body) {
+	private static void createContent(Document javaDoc, Element body) {
 		Element divContent = body.appendElement("div").attr("id", "content");
 		Elements h1Elements = javaDoc.select("h1");
 		for (Element h1 : h1Elements) {
@@ -71,7 +74,7 @@ public class PrintableWebPage extends WebPage {
 
 	}
 
-	private void createFrontCover(Document javaDoc, Element body) {
+	private static void createFrontCover(Document javaDoc, Element body) {
 		Element firstChapter = javaDoc.select("h1").first();
 		List<Node> frontCoverElements = ElementUtil
 				.findAllNodesBefore(firstChapter);
@@ -80,7 +83,7 @@ public class PrintableWebPage extends WebPage {
 		ElementUtil.addAllNodes(divFrontCover, frontCoverElements);
 	}
 
-	private void createTableOfContents(Document javaDoc, Element body) {
+	private static void createTableOfContents(Document javaDoc, Element body) {
 		Element divToc = body.appendElement("div")
 				.attr("id", "tableOfContents");
 		divToc.appendElement("h1").html("Contents");

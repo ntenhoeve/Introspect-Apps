@@ -9,8 +9,9 @@ import java.util.Map;
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.JavaDocFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFile;
 import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFileFactory;
-import nth.introspect.apps.docgenforjavaproj.dom.page.GitHubWebPageFactory;
-import nth.introspect.apps.docgenforjavaproj.dom.page.WikiPage;
+import nth.introspect.apps.docgenforjavaproj.dom.page.web.GitHubWebPageFactory;
+import nth.introspect.apps.docgenforjavaproj.dom.page.wiki.GitHubWikiPageFactory;
+import nth.introspect.apps.docgenforjavaproj.dom.page.wiki.WikiPage;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -113,7 +114,7 @@ import org.jsoup.select.Elements;
  * Than you can (re)publish the documentation to the GitHub web page by running
  * the {@link SoftwareDocumentationGenerator} with the following parameters (see
  * also
- * {@link DocumentationService#createGitHubHtmlDocumentation(GitHubHtmlInfo)
+ * {@link DocumentationService#createGitHubHtmlDocumentation(GitHubWebInfo)
  * (GitHubWikiInfo)}):
  * 
  * <pre>
@@ -152,123 +153,19 @@ import org.jsoup.select.Elements;
 public class DocumentationService {
 
 	private final GitHubWebPageFactory gitHubWebPageFactory;
+	private final GitHubWikiPageFactory gitHubWikiPageFactory;
 
-	// private final GitRepository gitRepository;
-	//
-	// public DocumentationService(GitRepository gitRepository) {
-	// this.gitRepository = gitRepository;
-	// }
-	// public void createGitHubWikiDocumentation(GitHubWikiInfo gitHubWikiInfo)
-	// throws IOException, MultipleFileException {
-	// String javaDoc = DocumentationReader
-	// .readAllDocumentation(gitHubWikiInfo);
-	//
-	// JavaDocParser javaDocParser = new JavaDocParser(javaDoc);
-	// List<Node> nodes = javaDocParser.parse();
-	// DocumentationModel documentationModel = new DocumentationModel(
-	// gitHubWikiInfo.getProjectsFolder(), nodes);
-	//
-	// deleteFolderContents(gitHubWikiInfo.getGitHubWikiProjectLocation());
-	//
-	// WikiFramer wikiFramer = new WikiFramer(documentationModel,
-	// gitHubWikiInfo, gitHubWikiInfo.getGitHubWikiProjectLocation());
-	// wikiFramer.frame();
-	//
-	// gitRepository.commitAndPush(gitHubWikiInfo,
-	// gitHubWikiInfo.getGitHubWikiProjectLocation());
-	// }
-	//
-	//
-	// public void createGitHubHtmlDocumentation(GitHubHtmlInfo gitHubHtmlInfo)
-	// throws IOException, MultipleFileException {
-	// String javaDoc = DocumentationReader
-	// .readAllDocumentation(gitHubHtmlInfo);
-	//
-	// JavaDocParser javaDocParser = new JavaDocParser(javaDoc);
-	// List<Node> nodes = javaDocParser.parse();
-	// DocumentationModel documentationModel = new DocumentationModel(
-	// gitHubHtmlInfo.getProjectsFolder(), nodes);
-	//
-	// deleteFolderContents(gitHubHtmlInfo.getGithubHtmlProjectLocation());
-	//
-	// HtmlSingleFileFramer htmlSingleFileFramer = new HtmlSingleFileFramer(
-	// documentationModel, gitHubHtmlInfo,
-	// gitHubHtmlInfo.getGithubHtmlProjectLocation());
-	// htmlSingleFileFramer.frame();
-	//
-	// // See http://www.wikihow.com/Get-Your-Website-Indexed-by-Google
-	// // Google search console:
-	// //
-	// https://www.google.com/webmasters/tools/home?hl=nl&siteUrl=http://ntenhoeve.github.io/&authuser=0
-	//
-	// RobotsTxt.writeFile(gitHubHtmlInfo.getGithubHtmlProjectLocation());
-	//
-	// SiteMap.witeFile(gitHubHtmlInfo);
-	//
-	// gitRepository.commitAndPush(gitHubHtmlInfo,
-	// gitHubHtmlInfo.getGithubHtmlProjectLocation());
-	// }
-	//
-	// // TODO does not work
-	// // public String createGitHubHtmlDocumentationDescription() {
-	// // return "TODO";
-	// // }
-	//
-	// public void createHtmlDocumentation(HtmlInfo htmlInfo) throws
-	// IOException,
-	// MultipleFileException {
-	// String javaDoc = DocumentationReader.readAllDocumentation(htmlInfo);
-	//
-	// JavaDocParser javaDocParser = new JavaDocParser(javaDoc);
-	// List<Node> nodes = javaDocParser.parse();
-	// DocumentationModel documentationModel = new DocumentationModel(
-	// htmlInfo.getProjectsFolder(), nodes);
-	//
-	// deleteFolderContents(htmlInfo.getDestinationFolder());
-	//
-	// HtmlSingleFileFramer htmlSingleFileFramer = new HtmlSingleFileFramer(
-	// documentationModel, htmlInfo, htmlInfo.getDestinationFolder());
-	// htmlSingleFileFramer.frame();
-	// }
-	//
-
-	public DocumentationService(GitHubWebPageFactory gitHubWebPageFactory) {
+	public DocumentationService(GitHubWebPageFactory gitHubWebPageFactory, GitHubWikiPageFactory gitHubWikiPageFactory) {
 		this.gitHubWebPageFactory = gitHubWebPageFactory;
+		this.gitHubWikiPageFactory = gitHubWikiPageFactory;
 	}
 
-	public void createGitHubWebPages(GitHubHtmlInfo info) throws IOException {
+	public void createGitHubWebPages(GitHubWebInfo info) throws IOException {
 		gitHubWebPageFactory.createGitHubWebPages(info);
 	}
-//
-//	public void test(GitHubWikiInfo info) throws IOException {
-//		Map<String, JavaFile> javaFiles = JavaFileFactory
-//				.findAllJavaFilesInFolder(info.getProjectsFolder());
-//
-//		Document html = JavaDocFactory.getAllJavaDoc(info, javaFiles);
-//
-//		List<WikiPage> wikiPages = getWikiPages(html,
-//				info.getGitHubWikiProjectLocation());
-//
-//		for (WikiPage wikiPage : wikiPages) {
-//			System.out.println(wikiPage);
-//		}
-//		// TODO convert to wiki pages
-//		// TODO publish
-//
-//		// TODO convert to web page
-//		// TODO publish
-//	}
-//
-//	private List<WikiPage> getWikiPages(Document html,
-//			File gitHubWikiProjectLocation) {
-//		List<WikiPage> wikiPages = new ArrayList<>();
-//		Elements chapters = html.select("h1");
-//		for (Element chapterElement : chapters) {
-//			WikiPage wikiPage = new WikiPage(chapterElement,
-//					gitHubWikiProjectLocation);
-//			wikiPages.add(wikiPage);
-//		}
-//		return wikiPages;
-//	}
+	
+	public void createGitHubWikiPages(GitHubWikiInfo info) throws IOException {
+		gitHubWikiPageFactory.createGitHubWikiPages(info);
+	}
 
 }
