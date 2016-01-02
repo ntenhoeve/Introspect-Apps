@@ -1,21 +1,9 @@
 package nth.introspect.apps.docgenforjavaproj.dom.documentation;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import nth.introspect.apps.docgenforjavaproj.dom.javadoc.JavaDocFactory;
-import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFile;
-import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFileFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.page.web.GitHubWebPageFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.page.wiki.GitHubWikiPageFactory;
-import nth.introspect.apps.docgenforjavaproj.dom.page.wiki.WikiPage;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  * <h3>Creating GitHub Repositories</h3>

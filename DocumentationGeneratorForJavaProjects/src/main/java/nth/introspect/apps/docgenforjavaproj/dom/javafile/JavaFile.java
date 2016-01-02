@@ -3,10 +3,7 @@ package nth.introspect.apps.docgenforjavaproj.dom.javafile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.EndTag;
@@ -14,7 +11,6 @@ import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.HtmlLinkToReference
 
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
-import org.jsoup.select.Elements;
 
 /**
  * 

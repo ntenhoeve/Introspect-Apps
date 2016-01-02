@@ -2,12 +2,10 @@ package nth.introspect.apps.docgenforjavaproj.dom.page.wiki;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubWebInfo;
 import nth.introspect.apps.docgenforjavaproj.dom.documentation.GitHubWikiInfo;
 import nth.introspect.apps.docgenforjavaproj.dom.github.GitRepository;
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.JavaDocFactory;
@@ -18,7 +16,6 @@ import nth.introspect.apps.docgenforjavaproj.dom.page.FileUtil;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 public class GitHubWikiPageFactory {

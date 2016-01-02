@@ -1,16 +1,10 @@
 package nth.introspect.apps.docgenforjavaproj.dom.page.web;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 
 import nth.introspect.apps.docgenforjavaproj.dom.page.WritableFile;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 public class RobotsTxt implements WritableFile {
 
