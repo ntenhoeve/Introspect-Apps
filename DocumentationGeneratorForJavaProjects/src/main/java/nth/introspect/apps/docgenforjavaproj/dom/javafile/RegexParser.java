@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import nth.introspect.generic.regex.Regex;
+
 public class RegexParser {
 
 	private static final int NOT_FOUND = -1;

@@ -1,6 +1,6 @@
 package nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag;
 
-import nth.introspect.apps.docgenforjavaproj.dom.javafile.Regex;
+import nth.introspect.generic.regex.Regex;
 
 
 public enum EndTag {

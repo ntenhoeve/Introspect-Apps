@@ -2,8 +2,8 @@ package nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag;
 
 import java.io.IOException;
 
-import nth.introspect.apps.docgenforjavaproj.dom.javafile.Regex;
-import nth.introspect.apps.docgenforjavaproj.dom.javafile.Repetition;
+import nth.introspect.generic.regex.Regex;
+import nth.introspect.generic.regex.Repetition;
 
 import org.jsoup.nodes.Element;
 

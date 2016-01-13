@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.EndTag;
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.HtmlLinkToReference;
+import nth.introspect.generic.regex.Regex;
+import nth.introspect.generic.regex.Repetition;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
