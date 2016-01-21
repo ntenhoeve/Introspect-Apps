@@ -1,4 +1,4 @@
-package nth.meyn.display.translate.dom.translate;
+package nth.meyn.display.translate.dom.componentcode;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -8,11 +8,12 @@ import nth.introspect.layer1userinterface.controller.UploadStream;
 
 public class TranslateService {
 
-	//public DownloadStream createTranslateRequest(UploadStream uploadStream) throws URISyntaxException, IOException {
+	//public DownloadStream createTranslateRequest(UploadStreamParameterAction uploadStream) throws URISyntaxException, IOException {
 	public DownloadStream createTranslateRequest() throws URISyntaxException, IOException {
 		//FIXME take InputStream (file open dialog) as argument
 		return TranslateFactory.createTranslateRequest();
 	}
+	
 
 	public String findAbreviationCandidates() throws URISyntaxException,
 			IOException {

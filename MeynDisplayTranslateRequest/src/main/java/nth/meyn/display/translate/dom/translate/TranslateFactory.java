@@ -26,7 +26,7 @@ import org.apache.commons.csv.CSVRecord;
 public class TranslateFactory {
 
 	//public static DownloadStream createTranslateRequest(
-//			UploadStream uploadStream) throws URISyntaxException, IOException {
+//			UploadStreamParameterAction uploadStream) throws URISyntaxException, IOException {
 				public static DownloadStream createTranslateRequest() throws URISyntaxException, IOException {
 		//InputStreamReader reader = createReader(uploadStream);
 		InputStreamReader reader = createReader();

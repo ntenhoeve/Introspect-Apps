@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import nth.introspect.generic.regex.Regex;
 import nth.introspect.generic.regex.Repetition;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
+import nth.meyn.display.translate.dom.componentcode.ComponentCodes;
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
