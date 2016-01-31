@@ -94,7 +94,7 @@ public class JavaDocFactory {
 			boolean foundMatch = true;
 			while (foundMatch) {
 				foundMatch = false;
-				Matcher matcher = inlineTag.getRegex().asMatcher(javaDoc);
+				Matcher matcher = inlineTag.getRegex().toMatcher(javaDoc);
 				if (matcher.find()) {
 					foundMatch = true;
 					int start = matcher.start();

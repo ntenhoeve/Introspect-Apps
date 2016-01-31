@@ -8,7 +8,7 @@ public enum EndTag {
 	
 	public Regex asRegex() {
 		String name="@"+this.name();
-		Regex regex=new Regex().caseUnsensativeMode().literal(name);
+		Regex regex=new Regex().ignoreCase().literal(name);
 		return regex;
 	}
 	

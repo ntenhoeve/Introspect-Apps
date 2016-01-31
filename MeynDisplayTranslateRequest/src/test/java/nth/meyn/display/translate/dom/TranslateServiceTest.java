@@ -5,16 +5,12 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import nth.introspect.container.DependencyInjectionContainer;
-import nth.introspect.generic.util.ClassList;
 import nth.introspect.layer1userinterface.controller.UploadStream;
 import nth.introspect.ui.junit.IntrospectApplicationForJUnit;
 import nth.meyn.display.translate.dom.translate.TranslateFactory;
@@ -29,13 +25,7 @@ public class TranslateServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		IntrospectApplicationForJUnit application=new IntrospectApplicationForJUnit() {
-			@Override
-			public List<Class<?>> getServiceClasses() {
-				return new ClassList(TranslateService.class);
-			}
-		};
-		DependencyInjectionContainer container = application.createContainer();
+		DependencyInjectionContainer container = new IntrospectApplicationForJUnit().addServiceClass(TranslateService.class).createContainer();
 		translateService = container.get(TranslateService.class);
 	}
 

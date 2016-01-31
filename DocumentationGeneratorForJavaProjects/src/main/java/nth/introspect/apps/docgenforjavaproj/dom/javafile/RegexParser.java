@@ -47,7 +47,7 @@ public class RegexParser {
 	}
 
 	public void removeFrom(Regex regex) {
-		Matcher matcher = regex.asMatcher(result);
+		Matcher matcher = regex.toMatcher(result);
 		if (matcher.find()) {
 			int startPos =matcher.start();
 			result = result.substring(0, startPos);

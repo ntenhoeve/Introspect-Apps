@@ -29,21 +29,21 @@ public class JavaFile {
 			.whiteSpace(Repetition.oneOrMoreTimes())
 			.literals("a-zA-Z", Repetition.oneOrMoreTimes())
 			.anyCharacter(Repetition.zeroOrMoreTimes()).literal(";")
-			.whiteSpace(Repetition.zeroOrMoreTimes()).asPattern();
+			.whiteSpace(Repetition.zeroOrMoreTimes()).toPattern();
 	private static final Pattern IMPORT_LINE = new Regex().multiLineMode()
 			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes())
 			.literal("import").whiteSpace(Repetition.oneOrMoreTimes())
 			.literals("a-zA-Z", Repetition.oneOrMoreTimes())
 			.anyCharacter(Repetition.zeroOrMoreTimes()).literal(";")
-			.whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().asPattern();
+			.whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
 	private static final Pattern SINGLE_LINE_COMMENT = new Regex().multiLineMode()
 			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes())
-			.literal("//").anyCharacter(Repetition.zeroOrMoreTimes()).endOfLine().asPattern();
+			.literal("//").anyCharacter(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
 	private static final Pattern STARTS_WITH_ASTRIX = new Regex()
 			.multiLineMode().beginOfLine()
-			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).literals("*").asPattern();
+			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).literals("*").toPattern();
 	private static final Pattern EMPTY_LINE = new Regex().multiLineMode()
-			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().asPattern();
+			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
 	private static final String START_JAVADOC_COMMENTS = "/**";
 
 	private File javaFile;

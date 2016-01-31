@@ -102,7 +102,7 @@ public class Account {
 	}
 
 
-	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
+	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesAddCustomAttribute(AccountAttribute newAttribute) {
 		attributes.add(newAttribute);
 	}
@@ -117,7 +117,7 @@ public class Account {
 	}
 	
 
-	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THAN_EXECUTE_METHOD_OR_CANCEL)
+	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesModifyAttribute(AccountAttribute attribute) {
 	}
 

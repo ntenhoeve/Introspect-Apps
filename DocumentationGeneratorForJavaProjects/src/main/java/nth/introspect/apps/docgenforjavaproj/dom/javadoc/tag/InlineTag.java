@@ -30,7 +30,7 @@ public abstract class InlineTag {
 	}
 
 	protected Regex createTagBegin() {
-		return new Regex().caseUnsensativeMode()
+		return new Regex().ignoreCase()
 				.literal("{").whiteSpace(Repetition.zeroOrMoreTimes()).literal("@")
 				.whiteSpace(Repetition.zeroOrMoreTimes()).literal(getName())
 				.whiteSpace(Repetition.oneOrMoreTimes());
