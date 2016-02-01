@@ -2,20 +2,18 @@ package nth.meyn.display.translate.dom.translate;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import nth.introspect.layer1userinterface.controller.DownloadStream;
-import nth.introspect.layer1userinterface.controller.UploadStream;
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
 
@@ -26,17 +24,15 @@ import org.apache.commons.csv.CSVRecord;
 public class TranslateFactory {
 
 	//public static DownloadStream createTranslateRequest(
-//			UploadStreamParameterAction uploadStream) throws URISyntaxException, IOException {
-				public static DownloadStream createTranslateRequest() throws URISyntaxException, IOException {
-		//InputStreamReader reader = createReader(uploadStream);
-		InputStreamReader reader = createReader();
+				public static DownloadStream createTranslateRequest(File omronDisplayCvsFile) throws URISyntaxException, IOException {
+		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		skipFirstLine(reader);
 		CSVParser parser = createParser(reader);
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		PrintStream printStream = new PrintStream(out, false,
 				StandardCharsets.UTF_16.toString());
-		writeFirstLines(printStream);
+		writeFirstLines(printStream, omronDisplayCvsFile);
 
 		Abbreviations abbreviations = AbbreviationRepository.read();
 		try {
@@ -53,9 +49,9 @@ public class TranslateFactory {
 		return new DownloadStream(file, out);
 	}
 
-	private static void writeFirstLines(PrintStream printStream)
+	private static void writeFirstLines(PrintStream printStream, File omronDisplayCvsFile)
 			throws IOException, URISyntaxException {
-		InputStreamReader reader = createReader();
+		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		char ch;
 
 		// copy first line
@@ -87,10 +83,10 @@ public class TranslateFactory {
 		} while (ch != '\n');
 	}
 
-	public static String findAbreviationCandidates() throws URISyntaxException,
+	public static String findAbreviationCandidates(File omronDisplayCvsFile) throws URISyntaxException,
 			IOException {
 		Set<String> candidates = new HashSet<>();
-		InputStreamReader reader = createReader();
+		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		skipFirstLine(reader);
 		CSVParser parser = createParser(reader);
 
@@ -116,27 +112,18 @@ public class TranslateFactory {
 		return parser;
 	}
 
-	private static InputStreamReader createReader(UploadStream uploadStream)
+	private static InputStreamReader createReader(File omronDisplayCvsFile)
 			throws URISyntaxException, IOException {
+		InputStream fis=new FileInputStream(omronDisplayCvsFile);
 		InputStreamReader reader = new InputStreamReader(
-				uploadStream.getInputStream(), StandardCharsets.UTF_16);
+				fis, StandardCharsets.UTF_16);
 		return reader;
 	}
 
-	private static InputStreamReader createReader() throws URISyntaxException,
-			IOException {
-//		Path path = Paths.get(TranslateFactory.class.getResource(
-//				"/sourceFileToTranslate.csv").toURI());
-		Path path=Paths.get("w:/sourceFileToTranslate.csv");
-		InputStreamReader reader = new InputStreamReader(
-				Files.newInputStream(path), StandardCharsets.UTF_16);
-		return reader;
-	}
-
-	public static String validateTranslations() throws URISyntaxException,
+	public static String validateTranslations(File omronDisplayCvsFile) throws URISyntaxException,
 			IOException {
 		StringBuilder report = new StringBuilder();
-		 InputStreamReader reader = createReader();
+		 InputStreamReader reader = createReader(omronDisplayCvsFile);
 		skipFirstLine(reader);
 		CSVParser parser = createParser(reader);
 		try {

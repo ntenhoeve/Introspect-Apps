@@ -8,27 +8,37 @@ import nth.introspect.layer1userinterface.controller.UploadStream;
 
 public class TranslateService {
 
-	//public DownloadStream createTranslateRequest(UploadStreamParameterAction uploadStream) throws URISyntaxException, IOException {
-	public DownloadStream createTranslateRequest() throws URISyntaxException, IOException {
-		//FIXME take InputStream (file open dialog) as argument
-		return TranslateFactory.createTranslateRequest();
+	private static final String CSV = "csv";
+	private static final String CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY = "CSV language file exported from Omron Display";
+
+	public DownloadStream createTranslateRequest(UploadStream uploadStream) throws URISyntaxException, IOException {
+		return TranslateFactory.createTranslateRequest(uploadStream.getFile());
 	}
 	
+	public UploadStream createTranslateRequestParameterFactory() {
+		return new UploadStream(CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY, CSV);
+	}
 
-	public String findAbreviationCandidates() throws URISyntaxException,
+	public String findAbreviationCandidates(UploadStream uploadStream) throws URISyntaxException,
 			IOException {
-		//FIXME take InputStream (file open dialog) as argument
 		//FIXME: open in view (not popup)
-		String candidates = TranslateFactory.findAbreviationCandidates();
+		String candidates = TranslateFactory.findAbreviationCandidates(uploadStream.getFile());
 		return candidates;
 	}
 	
-	public String validateTranslations() throws URISyntaxException,
+	public UploadStream findAbreviationCandidatesParameterFactory() {
+		return new UploadStream(CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY, CSV);
+	}
+	
+	public String validateTranslations(UploadStream uploadStream) throws URISyntaxException,
 	IOException {
 		//FIXME: to implement
 		//FIXME: open in view (not in pop up)
-		//FIXME take InputStream (file open dialog) as argument
-		String candidates = TranslateFactory.validateTranslations();
+		String candidates = TranslateFactory.validateTranslations(uploadStream.getFile());
 		return candidates;
+	}
+	
+	public UploadStream validateTranslationsParameterFactory() {
+		return new UploadStream(CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY, CSV);
 	}
 }

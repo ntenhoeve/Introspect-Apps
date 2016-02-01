@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Introspect"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar" sourcepath="C:/Program Files/Java/jdk1.8.0_31/src.zip"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IntrospectForCommandLine"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-3.3.2.201404171909-r.jar" sourcepath="C:/Users/nilsth/.m2/repository/org/eclipse/jgit/org.eclipse.jgit/3.3.2.201404171909-r/org.eclipse.jgit-3.3.2.201404171909-r-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jsch-0.1.51.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IntrospectUserInterface"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
