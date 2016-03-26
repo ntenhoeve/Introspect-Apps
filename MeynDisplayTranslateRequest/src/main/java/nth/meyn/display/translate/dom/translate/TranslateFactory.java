@@ -67,7 +67,7 @@ public class TranslateFactory {
 				printStream
 						.print(",\"New Language                                                                                   \"");
 				printStream.print(",\"How to translate\"");
-				printStream.print(",\"Maximum translation size\"");
+				printStream.print(",\"Maximum translation SIZE\"");
 				printStream.print(",\"Translation tips\"\n");
 			} else {
 				printStream.print(ch);

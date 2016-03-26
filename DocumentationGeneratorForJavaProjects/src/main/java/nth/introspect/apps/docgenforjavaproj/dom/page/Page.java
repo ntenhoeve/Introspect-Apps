@@ -30,7 +30,7 @@ public abstract class  Page implements WritableFile {
 	
 	
 	public  String getTitle() {
-		Element titleElement = javaDoc.select("title").first();
+		Element titleElement = javaDoc.select("MaterialAppBarTitle").first();
 		if (titleElement != null) {
 			return titleElement.html();
 		}

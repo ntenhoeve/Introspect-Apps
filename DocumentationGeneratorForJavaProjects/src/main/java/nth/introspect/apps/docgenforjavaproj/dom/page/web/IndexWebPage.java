@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 /**
- * Index files that redirects the user to the title page
+ * Index files that redirects the user to the MaterialAppBarTitle page
  * 
  * @author nilsth
  *

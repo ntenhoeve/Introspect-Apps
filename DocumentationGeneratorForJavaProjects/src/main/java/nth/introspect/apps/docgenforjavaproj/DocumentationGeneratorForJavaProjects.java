@@ -1,5 +1,6 @@
 package nth.introspect.apps.docgenforjavaproj;
 
+import java.util.Arrays;
 import java.util.List;
 
 import nth.introspect.apps.docgenforjavaproj.dom.documentation.DocumentationService;
@@ -8,7 +9,6 @@ import nth.introspect.apps.docgenforjavaproj.dom.javadoc.JavaDocFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFileFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.page.web.GitHubWebPageFactory;
 import nth.introspect.apps.docgenforjavaproj.dom.page.wiki.GitHubWikiPageFactory;
-import nth.introspect.generic.util.ClassList;
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 
 /**
@@ -42,11 +42,11 @@ import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
  * the png extension and be located in the same package.This .</li>
  * <li>You can insert other class or interface files using the Javadoc in-line
  * tag &lt;@insert ClassName&gt;</li>
- * <li>You can include {@link Chapter}s by adding a title between &lt;H1&gt; &lt;/H1&gt;
+ * <li>You can include {@link Chapter}s by adding a MaterialAppBarTitle between &lt;H1&gt; &lt;/H1&gt;
  * tags</li>
- * <li>You can include {@link SubChapter}s by adding a title between &lt;H2&gt;
+ * <li>You can include {@link SubChapter}s by adding a MaterialAppBarTitle between &lt;H2&gt;
  * &lt;/H2&gt; tags</li>
- * <li>You can include {@link SubSubChapter}s by adding a title between &lt;H3&gt;
+ * <li>You can include {@link SubSubChapter}s by adding a MaterialAppBarTitle between &lt;H3&gt;
  * &lt;/H3&gt; tags. Sub {@link SubSubChapter}s are normally not rendered in the table of
  * contents</li>
  * <li>It is good practice to create a documentation class that ties all the
@@ -83,22 +83,18 @@ import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 public class DocumentationGeneratorForJavaProjects extends
 		IntrospectApplicationForCommandLine {
 
-	public DocumentationGeneratorForJavaProjects(String[] commandLineArguments) {
-		super(commandLineArguments);
-	}
-
 	public static void main(String[] commandLineArguments) {
-		new DocumentationGeneratorForJavaProjects(commandLineArguments);
+		launch(commandLineArguments);
 	}
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return new ClassList(DocumentationService.class);
+		return Arrays.asList(DocumentationService.class);
 	}
 
 	@Override
 	public List<Class<?>> getInfrastructureClasses() {
-		return new ClassList(GitRepository.class, JavaFileFactory.class, JavaDocFactory.class, GitHubWebPageFactory.class, GitHubWikiPageFactory.class);
+		return Arrays.asList(GitRepository.class, JavaFileFactory.class, JavaDocFactory.class, GitHubWebPageFactory.class, GitHubWikiPageFactory.class);
 	}
 
 }

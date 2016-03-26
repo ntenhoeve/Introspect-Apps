@@ -11,12 +11,8 @@ import nth.introspect.ui.swing.IntrospectApplicationForSwing;
 
 public class AccountsForSwing extends IntrospectApplicationForSwing {
 
-	public AccountsForSwing(String[] args) {
-		super(args);
-	}
-
 	public static void main(String[] args) {
-		new AccountsForSwing(args);
+		launch();
 	}
 
 	public List<Class<?>> getServiceClasses() {

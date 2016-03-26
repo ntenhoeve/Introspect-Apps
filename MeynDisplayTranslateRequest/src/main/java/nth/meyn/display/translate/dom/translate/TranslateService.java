@@ -30,14 +30,14 @@ public class TranslateService {
 		return new UploadStream(CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY, CSV);
 	}
 	
-	public String validateTranslations(UploadStream uploadStream) throws URISyntaxException,
-	IOException {
-		//FIXME: to implement
-		//FIXME: open in view (not in pop up)
-		String candidates = TranslateFactory.validateTranslations(uploadStream.getFile());
-		return candidates;
-	}
-	
+//	public String validateTranslations(UploadStream uploadStream) throws URISyntaxException,
+//	IOException {
+//		//FIXME: to implement
+//		//FIXME: open in view (not in pop up)
+//		String candidates = TranslateFactory.validateTranslations(uploadStream.getFile());
+//		return candidates;
+//	}
+//	
 	public UploadStream validateTranslationsParameterFactory() {
 		return new UploadStream(CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY, CSV);
 	}

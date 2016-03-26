@@ -208,7 +208,7 @@ public class FancyWebPage extends WebPage {
 //		js.append("	searchfield	: true,");
 //		js.append("	counters	: true,");
 //		js.append("	navbar 		: {");
-//		js.append("		title		: 'Advanced menu'");
+//		js.append("		MaterialAppBarTitle		: 'Advanced menu'");
 //		js.append("	},");
 //		js.append("	navbars		: [");
 //		js.append("		{");
@@ -218,7 +218,7 @@ public class FancyWebPage extends WebPage {
 //		js.append("			position	: 'top',");
 //		js.append("			content		: [");
 //		js.append("				'prev',");
-//		js.append("				'title',");
+//		js.append("				'MaterialAppBarTitle',");
 //		js.append("				'close'");
 //		js.append("			]");
 //		js.append("		}, {");
