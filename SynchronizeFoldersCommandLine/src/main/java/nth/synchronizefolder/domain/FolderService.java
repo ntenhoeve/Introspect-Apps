@@ -40,7 +40,7 @@ public class FolderService {
 	public static final BigInteger ONE_MB_BI = ONE_KB_BI.multiply(ONE_KB_BI);
 
 	/**
-	 * The file copy buffer size (30 MB)
+	 * The file copy buffer SIZE (30 MB)
 	 */
 	private static final long FILE_COPY_BUFFER_SIZE = ONE_MB * 30;
 
@@ -304,7 +304,7 @@ public class FolderService {
 		boolean sameType = (!file1.isDirectory() && !file2.isDirectory()) || (file1.isDirectory() && file2.isDirectory());
 		if (!sameType)
 			return false;
-		if (!file1.isDirectory()) {// size is ignored if it is a directory
+		if (!file1.isDirectory()) {// SIZE is ignored if it is a directory
 			boolean sameSize = (file1.length() == file2.length());
 			if (!sameSize)
 				return false;
