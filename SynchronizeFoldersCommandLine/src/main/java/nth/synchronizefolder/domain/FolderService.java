@@ -7,10 +7,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 import org.apache.commons.io.IOUtils;
 
@@ -61,16 +66,18 @@ public class FolderService {
 	 */
 	public static final long ONE_TB = ONE_KB * ONE_GB;
 
+	@ParameterFactory 
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void synchronize(SynchronizeArgument synchronizeArgument) throws IOException {
 		// source
-		File source = synchronizeArgument.getSource();
-		if (!source.exists()) {
+		File source = synchronizeArgument.getSource().getCanonicalFile();
+		if (!source.exists() ) {
 			throw new RuntimeException("Source: " + source.getAbsolutePath() + " does not exist");
 		}
 		if (!source.isDirectory()) {
 			throw new RuntimeException("Source: " + source.getAbsolutePath() + " is not a folder");
 		}
+		
 
 		// destination
 		File destination = synchronizeArgument.getDestination();
@@ -91,8 +98,10 @@ public class FolderService {
 		// recurse
 		File[] srcFiles = srcFolder.listFiles();
 		File[] destFiles = destFolder.listFiles();
-		if (srcFiles == null) { // null if abstract pathname does not denote a directory, or if an I/O error occurs
-			throw new IOException("Failed to list contents of " + srcFolder);
+		if (srcFiles == null) { 
+			// null if abstract pathname does not denote a directory, or if an I/O error occurs
+			// so no: throw new IOException("Failed to list contents of " + srcFolder);
+			return;
 		}
 		if (destFolder.exists()) {
 			if (destFolder.isDirectory() == false) {

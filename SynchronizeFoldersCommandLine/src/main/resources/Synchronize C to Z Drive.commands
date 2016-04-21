@@ -1,0 +1,7 @@
+synchronize "C:\Users\nilsth\Documents" "Z:\My Documents" false true
+synchronize "C:\Users\nilsth\Pictures" "Z:\My Pictures" false true
+synchronize "C:\Users\nilsth\My E Books" "Z:\My E Books" false true
+synchronize "C:\Users\nilsth\My Galaxi" "Z:\My Galaxi" true true
+synchronize "C:\Users\nilsth\My Java" "Z:\My Java" true true
+synchronize "C:\Users\nilsth\My Git" "Z:\My Git" true true
+synchronize "C:\Users\nilsth\My Outlook Archives" "Z:\My Outlook Archives" true true

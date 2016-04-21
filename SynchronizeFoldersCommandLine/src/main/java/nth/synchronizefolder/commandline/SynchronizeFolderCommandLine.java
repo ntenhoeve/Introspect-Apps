@@ -8,15 +8,12 @@ import nth.synchronizefolder.domain.FolderService;
 
 public class SynchronizeFolderCommandLine extends IntrospectApplicationForCommandLine{
 
-	private SynchronizeFolderCommandLine(String[] arguments) {
-		super(arguments);
-	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] arguments) {
-		new SynchronizeFolderCommandLine(arguments);
+		launch(arguments);
 	}
 
 	@Override
