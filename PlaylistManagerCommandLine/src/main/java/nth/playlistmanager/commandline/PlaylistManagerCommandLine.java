@@ -8,15 +8,11 @@ import nth.playlistmanager.domain.PlaylistService;
 
 public class PlaylistManagerCommandLine extends IntrospectApplicationForCommandLine{
 
-	private PlaylistManagerCommandLine(String[] arguments) {
-		super(arguments);
-	}
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] arguments) {
-		new PlaylistManagerCommandLine(arguments);
+		launch(arguments);
 	}
 
 	@Override

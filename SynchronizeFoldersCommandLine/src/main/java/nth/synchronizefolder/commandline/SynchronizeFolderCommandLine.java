@@ -3,6 +3,7 @@ package nth.synchronizefolder.commandline;
 import java.util.ArrayList;
 import java.util.List;
 
+import nth.introspect.layer5provider.path.url.ReflectUrlConnection;
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 import nth.synchronizefolder.domain.FolderService;
 
@@ -27,5 +28,7 @@ public class SynchronizeFolderCommandLine extends IntrospectApplicationForComman
 	public List<Class<?>> getInfrastructureClasses() {
 		return new ArrayList<>();
 	}
+
+
 
 }

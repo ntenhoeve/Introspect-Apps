@@ -113,7 +113,7 @@ public class TranslateRecord {
 			return 65;
 		} else {
 			String englishText = csvRecord.get(ENGLISH);
-			return (int) (getMaxNrOfCharacters(englishText) * 1.1);
+			return (int) (getMaxNrOfCharacters(englishText) * 1.2);
 		}
 	}
 
