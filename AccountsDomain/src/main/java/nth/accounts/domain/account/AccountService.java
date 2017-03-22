@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import nth.accounts.domain.repository.AccountRepository;
-import nth.accounts.domain.user.User;
+import nth.accounts.domain.tag.Tag;
 import nth.introspect.generic.filter.FilterUtil;
 import nth.introspect.layer5provider.notification.NotificationProvider;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
@@ -21,7 +21,7 @@ public class AccountService {
 	}
 
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public List<Account> allAccountsOfUser(User userToFind) throws Exception {
+	public List<Account> allAccountsOfUser(Tag userToFind) throws Exception {
 		List<Account> allAccounts = allAccounts();
 		AccountUserFilter filter = new AccountUserFilter(userToFind);
 		return FilterUtil.filter(allAccounts, filter);

@@ -1,13 +1,13 @@
 package nth.accounts.domain.account;
 
-import nth.accounts.domain.user.User;
+import nth.accounts.domain.tag.Tag;
 import nth.introspect.generic.filter.Filter;
 
 public class AccountUserFilter implements Filter<Account> {
 
-	private User userToFind;
+	private Tag userToFind;
 
-	public AccountUserFilter(User userToFind) {
+	public AccountUserFilter(Tag userToFind) {
 		this.userToFind = userToFind;
 	}
 	

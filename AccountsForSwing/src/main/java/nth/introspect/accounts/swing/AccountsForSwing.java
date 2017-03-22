@@ -5,7 +5,7 @@ import java.util.List;
 
 import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
-import nth.accounts.domain.user.UserService;
+import nth.accounts.domain.tag.TagService;
 import nth.introspect.generic.xml.XmlConverter;
 import nth.introspect.ui.swing.IntrospectApplicationForSwing;
 
@@ -18,7 +18,7 @@ public class AccountsForSwing extends IntrospectApplicationForSwing {
 	public List<Class<?>> getServiceClasses() {
 		List<Class<?>> serviceClasses = new ArrayList<Class<?>>();
 		serviceClasses.add(AccountService.class);
-		serviceClasses.add(UserService.class);
+		serviceClasses.add(TagService.class);
 		return serviceClasses;
 	}
 

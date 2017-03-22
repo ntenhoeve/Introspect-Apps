@@ -6,17 +6,17 @@ import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.accounts.domain.user.User;
+import com.sun.istack.internal.NotNull;
+
+import nth.accounts.domain.tag.Tag;
 import nth.introspect.generic.util.TitleBuilder;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.introspect.layer5provider.reflection.behavior.order.Order;
 
-import com.sun.istack.internal.NotNull;
-
 public class Account {
 	private String accountName;
-	private User user;
+	private Tag tag;
 	private List<AccountAttribute> attributes;
 
 	public Account() {
@@ -24,7 +24,7 @@ public class Account {
 	}
 
 	@NotNull
-	@Order(sequenceNumber=1)
+	@Order(sequenceNumber = 1)
 	public String getAccountName() {
 		return accountName;
 	}
@@ -33,23 +33,23 @@ public class Account {
 		this.accountName = accountName;
 	}
 
-	@Order(sequenceNumber=2)
-	public User getUser() {
-		return user;
+	@Order(sequenceNumber = 2)
+	public Tag getUser() {
+		return tag;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Tag tag) {
+		this.tag = tag;
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(sequenceNumber = 3)
 	public List<AccountAttribute> getAttributes() {
 		return attributes;
 	}
 
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void userPutUser(User user) {
-		setUser(user);
+	public void userPutUser(Tag tag) {
+		setUser(tag);
 	}
 
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
@@ -66,7 +66,7 @@ public class Account {
 	}
 
 	public AccountAttribute attributesAddEmailAttributeParameterFactory() {
-		AccountAttribute attribute=new AccountAttribute();
+		AccountAttribute attribute = new AccountAttribute();
 		attribute.setName("E-Mail");
 		return attribute;
 	}
@@ -76,31 +76,30 @@ public class Account {
 	}
 
 	public AccountAttribute attributesAddUserNameAttributeParameterFactory() {
-		AccountAttribute attribute=new AccountAttribute();
-		attribute.setName("User name");
+		AccountAttribute attribute = new AccountAttribute();
+		attribute.setName("Tag name");
 		return attribute;
 	}
-	
+
 	public void attributesAddPasswordAttribute(AccountAttribute passwordAttribute) {
 		attributes.add(passwordAttribute);
 	}
 
 	public AccountAttribute attributesAddPasswordAttributeParameterFactory() {
-		AccountAttribute attribute=new AccountAttribute();
+		AccountAttribute attribute = new AccountAttribute();
 		attribute.setName("Password");
 		return attribute;
 	}
-	
+
 	public void attributesAddUrlAttribute(AccountAttribute urlAttribute) {
 		attributes.add(urlAttribute);
 	}
 
 	public AccountAttribute attributesAddUrlAttributeParameterFactory() {
-		AccountAttribute attribute=new AccountAttribute();
+		AccountAttribute attribute = new AccountAttribute();
 		attribute.setName("URL");
 		return attribute;
 	}
-
 
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesAddCustomAttribute(AccountAttribute newAttribute) {
@@ -115,26 +114,22 @@ public class Account {
 	public void attributesRemoveAttribute(AccountAttribute attribute) {
 		attributes.remove(attribute);
 	}
-	
 
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
 	public void attributesModifyAttribute(AccountAttribute attribute) {
 	}
 
-
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void attributesCopyAttributeValue(AccountAttribute attribute) {
 		StringSelection selection = new StringSelection(attribute.getValue());
-	    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-	    clipboard.setContents(selection, selection);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(selection, selection);
 	}
-	
+
 	@Override
 	public String toString() {
 		TitleBuilder titleBuilder = new TitleBuilder("-");
-		if (user != null) {
-			titleBuilder.append(user.getName());
-		}
+		titleBuilder.append(tag.getName());
 		titleBuilder.append(accountName);
 		return titleBuilder.toString();
 	}
