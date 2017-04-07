@@ -1,0 +1,78 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Rungs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RungXML" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LadderElement" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="ConnectionPoint" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Edge">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="instanceID" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="connectionPointType" use="optional"/>
+                        <xs:attribute type="xs:string" name="instanceID" use="optional"/>
+                        <xs:attribute type="xs:string" name="PowerPin" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="PinViewModel" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="IsInput" use="optional"/>
+                            <xs:attribute type="xs:string" name="Name" use="optional"/>
+                            <xs:attribute type="xs:string" name="Datatype" use="optional"/>
+                            <xs:attribute type="xs:string" name="Comment" use="optional"/>
+                            <xs:attribute type="xs:string" name="Negated" use="optional"/>
+                            <xs:attribute type="xs:string" name="IsInOutVariable" use="optional"/>
+                            <xs:attribute type="xs:string" name="PowerPin" use="optional"/>
+                            <xs:attribute type="xs:string" name="Visible" use="optional"/>
+                            <xs:attribute type="xs:string" name="EdgeDirectionType" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="instanceID" use="optional"/>
+                  <xs:attribute type="xs:string" name="ladderElementType" use="optional"/>
+                  <xs:attribute type="xs:string" name="inverted" use="optional"/>
+                  <xs:attribute type="xs:string" name="diffUp" use="optional"/>
+                  <xs:attribute type="xs:string" name="diffDown" use="optional"/>
+                  <xs:attribute type="xs:string" name="variableName" use="optional"/>
+                  <xs:attribute type="xs:string" name="baseVariableName" use="optional"/>
+                  <xs:attribute type="xs:string" name="ProgramName" use="optional"/>
+                  <xs:attribute type="xs:string" name="baseVariableDataType" use="optional"/>
+                  <xs:attribute type="xs:string" name="set" use="optional"/>
+                  <xs:attribute type="xs:string" name="reset" use="optional"/>
+                  <xs:attribute type="xs:string" name="IsLeftPowerRail" use="optional"/>
+                  <xs:attribute type="xs:string" name="IsRightPowerRail" use="optional"/>
+                  <xs:attribute type="xs:string" name="sourceID" use="optional"/>
+                  <xs:attribute type="xs:string" name="targetID" use="optional"/>
+                  <xs:attribute type="xs:string" name="Focusable" use="optional"/>
+                  <xs:attribute type="xs:string" name="typeName" use="optional"/>
+                  <xs:attribute type="xs:string" name="IsUserDefinedType" use="optional"/>
+                  <xs:attribute type="xs:string" name="IsPolynomial" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="Comment" use="optional"/>
+            <xs:attribute type="xs:string" name="Label" use="optional"/>
+            <xs:attribute type="xs:float" name="Height" use="optional"/>
+            <xs:attribute type="xs:short" name="Width" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

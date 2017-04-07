@@ -1,0 +1,205 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="LadderDiagram">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RungList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RUNG" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="RUNGCOMMENT"/>
+                    <xs:element name="ElementList">
+                      <xs:complexType mixed="true">
+                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                          <xs:element name="VERTICAL">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element type="xs:byte" name="Negated" minOccurs="0"/>
+                                <xs:element type="xs:byte" name="DiffUp" minOccurs="0"/>
+                                <xs:element type="xs:byte" name="DiffDown" minOccurs="0"/>
+                                <xs:element type="xs:byte" name="ImmRefresh" minOccurs="0"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                      <xs:element name="Operand" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="Name"/>
+                                            <xs:element type="xs:string" name="POUDefinition"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="HORIZONTAL">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="INSTRUCTION">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element type="xs:byte" name="Negated"/>
+                                <xs:element type="xs:byte" name="DiffUp"/>
+                                <xs:element type="xs:byte" name="DiffDown"/>
+                                <xs:element type="xs:byte" name="ImmRefresh"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                      <xs:element name="Operand" maxOccurs="unbounded" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="Name"/>
+                                            <xs:element type="xs:string" name="POUDefinition"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="CONTACT">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element type="xs:byte" name="Negated"/>
+                                <xs:element type="xs:byte" name="DiffUp"/>
+                                <xs:element type="xs:byte" name="DiffDown"/>
+                                <xs:element type="xs:byte" name="ImmRefresh"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                      <xs:element name="Operand">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="Name"/>
+                                            <xs:element type="xs:string" name="POUDefinition"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="FB">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element type="xs:byte" name="Negated"/>
+                                <xs:element type="xs:byte" name="DiffUp"/>
+                                <xs:element type="xs:byte" name="DiffDown"/>
+                                <xs:element type="xs:byte" name="ImmRefresh"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                      <xs:element name="Operand">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="Name"/>
+                                            <xs:element type="xs:string" name="POUDefinition"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="FBPARAMETER">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element type="xs:byte" name="Negated"/>
+                                <xs:element type="xs:byte" name="DiffUp"/>
+                                <xs:element type="xs:byte" name="DiffDown"/>
+                                <xs:element type="xs:byte" name="ImmRefresh"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                      <xs:element name="Operand">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="Name"/>
+                                            <xs:element type="xs:string" name="POUDefinition"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="COIL">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:byte" name="XPos"/>
+                                <xs:element type="xs:byte" name="YPos"/>
+                                <xs:element type="xs:byte" name="Negated"/>
+                                <xs:element type="xs:byte" name="DiffUp"/>
+                                <xs:element type="xs:byte" name="DiffDown"/>
+                                <xs:element type="xs:byte" name="ImmRefresh"/>
+                                <xs:element name="Operands">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:byte" name="NumberOperands"/>
+                                      <xs:element name="Operand">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="Name"/>
+                                            <xs:element type="xs:string" name="POUDefinition"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:float" name="version"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
