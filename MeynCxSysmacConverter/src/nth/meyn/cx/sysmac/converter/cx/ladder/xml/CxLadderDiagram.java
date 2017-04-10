@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.CONTACT;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -3792,5 +3794,8 @@ public class CxLadderDiagram {
         }
 
     }
+
+
+    
 
 }

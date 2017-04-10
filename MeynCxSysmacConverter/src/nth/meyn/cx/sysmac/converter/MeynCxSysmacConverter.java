@@ -1,7 +1,7 @@
 package nth.meyn.cx.sysmac.converter;
 
-import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBException;
@@ -22,7 +22,6 @@ import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacSymbolDataFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacMarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacRungsFactory;
-import nth.meyn.cx.sysmac.converter.util.StringToArrayCodeUtil;
 
 public class MeynCxSysmacConverter extends Application {
 
@@ -74,30 +73,41 @@ public class MeynCxSysmacConverter extends Application {
 	}
 
 	private void convertLadderFromCxClipboardToSysmacClipboard() throws JAXBException {
-		String cxXml = CxClipboard.getLadderXml();
-		CxLadderDiagram cxLadderDiagram = CxUnmarshaller.createCxLadderDiagram(cxXml);
-		List<CxLadderModel> cxLadderModels = CxLadderModelFactory.create(cxLadderDiagram);
-		print(cxLadderModels);
-		Rungs sysmacRungs = SysmacRungsFactory.create(cxLadderModels);
-		String sysmacLadderXml = SysmacMarshaller.createXml(sysmacRungs);
-		System.out.println(sysmacLadderXml);
-	
-		String sysmacSymbolData=SysmacSymbolDataFactory.createExample(); 
-		String sysmacLadderData=SysmacLadderDataFactory.create(sysmacLadderXml);
-//		String sysmacLadderData=SysmacLadderDataFactory.createExample();
+		List<CxLadderModel> cxLadderModels = createCxLadderModelsFromClipboard();
+
+		String sysmacSymbolData = createSysmacVariableData(cxLadderModels); 
 		
-		System.out.println(sysmacLadderData);
+		String sysmacLadderData = createSysmacLadderData(cxLadderModels);
 		
 		SysmacClipboard.putLadderRungs(sysmacLadderData, sysmacSymbolData);
 	}
 
-	private void print(List<CxLadderModel> cxLadderModels) {
-		for (CxLadderModel cxLadderModel : cxLadderModels) {
-			System.out.println(
-					"=================================================================================================================");
-			System.out.println(cxLadderModel);
-		}
+	private String createSysmacLadderData(List<CxLadderModel> cxLadderModels) throws JAXBException {
+//		Rungs sysmacRungs = SysmacRungsFactory.create(cxLadderModels);
+		Rungs sysmacRungs = SysmacRungsFactory.createExample();//  werkt soms niet goed?  String sysmacLadderData=SysmacLadderDataFactory.createExample(); werkt wel
+		String sysmacLadderXml = SysmacMarshaller.createXml(sysmacRungs);
+		System.out.println(sysmacLadderXml.length());
+		String sysmacLadderData=SysmacLadderDataFactory.create(sysmacLadderXml);
+//		String sysmacLadderData=SysmacLadderDataFactory.createExample();
+		return sysmacLadderData;
 	}
+
+	private String createSysmacVariableData(List<CxLadderModel> cxLadderModels) {
+//		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariables(cxLadderModels);
+//		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariableExamples();
+//		String sysmacVariableData=SysmacSymbolDataFactory.create(cxVariables); 
+		String sysmacVariableData=SysmacSymbolDataFactory.createExample();
+		return sysmacVariableData;
+	}
+
+	private List<CxLadderModel> createCxLadderModelsFromClipboard() throws JAXBException {
+//		String cxXml = CxClipboard.getLadderXml();
+//		CxLadderDiagram cxLadderDiagram = CxUnmarshaller.createCxLadderDiagram(cxXml);
+//		List<CxLadderModel> cxLadderModels = CxLadderModelFactory.createLadderModels(cxLadderDiagram);
+//		return cxLadderModels;
+		return null;
+	}
+
 
 
 }

@@ -1,6 +1,7 @@
 package nth.meyn.cx.sysmac.converter.sysmac.clipboard;
 
 import javax.xml.bind.DatatypeConverter;
+import javax.xml.bind.annotation.XmlList;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,23 +27,43 @@ public class SysmacLadderDataFactory {
 	}
 
 	public static String create(String sysmacLadderXml) {
-		byte[] prefix= DatatypeConverter.parseHexBinary("96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
+		byte[] prefix = DatatypeConverter.parseHexBinary(
+				"96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
 
-		StringBuilder data=new StringBuilder();
+		StringBuilder data = new StringBuilder();
 		data.append(new String(prefix));
-		
-		int xmlLength = sysmacLadderXml.length()*2;
-		//Apparently low byte shifts one bit to the right!!! Omron= Strange Japanese programmers
-		byte lengthLowByte=   (byte) (((xmlLength % 256)/2 )+128); 
-		byte lengthHighByte = (byte) (xmlLength / 256); 
-		byte[] length=new byte[] {lengthLowByte, lengthHighByte};
+
+		sysmacLadderXml = fixXmlLenghtIssue(sysmacLadderXml);
+
+		int xmlLength = sysmacLadderXml.length() * 2;
+		// Apparently low byte shifts one bit to the right!!! Omron= Strange
+		// Japanese programmers
+		byte lengthLowByte = (byte) (((xmlLength % 256) / 2) + 128);
+		byte lengthHighByte = (byte) (xmlLength / 256);
+		byte[] length = new byte[] { lengthLowByte, lengthHighByte };
 		data.append(new String(length));
-		
+
 		data.append(sysmacLadderXml);
-		
-		byte[] suffix= DatatypeConverter.parseHexBinary("0B");
+
+		byte[] suffix = DatatypeConverter.parseHexBinary("0B");
 		data.append(new String(suffix));
 
 		return data.toString();
+	}
+
+	/**
+	 * XML .length=2305, 2319 (comment.length=7, 21): Sysmac does not recognize
+	 * clipboard This is fixed by extending the XML with a space for these
+	 * cases. Likely to be more lenghts that have this issue.<br>
+	 * XML.length MOD 14==0 is not it: a length of 2332 has no issue.
+	 *
+	 * @param sysmacLadderXml
+	 * @return
+	 */
+	private static String fixXmlLenghtIssue(String sysmacLadderXml) {
+		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319) {
+			sysmacLadderXml = sysmacLadderXml + " ";
+		}
+		return sysmacLadderXml;
 	}
 }
