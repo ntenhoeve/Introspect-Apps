@@ -36,6 +36,7 @@ public class MeynCxSysmacClipboardPrinter extends Application {
 			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_RESOURCE_HANDLE_CLIPBOARD_FORMAT:
 			case SysmacClipboard.LADDER_SNIPPET_XML :
 			case SysmacClipboard.LADDER_SNIPPET_ASSIGNED_VARIABLES :
+			case SysmacClipboard.VARIABLE_NAMES:	
 				Object clipboardContent = clipboard.getContent(dataFormat);
 				print(clipboardContent);
 				break;

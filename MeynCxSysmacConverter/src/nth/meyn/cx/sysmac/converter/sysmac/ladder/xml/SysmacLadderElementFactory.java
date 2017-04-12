@@ -5,6 +5,10 @@ import javax.xml.namespace.QName;
 
 import org.apache.commons.lang3.StringUtils;
 
+import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxConnection;
+import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
+import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.COIL;
+import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.CONTACT;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement.ConnectionPoint;
@@ -23,15 +27,15 @@ public class SysmacLadderElementFactory {
 	private int instanceId;
 
 	public SysmacLadderElementFactory() {
-		instanceId = 10067-1;
+		instanceId = 2;
 	}
 
-//	public  String getNextInstanceId() {
-//		instanceId++;
-//		return getHexId(instanceId);
-//	}
+	public  String getNextInstanceId() {
+		instanceId++;
+		return getHex(instanceId);
+	}
 
-	public static  String getHex(int id) {
+	public static String getHex(int id) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(HEX_PREFIX);
 		String hexString = Integer.toHexString(id).toUpperCase();
@@ -64,6 +68,15 @@ public class SysmacLadderElementFactory {
 		ladderElement.setIsRightPowerRail(Boolean.FALSE.toString());
 		return ladderElement;
 	}
+	
+	public LadderElement createLeftPowerRail() {
+		LadderElement ladderElement = new LadderElement();
+		ladderElement.setInstanceID(getNextInstanceId());
+		ladderElement.setLadderElementType(CONNECTION);
+		ladderElement.setIsLeftPowerRail(Boolean.TRUE.toString());
+		ladderElement.setIsRightPowerRail(Boolean.FALSE.toString());
+		return ladderElement;
+	}
 
 	/**
 	 * {@link ConnectionPoint} properties is added later see {@link #createConnection(RungXML, LadderElement, LadderElement)}
@@ -76,6 +89,27 @@ public class SysmacLadderElementFactory {
 		ladderElement.setLadderElementType(CONNECTION);
 		ladderElement.setIsLeftPowerRail(Boolean.FALSE.toString());
 		ladderElement.setIsRightPowerRail(Boolean.TRUE.toString());
+		// add ConnectionPointInput later
+		return ladderElement;
+
+	}
+	
+	public LadderElement createRightPowerRail() {
+		LadderElement ladderElement = new LadderElement();
+		ladderElement.setInstanceID(getNextInstanceId());
+		ladderElement.setLadderElementType(CONNECTION);
+		ladderElement.setIsLeftPowerRail(Boolean.FALSE.toString());
+		ladderElement.setIsRightPowerRail(Boolean.TRUE.toString());
+		// add ConnectionPointInput later
+		return ladderElement;
+	}
+	
+	public LadderElement createConnection() {
+		LadderElement ladderElement = new LadderElement();
+		ladderElement.setInstanceID(getNextInstanceId());
+		ladderElement.setLadderElementType(CONNECTION);
+		ladderElement.setIsLeftPowerRail(Boolean.FALSE.toString());
+		ladderElement.setIsRightPowerRail(Boolean.FALSE.toString());
 		// add ConnectionPointInput later
 		return ladderElement;
 
@@ -123,6 +157,29 @@ public class SysmacLadderElementFactory {
 		return jaxbElement;
 	}
 
+	
+	public void createConnection(RungXML sysmacRung, Mapping mapping, CxConnection cxConnection) {
+		String edgeId=getNextInstanceId();
+		LadderElement edge = createEdge(edgeId);
+		sysmacRung.getLadderElement().add(edge);
+
+		LadderElement source = mapping.getLadderElement(cxConnection.getInput());
+		String connectionPointOutputId = getNextInstanceId();
+		JAXBElement<ConnectionPoint> connectionPointOutput = createConnectionPointOutput(
+				connectionPointOutputId, edge.getInstanceID());
+		source.getContent().add(connectionPointOutput);
+		
+		LadderElement target = mapping.getLadderElement(cxConnection.getOutput());
+		String connectionPointInputId = getNextInstanceId();
+		JAXBElement<ConnectionPoint> connectionPointInput = createConnectionPointIntput(
+				connectionPointInputId, edge.getInstanceID());
+		target.getContent().add(connectionPointInput);
+		
+		edge.setSourceID(connectionPointOutputId);
+		edge.setTargetID(connectionPointInputId);
+
+	}
+	
 	public void createConnection(RungXML sysmacRung, String edgeId,  LadderElement source, LadderElement target) {
 
 		LadderElement edge = createEdge(edgeId);
@@ -181,5 +238,39 @@ public class SysmacLadderElementFactory {
 		coil.setBaseVariableDataType(BOOL);
 		return coil;
 	}
+
+	public LadderElement createContact(String programName, CONTACT cxContact) {
+		LadderElement contact=new LadderElement();
+		contact.setInstanceID(getNextInstanceId());
+		contact.setLadderElementType(CONTACT);
+		contact.setInverted(Boolean.toString(cxContact.getNegated()==1));
+		contact.setDiffUp(Boolean.toString(cxContact.getDiffUp()==1));
+		contact.setDiffDown(Boolean.toString(cxContact.getDiffDown()==1));
+		contact.setVariableName(cxContact.getOperands().getOperand().getName());
+		contact.setBaseVariableName(cxContact.getOperands().getOperand().getName());
+		contact.setProgramName(programName);
+		contact.setBaseVariableDataType(BOOL);
+		return contact;
+	}
+
+	public LadderElement createCoil(String programName, COIL cxCoil) {
+		LadderElement coil=new LadderElement();
+		coil.setInstanceID(getNextInstanceId());
+		coil.setLadderElementType(COIL);
+		coil.setInverted(Boolean.toString(cxCoil.getNegated()==1));
+		coil.setDiffUp(Boolean.toString(cxCoil.getDiffUp()==1));
+		coil.setDiffDown(Boolean.toString(cxCoil.getDiffDown()==1));
+		coil.setSet(Boolean.FALSE.toString());
+		coil.setReset(Boolean.FALSE.toString());
+		coil.setVariableName(cxCoil.getOperands().getOperand().getName());
+		coil.setBaseVariableName(cxCoil.getOperands().getOperand().getName());
+		coil.setProgramName(programName);
+		coil.setBaseVariableDataType(BOOL);
+		return coil;
+	}
+
+
+
+
 
 }

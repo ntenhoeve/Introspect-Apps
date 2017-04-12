@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import nth.meyn.cx.sysmac.converter.CxVariable;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.COIL;
@@ -82,7 +81,7 @@ public class CxLadderModelFactory {
 	}
 
 	private static CxVariable createVariable(String variableInfo) {
-		System.out.println(variableInfo);
+//		System.out.println(variableInfo);
 		String[] variableInfos = variableInfo.split(",");
 		CxVariable variable = new CxVariable();
 		variable.setName(variableInfos[0]);

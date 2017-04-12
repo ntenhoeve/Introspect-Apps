@@ -3,10 +3,7 @@ package nth.meyn.cx.sysmac.converter;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBException;
-
-import org.apache.commons.lang3.StringUtils;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,6 +11,7 @@ import javafx.stage.Stage;
 import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModelFactory;
+import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxVariable;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxUnmarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacClipboard;
@@ -42,35 +40,35 @@ public class MeynCxSysmacConverter extends Application {
 
 	}
 
-	private void testLadderSysmacExampleVersusSysmacClipboard() {
-		
-		
-		String sysmacLadderExampleData=SysmacLadderDataFactory.createExample();
-		String sysmacLadderClipboardData=SysmacClipboard.getLadderData();
-		
-		String data = sysmacLadderClipboardData;                                                                          
-		byte[] prefix= DatatypeConverter.parseHexBinary("96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
-
-		StringBuilder data2=new StringBuilder();
-		data2.append(new String(prefix));
-		
-		String xml=SysmacClipboard.getXml(data);
-		int xmlLength = xml.length()*2;
-		
-		byte lengthLowByte=   (byte) (((xmlLength % 256)/2 )+128);//Apparently low byte shifts one bit to the right!!! Omron= Strange Japanese programmers 
-		byte lengthHighByte = (byte) (xmlLength / 256); 
-		byte[] length=new byte[] {lengthLowByte, lengthHighByte};
-		data2.append(new String(length));
-		
-		data2.append(xml);
-		
-		byte[] suffix= DatatypeConverter.parseHexBinary("0B");
-		data2.append(new String(suffix));
-
-		String data3 = data2.toString();
-
-		System.out.println(StringUtils.indexOfDifference(data, data3));
-	}
+//	private void testLadderSysmacExampleVersusSysmacClipboard() {
+//		
+//		
+//		String sysmacLadderExampleData=SysmacLadderDataFactory.createExample();
+//		String sysmacLadderClipboardData=SysmacClipboard.getLadderData();
+//		
+//		String data = sysmacLadderClipboardData;                                                                          
+//		byte[] prefix= DatatypeConverter.parseHexBinary("96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
+//
+//		StringBuilder data2=new StringBuilder();
+//		data2.append(new String(prefix));
+//		
+//		String xml=SysmacClipboard.getXml(data);
+//		int xmlLength = xml.length()*2;
+//		
+//		byte lengthLowByte=   (byte) (((xmlLength % 256)/2 )+128);//Apparently low byte shifts one bit to the right!!! Omron= Strange Japanese programmers 
+//		byte lengthHighByte = (byte) (xmlLength / 256); 
+//		byte[] length=new byte[] {lengthLowByte, lengthHighByte};
+//		data2.append(new String(length));
+//		
+//		data2.append(xml);
+//		
+//		byte[] suffix= DatatypeConverter.parseHexBinary("0B");
+//		data2.append(new String(suffix));
+//
+//		String data3 = data2.toString();
+//
+//		System.out.println(StringUtils.indexOfDifference(data, data3));
+//	}
 
 	private void convertLadderFromCxClipboardToSysmacClipboard() throws JAXBException {
 		List<CxLadderModel> cxLadderModels = createCxLadderModelsFromClipboard();
@@ -83,10 +81,10 @@ public class MeynCxSysmacConverter extends Application {
 	}
 
 	private String createSysmacLadderData(List<CxLadderModel> cxLadderModels) throws JAXBException {
-//		Rungs sysmacRungs = SysmacRungsFactory.create(cxLadderModels);
-		Rungs sysmacRungs = SysmacRungsFactory.createExample();//  werkt soms niet goed?  String sysmacLadderData=SysmacLadderDataFactory.createExample(); werkt wel
+		Rungs sysmacRungs = SysmacRungsFactory.create(cxLadderModels);
+//		Rungs sysmacRungs = SysmacRungsFactory.createExample();
 		String sysmacLadderXml = SysmacMarshaller.createXml(sysmacRungs);
-		System.out.println(sysmacLadderXml.length());
+		System.out.println(sysmacLadderXml);
 		String sysmacLadderData=SysmacLadderDataFactory.create(sysmacLadderXml);
 //		String sysmacLadderData=SysmacLadderDataFactory.createExample();
 		return sysmacLadderData;
@@ -94,18 +92,18 @@ public class MeynCxSysmacConverter extends Application {
 
 	private String createSysmacVariableData(List<CxLadderModel> cxLadderModels) {
 //		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariables(cxLadderModels);
-//		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariableExamples();
-//		String sysmacVariableData=SysmacSymbolDataFactory.create(cxVariables); 
-		String sysmacVariableData=SysmacSymbolDataFactory.createExample();
+		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariableExamples(); 
+		String sysmacVariableData=SysmacSymbolDataFactory.create(cxVariables);  
+//		String sysmacVariableData=SysmacSymbolDataFactory.createExample();
+		System.out.println(sysmacVariableData);
 		return sysmacVariableData;
 	}
 
 	private List<CxLadderModel> createCxLadderModelsFromClipboard() throws JAXBException {
-//		String cxXml = CxClipboard.getLadderXml();
-//		CxLadderDiagram cxLadderDiagram = CxUnmarshaller.createCxLadderDiagram(cxXml);
-//		List<CxLadderModel> cxLadderModels = CxLadderModelFactory.createLadderModels(cxLadderDiagram);
-//		return cxLadderModels;
-		return null;
+		String cxXml = CxClipboard.getLadderXml();
+		CxLadderDiagram cxLadderDiagram = CxUnmarshaller.createCxLadderDiagram(cxXml);
+		List<CxLadderModel> cxLadderModels = CxLadderModelFactory.createLadderModels(cxLadderDiagram);
+		return cxLadderModels;
 	}
 
 

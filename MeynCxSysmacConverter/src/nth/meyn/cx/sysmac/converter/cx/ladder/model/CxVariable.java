@@ -1,10 +1,8 @@
-package nth.meyn.cx.sysmac.converter;
+package nth.meyn.cx.sysmac.converter.cx.ladder.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxVariableType;
 
 public class CxVariable {
 

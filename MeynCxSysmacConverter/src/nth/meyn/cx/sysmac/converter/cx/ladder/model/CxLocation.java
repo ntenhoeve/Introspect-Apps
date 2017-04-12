@@ -1,9 +1,9 @@
 package nth.meyn.cx.sysmac.converter.cx.ladder.model;
 
-public class Location {
+public class CxLocation {
 private final int x,y;
 
-public Location(int x, int y) {
+public CxLocation(int x, int y) {
 	this.x = x;
 	this.y = y;
 }
@@ -23,8 +23,8 @@ public int getY() {
           return true;
       }
 	  
-      if (obj instanceof Location) {
-          Location location=(Location) obj;
+      if (obj instanceof CxLocation) {
+          CxLocation location=(CxLocation) obj;
               return location.getX()==x && location.getY()==y;
       }
       return false;
@@ -34,5 +34,10 @@ public int getY() {
 	public int hashCode() {
 		int hashCode = x+y*100000;
 		return hashCode;
+	}
+
+@Override
+	public String toString() {
+		return "("+x+","+y+")";
 	}
 }

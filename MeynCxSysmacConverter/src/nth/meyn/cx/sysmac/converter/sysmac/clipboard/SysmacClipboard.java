@@ -16,6 +16,7 @@ public class SysmacClipboard {
 
 	public static final String LADDER_SNIPPET_ASSIGNED_VARIABLES = "ladderSnippetAssignedVariables";
 	public static final String LADDER_SNIPPET_XML = "ladderSnippetXML";
+	public static final String VARIABLE_NAMES = "VariableNames";
 
 	public static String getLadderData() {
 		String ladderData = ClipboardUtil.getText(LADDER_SNIPPET_XML);

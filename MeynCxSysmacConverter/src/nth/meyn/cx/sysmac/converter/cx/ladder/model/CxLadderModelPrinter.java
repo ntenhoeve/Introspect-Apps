@@ -89,8 +89,8 @@ public class CxLadderModelPrinter {
 	}
 
 	private String printWithVertical(String text, int x, int y, int line) {
-		boolean hasVerticalFromAbove = cxLadderModel.hasVertical(x, y - 1);
-		boolean hasVerticalToBelow = cxLadderModel.hasVertical(x, y);
+		boolean hasVerticalFromAbove = cxLadderModel.getVerticals().goingUpFrom(x, y);
+		boolean hasVerticalToBelow = cxLadderModel.getVerticals().goingDownFrom(x, y);
 		if (line == 1) {
 			if (hasVerticalFromAbove) {
 				return "|" + text;

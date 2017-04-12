@@ -61,6 +61,7 @@ public class SysmacLadderDataFactory {
 	 * @return
 	 */
 	private static String fixXmlLenghtIssue(String sysmacLadderXml) {
+		System.out.println(sysmacLadderXml.length());
 		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319) {
 			sysmacLadderXml = sysmacLadderXml + " ";
 		}
