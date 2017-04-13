@@ -30,7 +30,7 @@ public class SysmacLadderElementFactory {
 		instanceId = 2;
 	}
 
-	public  String getNextInstanceId() {
+	public String getNextInstanceId() {
 		instanceId++;
 		return getHex(instanceId);
 	}
@@ -47,17 +47,17 @@ public class SysmacLadderElementFactory {
 		return builder.toString();
 	}
 
-
 	private int getInt(String hex) {
-		hex=StringUtils.removeStart(hex, HEX_PREFIX);
-		long l=Long.parseLong(hex, 16);
+		hex = StringUtils.removeStart(hex, HEX_PREFIX);
+		long l = Long.parseLong(hex, 16);
 		return (int) l;
 	}
 
-	
 	/**
-	 * {@link ConnectionPoint} properties is added later see {@link #createConnection(RungXML, LadderElement, LadderElement)}
-	 * @param newInstanceId 
+	 * {@link ConnectionPoint} properties is added later see
+	 * {@link #createConnection(RungXML, LadderElement, LadderElement)}
+	 * 
+	 * @param newInstanceId
 	 * @return
 	 */
 	public LadderElement createLeftPowerRail(String newInstanceId) {
@@ -68,7 +68,7 @@ public class SysmacLadderElementFactory {
 		ladderElement.setIsRightPowerRail(Boolean.FALSE.toString());
 		return ladderElement;
 	}
-	
+
 	public LadderElement createLeftPowerRail() {
 		LadderElement ladderElement = new LadderElement();
 		ladderElement.setInstanceID(getNextInstanceId());
@@ -79,8 +79,10 @@ public class SysmacLadderElementFactory {
 	}
 
 	/**
-	 * {@link ConnectionPoint} properties is added later see {@link #createConnection(RungXML, LadderElement, LadderElement)}
-	 * @param newInstanceId 
+	 * {@link ConnectionPoint} properties is added later see
+	 * {@link #createConnection(RungXML, LadderElement, LadderElement)}
+	 * 
+	 * @param newInstanceId
 	 * @return
 	 */
 	public LadderElement createRightPowerRail(String newInstanceId) {
@@ -93,7 +95,7 @@ public class SysmacLadderElementFactory {
 		return ladderElement;
 
 	}
-	
+
 	public LadderElement createRightPowerRail() {
 		LadderElement ladderElement = new LadderElement();
 		ladderElement.setInstanceID(getNextInstanceId());
@@ -103,7 +105,7 @@ public class SysmacLadderElementFactory {
 		// add ConnectionPointInput later
 		return ladderElement;
 	}
-	
+
 	public LadderElement createConnection() {
 		LadderElement ladderElement = new LadderElement();
 		ladderElement.setInstanceID(getNextInstanceId());
@@ -116,8 +118,11 @@ public class SysmacLadderElementFactory {
 	}
 
 	/**
-	 * {@link LadderElement#setSourceID()} and {@link LadderElement#setTargetID(String)} properties are set later see {@link #createConnection(RungXML, LadderElement, LadderElement)}
-	 * @param newInstanceId 
+	 * {@link LadderElement#setSourceID()} and
+	 * {@link LadderElement#setTargetID(String)} properties are set later see
+	 * {@link #createConnection(RungXML, LadderElement, LadderElement)}
+	 * 
+	 * @param newInstanceId
 	 * @return
 	 */
 
@@ -157,58 +162,55 @@ public class SysmacLadderElementFactory {
 		return jaxbElement;
 	}
 
-	
 	public void createConnection(RungXML sysmacRung, Mapping mapping, CxConnection cxConnection) {
-		String edgeId=getNextInstanceId();
+		String edgeId = getNextInstanceId();
 		LadderElement edge = createEdge(edgeId);
 		sysmacRung.getLadderElement().add(edge);
 
-		LadderElement source = mapping.getLadderElement(cxConnection.getInput());
-		String connectionPointOutputId = getNextInstanceId();
-		JAXBElement<ConnectionPoint> connectionPointOutput = createConnectionPointOutput(
-				connectionPointOutputId, edge.getInstanceID());
-		source.getContent().add(connectionPointOutput);
-		
 		LadderElement target = mapping.getLadderElement(cxConnection.getOutput());
-		String connectionPointInputId = getNextInstanceId();
+		String connectionPointInputId = getHex(getInt(target.getInstanceID())+ target.getContent().size()+1);
 		JAXBElement<ConnectionPoint> connectionPointInput = createConnectionPointIntput(
 				connectionPointInputId, edge.getInstanceID());
 		target.getContent().add(connectionPointInput);
+
 		
-		edge.setSourceID(connectionPointOutputId);
-		edge.setTargetID(connectionPointInputId);
-
-	}
-	
-	public void createConnection(RungXML sysmacRung, String edgeId,  LadderElement source, LadderElement target) {
-
-		LadderElement edge = createEdge(edgeId);
-		sysmacRung.getLadderElement().add(edge);
-		
-
-
-		String connectionPointOutputId = getHex(getInt(source.getInstanceID())+source.getContent().size()+1);
+		LadderElement source = mapping.getLadderElement(cxConnection.getInput());
+		String connectionPointOutputId = getHex(getInt(source.getInstanceID())+  source.getContent().size()+1);
 		JAXBElement<ConnectionPoint> connectionPointOutput = createConnectionPointOutput(
 				connectionPointOutputId, edge.getInstanceID());
 		source.getContent().add(connectionPointOutput);
 
-		
+		edge.setSourceID(connectionPointOutputId);
+		edge.setTargetID(connectionPointInputId);
 
-		String connectionPointInputId = getHex(getInt(target.getInstanceID())+target.getContent().size()+1);
+	}
+
+	public void createConnection(RungXML sysmacRung, String edgeId, LadderElement source,
+			LadderElement target) {
+
+		LadderElement edge = createEdge(edgeId);
+		sysmacRung.getLadderElement().add(edge);
+
+		String connectionPointOutputId = getHex(
+				getInt(source.getInstanceID()) + source.getContent().size() + 1);
+		JAXBElement<ConnectionPoint> connectionPointOutput = createConnectionPointOutput(
+				connectionPointOutputId, edge.getInstanceID());
+		source.getContent().add(connectionPointOutput);
+
+		String connectionPointInputId = getHex(
+				getInt(target.getInstanceID()) + target.getContent().size() + 1);
 		JAXBElement<ConnectionPoint> connectionPointInput = createConnectionPointIntput(
 				connectionPointInputId, edge.getInstanceID());
 		target.getContent().add(connectionPointInput);
 
-		
 		edge.setSourceID(connectionPointOutputId);
 		edge.setTargetID(connectionPointInputId);
 
-
 	}
 
-	public LadderElement createContact(String newInstanceId, String programName, String varName, boolean inverted, boolean diffUp,
-			boolean diffDown) {
-		LadderElement contact=new LadderElement();
+	public LadderElement createContact(String newInstanceId, String programName, String varName,
+			boolean inverted, boolean diffUp, boolean diffDown) {
+		LadderElement contact = new LadderElement();
 		contact.setInstanceID(newInstanceId);
 		contact.setLadderElementType(CONTACT);
 		contact.setInverted(Boolean.toString(inverted));
@@ -220,11 +222,10 @@ public class SysmacLadderElementFactory {
 		contact.setBaseVariableDataType(BOOL);
 		return contact;
 	}
-	
-	
-	public LadderElement createCoil(String coilID, String programName, String varName, boolean inverted, boolean diffUp,
-			boolean diffDown, boolean set, boolean reset) {
-		LadderElement coil=new LadderElement();
+
+	public LadderElement createCoil(String coilID, String programName, String varName,
+			boolean inverted, boolean diffUp, boolean diffDown, boolean set, boolean reset) {
+		LadderElement coil = new LadderElement();
 		coil.setInstanceID(coilID);
 		coil.setLadderElementType(COIL);
 		coil.setInverted(Boolean.toString(inverted));
@@ -240,12 +241,12 @@ public class SysmacLadderElementFactory {
 	}
 
 	public LadderElement createContact(String programName, CONTACT cxContact) {
-		LadderElement contact=new LadderElement();
+		LadderElement contact = new LadderElement();
 		contact.setInstanceID(getNextInstanceId());
 		contact.setLadderElementType(CONTACT);
-		contact.setInverted(Boolean.toString(cxContact.getNegated()==1));
-		contact.setDiffUp(Boolean.toString(cxContact.getDiffUp()==1));
-		contact.setDiffDown(Boolean.toString(cxContact.getDiffDown()==1));
+		contact.setInverted(Boolean.toString(cxContact.getNegated() == 1));
+		contact.setDiffUp(Boolean.toString(cxContact.getDiffUp() == 1));
+		contact.setDiffDown(Boolean.toString(cxContact.getDiffDown() == 1));
 		contact.setVariableName(cxContact.getOperands().getOperand().getName());
 		contact.setBaseVariableName(cxContact.getOperands().getOperand().getName());
 		contact.setProgramName(programName);
@@ -254,12 +255,12 @@ public class SysmacLadderElementFactory {
 	}
 
 	public LadderElement createCoil(String programName, COIL cxCoil) {
-		LadderElement coil=new LadderElement();
+		LadderElement coil = new LadderElement();
 		coil.setInstanceID(getNextInstanceId());
 		coil.setLadderElementType(COIL);
-		coil.setInverted(Boolean.toString(cxCoil.getNegated()==1));
-		coil.setDiffUp(Boolean.toString(cxCoil.getDiffUp()==1));
-		coil.setDiffDown(Boolean.toString(cxCoil.getDiffDown()==1));
+		coil.setInverted(Boolean.toString(cxCoil.getNegated() == 1));
+		coil.setDiffUp(Boolean.toString(cxCoil.getDiffUp() == 1));
+		coil.setDiffDown(Boolean.toString(cxCoil.getDiffDown() == 1));
 		coil.setSet(Boolean.FALSE.toString());
 		coil.setReset(Boolean.FALSE.toString());
 		coil.setVariableName(cxCoil.getOperands().getOperand().getName());
@@ -269,8 +270,10 @@ public class SysmacLadderElementFactory {
 		return coil;
 	}
 
+	public void addToInstanceId(int offset) {
+		instanceId = instanceId + offset;
+	}
 
-
-
+	// TODO remove no longer used methods !!!
 
 }

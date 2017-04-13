@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.print.attribute.standard.OutputDeviceAssigned;
+
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.COIL;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.CONTACT;
 
@@ -21,42 +23,23 @@ public class CxConnectionHubs {
 		Set<CxConnectionHub> connectionHubs = new HashSet<>();
 		for (Object object : cxLadderModel.getContactsAndCoils()) {
 			CxLocation location = cxLadderModel.getLocation(object);
-			
-			List<Object> objectsLeftOf = cxLadderModel.findLeftOf(location.getX(), location.getY());
-			if (objectsLeftOf.size() > 1) {
-				CxConnectionHub connectionHub = createLeftOf(cxLadderModel, location,
-						objectsLeftOf);
-				connectionHubs.add(connectionHub);
-			}
-			List<Object> objectsRightOf = cxLadderModel.findRightOf(location.getX(),
-					location.getY());
-			if (objectsRightOf.size() > 1) {
-				CxConnectionHub connectionHub = createRightOf(cxLadderModel, location,
-						objectsRightOf);
-				connectionHubs.add(connectionHub);
+
+			List<Object> inputs = cxLadderModel.findLeftOf(location.getX(), location.getY(), true);
+			if (inputs.size() > 0) {
+				Object input = inputs.get(0);
+				CxLocation inputLocation = cxLadderModel.getLocation(input);
+				List<Object> outputs = cxLadderModel.findRightOf(inputLocation.getX(),
+						inputLocation.getY(), true);
+
+				if (inputs.size() > 1 || outputs.size() > 1) {
+					CxConnectionHub connectionHub = new CxConnectionHub(inputs, outputs);
+					connectionHubs.add(connectionHub);
+				}
 			}
 
 		}
 		return connectionHubs;
 
-	}
-
-	private CxConnectionHub createRightOf(CxLadderModel cxLadderModel, CxLocation location,
-			List<Object> outputs) {
-		Object output = outputs.get(0);
-		CxLocation outputLocation = cxLadderModel.getLocation(output);
-		List<Object> inputs = cxLadderModel.findLeftOf(outputLocation.getX(),
-				outputLocation.getY());
-		return new CxConnectionHub(inputs, outputs);
-	}
-
-	private CxConnectionHub createLeftOf(CxLadderModel cxLadderModel, CxLocation location,
-			List<Object> inputs) {
-		Object input = inputs.get(0);
-		CxLocation inputLocation = cxLadderModel.getLocation(input);
-		List<Object> outputs = cxLadderModel.findRightOf(inputLocation.getX(),
-				inputLocation.getY());
-		return new CxConnectionHub(inputs, outputs);
 	}
 
 	public CxConnectionHub findOutput(Object cxLadderObject) {
@@ -67,7 +50,7 @@ public class CxConnectionHubs {
 		}
 		return null;
 	}
-	
+
 	public CxConnectionHub findInput(Object cxLadderObject) {
 		for (CxConnectionHub connectionHub : connectionHubs) {
 			if (connectionHub.getInputs().contains(cxLadderObject)) {
@@ -77,8 +60,17 @@ public class CxConnectionHubs {
 		return null;
 	}
 
-	public  Set<CxConnectionHub> getAll() {
+	public Set<CxConnectionHub> getAll() {
 		return Collections.unmodifiableSet(connectionHubs);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder reply = new StringBuilder();
+		for (CxConnectionHub connectionHub : connectionHubs) {
+			reply.append(connectionHub.toString());
+			reply.append("\r");
+		}
+		return reply.toString();
+	}
 }

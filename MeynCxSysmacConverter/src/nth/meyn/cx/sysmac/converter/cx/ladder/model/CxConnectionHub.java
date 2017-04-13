@@ -1,5 +1,6 @@
 package nth.meyn.cx.sysmac.converter.cx.ladder.model;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -39,4 +40,44 @@ public class CxConnectionHub {
 		return new HashCodeBuilder().append(inputs).append(outputs).hashCode();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder reply = new StringBuilder();
+		reply.append("[");
+		boolean comma=false;
+		for (Object object : inputs) {
+			if (comma) {
+				reply.append(", ");
+			}
+			reply.append(getVarName(object));
+			comma=true;
+		}
+		reply.append("] => [");
+		comma=false;
+		for (Object object : outputs) {
+			if (comma) {
+				reply.append(", ");
+			}
+			reply.append(getVarName(object));
+			comma=true;
+		}
+		reply.append("]");
+		return reply.toString();
+	}
+
+	private String getVarName(Object object) {
+		try {
+			Method getOperandsMethod = object.getClass().getDeclaredMethod("getOperands");
+			Object operands = getOperandsMethod.invoke(object);
+
+			Method getOperandMethod = operands.getClass().getMethod("getOperand");
+			Object operand = getOperandMethod.invoke(operands);
+
+			Method getNameMethod = operand.getClass().getMethod("getName");
+			String name = (String) getNameMethod.invoke(operand);
+			return name;
+		} catch (Exception e) {
+			return "";
+		}
+	}
 }

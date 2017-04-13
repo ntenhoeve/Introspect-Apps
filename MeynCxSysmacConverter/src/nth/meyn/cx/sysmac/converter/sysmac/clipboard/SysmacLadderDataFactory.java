@@ -1,9 +1,6 @@
 package nth.meyn.cx.sysmac.converter.sysmac.clipboard;
 
 import javax.xml.bind.DatatypeConverter;
-import javax.xml.bind.annotation.XmlList;
-
-import org.apache.commons.lang3.StringUtils;
 
 import nth.meyn.cx.sysmac.converter.util.StringToArrayCodeUtil;
 
@@ -27,43 +24,57 @@ public class SysmacLadderDataFactory {
 	}
 
 	public static String create(String sysmacLadderXml) {
-		byte[] prefix = DatatypeConverter.parseHexBinary(
-				"96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
-
-		StringBuilder data = new StringBuilder();
-		data.append(new String(prefix));
-
 		sysmacLadderXml = fixXmlLenghtIssue(sysmacLadderXml);
 
-		int xmlLength = sysmacLadderXml.length() * 2;
-		// Apparently low byte shifts one bit to the right!!! Omron= Strange
-		// Japanese programmers
-		byte lengthLowByte = (byte) (((xmlLength % 256) / 2) + 128);
-		byte lengthHighByte = (byte) (xmlLength / 256);
-		byte[] length = new byte[] { lengthLowByte, lengthHighByte };
-		data.append(new String(length));
-
+		StringBuilder data = new StringBuilder();
+		data.append(createPrefix());
+		data.append(createLength(sysmacLadderXml));
 		data.append(sysmacLadderXml);
-
-		byte[] suffix = DatatypeConverter.parseHexBinary("0B");
-		data.append(new String(suffix));
+		data.append(createSuffix());
 
 		return data.toString();
 	}
 
 	/**
-	 * XML .length=2305, 2319 (comment.length=7, 21): Sysmac does not recognize
-	 * clipboard This is fixed by extending the XML with a space for these
-	 * cases. Likely to be more lenghts that have this issue.<br>
-	 * XML.length MOD 14==0 is not it: a length of 2332 has no issue.
+	 * Apparently low byte shifts one bit to the right!!!<br>
+	 * Omron has Strange Japanese programmers
+	 * 
+	 * @param sysmacLadderXml
+	 * @return
+	 */
+	private static String createLength(String sysmacLadderXml) {
+		int xmlLength = sysmacLadderXml.length() * 2;
+		byte lengthLowByte = (byte) (((xmlLength % 256) / 2) + 128);
+		byte lengthHighByte = (byte) (xmlLength / 256);
+		byte[] length = new byte[] { lengthLowByte, lengthHighByte };
+		return new String(length);
+	}
+
+	private static String createSuffix() {
+		byte[] suffix = DatatypeConverter.parseHexBinary("0B");
+		return new String(suffix);
+	}
+
+	private static String createPrefix() {
+		byte[] prefix = DatatypeConverter.parseHexBinary(
+				"96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
+		return new String(prefix);
+	}
+
+	/**
+	 * Seems to be necessary to extend the XML message with a space is some
+	 * conditions, otherwise Sysmac does not recognize the clip board as
+	 * valid... Likely to do with the strange XML length calculation we need to
+	 * add to the data.
 	 *
 	 * @param sysmacLadderXml
 	 * @return
 	 */
 	private static String fixXmlLenghtIssue(String sysmacLadderXml) {
 		System.out.println(sysmacLadderXml.length());
-		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319) {
-			sysmacLadderXml = sysmacLadderXml + " ";
+		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319
+				|| sysmacLadderXml.length() == 9089) {
+				sysmacLadderXml = sysmacLadderXml + " ";
 		}
 		return sysmacLadderXml;
 	}

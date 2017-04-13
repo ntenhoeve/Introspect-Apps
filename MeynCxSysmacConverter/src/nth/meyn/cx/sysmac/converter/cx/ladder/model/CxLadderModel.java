@@ -193,9 +193,6 @@ public class CxLadderModel {
 		return rightPowerRail;
 	}
 
-	public List<Object> findLeftOf(int x, int y) {
-		return findLeftOf(x, y, false);
-	}
 
 	/**
 	 * follows the lines and gets all XML objects left of given coordinates
@@ -204,20 +201,20 @@ public class CxLadderModel {
 	 * @param y
 	 * @return
 	 */
-	public List<Object> findLeftOf(int x, int y, boolean ignoreVertical) {
+	public List<Object> findLeftOf(int x, int y, boolean includeVertical) {
 		List<Object> found = new ArrayList<>();
-		if (!ignoreVertical && (verticals.goingUpFrom(x, y) || verticals.goingDownFrom(x, y))) {
+		if (includeVertical && (verticals.goingUpFrom(x, y) || verticals.goingDownFrom(x, y))) {
 			int top = verticals.getTop(x, y);
 			int bottom = verticals.getBottom(x, y);
 			for (int y2 = top; y2 <= bottom; y2++) {
-				found.addAll(findLeftOf(x, y2, true));
+				found.addAll(findLeftOf(x, y2, false));
 			}
 		} else {
 			if (x >= 0) {
 				Object value = get(x - 1, y);
 				if (value != null) {
 					if (value instanceof HORIZONTAL) {
-						found.addAll(findLeftOf(x - 1, y, false));
+						found.addAll(findLeftOf(x - 1, y, true));
 					} else {
 						found.add(value);
 					}
@@ -234,20 +231,20 @@ public class CxLadderModel {
 	 * @param y
 	 * @return
 	 */
-	public List<Object> findRightOf(int x, int y) {
+	public List<Object> findRightOf(int x, int y, boolean includeVertical) {
 		List<Object> found = new ArrayList<>();
-		if (verticals.goingUpFrom(x + 1, y) || verticals.goingDownFrom(x + 1, y)) {
+		if (includeVertical && ( verticals.goingUpFrom(x + 1, y) || verticals.goingDownFrom(x + 1, y))) {
 			int top = verticals.getTop(x + 1, y);
 			int bottom = verticals.getBottom(x + 1, y);
 			for (int y2 = top; y2 <= bottom; y2++) {
-				found.addAll(findRightOf(x + 1, y2));
+				found.addAll(findRightOf(x, y2, false));
 			}
 		} else {
 			if (x < getMaxX()) {
 				Object value = get(x + 1, y);
 				if (value != null) {
 					if (value instanceof HORIZONTAL && x < getMaxX()) {
-						found.addAll(findRightOf(x + 1, y));
+						found.addAll(findRightOf(x + 1, y,true));
 					} else {
 						found.add(value);
 					}
@@ -275,7 +272,7 @@ public class CxLadderModel {
 			}
 
 			CxLocation location = getLocation(cxLadderObject);
-			List<Object> inputs = findLeftOf(location.getX(), location.getY());
+			List<Object> inputs = findLeftOf(location.getX(), location.getY(),true);
 			if (inputs.size() == 1) {
 				return inputs;
 			} else {
@@ -304,7 +301,7 @@ public class CxLadderModel {
 			}
 
 			CxLocation location = getLocation(cxLadderObject);
-			List<Object> outputs = findRightOf(location.getX(), location.getY());
+			List<Object> outputs = findRightOf(location.getX(), location.getY(),true);
 			if (outputs.size() == 1) {
 				return outputs;
 			} else {
