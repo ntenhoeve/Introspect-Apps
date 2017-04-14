@@ -90,7 +90,7 @@ public class SysmacRungsFactory {
 		}
 
 		
-		//TODO test.cxp\CAS Unit 1\On Off\ Rung 1 and Rung2 do not work. To do with order of Contacts and Coils or order of ConnectionPoint connectionPointType input and outputs? If so, can we get rid of ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel,cxConnectionHub ));??? 
+//	TODO	test.cxp\CAS Unit 1\On Off\ Rung 1 and Rung2 do not work. To do with order of Contacts and Coils or order of ConnectionPoint connectionPointType input and outputs? If so, can we get rid of ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel,cxConnectionHub ));??? 
 		return sysmacRung;
 	}
 

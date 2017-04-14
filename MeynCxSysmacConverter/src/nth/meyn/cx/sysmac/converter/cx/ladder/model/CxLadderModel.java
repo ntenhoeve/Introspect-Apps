@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.xml.bind.JAXBElement;
 
@@ -37,7 +39,7 @@ public class CxLadderModel {
 	private final int maxY;
 
 	public CxLadderModel(RUNG rung) {
-		grid = new HashMap<>();
+		grid = new TreeMap<>(new CxLocationComparator());
 		verticals = new CxVerticals();
 		populate(rung);
 		maxX=findMaxX();
