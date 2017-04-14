@@ -50,7 +50,6 @@ public class SysmacRungsFactory {
 		for (CONTACT cxContact : cxContacts) {
 			LadderElement sysmacContact = ladderElementFactory.createContact("SimpleThings",
 					cxContact);
-			ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel, cxContact));
 			ladderElements.add(sysmacContact);
 			mapping.put(cxContact, sysmacContact);
 		}
@@ -59,28 +58,24 @@ public class SysmacRungsFactory {
 		for (COIL cxCoil : cxCoils) {
 			LadderElement sysmacContact = ladderElementFactory.createCoil("SimpleThings",
 					cxCoil);
-			ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel, cxCoil));
 			ladderElements.add(sysmacContact);
 			mapping.put(cxCoil, sysmacContact);
 		}
 
 		CxLeftPowerRail leftPowerRail = cxLadderModel.getLeftPowerRail();
 		LadderElement sysmacLeftPowerRail = ladderElementFactory.createLeftPowerRail();
-		ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel,leftPowerRail ));
 		ladderElements.add(sysmacLeftPowerRail);
 		mapping.put(leftPowerRail, sysmacLeftPowerRail);
 
 		CxRightPowerRail rightPowerRail = cxLadderModel.getRightPowerRail();
 		LadderElement sysmacRightPowerRail = ladderElementFactory.createRightPowerRail();
 		ladderElements.add(sysmacRightPowerRail);
-		ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel,rightPowerRail ));
 		mapping.put(rightPowerRail, sysmacRightPowerRail);
 
 		Set<CxConnectionHub> cxConnnectionHubs = cxLadderModel.getConnectionHubs();
 		for (CxConnectionHub cxConnectionHub : cxConnnectionHubs) {
 			LadderElement sysmacConnection = ladderElementFactory.createConnection();
 			ladderElements.add(sysmacConnection);
-			ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel,cxConnectionHub ));
 			mapping.put(cxConnectionHub, sysmacConnection);
 		}
 
@@ -90,16 +85,9 @@ public class SysmacRungsFactory {
 		}
 
 		
-//	TODO	test.cxp\CAS Unit 1\On Off\ Rung 1 and Rung2 do not work. To do with order of Contacts and Coils or order of ConnectionPoint connectionPointType input and outputs? If so, can we get rid of ladderElementFactory.addToInstanceId(getNrOfInAndOutputs(cxLadderModel,cxConnectionHub ));??? 
 		return sysmacRung;
 	}
 
-	private static int getNrOfInAndOutputs(CxLadderModel cxLadderModel, Object cxLadderObject) {
-		List<Object> inputs = cxLadderModel.getInputs(cxLadderObject);
-		List<Object> outputs = cxLadderModel.getOutputs(cxLadderObject);
-		int nrOfInAndOutputs = inputs.size() + outputs.size();
-		return nrOfInAndOutputs;
-	}
 
 	/**
 	 * XML.length=2305, 2319 (comment.length=7, 21): Sysmac does not recognize

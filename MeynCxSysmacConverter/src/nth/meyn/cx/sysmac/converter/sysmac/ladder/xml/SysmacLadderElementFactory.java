@@ -168,14 +168,14 @@ public class SysmacLadderElementFactory {
 		sysmacRung.getLadderElement().add(edge);
 
 		LadderElement target = mapping.getLadderElement(cxConnection.getOutput());
-		String connectionPointInputId = getHex(getInt(target.getInstanceID())+ target.getContent().size()+1);
+		String connectionPointInputId = getNextInstanceId();
 		JAXBElement<ConnectionPoint> connectionPointInput = createConnectionPointIntput(
 				connectionPointInputId, edge.getInstanceID());
 		target.getContent().add(connectionPointInput);
 
 		
 		LadderElement source = mapping.getLadderElement(cxConnection.getInput());
-		String connectionPointOutputId = getHex(getInt(source.getInstanceID())+  source.getContent().size()+1);
+		String connectionPointOutputId = getNextInstanceId();
 		JAXBElement<ConnectionPoint> connectionPointOutput = createConnectionPointOutput(
 				connectionPointOutputId, edge.getInstanceID());
 		source.getContent().add(connectionPointOutput);
@@ -270,9 +270,6 @@ public class SysmacLadderElementFactory {
 		return coil;
 	}
 
-	public void addToInstanceId(int offset) {
-		instanceId = instanceId + offset;
-	}
 
 	// TODO remove no longer used methods !!!
 
