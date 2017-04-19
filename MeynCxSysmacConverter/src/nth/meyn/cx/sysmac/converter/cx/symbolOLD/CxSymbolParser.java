@@ -1,12 +1,8 @@
 package nth.meyn.cx.sysmac.converter.cx.symbolOLD;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import javax.swing.plaf.ListUI;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.TokenReader;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.Tokenizer;

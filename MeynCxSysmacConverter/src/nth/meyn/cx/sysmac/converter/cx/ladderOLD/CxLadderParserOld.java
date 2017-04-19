@@ -1,17 +1,10 @@
 package nth.meyn.cx.sysmac.converter.cx.ladderOLD;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import javax.management.Descriptor;
-import javax.swing.plaf.ListUI;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.TokenReader;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.Tokenizer;
-import nth.meyn.cx.sysmac.converter.cx.symbolOLD.CxSymbol;
 
 public class CxLadderParserOld {
 

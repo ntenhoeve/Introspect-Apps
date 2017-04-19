@@ -1,10 +1,5 @@
 package nth.meyn.cx.sysmac.converter.cx.clipboard;
 
-import java.nio.ByteBuffer;
-import java.util.Set;
-
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.DataFormat;
 import nth.meyn.cx.sysmac.converter.util.ClipboardUtil;
 
 public class CxClipboard {

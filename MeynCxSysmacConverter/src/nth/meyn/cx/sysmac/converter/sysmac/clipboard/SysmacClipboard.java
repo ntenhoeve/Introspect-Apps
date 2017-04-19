@@ -2,15 +2,10 @@ package nth.meyn.cx.sysmac.converter.sysmac.clipboard;
 
 import java.nio.ByteBuffer;
 
-import javax.xml.bind.DatatypeConverter;
-
-import org.apache.commons.lang3.StringUtils;
-
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import nth.meyn.cx.sysmac.converter.util.ClipboardUtil;
-import nth.meyn.cx.sysmac.converter.util.StringToArrayCodeUtil;
 
 public class SysmacClipboard {
 

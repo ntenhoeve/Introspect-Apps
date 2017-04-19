@@ -81,11 +81,30 @@ public class CxLadderModelPrinter {
 			text = print((CONTACT) value, line);
 		} else if (value instanceof HORIZONTAL) {
 			text = print((HORIZONTAL) value, line);
+		}  else if (value instanceof CxInstructionInput) {
+			text = print((CxInstructionInput) value, line);
 		} else {
 			throw new RuntimeException("Could not print cell x:" + x + " y:" + y);
 		}
 		return printWithVertical(text, x, y, line);
 
+	}
+
+	private String print(CxInstructionInput instructionInput, int line) {
+		if (line == 1) {
+			 String name = instructionInput.getInstruction().getOperands().getOperand().get(0).getName()+instructionInput.getInputNr();
+			return trimAndCenter(name, maxTextWidth);
+		} else if (line == 2) {
+			StringBuilder text = new StringBuilder();
+			int dashesBefore = (maxTextWidth - 5) / 2;
+			text.append(repeat("-", dashesBefore));
+			text.append("(   )");
+			int dashesAfter = maxTextWidth - 5 - dashesBefore;
+			text.append(repeat("-", dashesAfter));
+			return text.toString();
+		} else {
+			return repeat(SPACE, maxTextWidth);
+		}
 	}
 
 	private String printWithVertical(String text, int x, int y, int line) {
@@ -179,7 +198,6 @@ public class CxLadderModelPrinter {
 		return result.toString();
 	}
 
-
 	private String trimAndCenter(String text, int width) {
 		if (text == null) {
 			text = "";
@@ -193,7 +211,6 @@ public class CxLadderModelPrinter {
 		return result;
 
 	}
-
 
 	private String print(FBPARAMETER value, int line) {
 		// TODO Auto-generated method stub
@@ -251,6 +268,15 @@ public class CxLadderModelPrinter {
 	private String print(FB value, int line) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String print(CxLocation location) {
+		StringBuilder reply = new StringBuilder();
+		for (int lineNr = 0; lineNr < 3; lineNr++) {
+			reply.append(print(location.getX(), location.getY(), lineNr));
+			reply.append("\r");
+		}
+		return reply.toString();
 	}
 
 }

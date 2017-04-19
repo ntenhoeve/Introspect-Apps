@@ -1,10 +1,7 @@
 package nth.meyn.cx.sysmac.converter.sysmac.clipboard;
 
-import java.nio.ByteBuffer;
 import java.util.Set;
-import java.util.UUID;
 
-import javax.swing.plaf.synth.SynthSliderUI;
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang3.StringUtils;

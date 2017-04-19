@@ -2,7 +2,6 @@ package nth.meyn.cx.sysmac.converter.cx.ladder.xml;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * @deprecated use xml from clipboard instead

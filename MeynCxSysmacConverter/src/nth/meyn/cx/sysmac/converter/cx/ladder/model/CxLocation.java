@@ -40,4 +40,14 @@ public int getY() {
 	public String toString() {
 		return "("+x+","+y+")";
 	}
+
+public CxLocation oneDown() {
+	return new CxLocation(x, y+1);
+}
+
+
+public CxLocation oneLeft() {
+	return new CxLocation(x-1, y);
+}
+
 }

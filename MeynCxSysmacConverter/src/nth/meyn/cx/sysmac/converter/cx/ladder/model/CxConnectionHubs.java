@@ -1,16 +1,9 @@
 package nth.meyn.cx.sysmac.converter.cx.ladder.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.print.attribute.standard.OutputDeviceAssigned;
-
-import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.COIL;
-import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.CONTACT;
 
 public class CxConnectionHubs {
 	private final Set<CxConnectionHub> connectionHubs;
@@ -21,7 +14,7 @@ public class CxConnectionHubs {
 
 	public Set<CxConnectionHub> create(CxLadderModel cxLadderModel) {
 		Set<CxConnectionHub> connectionHubs = new HashSet<>();
-		for (Object object : cxLadderModel.getContactsAndCoils()) {
+		for (Object object : cxLadderModel.getContactsCoilsAndInstructions()) {
 			CxLocation location = cxLadderModel.getLocation(object);
 
 			List<Object> inputs = cxLadderModel.findLeftOf(location.getX(), location.getY(), true);

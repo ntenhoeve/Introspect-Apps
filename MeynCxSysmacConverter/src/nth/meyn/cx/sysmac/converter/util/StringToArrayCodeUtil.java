@@ -1,7 +1,5 @@
 package nth.meyn.cx.sysmac.converter.util;
 
-import javax.xml.bind.DatatypeConverter;
-
 public class StringToArrayCodeUtil {
 
 	public static String print(String txt) {

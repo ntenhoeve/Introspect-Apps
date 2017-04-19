@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +12,6 @@ import java.util.TreeMap;
 import javax.xml.bind.JAXBElement;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.COIL;
@@ -39,11 +37,11 @@ public class CxLadderModel {
 	private final int maxY;
 
 	public CxLadderModel(RUNG rung) {
-		grid = new TreeMap<>(new CxLocationComparator());
 		verticals = new CxVerticals();
-		populate(rung);
-		maxX=findMaxX();
-		maxY=findMaxY();
+		comment = getComment(rung);
+		grid=createGridWithObjects(rung);
+		maxX = findMaxX();
+		maxY = findMaxY();
 		leftPowerRail = new CxLeftPowerRail(this);
 		rightPowerRail = new CxRightPowerRail(this);
 		connectionHubs = new CxConnectionHubs(this);
@@ -74,8 +72,39 @@ public class CxLadderModel {
 		return maxX;
 	}
 
-	private void populate(RUNG rung) {
-		comment = getComment(rung);
+
+	private Map<CxLocation, Object> createInstructionInputs(TreeMap<CxLocation, Object> grid) {
+		Map<CxLocation, Object> instructionInputs=new HashMap<>();
+		Set<CxLocation> locations = grid.keySet();
+		for (CxLocation location : locations) {
+			Object value = grid.get(location);
+			if (value instanceof INSTRUCTION) {
+				CxLocation instructionLocation1 = location.oneDown();
+				if (grid.get(instructionLocation1.oneLeft()) != null) {
+					CxInstructionInput instructionInput1 = new CxInstructionInput(
+							(INSTRUCTION) value, 1);
+					instructionInputs.put(instructionLocation1, instructionInput1);
+				}
+				CxLocation instructionLocation2 = instructionLocation1.oneDown();
+				if (grid.get(instructionLocation2.oneLeft()) != null) {
+					CxInstructionInput instructionInput2 = new CxInstructionInput(
+							(INSTRUCTION) value, 2);
+					instructionInputs.put(instructionLocation2, instructionInput2);
+				}
+				CxLocation instructionLocation3 = instructionLocation2.oneDown();
+				if (grid.get(instructionLocation3.oneLeft()) != null) {
+					CxInstructionInput instructionInput3 = new CxInstructionInput(
+							(INSTRUCTION) value, 3);
+					instructionInputs.put(instructionLocation3, instructionInput3);
+				}
+
+			}
+		}
+		return instructionInputs;
+	}
+
+	private Map<CxLocation, Object> createGridWithObjects(RUNG rung) {
+		TreeMap<CxLocation, Object> grid = new TreeMap<>(new CxLocationComparator());
 		List<Serializable> elements = rung.getElementList().getContent();
 		for (Serializable element : elements) {
 			@SuppressWarnings("rawtypes")
@@ -107,7 +136,11 @@ public class CxLadderModel {
 						+ getClass().getSimpleName());
 
 		}
-
+		
+		Map<CxLocation, Object> instructionInputs = createInstructionInputs(grid);
+		grid.putAll(instructionInputs);
+		
+		return grid;
 	}
 
 	private String getComment(RUNG rung) {
@@ -195,7 +228,6 @@ public class CxLadderModel {
 		return rightPowerRail;
 	}
 
-
 	/**
 	 * follows the lines and gets all XML objects left of given coordinates
 	 * 
@@ -235,7 +267,8 @@ public class CxLadderModel {
 	 */
 	public List<Object> findRightOf(int x, int y, boolean includeVertical) {
 		List<Object> found = new ArrayList<>();
-		if (includeVertical && ( verticals.goingUpFrom(x + 1, y) || verticals.goingDownFrom(x + 1, y))) {
+		if (includeVertical
+				&& (verticals.goingUpFrom(x + 1, y) || verticals.goingDownFrom(x + 1, y))) {
 			int top = verticals.getTop(x + 1, y);
 			int bottom = verticals.getBottom(x + 1, y);
 			for (int y2 = top; y2 <= bottom; y2++) {
@@ -246,7 +279,7 @@ public class CxLadderModel {
 				Object value = get(x + 1, y);
 				if (value != null) {
 					if (value instanceof HORIZONTAL && x < getMaxX()) {
-						found.addAll(findRightOf(x + 1, y,true));
+						found.addAll(findRightOf(x + 1, y, true));
 					} else {
 						found.add(value);
 					}
@@ -274,7 +307,7 @@ public class CxLadderModel {
 			}
 
 			CxLocation location = getLocation(cxLadderObject);
-			List<Object> inputs = findLeftOf(location.getX(), location.getY(),true);
+			List<Object> inputs = findLeftOf(location.getX(), location.getY(), true);
 			if (inputs.size() == 1) {
 				return inputs;
 			} else {
@@ -303,11 +336,23 @@ public class CxLadderModel {
 			}
 
 			CxLocation location = getLocation(cxLadderObject);
-			List<Object> outputs = findRightOf(location.getX(), location.getY(),true);
+			List<Object> outputs = findRightOf(location.getX(), location.getY(), true);
 			if (outputs.size() == 1) {
 				return outputs;
 			} else {
-				throw new RuntimeException("An CX-One XML object sould only have one output!");
+				StringBuilder message = new StringBuilder(
+						"The following ladder XML object must have one output:\r");
+				CxLadderModelPrinter printer = new CxLadderModelPrinter(this, 15);
+				message.append(printer.print(location));
+				if (outputs.size() == 0) {
+					message.append("\rThere are no outputs.");
+				} else {
+					message.append("\rOutputs:\r");
+					for (Object output : outputs) {
+						message.append(printer.print(getLocation(output)));
+					}
+				}
+				throw new RuntimeException(message.toString());
 			}
 		}
 
@@ -324,8 +369,6 @@ public class CxLadderModel {
 				"Could not find a location for CX-One XML object: " + cxLadderObject);
 	}
 
-	
-
 	public CxVerticals getVerticals() {
 		return verticals;
 	}
@@ -340,7 +383,7 @@ public class CxLadderModel {
 
 	private List<CxConnection> createConnections() {
 		List<CxConnection> connections = new ArrayList<>();
-		for (Object input : getContactsCoilsPowerRailsAndConnectionHubs()) {
+		for (Object input : getConnectingObjects()) {
 			List<Object> outputs = getOutputs(input);
 			for (Object output : outputs) {
 				CxConnection connection = new CxConnection(input, output);
@@ -355,26 +398,36 @@ public class CxLadderModel {
 	}
 
 	/**
-	 * TODO add INSTRUCTION and FB
+	 * Note: order must be same as Sysmac XML!!!<br>
+	 * TODO add FB
+	 * 
 	 * @return
 	 */
-	
-	public List<Object> getContactsAndCoils() {
-		List<Object> objects=new ArrayList<>();
+
+	public List<Object> getContactsCoilsAndInstructions() {
+		List<Object> objects = new ArrayList<>();
 		List<CONTACT> contacts = get(CONTACT.class);
 		objects.addAll(contacts);
-		List<COIL> coils=get(COIL.class);
+		List<COIL> coils = get(COIL.class);
 		objects.addAll(coils);
+		List<INSTRUCTION> instructions = get(INSTRUCTION.class);
+		objects.addAll(instructions);
 		return objects;
 	}
-	
-	public List<Object> getContactsCoilsPowerRailsAndConnectionHubs() {
+
+	/**
+	 * Note: order must be same as Sysmac XML!!!
+	 * 
+	 * @return
+	 */
+	public List<Object> getConnectingObjects() {
 		List<Object> objects = new ArrayList<>();
-		objects.addAll(getContactsAndCoils());
+		objects.addAll(getContactsCoilsAndInstructions());
+		objects.addAll(get(CxInstructionInput.class));
 		objects.add(leftPowerRail);
 		objects.add(rightPowerRail);
 		objects.addAll(connectionHubs.getAll());
 		return objects;
 	}
-	
+
 }

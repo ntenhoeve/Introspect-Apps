@@ -2,7 +2,6 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml;
 
 import java.io.StringWriter;
 
-import javax.swing.text.MaskFormatter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

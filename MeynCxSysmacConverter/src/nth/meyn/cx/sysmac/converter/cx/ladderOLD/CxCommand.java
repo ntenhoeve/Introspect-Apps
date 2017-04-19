@@ -1,9 +1,7 @@
 package nth.meyn.cx.sysmac.converter.cx.ladderOLD;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public enum CxCommand {
   LD, LDNOT, OR, ORNOT, ORLD, AND, ANDNOT, ANDLD, OUT, OUTNOT, MOVE_021, KEEP_011, TIMX_550;

@@ -1,10 +1,14 @@
 package nth.meyn.cx.sysmac.converter.sysmac.clipboard;
 
+import java.nio.ByteBuffer;
+
 import javax.xml.bind.DatatypeConverter;
 
 import nth.meyn.cx.sysmac.converter.util.StringToArrayCodeUtil;
 
 public class SysmacLadderDataFactory {
+
+	private static final byte MOST_SIGNIFICANT_BIT = (byte) 128;
 
 	/**
 	 * Created with {@link #getLadderData()} and then
@@ -43,11 +47,47 @@ public class SysmacLadderDataFactory {
 	 * @return
 	 */
 	private static String createLength(String sysmacLadderXml) {
-		int xmlLength = sysmacLadderXml.length() * 2;
-		byte lengthLowByte = (byte) (((xmlLength % 256) / 2) + 128);
-		byte lengthHighByte = (byte) (xmlLength / 256);
-		byte[] length = new byte[] { lengthLowByte, lengthHighByte };
-		return new String(length);
+//		int xmlLength = sysmacLadderXml.length() * 2;
+//		byte lengthLowByte = (byte) (((xmlLength % 256) / 2) + 128);
+//		byte lengthHighByte = (byte) (xmlLength / 256);
+//		byte[] length = new byte[] { lengthLowByte, lengthHighByte };
+	
+		int xmlLength = sysmacLadderXml.length();
+		
+		ByteBuffer byteBuffer = ByteBuffer.allocate(4);
+		byteBuffer.putInt(xmlLength * 8);
+		byte b3 = byteBuffer.array()[0];
+
+		byteBuffer = ByteBuffer.allocate(4);
+		byteBuffer.putInt(xmlLength * 4);
+		byte b2 = byteBuffer.array()[1];
+
+		byteBuffer = ByteBuffer.allocate(4);
+		byteBuffer.putInt(xmlLength * 2);
+		byte b1 = byteBuffer.array()[2];
+		
+		byteBuffer = ByteBuffer.allocate(4);
+		byteBuffer.putInt(xmlLength);
+		byte b0 = byteBuffer.array()[3];
+		
+		if (b3!=0) {//numBytes=4;
+			//add sign bits when there is a higher byte 
+			b2=(byte) (b2|MOST_SIGNIFICANT_BIT);
+			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String( new byte[] {b0, b1, b2, b3});
+		} else if (b2!=0) {//numBytes=3;
+			//add sign bits when there is a higher byte 
+			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String(  new byte[] {b0, b1, b2});
+		} else if (b1!=0) {//numBytes=2;
+			//add sign bits when there is a higher byte 
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String(  new byte[] {b0, b1});
+		}else  {//numBytes=1
+			return new String(  new byte[] {b0});
+		}
 	}
 
 	private static String createSuffix() {
@@ -55,7 +95,7 @@ public class SysmacLadderDataFactory {
 		return new String(suffix);
 	}
 
-	private static String createPrefix() {
+	public static String createPrefix() {
 		byte[] prefix = DatatypeConverter.parseHexBinary(
 				"96A79EFD133B7043A67956106BB288FB0001000000FFFFFFFF01000000000000000601000000");
 		return new String(prefix);
@@ -71,11 +111,11 @@ public class SysmacLadderDataFactory {
 	 * @return
 	 */
 	private static String fixXmlLenghtIssue(String sysmacLadderXml) {
-		System.out.println(sysmacLadderXml.length());
-		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319
-				|| sysmacLadderXml.length() == 9089) {
-				sysmacLadderXml = sysmacLadderXml + " ";
-		}
+//		System.out.println(sysmacLadderXml.length());
+//		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319
+//				|| sysmacLadderXml.length() == 9089 ||sysmacLadderXml.length()==34166) {
+//				sysmacLadderXml = sysmacLadderXml + "  ";
+//		}
 		return sysmacLadderXml;
 	}
 }
