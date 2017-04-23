@@ -19,6 +19,7 @@ public class InstructionFactory {
 	private static final int NOT_FOUND= 1;
 	private static final Boolean IS_NO_POWER_POINT = false;
 	private static final String VARIABLE = "Variable";
+	public static final String FUNCTION = "Function";
 
 	public static String getVarName(INSTRUCTION cxInstruction, int index) {
 		Operand opperand = cxInstruction.getOperands().getOperand().get(index);

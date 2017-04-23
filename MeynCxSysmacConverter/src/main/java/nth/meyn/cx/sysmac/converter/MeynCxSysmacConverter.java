@@ -32,7 +32,7 @@ public class MeynCxSysmacConverter extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		 convertLadderFromCxClipboardToSysmacClipboard();
+		 convertLadderFromCxClipboardToSysmacClipboard(); 
 		// testLadderSysmacExampleVersusSysmacClipboard();
 //		testSysmacLength();
 		System.out.println("Done");

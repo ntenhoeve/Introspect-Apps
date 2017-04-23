@@ -3,11 +3,14 @@ package nth.meyn.cx.sysmac.converter.cx.ladder.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBElement;
 
@@ -104,7 +107,7 @@ public class CxLadderModel {
 	}
 
 	private Map<CxLocation, Object> createGridWithObjects(RUNG rung) {
-		TreeMap<CxLocation, Object> grid = new TreeMap<>(new CxLocationComparator());
+		TreeMap<CxLocation, Object> grid = new TreeMap<>(new CxLocationComparator(true));
 		List<Serializable> elements = rung.getElementList().getContent();
 		for (Serializable element : elements) {
 			@SuppressWarnings("rawtypes")
@@ -220,6 +223,16 @@ public class CxLadderModel {
 		return found;
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T extends Object> List<T> get(TreeMap<CxLocation, Object> grid, Class<T> classToFind) {
+		List<T> found = new ArrayList<>();
+		for (Object value : grid.values()) {
+			if (classToFind.isAssignableFrom(value.getClass())) {
+				found.add((T) value);
+			}
+		}
+		return found;
+	}
 	public CxLeftPowerRail getLeftPowerRail() {
 		return leftPowerRail;
 	}
@@ -406,11 +419,12 @@ public class CxLadderModel {
 
 	public List<Object> getContactsCoilsAndInstructions() {
 		List<Object> objects = new ArrayList<>();
-		List<CONTACT> contacts = get(CONTACT.class);
+		List<CONTACT> contacts = new ArrayList<>( get(CONTACT.class));
+//		Collections.reverse(contacts);
 		objects.addAll(contacts);
-		List<COIL> coils = get(COIL.class);
+		List<COIL> coils = get( COIL.class);
 		objects.addAll(coils);
-		List<INSTRUCTION> instructions = get(INSTRUCTION.class);
+		List<INSTRUCTION> instructions = get( INSTRUCTION.class);
 		objects.addAll(instructions);
 		return objects;
 	}
@@ -423,11 +437,39 @@ public class CxLadderModel {
 	public List<Object> getConnectingObjects() {
 		List<Object> objects = new ArrayList<>();
 		objects.addAll(getContactsCoilsAndInstructions());
-		objects.addAll(get(CxInstructionInput.class));
+		objects.addAll(get( CxInstructionInput.class));
 		objects.add(leftPowerRail);
 		objects.add(rightPowerRail);
 		objects.addAll(connectionHubs.getAll());
 		return objects;
 	}
 
+//	public List<Object> getConnectingObjectsLastLineFirst() {
+//		TreeMap<CxLocation,Object> gridUpsideDown=new TreeMap<>(new CxLocationComparator(false));
+//		gridUpsideDown.putAll(grid);
+//		List<Object> objects = new ArrayList<>();
+//		objects.addAll(get(gridUpsideDown, CONTACT.class));
+//		objects.addAll(get(gridUpsideDown,COIL.class));
+//		objects.addAll(get(gridUpsideDown ,INSTRUCTION.class));
+//		objects.addAll(get(gridUpsideDown, CxInstructionInput.class));
+//		objects.add(leftPowerRail);
+//		objects.add(rightPowerRail);
+//		objects.addAll(connectionHubs.getAll());
+//		return objects;
+//	}
+
+//	public List<Object> getConnectingObjectsinXmlOrder() {
+//	TreeMap<CxLocation,Object> gridUpsideDown=new TreeMap<>(new CxLocationComparator(false));
+//	gridUpsideDown.putAll(grid);
+//	List<Object> objects = new ArrayList<>();
+//	objects.add(leftPowerRail);
+//	objects.add(rightPowerRail);
+//	objects.addAll(connectionHubs.getAll());
+//	List<Object> gridObjects = new ArrayList(grid.values());
+//	gridObjects.removeIf(o -> (o instanceof HORIZONTAL));
+//	objects.addAll(gridObjects);
+//	TODO order werkt nog niet goed!!!
+//	return objects;
+//}
+	
 }

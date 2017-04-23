@@ -8,16 +8,18 @@ import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxConnection;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.Calculation;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.EdgeFactory;
-import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.SysmacLadderElementFactory;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactory;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
 
 public class SysmacRungsFactory {
 
 	public static Rungs create(List<CxLadderModel> cxLadderModels) {
 		Rungs sysmacRungs = new Rungs();
-		SysmacLadderElementFactory ladderElementFactory = new SysmacLadderElementFactory();
+		LadderElementFactoryFactory ladderElementFactoryFactory = new LadderElementFactoryFactory();
 		for (CxLadderModel cxLadderModel : cxLadderModels) {
-			RungXML sysmacRung = createLadderRung(cxLadderModel, ladderElementFactory);
+			RungXML sysmacRung = createLadderRung(cxLadderModel, ladderElementFactoryFactory);
 			sysmacRungs.getRungXML().add(sysmacRung);
 		}
 		return sysmacRungs;
@@ -32,10 +34,10 @@ public class SysmacRungsFactory {
 //	}
 
 	private static RungXML createLadderRung(CxLadderModel cxLadderModel,
-			SysmacLadderElementFactory ladderElementFactory) {
+			LadderElementFactoryFactory ladderElementFactoryFactory) {
 		RungXML sysmacRung = new RungXML();
-
-		sysmacRung.setComment(cxLadderModel.getComment());
+		
+		
 		sysmacRung.setHeight((float) 56);// TODO test if this can be removed
 		sysmacRung.setWidth((short) 661);// TODO test if this can be removed
 		sysmacRung.setLabel("");
@@ -44,11 +46,16 @@ public class SysmacRungsFactory {
 		Mapping mapping = new Mapping();
 		String programName="SimpleThings";
 
+		boolean containsCalculation=false;
+		
 		List<LadderElement> sysmacEdges=new ArrayList<>();
 		List<Object> cxLadderObjects = cxLadderModel.getConnectingObjects();
 		for (Object cxLadderObject : cxLadderObjects) {
-			 List<LadderElement> newLadderElements = ladderElementFactory.create(programName,
-						cxLadderObject);
+			LadderElementFactory ladderElementFactory = ladderElementFactoryFactory.create(programName, cxLadderObject);
+if (ladderElementFactory instanceof Calculation) {
+	containsCalculation=true;
+}
+			List<LadderElement> newLadderElements = ladderElementFactory.create(cxLadderObject, ladderElementFactoryFactory.getIdFactory(), programName);
 			 List<LadderElement> newEdges = newLadderElements.stream().filter(ladderElement -> ladderElement.getLadderElementType().equals(EdgeFactory.EDGE)).collect(Collectors.toList());
 			 sysmacEdges.addAll(newEdges);
 			 newLadderElements.removeAll(newEdges);
@@ -57,42 +64,19 @@ public class SysmacRungsFactory {
 			 mapping.put(cxLadderObject, newLadderElements.get(0));
 			
 		}
-//		
-//		LadderElement sysmacLadderElement=null;
-//		
-//		List<CONTACT> cxContacts = cxLadderModel.get(CONTACT.class);
-//		for (CONTACT cxContact : cxContacts) {
-//		}
-//
-//		List<COIL> cxCoils = cxLadderModel.get(COIL.class);
-//		for (COIL cxCoil : cxCoils) {
-//			sysmacLadderElement= ladderElementFactory.create(programName, cxCoil);
-//			sysmacLadderElements.add(sysmacLadderElement);
-//			mapping.put(cxCoil, sysmacLadderElement);
-//		}
-//
-//		CxLeftPowerRail cxLeftPowerRail = cxLadderModel.getLeftPowerRail();
-//		sysmacLadderElement= ladderElementFactory.create(programName, cxLeftPowerRail);
-//		sysmacLadderElements.add(sysmacLadderElement);
-//		mapping.put(cxLeftPowerRail, sysmacLadderElement);
-//				
-//		CxRightPowerRail cxRightPowerRail = cxLadderModel.getRightPowerRail();
-//		LadderElement sysmacRightPowerRail = ladderElementFactory.create(programName, cxRightPowerRail);
-//		sysmacLadderElements.add(sysmacRightPowerRail);
-//		mapping.put(cxRightPowerRail, sysmacRightPowerRail);
-//
-//		Set<CxConnectionHub> cxConnnectionHubs = cxLadderModel.getConnectionHubs();
-//		for (CxConnectionHub cxConnectionHub : cxConnnectionHubs) {
-//			LadderElement sysmacConnection = ladderElementFactory.create(programName, cxConnectionHub);
-//			sysmacLadderElements.add(sysmacConnection);
-//			mapping.put(cxConnectionHub, sysmacConnection);
-//		}
 
 		List<CxConnection> cxConnections = cxLadderModel.getConnections();
 		for (CxConnection cxConnection : cxConnections) {
-			ladderElementFactory.createConnection(sysmacRung, mapping, cxConnection);
+			ladderElementFactoryFactory.createConnection(sysmacRung, mapping, cxConnection);
 		}
 		sysmacLadderElements.addAll(sysmacEdges);
+		
+		
+		StringBuilder comment=new StringBuilder(cxLadderModel.getComment());
+		if (containsCalculation) {
+			comment.append("\rTODO: Convert the calculations in this rung to structured text to improvr readability");
+		}
+		sysmacRung.setComment(comment.toString());
 		
 		return sysmacRung;
 	}
