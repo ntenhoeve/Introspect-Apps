@@ -3,14 +3,11 @@ package nth.meyn.cx.sysmac.converter.cx.ladder.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBElement;
 
@@ -24,6 +21,7 @@ import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.HORIZONTAL;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.VERTICAL;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
 
 public class CxLadderModel {
 
@@ -76,36 +74,6 @@ public class CxLadderModel {
 	}
 
 
-	private Map<CxLocation, Object> createInstructionInputs(TreeMap<CxLocation, Object> grid) {
-		Map<CxLocation, Object> instructionInputs=new HashMap<>();
-		Set<CxLocation> locations = grid.keySet();
-		for (CxLocation location : locations) {
-			Object value = grid.get(location);
-			if (value instanceof INSTRUCTION) {
-				CxLocation instructionLocation1 = location.oneDown();
-				if (grid.get(instructionLocation1.oneLeft()) != null) {
-					CxInstructionInput instructionInput1 = new CxInstructionInput(
-							(INSTRUCTION) value, 1);
-					instructionInputs.put(instructionLocation1, instructionInput1);
-				}
-				CxLocation instructionLocation2 = instructionLocation1.oneDown();
-				if (grid.get(instructionLocation2.oneLeft()) != null) {
-					CxInstructionInput instructionInput2 = new CxInstructionInput(
-							(INSTRUCTION) value, 2);
-					instructionInputs.put(instructionLocation2, instructionInput2);
-				}
-				CxLocation instructionLocation3 = instructionLocation2.oneDown();
-				if (grid.get(instructionLocation3.oneLeft()) != null) {
-					CxInstructionInput instructionInput3 = new CxInstructionInput(
-							(INSTRUCTION) value, 3);
-					instructionInputs.put(instructionLocation3, instructionInput3);
-				}
-
-			}
-		}
-		return instructionInputs;
-	}
-
 	private Map<CxLocation, Object> createGridWithObjects(RUNG rung) {
 		TreeMap<CxLocation, Object> grid = new TreeMap<>(new CxLocationComparator(true));
 		List<Serializable> elements = rung.getElementList().getContent();
@@ -125,6 +93,7 @@ public class CxLadderModel {
 			} else if (value instanceof INSTRUCTION) {
 				CxLocation location = getLocation((INSTRUCTION) value);
 				grid.put(location, value);
+				grid.putAll(createInstructionInputs(location, (INSTRUCTION)value));
 			} else if (value instanceof FBPARAMETER) {
 				CxLocation location = getLocation((FBPARAMETER) value);
 				grid.put(location, value);
@@ -140,10 +109,24 @@ public class CxLadderModel {
 
 		}
 		
-		Map<CxLocation, Object> instructionInputs = createInstructionInputs(grid);
-		grid.putAll(instructionInputs);
-		
 		return grid;
+	}
+
+	private Map<CxLocation, Object> createInstructionInputs(CxLocation location,
+			INSTRUCTION instruction) {
+		
+		Map<CxLocation, Object> instructionInputs=new HashMap<>();
+		LadderElementFactoryFactory factory=new LadderElementFactoryFactory();
+		for (int inputNr=1;inputNr<=3;inputNr++) {
+			CxInstructionInput instructionInput=new CxInstructionInput(instruction, inputNr);
+			try {
+				factory.create(instructionInput);
+				location=location.oneDown();
+				instructionInputs.put(location, instructionInput);
+			} catch (Exception e) {
+			}
+		}
+		return instructionInputs;
 	}
 
 	private String getComment(RUNG rung) {

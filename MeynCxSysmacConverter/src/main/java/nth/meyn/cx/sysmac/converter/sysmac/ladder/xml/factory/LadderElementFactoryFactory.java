@@ -117,7 +117,7 @@ public class LadderElementFactoryFactory {
 		}
 	}
 
-	public LadderElementFactory create(String programName, Object cxLadderObject) {
+	public LadderElementFactory create( Object cxLadderObject) {
 		String converterClassName = createFactoryClassName(cxLadderObject);
 		LadderElementFactory ladderElementFactory = ladderElementFactories.get(converterClassName);
 		if (ladderElementFactory == null) {
