@@ -16,10 +16,11 @@ import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
 
 public class InstructionFactory {
 
-	private static final int NOT_FOUND= 1;
+	private static final int NOT_FOUND = 1;
 	private static final Boolean IS_NO_POWER_POINT = false;
 	private static final String VARIABLE = "Variable";
-	public static final String FUNCTION = "Function";
+	private static final String FUNCTION = "Function";
+	private static final String FUNCTION_BLOCK = "FunctionBlock";
 
 	public static String getVarName(INSTRUCTION cxInstruction, int index) {
 		Operand opperand = cxInstruction.getOperands().getOperand().get(index);
@@ -37,8 +38,8 @@ public class InstructionFactory {
 	 * @param name
 	 * @param isPolynomial
 	 * @param isUserDefinedType
-	 * @param powerPinOutName 
-	 * @param powerPinInName 
+	 * @param powerPinOutName
+	 * @param powerPinInName
 	 * @return all elements that make up the function (first element is function
 	 *         it self, followed by variable elements and edge elements), see
 	 *         also
@@ -92,24 +93,68 @@ public class InstructionFactory {
 	// </ConnectionPoint>
 	// </LadderElement>
 
-	public static List<LadderElement> create(IdFactory idFactory, String ladderElementType,
-			String name, boolean isPolynomial, boolean isUserDefinedType, String powerPinInName, String powerPinOutName) {
+	public static List<LadderElement> createFunction(IdFactory idFactory, String name,
+			boolean isPolynomial, boolean isUserDefinedType, String powerPinInName,
+			String powerPinOutName) {
 		LadderElement ladderElement = new LadderElement();
 		ladderElement.setInstanceID(idFactory.createNext());
-		ladderElement.setLadderElementType(ladderElementType);
+		ladderElement.setLadderElementType(FUNCTION);
 		ladderElement.setTypeName(name);
 		ladderElement.setIsPolynomial(Boolean.FALSE.toString());
 		ladderElement.setIsUserDefinedType(Boolean.FALSE.toString());
 
-		JAXBElement<PinViewModel> pinViewModelIn = PinViewModelFactory
-				.create(SysmacConnectionPointType.INPUT, powerPinInName, "", SysmacDataType.BOOL, true);
+		JAXBElement<PinViewModel> pinViewModelIn = PinViewModelFactory.create(
+				SysmacConnectionPointType.INPUT, powerPinInName, "", SysmacDataType.BOOL, true);
 		ladderElement.getContent().add(pinViewModelIn);
 
-		JAXBElement<PinViewModel> pinViewModelOut = PinViewModelFactory.create(SysmacConnectionPointType.OUTPUT, powerPinOutName, "",
-				SysmacDataType.BOOL, true);
+		JAXBElement<PinViewModel> pinViewModelOut = PinViewModelFactory.create(
+				SysmacConnectionPointType.OUTPUT, powerPinOutName, "", SysmacDataType.BOOL, true);
 		ladderElement.getContent().add(pinViewModelOut);
 
-		List<LadderElement> ladderElements=new ArrayList<>();
+		List<LadderElement> ladderElements = new ArrayList<>();
+		ladderElements.add(ladderElement);
+		return ladderElements;
+	}
+
+	/**
+	 * creates a standard sysmac functionblock<br>
+	 * Than add all in and outputs with
+	 * {@link #add(LadderElement, IdFactory, String, SysmacConnectionPointType, String, String, SysmacDataType, String, SysmacDataType)}
+	 * 
+	 * @param idFactory
+	 * @param ladderElementType
+	 * @param name
+	 * @param isPolynomial
+	 * @param isUserDefinedType
+	 * @param powerPinOutName
+	 * @param powerPinInName
+	 * @return all elements that make up the function (first element is function
+	 *         it self, followed by variable elements and edge elements), see
+	 *         also
+	 *         {@link #add(List, IdFactory, String, SysmacConnectionPointType, String, String, SysmacDataType, String, SysmacDataType)}
+	 *
+	 */
+
+	public static List<LadderElement> createStandardFunctionBlock(IdFactory idFactory,
+			String functionBlockName, String instanceName, boolean isUserDefinedType,
+			String powerPinInName, String powerPinOutName) {
+		LadderElement ladderElement = new LadderElement();
+		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setLadderElementType(FUNCTION_BLOCK);
+		ladderElement.setTypeName(functionBlockName);
+		ladderElement.setIsUserDefinedType(Boolean.FALSE.toString());
+		ladderElement.setVariableName(instanceName);
+		ladderElement.setBaseVariableDataType(instanceName);
+
+		JAXBElement<PinViewModel> pinViewModelIn = PinViewModelFactory.create(
+				SysmacConnectionPointType.INPUT, powerPinInName, "", SysmacDataType.BOOL, true);
+		ladderElement.getContent().add(pinViewModelIn);
+
+		JAXBElement<PinViewModel> pinViewModelOut = PinViewModelFactory.create(
+				SysmacConnectionPointType.OUTPUT, powerPinOutName, "", SysmacDataType.BOOL, true);
+		ladderElement.getContent().add(pinViewModelOut);
+
+		List<LadderElement> ladderElements = new ArrayList<>();
 		ladderElements.add(ladderElement);
 		return ladderElements;
 	}
@@ -153,38 +198,39 @@ public class InstructionFactory {
 		index = findNextPinViewModelIndex(functionElement, type);
 		functionElement.getContent().add(index, pinViewModel);
 
-		LadderElement varElement = new LadderElement();
-		varElement.setInstanceID(idFactory.createNext());
-		varElement.setLadderElementType(VARIABLE);
-		varElement.setVariableName(varName);
-		varElement.setBaseVariableName(varName);
-		varElement.setProgramName(programName);
-		varElement.setBaseVariableDataType(varDataType.toString());
+		if (varName != null) {
+			LadderElement varElement = new LadderElement();
+			varElement.setInstanceID(idFactory.createNext());
+			varElement.setLadderElementType(VARIABLE);
+			varElement.setVariableName(varName);
+			varElement.setBaseVariableName(varName);
+			varElement.setProgramName(programName);
+			varElement.setBaseVariableDataType(varDataType.toString());
 
-		String variableConnectionPointId = idFactory.createNext();
-		connectionPoint = ConnectionPointFactory.create(variableConnectionPointId, edgeId,
-				type.getInverse(), null);
-		varElement.getContent().add(connectionPoint);
+			String variableConnectionPointId = idFactory.createNext();
+			connectionPoint = ConnectionPointFactory.create(variableConnectionPointId, edgeId,
+					type.getInverse(), null);
+			varElement.getContent().add(connectionPoint);
 
-		index = findNextVarElementIndex(ladderElements);
-		ladderElements.add(index, varElement);
+			index = findNextVarElementIndex(ladderElements);
+			ladderElements.add(index, varElement);
 
-		String connectionPointSourceId = (type == SysmacConnectionPointType.INPUT)
-				? variableConnectionPointId : functionConnectionPointId;
-		String connectionPointTargetId = (type == SysmacConnectionPointType.INPUT)
-				? functionConnectionPointId : variableConnectionPointId;
-		LadderElement edgeElement = EdgeFactory.createEdge(edgeId, connectionPointSourceId,
-				connectionPointTargetId,false);
-		index = ladderElements.size();
-		ladderElements.add(index, edgeElement);
-
+			String connectionPointSourceId = (type == SysmacConnectionPointType.INPUT)
+					? variableConnectionPointId : functionConnectionPointId;
+			String connectionPointTargetId = (type == SysmacConnectionPointType.INPUT)
+					? functionConnectionPointId : variableConnectionPointId;
+			LadderElement edgeElement = EdgeFactory.createEdge(edgeId, connectionPointSourceId,
+					connectionPointTargetId, false);
+			index = ladderElements.size();
+			ladderElements.add(index, edgeElement);
+		}
 	}
 
 	private static int findNextVarElementIndex(List<LadderElement> ladderElements) {
 		int index = 1;
 		for (LadderElement ladderElement : ladderElements) {
 			if (ladderElement.getLadderElementType().equals(VARIABLE)) {
-				index = ladderElements.indexOf(ladderElement)+1;
+				index = ladderElements.indexOf(ladderElement) + 1;
 			}
 		}
 		return index;
@@ -201,7 +247,7 @@ public class InstructionFactory {
 				if (xmlObject instanceof PinViewModel) {
 					PinViewModel pinViewModel = (PinViewModel) xmlObject;
 					if (pinViewModel.getIsInput().equals(isInput)) {
-						index = functionElement.getContent().indexOf(xmlElement)+1;
+						index = functionElement.getContent().indexOf(xmlElement) + 1;
 					}
 				}
 			}
@@ -221,23 +267,23 @@ public class InstructionFactory {
 					ConnectionPoint connectionPoint = (ConnectionPoint) xmlObject;
 					if (connectionPoint.getConnectionPointType()
 							.equals(connectionPointTypeToFind)) {
-						index = functionElement.getContent().indexOf(xmlElement)+1;
+						index = functionElement.getContent().indexOf(xmlElement) + 1;
 					}
 				}
 			}
 		}
-		if (index==NOT_FOUND) {
+		if (index == NOT_FOUND) {
 			for (Serializable xmlElement : functionElement.getContent()) {
 				if (xmlElement instanceof JAXBElement) {
 					JAXBElement jaxbElement = (JAXBElement) xmlElement;
 					Object xmlObject = jaxbElement.getValue();
 					if (xmlObject instanceof PinViewModel) {
 						return functionElement.getContent().indexOf(xmlElement);
-						}
 					}
 				}
-			}	
-		
+			}
+		}
+
 		return index;
 	}
 

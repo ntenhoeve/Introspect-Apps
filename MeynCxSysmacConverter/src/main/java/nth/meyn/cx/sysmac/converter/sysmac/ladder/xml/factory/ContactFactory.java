@@ -87,7 +87,7 @@ public class ContactFactory implements LadderElementFactory<CONTACT> {
 		boolean isUserDefinedType=false;
 		String powerPinInName="EN";
 		String powerPinOutName="";
-		List<LadderElement> ladderElements = InstructionFactory.create(idFactory, InstructionFactory.FUNCTION, pulseFunctionName, isPolynomial, isUserDefinedType, powerPinInName, powerPinOutName);
+		List<LadderElement> ladderElements = InstructionFactory.createFunction(idFactory, pulseFunctionName, isPolynomial, isUserDefinedType, powerPinInName, powerPinOutName);
 		return ladderElements;
 	}
 

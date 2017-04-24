@@ -42,7 +42,6 @@ public class InstructionMovFactory implements LadderElementFactory<INSTRUCTION> 
 	
 
 
-	private static final String FUNCTION = "Function";
 	private static final String MOVE = "MOVE";
 
 	@Override
@@ -51,7 +50,7 @@ public class InstructionMovFactory implements LadderElementFactory<INSTRUCTION> 
 		
 		 boolean isPolynomial=false;
 		boolean isUserDefinedType=false;
-		List<LadderElement> ladderElements = InstructionFactory.create(idFactory, FUNCTION, MOVE, isPolynomial, isUserDefinedType, "EN","ENO");
+		List<LadderElement> ladderElements = InstructionFactory.createFunction(idFactory, MOVE, isPolynomial, isUserDefinedType, "EN","ENO");
 		
 		String sourceVarName = InstructionFactory.getVarName(cxInstruction, 1);
 		SysmacDataType sourceVarDataType = SysmacDataType.BOOL; //TODO;
