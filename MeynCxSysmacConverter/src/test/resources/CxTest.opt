@@ -52,19 +52,19 @@ BEGIN
  BEGIN
   BarID:=59414;
   Visible:=0;
-  Pos:="789 5";
+  Pos:="1 5";
   Docking:=1;
   MRUDockID:=59422;
-  MRUDockPos:="789 5 1375 204";
+  MRUDockPos:="1 5 1577 185";
   MRUFloatStyle:=4;
   MRUFloatPos:="-2147483648 0";
   Style:=36756;
   ExStyle:=3889;
   PrevFloating:=0;
   MDIChild:=0;
-  PctWidth:="375000";
+  PctWidth:="1000000";
   MRUFloat:="300 180";
-  MRUHorzDock:="586 199";
+  MRUHorzDock:="1576 180";
   MRUVertDock:="300 180";
   MRUDockingState:=0;
   DockingStyle:=61440;
@@ -154,7 +154,7 @@ BEGIN
   Pos:="1 5";
   Docking:=1;
   MRUDockID:=59422;
-  MRUDockPos:="1 5 783 204";
+  MRUDockPos:="1 5 786 185";
   MRUFloatStyle:=4;
   MRUFloatPos:="-2147483648 0";
   Style:=36756;
@@ -163,7 +163,7 @@ BEGIN
   MDIChild:=0;
   PctWidth:="500000";
   MRUFloat:="300 180";
-  MRUHorzDock:="782 199";
+  MRUHorzDock:="785 180";
   MRUVertDock:="732 210";
   MRUDockingState:=0;
   DockingStyle:=61440;
@@ -231,6 +231,21 @@ BEGIN
 END;
 Frame[2]:=
 BEGIN
+ Norm:="0075 0075 1379 0659";
+ Min:="-001 -001";
+ Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.OnOff!OnOff";
+ Type:=1;
+ Views:=
+ BEGIN
+  View[0]:=
+  BEGIN
+   Yscroll:=12;
+  END;
+  nViews:=1;
+ END;
+END;
+Frame[3]:=
+BEGIN
  Max:=true;
  Norm:="0000 0000 1300 0580";
  Min:="-001 -001";
@@ -240,11 +255,12 @@ BEGIN
  BEGIN
   View[0]:=
   BEGIN
+   Yscroll:=34;
   END;
   nViews:=1;
  END;
 END;
-nFrames:=3;
+nFrames:=4;
 WatchWindow:=
 BEGIN
  NumWatch:=3;

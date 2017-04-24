@@ -400,31 +400,20 @@ public class CxLadderModel {
 	 * @return
 	 */
 
-	public List<Object> getContactsCoilsAndInstructions() {
-		List<Object> objects = new ArrayList<>();
-		List<CONTACT> contacts = new ArrayList<>( get(CONTACT.class));
-//		Collections.reverse(contacts);
-		objects.addAll(contacts);
-		List<COIL> coils = get( COIL.class);
-		objects.addAll(coils);
-		List<INSTRUCTION> instructions = get( INSTRUCTION.class);
-		objects.addAll(instructions);
-		return objects;
-	}
-
-	/**
-	 * Note: order must be same as Sysmac XML!!!
-	 * 
-	 * @return
-	 */
 	public List<Object> getConnectingObjects() {
 		List<Object> objects = new ArrayList<>();
-		objects.addAll(getContactsCoilsAndInstructions());
+		objects.addAll( get(CONTACT.class));
+		objects.addAll( get( COIL.class));
+		objects.addAll( get( INSTRUCTION.class));
 		objects.addAll(get( CxInstructionInput.class));
 		objects.add(leftPowerRail);
 		objects.add(rightPowerRail);
 		objects.addAll(connectionHubs.getAll());
 		return objects;
+	}
+
+	public Map<CxLocation, Object> getGrid() {
+		return grid;
 	}
 
 //	public List<Object> getConnectingObjectsLastLineFirst() {
