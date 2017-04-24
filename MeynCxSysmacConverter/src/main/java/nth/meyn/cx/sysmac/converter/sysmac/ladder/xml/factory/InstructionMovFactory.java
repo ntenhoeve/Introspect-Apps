@@ -7,7 +7,7 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElemen
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
 
-public class InstructionMov0Factory implements LadderElementFactory<INSTRUCTION> {
+public class InstructionMovFactory implements LadderElementFactory<INSTRUCTION> {
 
 
 //	  <LadderElement instanceID="0x00000052" ladderElementType="Function" typeName="MOVE" IsPolynomial="false" IsUserDefinedType="false">
@@ -46,7 +46,7 @@ public class InstructionMov0Factory implements LadderElementFactory<INSTRUCTION>
 	private static final String MOVE = "MOVE";
 
 	@Override
-	public List<LadderElement> create(INSTRUCTION cxInstruction, IdFactory idFactory,
+	public List<LadderElement> createForInput1(INSTRUCTION cxInstruction, IdFactory idFactory,
 			String programName) {
 		
 		 boolean isPolynomial=false;

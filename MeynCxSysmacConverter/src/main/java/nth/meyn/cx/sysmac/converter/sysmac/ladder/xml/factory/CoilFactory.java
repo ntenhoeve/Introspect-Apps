@@ -31,7 +31,7 @@ public class CoilFactory implements LadderElementFactory<COIL> {
 	}
 
 	@Override
-	public List<LadderElement> create(
+	public List<LadderElement> createForInput1(
 			nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.COIL cxCoil,
 			IdFactory idFactory, String programName) {
 		LadderElement ladderElement = create(idFactory, programName,

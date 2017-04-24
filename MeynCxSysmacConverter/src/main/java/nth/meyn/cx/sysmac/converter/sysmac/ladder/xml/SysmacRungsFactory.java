@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxConnection;
+import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxInstructionInput;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
+import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.Calculation;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.EdgeFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith2Inputs;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith3Inputs;
 
 public class SysmacRungsFactory {
 
@@ -56,8 +60,33 @@ public class SysmacRungsFactory {
 			if (ladderElementFactory instanceof Calculation) {
 				containsCalculation = true;
 			}
-			List<LadderElement> newLadderElements = ladderElementFactory.create(cxLadderObject,
-					ladderElementFactoryFactory.getIdFactory(), programName);
+
+			List<LadderElement> newLadderElements = null;
+			if (ladderElementFactory instanceof LadderElementFactoryWith2Inputs) {
+				if (cxLadderObject instanceof INSTRUCTION) {
+					INSTRUCTION instruction = (INSTRUCTION) cxLadderObject;
+					newLadderElements = ladderElementFactory.createForInput1(instruction,
+							ladderElementFactoryFactory.getIdFactory(), programName);
+
+				} else if (cxLadderObject instanceof CxInstructionInput) {
+					CxInstructionInput cxInstructionInput = (CxInstructionInput) cxLadderObject;
+					INSTRUCTION instruction = cxInstructionInput.getInstruction();
+					int inputNr = cxInstructionInput.getInputNr();
+					if (inputNr == 1) {
+						newLadderElements = ((LadderElementFactoryWith2Inputs) ladderElementFactory)
+								.createForInput2(instruction,
+										ladderElementFactoryFactory.getIdFactory(), programName);
+					} else if (inputNr == 2) {
+						newLadderElements = ((LadderElementFactoryWith3Inputs) ladderElementFactory)
+								.createForInput3(instruction,
+										ladderElementFactoryFactory.getIdFactory(), programName);
+					}
+				}
+			} else {
+				newLadderElements = ladderElementFactory.createForInput1(cxLadderObject,
+						ladderElementFactoryFactory.getIdFactory(), programName);
+			}
+
 			List<LadderElement> newEdges = newLadderElements.stream().filter(
 					ladderElement -> ladderElement.getLadderElementType().equals(EdgeFactory.EDGE))
 					.collect(Collectors.toList());

@@ -21,7 +21,10 @@ import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.HORIZONTAL;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.VERTICAL;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith2Inputs;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith3Inputs;
 
 public class CxLadderModel {
 
@@ -40,7 +43,7 @@ public class CxLadderModel {
 	public CxLadderModel(RUNG rung) {
 		verticals = new CxVerticals();
 		comment = getComment(rung);
-		grid=createGridWithObjects(rung);
+		grid = createGridWithObjects(rung);
 		maxX = findMaxX();
 		maxY = findMaxY();
 		leftPowerRail = new CxLeftPowerRail(this);
@@ -73,7 +76,6 @@ public class CxLadderModel {
 		return maxX;
 	}
 
-
 	private Map<CxLocation, Object> createGridWithObjects(RUNG rung) {
 		TreeMap<CxLocation, Object> grid = new TreeMap<>(new CxLocationComparator(true));
 		List<Serializable> elements = rung.getElementList().getContent();
@@ -93,7 +95,7 @@ public class CxLadderModel {
 			} else if (value instanceof INSTRUCTION) {
 				CxLocation location = getLocation((INSTRUCTION) value);
 				grid.put(location, value);
-				grid.putAll(createInstructionInputs(location, (INSTRUCTION)value));
+				grid.putAll(createInstructionInputs(location, (INSTRUCTION) value));
 			} else if (value instanceof FBPARAMETER) {
 				CxLocation location = getLocation((FBPARAMETER) value);
 				grid.put(location, value);
@@ -108,23 +110,26 @@ public class CxLadderModel {
 						+ getClass().getSimpleName());
 
 		}
-		
+
 		return grid;
 	}
 
 	private Map<CxLocation, Object> createInstructionInputs(CxLocation location,
 			INSTRUCTION instruction) {
-		
-		Map<CxLocation, Object> instructionInputs=new HashMap<>();
-		LadderElementFactoryFactory factory=new LadderElementFactoryFactory();
-		for (int inputNr=1;inputNr<=3;inputNr++) {
-			CxInstructionInput instructionInput=new CxInstructionInput(instruction, inputNr);
-			try {
-				factory.create(instructionInput);
-				location=location.oneDown();
-				instructionInputs.put(location, instructionInput);
-			} catch (Exception e) {
-			}
+		Map<CxLocation, Object> instructionInputs = new HashMap<>();
+		LadderElementFactoryFactory factoryFactory = new LadderElementFactoryFactory();
+		 LadderElementFactory factory = factoryFactory.create(instruction);
+		 if (factory instanceof LadderElementFactoryWith3Inputs) {
+			CxInstructionInput instructionInput = new CxInstructionInput(instruction, 1);
+			location = location.oneDown();
+			instructionInputs.put(location, instructionInput);
+			instructionInput = new CxInstructionInput(instruction, 2);
+			location = location.oneDown();
+			instructionInputs.put(location, instructionInput);
+		} else if (factory instanceof LadderElementFactoryWith2Inputs) {
+			CxInstructionInput instructionInput = new CxInstructionInput(instruction, 1);
+			location = location.oneDown();
+			instructionInputs.put(location, instructionInput);
 		}
 		return instructionInputs;
 	}
@@ -216,6 +221,7 @@ public class CxLadderModel {
 		}
 		return found;
 	}
+
 	public CxLeftPowerRail getLeftPowerRail() {
 		return leftPowerRail;
 	}
@@ -402,10 +408,10 @@ public class CxLadderModel {
 
 	public List<Object> getConnectingObjects() {
 		List<Object> objects = new ArrayList<>();
-		objects.addAll( get(CONTACT.class));
-		objects.addAll( get( COIL.class));
-		objects.addAll( get( INSTRUCTION.class));
-		objects.addAll(get( CxInstructionInput.class));
+		objects.addAll(get(CONTACT.class));
+		objects.addAll(get(COIL.class));
+		objects.addAll(get(INSTRUCTION.class));
+		objects.addAll(get(CxInstructionInput.class));
 		objects.add(leftPowerRail);
 		objects.add(rightPowerRail);
 		objects.addAll(connectionHubs.getAll());
@@ -416,32 +422,34 @@ public class CxLadderModel {
 		return grid;
 	}
 
-//	public List<Object> getConnectingObjectsLastLineFirst() {
-//		TreeMap<CxLocation,Object> gridUpsideDown=new TreeMap<>(new CxLocationComparator(false));
-//		gridUpsideDown.putAll(grid);
-//		List<Object> objects = new ArrayList<>();
-//		objects.addAll(get(gridUpsideDown, CONTACT.class));
-//		objects.addAll(get(gridUpsideDown,COIL.class));
-//		objects.addAll(get(gridUpsideDown ,INSTRUCTION.class));
-//		objects.addAll(get(gridUpsideDown, CxInstructionInput.class));
-//		objects.add(leftPowerRail);
-//		objects.add(rightPowerRail);
-//		objects.addAll(connectionHubs.getAll());
-//		return objects;
-//	}
+	// public List<Object> getConnectingObjectsLastLineFirst() {
+	// TreeMap<CxLocation,Object> gridUpsideDown=new TreeMap<>(new
+	// CxLocationComparator(false));
+	// gridUpsideDown.putAll(grid);
+	// List<Object> objects = new ArrayList<>();
+	// objects.addAll(get(gridUpsideDown, CONTACT.class));
+	// objects.addAll(get(gridUpsideDown,COIL.class));
+	// objects.addAll(get(gridUpsideDown ,INSTRUCTION.class));
+	// objects.addAll(get(gridUpsideDown, CxInstructionInput.class));
+	// objects.add(leftPowerRail);
+	// objects.add(rightPowerRail);
+	// objects.addAll(connectionHubs.getAll());
+	// return objects;
+	// }
 
-//	public List<Object> getConnectingObjectsinXmlOrder() {
-//	TreeMap<CxLocation,Object> gridUpsideDown=new TreeMap<>(new CxLocationComparator(false));
-//	gridUpsideDown.putAll(grid);
-//	List<Object> objects = new ArrayList<>();
-//	objects.add(leftPowerRail);
-//	objects.add(rightPowerRail);
-//	objects.addAll(connectionHubs.getAll());
-//	List<Object> gridObjects = new ArrayList(grid.values());
-//	gridObjects.removeIf(o -> (o instanceof HORIZONTAL));
-//	objects.addAll(gridObjects);
-//	TODO order werkt nog niet goed!!!
-//	return objects;
-//}
-	
+	// public List<Object> getConnectingObjectsinXmlOrder() {
+	// TreeMap<CxLocation,Object> gridUpsideDown=new TreeMap<>(new
+	// CxLocationComparator(false));
+	// gridUpsideDown.putAll(grid);
+	// List<Object> objects = new ArrayList<>();
+	// objects.add(leftPowerRail);
+	// objects.add(rightPowerRail);
+	// objects.addAll(connectionHubs.getAll());
+	// List<Object> gridObjects = new ArrayList(grid.values());
+	// gridObjects.removeIf(o -> (o instanceof HORIZONTAL));
+	// objects.addAll(gridObjects);
+	// TODO order werkt nog niet goed!!!
+	// return objects;
+	// }
+
 }

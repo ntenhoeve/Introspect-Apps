@@ -151,14 +151,13 @@ public class LadderElementFactoryFactory {
 	private Object createNormilizedFactoryName(Object cxLadderObject) {
 		if (cxLadderObject instanceof INSTRUCTION) {
 			INSTRUCTION instruction = (INSTRUCTION) cxLadderObject;
-			return createNormilizedInstructionName(instruction, 0);
+			return createNormilizedInstructionName(instruction);
 		}
 
 		if (cxLadderObject instanceof CxInstructionInput) {
 			CxInstructionInput instructionInput = (CxInstructionInput) cxLadderObject;
 			INSTRUCTION instruction = instructionInput.getInstruction();
-			int inputNr = instructionInput.getInputNr();
-			String name = createNormilizedInstructionName(instruction, inputNr);
+			String name = createNormilizedInstructionName(instruction);
 			return name;
 		}
 		String className = cxLadderObject.getClass().getSimpleName();
@@ -179,7 +178,7 @@ public class LadderElementFactoryFactory {
 		return withoutSpaces;
 	}
 
-	private String createNormilizedInstructionName(INSTRUCTION instruction, int input) {
+	private String createNormilizedInstructionName(INSTRUCTION instruction) {
 		String instructionName = instruction.getOperands().getOperand().get(0).getName();
 		instructionName = StringUtils.removeStart(instructionName, INVERSE_PREFIX);
 		instructionName = StringUtils.removeStart(instructionName, DIFF_UP_PREFIX);
@@ -198,7 +197,6 @@ public class LadderElementFactoryFactory {
 		StringBuilder result = new StringBuilder();
 		result.append("Instruction");
 		result.append(instructionName);
-		result.append(input);
 		return result.toString();
 	}
 

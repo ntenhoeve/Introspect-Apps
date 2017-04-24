@@ -6,6 +6,6 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElemen
 
 public interface LadderElementFactory<T> {
 
-	List<LadderElement> create(T cxLadderObject, IdFactory idFactory, String programName);
+	List<LadderElement> createForInput1(T cxLadderObject, IdFactory idFactory, String programName);
 
 }

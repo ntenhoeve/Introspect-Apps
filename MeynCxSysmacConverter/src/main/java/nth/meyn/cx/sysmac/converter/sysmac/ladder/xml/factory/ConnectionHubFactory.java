@@ -10,7 +10,7 @@ public class ConnectionHubFactory implements LadderElementFactory<CxConnectionHu
 
 
 	@Override
-	public List<LadderElement> create(CxConnectionHub cxConnectionHub, IdFactory idFactory,
+	public List<LadderElement> createForInput1(CxConnectionHub cxConnectionHub, IdFactory idFactory,
 			String programName) {
 		LadderElement ladderElement = ConnectionFactory.create(idFactory, false, false);
 		return Arrays.asList(ladderElement);

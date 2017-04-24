@@ -60,7 +60,7 @@ public class ContactFactory implements LadderElementFactory<CONTACT> {
 
 	
 	@Override
-	public List<LadderElement> create(CONTACT cxContact, IdFactory idFactory,
+	public List<LadderElement> createForInput1(CONTACT cxContact, IdFactory idFactory,
 			String programName ) {
 		String variableName = cxContact.getOperands().getOperand().getName();
 		switch (variableName) {
