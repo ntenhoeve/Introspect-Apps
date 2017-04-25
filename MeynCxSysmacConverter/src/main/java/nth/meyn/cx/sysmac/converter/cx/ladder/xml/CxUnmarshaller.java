@@ -12,8 +12,8 @@ public class CxUnmarshaller {
 		JAXBContext jaxbContext = JAXBContext.newInstance(CxLadderDiagram.class);
 
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
 		StringReader reader = new StringReader(xml);
+		
 		CxLadderDiagram cxLadderDiagram = (CxLadderDiagram) unmarshaller.unmarshal(reader);
 		// TODO Auto-generated method stub
 		return cxLadderDiagram;

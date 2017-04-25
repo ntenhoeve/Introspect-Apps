@@ -19,6 +19,7 @@ public abstract class InstructionComparisonFactory implements LadderInstructionF
 	private static final String SIGNED_SUFFIX = "S";
 	private static final String FLOAT_SUFFIX= "F";
 	private static final String DOUBLE_SUFFIX="D";
+	private static final String SIGNED_LONG_SUFFIX = "SL";
 	private static final String COMPARISON_DATA = "Comparison data";
 	private final String comparison;
 	
@@ -53,7 +54,7 @@ public abstract class InstructionComparisonFactory implements LadderInstructionF
 	
 	@Override
 	public List<String> getNameSuffixes() {
-		return Arrays.asList(SIGNED_SUFFIX,LONG_SUFFIX, FLOAT_SUFFIX, DOUBLE_SUFFIX); 
+		return Arrays.asList(SIGNED_SUFFIX,LONG_SUFFIX, SIGNED_LONG_SUFFIX, FLOAT_SUFFIX, DOUBLE_SUFFIX); 
 	}
 
 }

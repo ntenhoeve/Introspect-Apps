@@ -53,24 +53,75 @@ public class SysmacLadderDataFactory {
 //		byte[] length = new byte[] { lengthLowByte, lengthHighByte };
 	
 		int xmlLength = sysmacLadderXml.length();
-		
-		ByteBuffer byteBuffer = ByteBuffer.allocate(4);
-		byteBuffer.putInt(xmlLength * 8);
-		byte b3 = byteBuffer.array()[0];
 
-		byteBuffer = ByteBuffer.allocate(4);
-		byteBuffer.putInt(xmlLength * 4);
-		byte b2 = byteBuffer.array()[1];
+		ByteBuffer byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength * 128);
+		byte b7 = byteBuffer.array()[0];
 
-		byteBuffer = ByteBuffer.allocate(4);
-		byteBuffer.putInt(xmlLength * 2);
-		byte b1 = byteBuffer.array()[2];
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength * 64);
+		byte b6 = byteBuffer.array()[1];
+
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength * 32);
+		byte b5 = byteBuffer.array()[2];
 		
-		byteBuffer = ByteBuffer.allocate(4);
-		byteBuffer.putInt(xmlLength);
-		byte b0 = byteBuffer.array()[3];
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength *16);
+		byte b4 = byteBuffer.array()[3];
 		
-		if (b3!=0) {//numBytes=4;
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength * 8);
+		byte b3 = byteBuffer.array()[4];
+
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength * 4);
+		byte b2 = byteBuffer.array()[5];
+
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength * 2);
+		byte b1 = byteBuffer.array()[6];
+		
+		byteBuffer = ByteBuffer.allocate(8);
+		byteBuffer.putLong(xmlLength);
+		byte b0 = byteBuffer.array()[7];
+		
+		
+		if (b7!=0) {//numBytes=8;
+			//add sign bits when there is a higher byte 
+			b6=(byte) (b6|MOST_SIGNIFICANT_BIT);
+			b5=(byte) (b5|MOST_SIGNIFICANT_BIT);
+			b4=(byte) (b4|MOST_SIGNIFICANT_BIT);
+			b3=(byte) (b3|MOST_SIGNIFICANT_BIT);
+			b2=(byte) (b2|MOST_SIGNIFICANT_BIT);
+			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String( new byte[] {b0, b1, b2, b3, b4, b5, b6, b7});
+		} else if (b6!=0) {//numBytes=7;
+			//add sign bits when there is a higher byte 
+			b5=(byte) (b5|MOST_SIGNIFICANT_BIT);
+			b4=(byte) (b4|MOST_SIGNIFICANT_BIT);
+			b3=(byte) (b3|MOST_SIGNIFICANT_BIT);
+			b2=(byte) (b2|MOST_SIGNIFICANT_BIT);
+			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String( new byte[] {b0, b1, b2, b3, b4, b5, b6});
+		} else if (b5!=0) {//numBytes=6;
+			//add sign bits when there is a higher byte 
+			b4=(byte) (b4|MOST_SIGNIFICANT_BIT);
+			b3=(byte) (b3|MOST_SIGNIFICANT_BIT);
+			b2=(byte) (b2|MOST_SIGNIFICANT_BIT);
+			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String( new byte[] {b0, b1, b2, b3, b4, b5});
+		} else if (b4!=0) {//numBytes=5;
+			//add sign bits when there is a higher byte 
+			b3=(byte) (b3|MOST_SIGNIFICANT_BIT);
+			b2=(byte) (b2|MOST_SIGNIFICANT_BIT);
+			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);
+			b0=(byte) (b0|MOST_SIGNIFICANT_BIT);
+			return new String( new byte[] {b0, b1, b2, b3, b4});
+		} else if (b3!=0) {//numBytes=4;
 			//add sign bits when there is a higher byte 
 			b2=(byte) (b2|MOST_SIGNIFICANT_BIT);
 			b1=(byte) (b1|MOST_SIGNIFICANT_BIT);

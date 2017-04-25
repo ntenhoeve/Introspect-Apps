@@ -51,20 +51,19 @@ BEGIN
  Bar[2]:=
  BEGIN
   BarID:=59414;
-  Visible:=0;
-  Pos:="800 5";
+  Pos:="1 5";
   Docking:=1;
   MRUDockID:=59422;
-  MRUDockPos:="800 5 1577 204";
+  MRUDockPos:="1 5 1920 185";
   MRUFloatStyle:=4;
   MRUFloatPos:="-2147483648 0";
   Style:=36756;
   ExStyle:=3889;
   PrevFloating:=0;
   MDIChild:=0;
-  PctWidth:="494699";
+  PctWidth:="1000000";
   MRUFloat:="300 180";
-  MRUHorzDock:="777 199";
+  MRUHorzDock:="1919 180";
   MRUVertDock:="300 180";
   MRUDockingState:=0;
   DockingStyle:=61440;
@@ -129,7 +128,7 @@ BEGIN
   Pos:="0 -2";
   Docking:=1;
   MRUDockID:=59420;
-  MRUDockPos:="0 -2 335 859";
+  MRUDockPos:="0 -2 335 672";
   MRUFloatStyle:=4;
   MRUFloatPos:="-2147483648 0";
   Style:=8084;
@@ -139,7 +138,7 @@ BEGIN
   PctWidth:="1000000";
   MRUFloat:="300 180";
   MRUHorzDock:="300 180";
-  MRUVertDock:="335 861";
+  MRUVertDock:="335 674";
   MRUDockingState:=0;
   DockingStyle:=61440;
   TypeID:=0;
@@ -154,16 +153,16 @@ BEGIN
   Pos:="1 5";
   Docking:=1;
   MRUDockID:=59422;
-  MRUDockPos:="1 5 794 204";
+  MRUDockPos:="1 5 786 185";
   MRUFloatStyle:=4;
   MRUFloatPos:="-2147483648 0";
   Style:=36756;
   ExStyle:=3889;
   PrevFloating:=0;
   MDIChild:=0;
-  PctWidth:="505298";
+  PctWidth:="500000";
   MRUFloat:="300 180";
-  MRUHorzDock:="793 199";
+  MRUHorzDock:="785 180";
   MRUVertDock:="732 210";
   MRUDockingState:=0;
   DockingStyle:=61440;
@@ -180,11 +179,12 @@ BEGIN
  Item[0]:=0;
  Item[1]:=2;
  Item[2]:=1675;
- Item[3]:=1676;
- Item[4]:=1767;
+ Item[3]:=1767;
+ Item[4]:=1847;
  ItemCount:=5;
  Sumcheck:=2072;
- Selected:=1773;
+ Selected:=1784;
+ ScrollPos:="0 11";
 END;
 Frame[0]:=
 BEGIN
@@ -232,22 +232,6 @@ BEGIN
 END;
 Frame[2]:=
 BEGIN
- Norm:="0000 0000 1300 0580";
- Min:="-001 -001";
- Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.TEST!TEST";
- Type:=1;
- Views:=
- BEGIN
-  View[0]:=
-  BEGIN
-   Yscroll:=38;
-  END;
-  nViews:=1;
- END;
-END;
-Frame[3]:=
-BEGIN
- Max:=true;
  Norm:="0075 0075 1379 0659";
  Min:="-001 -001";
  Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.OnOff!OnOff";
@@ -256,7 +240,23 @@ BEGIN
  BEGIN
   View[0]:=
   BEGIN
-   Yscroll:=37;
+   Yscroll:=20;
+  END;
+  nViews:=1;
+ END;
+END;
+Frame[3]:=
+BEGIN
+ Max:=true;
+ Norm:="0000 0000 1300 0580";
+ Min:="-001 -001";
+ Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.TEST!TEST";
+ Type:=1;
+ Views:=
+ BEGIN
+  View[0]:=
+  BEGIN
+   Yscroll:=47;
   END;
   nViews:=1;
  END;

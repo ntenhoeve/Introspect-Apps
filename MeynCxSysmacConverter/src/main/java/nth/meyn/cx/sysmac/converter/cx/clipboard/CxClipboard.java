@@ -46,7 +46,8 @@ public class CxClipboard {
 
 	private static String convertToWellFormedXml(String xml) {
 		xml = xml.replace("&", "&amp;").replace("<Name><", "<Name>&lt;").replace("<Name>>",
-				"<Name><&gt;");// TODO will need more work
+				"<Name>&gt;").replace("<Name><>",
+						"<Name>&lt;&gt;");// TODO will need more work
 		xml = trimCharactersAfterLastXmlElement(xml, "</LadderDiagram>");
 		return xml;
 	}
