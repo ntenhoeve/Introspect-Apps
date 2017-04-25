@@ -22,6 +22,9 @@ public class SysmacRungsFactory {
 	public static Rungs create(List<CxLadderModel> cxLadderModels) {
 		Rungs sysmacRungs = new Rungs();
 		LadderElementFactoryFactory ladderElementFactoryFactory = new LadderElementFactoryFactory();
+		
+
+		
 		for (CxLadderModel cxLadderModel : cxLadderModels) {
 			RungXML sysmacRung = createLadderRung(cxLadderModel, ladderElementFactoryFactory);
 			sysmacRungs.getRungXML().add(sysmacRung);

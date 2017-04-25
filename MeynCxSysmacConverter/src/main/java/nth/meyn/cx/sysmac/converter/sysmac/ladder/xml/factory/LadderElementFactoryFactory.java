@@ -2,6 +2,8 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 
 import java.io.Serializable;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +34,12 @@ public class LadderElementFactoryFactory {
 	private static final int NOT_FOUND = -1;
 	private final Map<String, LadderElementFactory> ladderElementFactories;
 	private final IdFactory idFactory;
+	private Map<String, String> nameReplacements;
 
 	public LadderElementFactoryFactory() {
 		ladderElementFactories = createLadderElementFactories();
 		idFactory = new IdFactory();
+		nameReplacements=createNameReplacements();
 	}
 
 	private Map<String, LadderElementFactory> createLadderElementFactories() {
@@ -190,7 +194,14 @@ public class LadderElementFactoryFactory {
 			LadderElementFactory ladderElementFactory = ladderElementFactoryClass.newInstance();
 			return ladderElementFactory;
 		} catch (Exception e) {
-			throw new RuntimeException("Could not create: " + converterClassName);
+			StringBuilder message=new StringBuilder("Could not create: ");
+			message.append(converterClassName);
+			message.append("\rAsk Nils ten Hoeve to implement this function or ensure that your PLC program only includes the following supported CX instructions:");
+			for (String supportedCxInstruction : getSupportedCxInstructions()) {
+				message.append(supportedCxInstruction);
+				message.append("\r");
+			}
+			throw new RuntimeException(message.toString(),e);
 		}
 
 	}
@@ -241,13 +252,10 @@ public class LadderElementFactoryFactory {
 		instructionName = StringUtils.removeStart(instructionName, DIFF_DOWN_PREFIX);
 		instructionName = StringUtils.removePattern(instructionName, "\\(\\d+\\)");
 		instructionName = createUpperCapitalCase(instructionName);
-		instructionName = instructionName.replace("<", "LessThan");
-		instructionName = instructionName.replace(">", "GreatherThan");
-		instructionName = instructionName.replace("=", "Equals");
-		instructionName = instructionName.replace("+", "Plus");
-		instructionName = instructionName.replace("-", "Minus");
-		instructionName = instructionName.replace("/", "Divide");
-		instructionName = instructionName.replace("*", "Multiply");
+		for (String toReplace : nameReplacements.keySet()) {
+			String replacement = nameReplacements.get(toReplace);
+			instructionName = instructionName.replace(toReplace, replacement);	
+		}
 
 		// TODO change illegal characters
 		StringBuilder result = new StringBuilder();
@@ -259,5 +267,35 @@ public class LadderElementFactoryFactory {
 	public IdFactory getIdFactory() {
 		return idFactory;
 	}
+	
+	private Map<String,String> createNameReplacements() {
+		 Map<String,String> replacements=new HashMap<>();
+		replacements.put("<", "LessThan");
+		replacements.put(">", "GreatherThan");
+		replacements.put("=", "Equals");
+		replacements.put("+", "Plus");
+		replacements.put("-", "Minus");
+		replacements.put("/", "Divide");
+		replacements.put("*", "Multiply");
+		return replacements;
+	}
 
+	public List<String> getSupportedCxInstructions() {
+		List<String> supportedCxInstructions=new ArrayList<>();
+		for (String key : ladderElementFactories.keySet()) {
+			LadderElementFactory ladderElementFactory = ladderElementFactories.get(key);
+			if (ladderElementFactory instanceof LadderInstructionFactory) {
+				String cxInstructionName = StringUtils.removeStart(key, LadderElementFactoryFactory.class.getPackage().getName()+".Instruction");
+				cxInstructionName = StringUtils.removeEnd(cxInstructionName, FACTORY);
+				for (String replacement : nameReplacements.keySet()) {
+					String toReplace = nameReplacements.get(replacement);
+					cxInstructionName = cxInstructionName.replace( toReplace,replacement);
+				}
+				supportedCxInstructions.add(cxInstructionName.toUpperCase());
+			}
+		}
+		Collections.sort(supportedCxInstructions);
+		return supportedCxInstructions;
+	}
+	
 }

@@ -161,7 +161,7 @@ BEGIN
   ExStyle:=3889;
   PrevFloating:=0;
   MDIChild:=0;
-  PctWidth:="505299";
+  PctWidth:="505298";
   MRUFloat:="300 180";
   MRUHorzDock:="793 199";
   MRUVertDock:="732 210";
@@ -180,10 +180,11 @@ BEGIN
  Item[0]:=0;
  Item[1]:=2;
  Item[2]:=1675;
- Item[3]:=1767;
- ItemCount:=4;
+ Item[3]:=1676;
+ Item[4]:=1767;
+ ItemCount:=5;
  Sumcheck:=2072;
- Selected:=1784;
+ Selected:=1773;
 END;
 Frame[0]:=
 BEGIN
@@ -231,22 +232,6 @@ BEGIN
 END;
 Frame[2]:=
 BEGIN
- Norm:="0075 0075 1379 0659";
- Min:="-001 -001";
- Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.OnOff!OnOff";
- Type:=1;
- Views:=
- BEGIN
-  View[0]:=
-  BEGIN
-   Yscroll:=53;
-  END;
-  nViews:=1;
- END;
-END;
-Frame[3]:=
-BEGIN
- Max:=true;
  Norm:="0000 0000 1300 0580";
  Min:="-001 -001";
  Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.TEST!TEST";
@@ -255,7 +240,23 @@ BEGIN
  BEGIN
   View[0]:=
   BEGIN
-   Yscroll:=43;
+   Yscroll:=38;
+  END;
+  nViews:=1;
+ END;
+END;
+Frame[3]:=
+BEGIN
+ Max:=true;
+ Norm:="0075 0075 1379 0659";
+ Min:="-001 -001";
+ Access:="PROGRAM:TWO_SISTERS_SCUNTHORPE.Resources.FB source program.Programs.CasUnit1.Sections.OnOff!OnOff";
+ Type:=1;
+ Views:=
+ BEGIN
+  View[0]:=
+  BEGIN
+   Yscroll:=37;
   END;
   nViews:=1;
  END;
