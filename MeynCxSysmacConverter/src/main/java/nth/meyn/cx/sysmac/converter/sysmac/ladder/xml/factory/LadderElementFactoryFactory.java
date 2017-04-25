@@ -184,6 +184,7 @@ public class LadderElementFactoryFactory {
 		instructionName = StringUtils.removeStart(instructionName, DIFF_UP_PREFIX);
 		instructionName = StringUtils.removeStart(instructionName, DIFF_DOWN_PREFIX);
 		instructionName = StringUtils.removePattern(instructionName, "\\(\\d+\\)");
+		instructionName = createUpperCapitalCase(instructionName);
 		instructionName = instructionName.replace("<", "LessThan");
 		instructionName = instructionName.replace(">", "GreatherThan");
 		instructionName = instructionName.replace("=", "Equals");
@@ -191,7 +192,7 @@ public class LadderElementFactoryFactory {
 		instructionName = instructionName.replace("-", "Minus");
 		instructionName = instructionName.replace("/", "Divide");
 		instructionName = instructionName.replace("*", "Multiply");
-		instructionName = createUpperCapitalCase(instructionName);
+		
 
 		// TODO change illegal characters
 		StringBuilder result = new StringBuilder();

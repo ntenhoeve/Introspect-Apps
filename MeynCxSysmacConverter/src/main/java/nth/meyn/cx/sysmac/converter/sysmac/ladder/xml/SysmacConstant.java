@@ -2,6 +2,8 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml;
 
 import java.time.LocalTime;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.sun.prism.PixelFormat.DataType;
 
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
@@ -16,6 +18,10 @@ import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
  */
 public class SysmacConstant {
 
+	private static final String CX_HEXADECIMAL_PREFIX = "#";
+	private static final String CX_UNSIGNED_DECIMAL_VALUE = "&";
+	private static final String CX_SIGNED_POSITIVE_DECIMAL_VALUE = "+";
+	private static final String CX_SIGNED_NEGATIVE_DECIMAL_VALUE = "-";
 	private final SysmacDataType type;
 	private final String value;
 
@@ -27,7 +33,7 @@ public class SysmacConstant {
 	@Override
 	public String toString() {
 		StringBuilder reply = new StringBuilder();
-		if (type==SysmacDataType.TIME || type ==SysmacDataType.DATE) {
+		if (type == SysmacDataType.TIME || type == SysmacDataType.DATE) {
 			reply.append(type.toString().substring(0, 1));
 		} else {
 			reply.append(type.toString());
@@ -59,4 +65,26 @@ public class SysmacConstant {
 		}
 		return new SysmacConstant(SysmacDataType.TIME, time.toString());
 	}
+
+	public static boolean isCxConstant(String value) {
+		value = value.trim();
+		return value.startsWith(CX_HEXADECIMAL_PREFIX)
+				|| value.startsWith(CX_UNSIGNED_DECIMAL_VALUE)
+				|| value.startsWith(CX_SIGNED_POSITIVE_DECIMAL_VALUE)
+				|| value.startsWith(CX_SIGNED_NEGATIVE_DECIMAL_VALUE);
+	}
+
+	public static SysmacConstant createForCxConstantValue(SysmacDataType type,
+			String cxConstantValue) {
+		String value = cxConstantValue.trim();
+		if (value.startsWith(CX_HEXADECIMAL_PREFIX)) {
+			value = "16#" + value.substring(1);
+		} else if (value.startsWith(CX_SIGNED_NEGATIVE_DECIMAL_VALUE)) {
+			value = value;
+		} else {
+			value = value.substring(1);
+		}
+		return new SysmacConstant(type, value);
+	}
+
 }
