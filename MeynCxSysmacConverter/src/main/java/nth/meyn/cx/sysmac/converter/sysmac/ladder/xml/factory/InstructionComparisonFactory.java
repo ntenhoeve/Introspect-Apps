@@ -20,7 +20,8 @@ public abstract class InstructionComparisonFactory implements LadderInstructionF
 	private static final String FLOAT_SUFFIX= "F";
 	private static final String DOUBLE_SUFFIX="D";
 	private static final String SIGNED_LONG_SUFFIX = "SL";
-	private static final String COMPARISON_DATA = "Comparison data";
+	private static final String NO_COMMENT = "";//Will be replaced by sysmac studio
+
 	private final String comparison;
 	
 	public InstructionComparisonFactory(String comparison) {
@@ -35,21 +36,31 @@ public abstract class InstructionComparisonFactory implements LadderInstructionF
 		boolean isUserDefinedType=false;
 		List<LadderElement> ladderElements = InstructionFactory.createFunction(idFactory, comparison, isPolynomial, isUserDefinedType, "EN","");
 		
-		String opperand1 = InstructionFactory.getVarName(cxInstruction, 1);
-		SysmacDataType opperand1DataType = SysmacDataType.INT; //TODO;
-		if (SysmacConstant.isCxConstant(opperand1)) {
-			opperand1=SysmacConstant.createForCxConstantValue(opperand1DataType, opperand1).toString();
-		}
-		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In1", COMPARISON_DATA,SysmacDataType.ANY_ELEMENTARY_EXCEPT_BOOL, opperand1, opperand1DataType  );
+		addIn1(cxInstruction, idFactory, programName, ladderElements);
 
+		addIn2(cxInstruction, idFactory, programName, ladderElements);
+		
+		return ladderElements;
+	}
+
+	private void addIn2(INSTRUCTION cxInstruction, IdFactory idFactory, String programName,
+			List<LadderElement> ladderElements) {
 		String opperand2 = InstructionFactory.getVarName(cxInstruction, 2);
 		SysmacDataType opperand2DataType = SysmacDataType.INT; //TODO;
 		if (SysmacConstant.isCxConstant(opperand2)) {
 			opperand2=SysmacConstant.createForCxConstantValue(opperand2DataType, opperand2).toString();
 		}
-		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In2", COMPARISON_DATA,SysmacDataType.ANY_ELEMENTARY_EXCEPT_BOOL, opperand2, opperand2DataType  );
-		
-		return ladderElements;
+		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In2", NO_COMMENT,SysmacDataType.ANY_ELEMENTARY_EXCEPT_BOOL, opperand2, opperand2DataType  );
+	}
+
+	private void addIn1(INSTRUCTION cxInstruction, IdFactory idFactory, String programName,
+			List<LadderElement> ladderElements) {
+		String opperand1 = InstructionFactory.getVarName(cxInstruction, 1);
+		SysmacDataType opperand1DataType = SysmacDataType.INT; //TODO;
+		if (SysmacConstant.isCxConstant(opperand1)) {
+			opperand1=SysmacConstant.createForCxConstantValue(opperand1DataType, opperand1).toString();
+		}
+		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In1", NO_COMMENT,SysmacDataType.ANY_ELEMENTARY_EXCEPT_BOOL, opperand1, opperand1DataType  );
 	}
 	
 	@Override

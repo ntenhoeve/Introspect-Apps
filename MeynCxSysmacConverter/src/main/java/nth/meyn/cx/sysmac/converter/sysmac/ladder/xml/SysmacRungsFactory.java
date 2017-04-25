@@ -110,8 +110,8 @@ public class SysmacRungsFactory {
 		StringBuilder comment = new StringBuilder(cxLadderModel.getComment());
 		if (containsCalculation) {
 			comment.append(
-					"\rTODO: Convert the calculations in this rung to structured text to improvr readability");
-		}
+					"TODO: Convert the calculations in this rung to structured text to improve readability".toUpperCase());
+		}//TODO &#xD;&#xA;&#xD;&#xA; needed for new line but this gets scrambled by JAXB
 		sysmacRung.setComment(comment.toString());
 
 		return sysmacRung;

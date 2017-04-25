@@ -1,7 +1,6 @@
 package nth.meyn.cx.sysmac.converter;
 
 public class ToDos {
-	//TODO extend test 13: comparisons
 	//TODO test many rungs
 	//TODO Calculations
 	//TODO Counters
