@@ -1,6 +1,7 @@
 package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 
 import java.io.Serializable;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +10,12 @@ import javax.xml.bind.JAXBElement;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
+
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxConnection;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxInstructionInput;
-import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModelPrinter;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Mapping;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML;
@@ -21,6 +25,7 @@ import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 
 public class LadderElementFactoryFactory {
 
+	private static final String FACTORY = "Factory";
 	private static final String DIFF_DOWN_PREFIX = "%";
 	private static final String DIFF_UP_PREFIX = "@";
 	private static final String INVERSE_PREFIX = "!";
@@ -29,8 +34,55 @@ public class LadderElementFactoryFactory {
 	private final IdFactory idFactory;
 
 	public LadderElementFactoryFactory() {
-		ladderElementFactories = new HashMap<>();
+		ladderElementFactories = createLadderElementFactories();
 		idFactory = new IdFactory();
+	}
+
+	private Map<String, LadderElementFactory> createLadderElementFactories() {
+		Map<String, LadderElementFactory> ladderElementFactories=new HashMap<>();
+		try {
+			ClassLoader loader = this.getClass().getClassLoader();
+			ClassPath path = ClassPath.from(loader);
+			String packageName = LadderElementFactoryFactory.class.getPackage().getName();
+			ImmutableSet<ClassInfo> allClassesInPackage = path.getTopLevelClasses(packageName);
+			for (ClassInfo classInfo : allClassesInPackage) {
+				String classNameInPackage = classInfo.toString();
+				Class<?> classInPackage = Class.forName(classNameInPackage);
+				boolean isInterface = classInPackage.isInterface();
+				boolean isAbstract = Modifier.isAbstract(classInPackage.getModifiers());
+				if (!isInterface && !isAbstract) {
+
+					if (LadderInstructionFactory.class.isAssignableFrom(classInPackage)) {
+						LadderInstructionFactory ladderInstructionFactory = (LadderInstructionFactory) classInPackage
+								.newInstance();
+						String className = classInPackage.getName();
+						List<String> nameSuffixes = ladderInstructionFactory.getNameSuffixes();
+						ladderElementFactories.put(className, ladderInstructionFactory);
+						for (String nameSuffix : nameSuffixes) {
+							ladderElementFactories.put(createFactoryName(className, nameSuffix),
+									ladderInstructionFactory);
+						}
+					} else if (LadderElementFactory.class.isAssignableFrom(classInPackage)) {
+						LadderElementFactory ladderElementFactory = (LadderElementFactory) classInPackage
+								.newInstance();
+						String className = classInPackage.getName();
+						ladderElementFactories.put(className, ladderElementFactory);
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("Could not create a LadderElementFactory.", e);
+		}
+
+		return ladderElementFactories;
+	}
+
+	private String createFactoryName(String className, String nameExtension) {
+		StringBuilder factoryName=new StringBuilder();
+		factoryName.append(StringUtils.removeEnd(className, FACTORY));
+		factoryName.append(nameExtension.toLowerCase());
+		factoryName.append(FACTORY);
+		return factoryName.toString();
 	}
 
 	public void createConnection(RungXML sysmacRung, Mapping mapping, CxConnection cxConnection) {
@@ -59,7 +111,8 @@ public class LadderElementFactoryFactory {
 				connectionPointOutputId, edge.getInstanceID(), SysmacConnectionPointType.OUTPUT,
 				isPowerPin);
 
-		int index = indexOf(source.getContent(), SysmacConnectionPointType.OUTPUT, isPowerPin!=null);
+		int index = indexOf(source.getContent(), SysmacConnectionPointType.OUTPUT,
+				isPowerPin != null);
 		source.getContent().add(index, connectionPointOutput);
 	}
 
@@ -74,7 +127,8 @@ public class LadderElementFactoryFactory {
 				connectionPointInputId, edge.getInstanceID(), SysmacConnectionPointType.INPUT,
 				isPowerPin);
 
-		int index = indexOf(target.getContent(), SysmacConnectionPointType.INPUT, isPowerPin!=null);
+		int index = indexOf(target.getContent(), SysmacConnectionPointType.INPUT,
+				isPowerPin != null);
 		target.getContent().add(index, connectionPointInput);
 	}
 
@@ -82,10 +136,13 @@ public class LadderElementFactoryFactory {
 	 * 
 	 * @param content
 	 * @param type
-	 * @param isPowerPin if true, returns index of first connectionPoint, if false it gets the index of  the last connectionPoint 
+	 * @param isPowerPin
+	 *            if true, returns index of first connectionPoint, if false it
+	 *            gets the index of the last connectionPoint
 	 * @return
 	 */
-	private int indexOf(List<Serializable> content, SysmacConnectionPointType type, boolean isPowerPin) {
+	private int indexOf(List<Serializable> content, SysmacConnectionPointType type,
+			boolean isPowerPin) {
 		int index = NOT_FOUND;
 		for (Serializable xmlElement : content) {
 			if (xmlElement instanceof JAXBElement) {
@@ -98,8 +155,8 @@ public class LadderElementFactoryFactory {
 						if (isPowerPin) {
 							return content.indexOf(xmlElement);
 						} else {
-							index = content.indexOf(xmlElement)+1;
-						}	
+							index = content.indexOf(xmlElement) + 1;
+						}
 					}
 				}
 			}
@@ -117,12 +174,11 @@ public class LadderElementFactoryFactory {
 		}
 	}
 
-	public LadderElementFactory create( Object cxLadderObject) {
-		String converterClassName = createFactoryClassName(cxLadderObject);
-		LadderElementFactory ladderElementFactory = ladderElementFactories.get(converterClassName);
+	public LadderElementFactory create(Object cxLadderObject) {
+		String factoryClassName = createFactoryClassName(cxLadderObject);
+		LadderElementFactory ladderElementFactory = ladderElementFactories.get(factoryClassName);
 		if (ladderElementFactory == null) {
-			ladderElementFactory = create(converterClassName);
-			ladderElementFactories.put(converterClassName, ladderElementFactory);
+			throw new RuntimeException("There is no:" + factoryClassName);
 		}
 		return ladderElementFactory;
 	}
@@ -144,7 +200,7 @@ public class LadderElementFactoryFactory {
 		name.append(LadderElementFactoryFactory.class.getPackage().getName());
 		name.append(".");
 		name.append(createNormilizedFactoryName(cxLadderObject));
-		name.append("Factory");
+		name.append(FACTORY);
 		return name.toString();
 	}
 
@@ -192,7 +248,6 @@ public class LadderElementFactoryFactory {
 		instructionName = instructionName.replace("-", "Minus");
 		instructionName = instructionName.replace("/", "Divide");
 		instructionName = instructionName.replace("*", "Multiply");
-		
 
 		// TODO change illegal characters
 		StringBuilder result = new StringBuilder();

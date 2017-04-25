@@ -1,5 +1,6 @@
 package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 
+import java.util.Arrays;
 import java.util.List;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
@@ -7,7 +8,7 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElemen
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
 
-public class InstructionMovFactory implements LadderElementFactory<INSTRUCTION> {
+public class InstructionMovFactory implements LadderInstructionFactory {
 
 
 //	  <LadderElement instanceID="0x00000052" ladderElementType="Function" typeName="MOVE" IsPolynomial="false" IsUserDefinedType="false">
@@ -61,6 +62,11 @@ public class InstructionMovFactory implements LadderElementFactory<INSTRUCTION> 
 		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.OUTPUT, "Out", "Move destination",SysmacDataType.ANY, destVarName, destVarDataType  );
 		
 		return ladderElements;
+	}
+
+	@Override
+	public List<String> getNameSuffixes() {
+		return Arrays.asList("L");
 	}
 
 }

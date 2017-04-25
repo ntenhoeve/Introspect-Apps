@@ -14,8 +14,8 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.Calculation;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.EdgeFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
-import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith2Inputs;
-import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith3Inputs;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderInstructionFactoryWith2Inputs;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderInstructionFactoryWith3Inputs;
 
 public class SysmacRungsFactory {
 
@@ -62,7 +62,7 @@ public class SysmacRungsFactory {
 			}
 
 			List<LadderElement> newLadderElements = null;
-			if (ladderElementFactory instanceof LadderElementFactoryWith2Inputs) {
+			if (ladderElementFactory instanceof LadderInstructionFactoryWith2Inputs) {
 				if (cxLadderObject instanceof INSTRUCTION) {
 					INSTRUCTION instruction = (INSTRUCTION) cxLadderObject;
 					newLadderElements = ladderElementFactory.createForInput1(instruction,
@@ -73,11 +73,11 @@ public class SysmacRungsFactory {
 					INSTRUCTION instruction = cxInstructionInput.getInstruction();
 					int inputNr = cxInstructionInput.getInputNr();
 					if (inputNr == 1) {
-						newLadderElements = ((LadderElementFactoryWith2Inputs) ladderElementFactory)
+						newLadderElements = ((LadderInstructionFactoryWith2Inputs) ladderElementFactory)
 								.createForInput2(instruction,
 										ladderElementFactoryFactory.getIdFactory(), programName);
 					} else if (inputNr == 2) {
-						newLadderElements = ((LadderElementFactoryWith3Inputs) ladderElementFactory)
+						newLadderElements = ((LadderInstructionFactoryWith3Inputs) ladderElementFactory)
 								.createForInput3(instruction,
 										ladderElementFactoryFactory.getIdFactory(), programName);
 					}

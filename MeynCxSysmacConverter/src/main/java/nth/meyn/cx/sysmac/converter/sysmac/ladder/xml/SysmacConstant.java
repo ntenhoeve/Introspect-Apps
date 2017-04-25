@@ -2,10 +2,6 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml;
 
 import java.time.LocalTime;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.sun.prism.PixelFormat.DataType;
-
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
 
 /**

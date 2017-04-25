@@ -23,8 +23,8 @@ import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.VERTICAL;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
-import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith2Inputs;
-import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryWith3Inputs;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderInstructionFactoryWith2Inputs;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderInstructionFactoryWith3Inputs;
 
 public class CxLadderModel {
 
@@ -119,14 +119,14 @@ public class CxLadderModel {
 		Map<CxLocation, Object> instructionInputs = new HashMap<>();
 		LadderElementFactoryFactory factoryFactory = new LadderElementFactoryFactory();
 		 LadderElementFactory factory = factoryFactory.create(instruction);
-		 if (factory instanceof LadderElementFactoryWith3Inputs) {
+		 if (factory instanceof LadderInstructionFactoryWith3Inputs) {
 			CxInstructionInput instructionInput = new CxInstructionInput(instruction, 1);
 			location = location.oneDown();
 			instructionInputs.put(location, instructionInput);
 			instructionInput = new CxInstructionInput(instruction, 2);
 			location = location.oneDown();
 			instructionInputs.put(location, instructionInput);
-		} else if (factory instanceof LadderElementFactoryWith2Inputs) {
+		} else if (factory instanceof LadderInstructionFactoryWith2Inputs) {
 			CxInstructionInput instructionInput = new CxInstructionInput(instruction, 1);
 			location = location.oneDown();
 			instructionInputs.put(location, instructionInput);

@@ -6,7 +6,7 @@ import java.util.List;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
 
-public class InstructionSetFactory implements LadderElementFactory<INSTRUCTION> {
+public class InstructionSetFactory implements LadderInstructionFactory {
 
 	private static final boolean SET = true;
 	private static final boolean RESET = false;
@@ -19,6 +19,11 @@ public class InstructionSetFactory implements LadderElementFactory<INSTRUCTION> 
 				cxInstruction.getDiffDown() == 1, SET, RESET,
 				InstructionFactory.getVarName(cxInstruction,1));
 		return Arrays.asList(ladderElement);
+	}
+
+	@Override
+	public List<String> getNameSuffixes() {
+		return Arrays.asList();
 	}
 
 }

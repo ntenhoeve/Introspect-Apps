@@ -1,5 +1,6 @@
 package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 
+import java.util.Arrays;
 import java.util.List;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
@@ -8,12 +9,16 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacConstant;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
 
-public abstract class InstructionComparisonFactory implements LadderElementFactory<INSTRUCTION> {
+public abstract class InstructionComparisonFactory implements LadderInstructionFactory {
 
 
 
 
 
+	private static final String LONG_SUFFIX = "L";
+	private static final String SIGNED_SUFFIX = "S";
+	private static final String FLOAT_SUFFIX= "F";
+	private static final String DOUBLE_SUFFIX="D";
 	private static final String COMPARISON_DATA = "Comparison data";
 	private final String comparison;
 	
@@ -44,6 +49,11 @@ public abstract class InstructionComparisonFactory implements LadderElementFacto
 		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In2", COMPARISON_DATA,SysmacDataType.ANY_ELEMENTARY_EXCEPT_BOOL, opperand2, opperand2DataType  );
 		
 		return ladderElements;
+	}
+	
+	@Override
+	public List<String> getNameSuffixes() {
+		return Arrays.asList(SIGNED_SUFFIX,LONG_SUFFIX, FLOAT_SUFFIX, DOUBLE_SUFFIX); 
 	}
 
 }
