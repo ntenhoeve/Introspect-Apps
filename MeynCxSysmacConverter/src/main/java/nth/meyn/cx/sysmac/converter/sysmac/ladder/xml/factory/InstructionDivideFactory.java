@@ -3,17 +3,18 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 import java.util.Arrays;
 import java.util.List;
 
-public class InstructionPlusFactory extends InstructionCalculationFactory {
+public class InstructionDivideFactory extends InstructionCalculationFactory {
 
 	private static final String LONG_SUFFIX = "L";
+	private static final String UNSIGNED_SUFFIX = "U";
 	
-	public InstructionPlusFactory() {
-		super("+");
+	public InstructionDivideFactory() {
+		super("/");
 	}
 	
 	@Override
 	public List<String> getNameSuffixes() {
-		return Arrays.asList( LONG_SUFFIX); 
+		return Arrays.asList( LONG_SUFFIX, UNSIGNED_SUFFIX); 
 	}
 
 }

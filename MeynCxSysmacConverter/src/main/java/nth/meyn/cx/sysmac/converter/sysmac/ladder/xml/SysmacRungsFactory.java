@@ -10,7 +10,6 @@ import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
-import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.Calculation;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.EdgeFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory.LadderElementFactoryFactory;
@@ -53,17 +52,12 @@ public class SysmacRungsFactory {
 		Mapping mapping = new Mapping();
 		String programName = "SimpleThings";
 
-		boolean containsCalculation = false;
 
 		List<LadderElement> sysmacEdges = new ArrayList<>();
 		List<Object> cxLadderObjects = cxLadderModel.getConnectingObjects();
 		for (Object cxLadderObject : cxLadderObjects) {
 			LadderElementFactory ladderElementFactory = ladderElementFactoryFactory
 					.create(cxLadderObject);
-			if (ladderElementFactory instanceof Calculation) {
-				containsCalculation = true;
-			}
-
 			List<LadderElement> newLadderElements = null;
 			if (ladderElementFactory instanceof LadderInstructionFactoryWith2Inputs) {
 				if (cxLadderObject instanceof INSTRUCTION) {
@@ -108,10 +102,6 @@ public class SysmacRungsFactory {
 		sysmacLadderElements.addAll(sysmacEdges);
 
 		StringBuilder comment = new StringBuilder(cxLadderModel.getComment());
-		if (containsCalculation) {
-			comment.append(
-					"TODO: Convert the calculations in this rung to structured text to improve readability".toUpperCase());
-		}//TODO &#xD;&#xA;&#xD;&#xA; needed for new line but this gets scrambled by JAXB
 		sysmacRung.setComment(comment.toString());
 
 		return sysmacRung;

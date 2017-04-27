@@ -28,7 +28,7 @@ public class SysmacLadderDataFactory {
 	}
 
 	public static String create(String sysmacLadderXml) {
-		sysmacLadderXml = fixXmlLenghtIssue(sysmacLadderXml);
+//		sysmacLadderXml = fixXmlLenghtIssue(sysmacLadderXml);
 
 		StringBuilder data = new StringBuilder();
 		data.append(createPrefix());
@@ -152,21 +152,19 @@ public class SysmacLadderDataFactory {
 		return new String(prefix);
 	}
 
-	/**
-	 * Seems to be necessary to extend the XML message with a space is some
-	 * conditions, otherwise Sysmac does not recognize the clip board as
-	 * valid... Likely to do with the strange XML length calculation we need to
-	 * add to the data.
-	 *
-	 * @param sysmacLadderXml
-	 * @return
-	 */
-	private static String fixXmlLenghtIssue(String sysmacLadderXml) {
+//	/**
+//	 * Seems to be necessary to extend the XML message with a space is some
+//	 * conditions, otherwise Sysmac does not recognize the clip board as
+//	 * valid... Likely to do with the strange XML length calculation we need to
+//	 * add to the data.
+//	 *
+//	 * @param sysmacLadderXml
+//	 * @return
+//	 */
+//	private static String fixXmlLenghtIssue(String sysmacLadderXml) {
 //		System.out.println(sysmacLadderXml.length());
 //		if (sysmacLadderXml.length() == 2305 || sysmacLadderXml.length() == 2319
-//				|| sysmacLadderXml.length() == 9089 ||sysmacLadderXml.length()==34166) {
-//				sysmacLadderXml = sysmacLadderXml + "  ";
-//		}
-		return sysmacLadderXml;
-	}
+//				|| sysmacLadderXml.length() == 9089 ||sysmacLadderXml.length()==34166 ) {
+//		return sysmacLadderXml;
+//	}
 }

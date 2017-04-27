@@ -490,6 +490,10 @@ public class Rungs {
             protected String instanceID;
             @XmlAttribute(name = "ladderElementType")
             protected String ladderElementType;
+            @XmlAttribute(name="textEntityID")
+            protected String textEntityID;
+            @XmlAttribute(name="text")
+            protected String text;
             @XmlAttribute(name = "inverted")
             protected String inverted;
             @XmlAttribute(name = "diffUp")
@@ -580,7 +584,27 @@ public class Rungs {
                 this.instanceID = value;
             }
 
-            /**
+            
+            
+            public String getTextEntityID() {
+				return textEntityID;
+			}
+
+			public void setTextEntityID(String textEntityID) {
+				this.textEntityID = textEntityID;
+			}
+
+			
+			
+			public String getText() {
+				return text;
+			}
+
+			public void setText(String text) {
+				this.text = text;
+			}
+
+			/**
              * Gets the value of the ladderElementType property.
              * 
              * @return

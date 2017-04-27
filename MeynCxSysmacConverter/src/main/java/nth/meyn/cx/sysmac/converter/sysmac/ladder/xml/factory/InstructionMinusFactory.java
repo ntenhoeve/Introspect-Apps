@@ -3,12 +3,12 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 import java.util.Arrays;
 import java.util.List;
 
-public class InstructionPlusFactory extends InstructionCalculationFactory {
+public class InstructionMinusFactory extends InstructionCalculationFactory {
 
 	private static final String LONG_SUFFIX = "L";
 	
-	public InstructionPlusFactory() {
-		super("+");
+	public InstructionMinusFactory() {
+		super("-");
 	}
 	
 	@Override

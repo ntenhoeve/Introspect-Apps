@@ -3,19 +3,16 @@ package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.factory;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacConstant;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
 
-public abstract class InstructionCalculationFactory implements LadderInstructionFactory, Calculation {
+public abstract class InstructionCalculationFactory implements LadderInstructionFactory {
 
-	private static final String LONG_SUFFIX = "L";
-	private static final String SIGNED_SUFFIX = "S";
-	private static final String FLOAT_SUFFIX= "F";
-	private static final String DOUBLE_SUFFIX="D";
-	private static final String SIGNED_LONG_SUFFIX = "SL";
 	private static final String NO_COMMENT = "";//Will be replaced by sysmac studio
 	private final String calculationType;
 	
@@ -27,6 +24,35 @@ public abstract class InstructionCalculationFactory implements LadderInstruction
 	public List<LadderElement> createForInput1(INSTRUCTION cxInstruction, IdFactory idFactory,
 			String programName) {
 		
+//		List<LadderElement> ladderElements = createFunction(cxInstruction, idFactory, programName);
+		LadderElement ladderElement=createStructuredText(cxInstruction, idFactory, programName);
+		return Arrays.asList(ladderElement);
+	}
+
+	private LadderElement createStructuredText(INSTRUCTION cxInstruction, IdFactory idFactory,
+			String programName) {
+		StringBuilder script=new StringBuilder();
+		String opperand3 = InstructionFactory.getVarName(cxInstruction, 3);
+		script.append(opperand3);
+		script.append(":=");
+		String opperand1 = InstructionFactory.getVarName(cxInstruction, 1);
+		if (SysmacConstant.isCxConstant(opperand1)) {
+			opperand1=StringUtils.removeStart( SysmacConstant.createForCxConstantValue(SysmacDataType.INT, opperand1).toString(), "INT#");
+		}
+		script.append(opperand1);
+		script.append(calculationType);
+		String opperand2 = InstructionFactory.getVarName(cxInstruction, 2);
+		if (SysmacConstant.isCxConstant(opperand2)) {
+			opperand2=StringUtils.removeStart( SysmacConstant.createForCxConstantValue(SysmacDataType.INT, opperand2).toString(), "INT#");
+		}
+		script.append(opperand2);
+		script.append(";");
+		LadderElement ladderElement=StructuredTextFactory.create(idFactory, script.toString());
+		return ladderElement;
+	}
+
+	private List<LadderElement> createFunction(INSTRUCTION cxInstruction, IdFactory idFactory,
+			String programName) {
 		boolean isPolynomial=true;
 		boolean isUserDefinedType=false;
 		List<LadderElement> ladderElements = InstructionFactory.createFunction(idFactory, calculationType, isPolynomial, isUserDefinedType, "EN","ENO");
@@ -36,7 +62,6 @@ public abstract class InstructionCalculationFactory implements LadderInstruction
 		addIn2(cxInstruction, idFactory, programName, ladderElements);
 		
 		addOut(cxInstruction, idFactory, programName, ladderElements);
-		
 		return ladderElements;
 	}
 
@@ -67,12 +92,6 @@ public abstract class InstructionCalculationFactory implements LadderInstruction
 		String opperand3 = InstructionFactory.getVarName(cxInstruction, 3);
 		SysmacDataType opperand3DataType = SysmacDataType.INT; //TODO;
 		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.OUTPUT, "", NO_COMMENT,SysmacDataType.ANY_NUM_OR_STRING, opperand3, opperand3DataType  );
-	}
-
-	
-	@Override
-	public List<String> getNameSuffixes() {
-		return Arrays.asList( SIGNED_LONG_SUFFIX); 
 	}
 
 }
