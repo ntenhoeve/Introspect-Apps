@@ -91,9 +91,9 @@ public class LadderElementFactoryFactory {
 
 	public void createConnection(RungXML sysmacRung, Mapping mapping, CxConnection cxConnection) {
 
-		String edgeId = idFactory.createNext();
-		String connectionPointInputId = idFactory.createNext();
-		String connectionPointOutputId = idFactory.createNext();
+		String edgeId = idFactory.createNextElementId();
+		String connectionPointInputId = idFactory.createNextElementId();
+		String connectionPointOutputId = idFactory.createNextElementId();
 
 		LadderElement edge = EdgeFactory.createEdge(edgeId, connectionPointOutputId,
 				connectionPointInputId, true);

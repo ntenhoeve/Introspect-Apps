@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram.RungList.RUNG.ElementList.INSTRUCTION;
+import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacConstant;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs.RungXML.LadderElement;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacDataType;
@@ -53,15 +54,31 @@ public class InstructionMovFactory implements LadderInstructionFactory {
 		boolean isUserDefinedType=false;
 		List<LadderElement> ladderElements = InstructionFactory.createFunction(idFactory, MOVE, isPolynomial, isUserDefinedType, "EN","ENO");
 		
-		String sourceVarName = InstructionFactory.getVarName(cxInstruction, 1);
-		SysmacDataType sourceVarDataType = SysmacDataType.BOOL; //TODO;
-		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In", "Move source",SysmacDataType.ANY, sourceVarName, sourceVarDataType  );
+		addSource(cxInstruction, idFactory, programName, ladderElements);
 
-		String destVarName = InstructionFactory.getVarName(cxInstruction, 2);
-		SysmacDataType destVarDataType = SysmacDataType.BOOL; //TODO;
-		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.OUTPUT, "Out", "Move destination",SysmacDataType.ANY, destVarName, destVarDataType  );
+		addDestination(cxInstruction, idFactory, programName, ladderElements);
 		
 		return ladderElements;
+	}
+
+	private void addDestination(INSTRUCTION cxInstruction, IdFactory idFactory, String programName,
+			List<LadderElement> ladderElements) {
+		String opperand2 = InstructionFactory.getVarName(cxInstruction, 2);
+		SysmacDataType opperand2DataType = SysmacDataType.INT; //TODO;
+		if (SysmacConstant.isCxConstant(opperand2)) {
+			opperand2=SysmacConstant.createForCxConstantValue(opperand2DataType, opperand2).toString();
+		}
+		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.OUTPUT, "Out", "Move destination",SysmacDataType.ANY, opperand2, opperand2DataType  );
+	}
+
+	private void addSource(INSTRUCTION cxInstruction, IdFactory idFactory, String programName,
+			List<LadderElement> ladderElements) {
+		String opperand1 = InstructionFactory.getVarName(cxInstruction, 1);
+		SysmacDataType opperand1DataType = SysmacDataType.INT; //TODO;
+		if (SysmacConstant.isCxConstant(opperand1)) {
+			opperand1=SysmacConstant.createForCxConstantValue(opperand1DataType, opperand1).toString();
+		}
+		InstructionFactory.add(ladderElements, idFactory, programName, SysmacConnectionPointType.INPUT, "In", "Move source",SysmacDataType.ANY, opperand1, opperand1DataType  );
 	}
 
 	@Override

@@ -74,25 +74,38 @@ public class CxLadderModelFactory {
 		for (CONTACT contact : contacts) {
 			Operand operand = contact.getOperands().getOperand();
 			String variableInfo = operand.getPOUDefinition();
-			CxVariable variable = createVariable(variableInfo);
-			variables.add(variable);
+			if (variableInfo.length()>0) {
+				CxVariable variable = createVariable(variableInfo);
+				variables.add(variable);
+			}
 		}
 		return variables;
 	}
 
 	private static CxVariable createVariable(String variableInfo) {
-//		System.out.println(variableInfo);
+		System.out.println(variableInfo);
 		String[] variableInfos = variableInfo.split(",");
 		CxVariable variable = new CxVariable();
 		variable.setName(variableInfos[0]);
-		int variableTypeId = Integer.parseInt(variableInfos[2]);
+		int variableTypeId = Integer.parseInt(variableInfos[1]);
 		variable.setType(CxVariableType.valueOfId(variableTypeId));
+		int arraySize = Integer.parseInt(variableInfos[2].replace("[", "").replace("]", ""));
+		variable.setArraySize(arraySize);
+		variable.setType(CxVariableType.valueOfId(variableTypeId));
+		int dataTypeId = Integer.parseInt(variableInfos[2]);
+		variable.setDataType(CxDataType.valueOfId(dataTypeId));
+		if (variableInfos.length > 6) {
 		variable.setComment(variableInfos[6]);
+		} else if (variableInfos.length > 7) {
+			variable.setRetained(variableInfos[7] == "1");
+		} else if (variableInfos.length > 8) {
+			variable.setFunctionBlockNameOrStructName(variableInfos[8]);
+		}
 		return variable;
 	}
 
 	public static Set<CxVariable> createVariableExamples() {
-		Set<CxVariable> variables =new HashSet<>();
+		Set<CxVariable> variables = new HashSet<>();
 		CxVariable variable = createVariable("iTest1,0,0,0,,FALSE,Example:Input variable 1,");
 		variables.add(variable);
 		variable = createVariable("oTest1,0,0,0,,FALSE,Example:Ouput variabale 1,");

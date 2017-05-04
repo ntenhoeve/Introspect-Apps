@@ -9,7 +9,7 @@ public class ConnectionFactory {
 	public static LadderElement create(IdFactory idFactory, boolean isLeftPowerRail,
 			boolean isRightPowerRail) {
 		LadderElement ladderElement = new LadderElement();
-		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setInstanceID(idFactory.createNextElementId());
 		ladderElement.setLadderElementType(CONNECTION);
 		ladderElement.setIsLeftPowerRail(Boolean.toString(isLeftPowerRail));
 		ladderElement.setIsRightPowerRail(Boolean.toString(isRightPowerRail));

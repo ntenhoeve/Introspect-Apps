@@ -94,7 +94,7 @@ public class ContactFactory implements LadderElementFactory<CONTACT> {
 	public static List<LadderElement> createContact(IdFactory idFactory,
 			String programName, boolean inverted, boolean diffUp, boolean diffDown,  String varName) {
 		LadderElement ladderElement = new LadderElement();
-		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setInstanceID(idFactory.createNextElementId());
 		ladderElement.setLadderElementType(CONTACT);
 		ladderElement.setInverted(Boolean.toString(inverted));
 		ladderElement.setDiffUp(Boolean.toString(diffUp));

@@ -15,7 +15,7 @@ public class StructuredTextFactory {
 	 */
 	public static LadderElement create(IdFactory idFactory, String script) {
 		LadderElement ladderElement = new LadderElement();
-		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setInstanceID(idFactory.createNextElementId());
 		ladderElement.setLadderElementType(INLINE_STRUCTURED_TEXT_SERVICES_INSERT_INLINE_ST);
 		ladderElement.setTextEntityID(UUID.randomUUID().toString());
 		ladderElement.setText(script);

@@ -31,14 +31,6 @@ public class SysmacRungsFactory {
 		return sysmacRungs;
 	}
 
-	// public static Rungs createExample() {
-	// Rungs sysmacRungs = new Rungs();
-	// SysmacLadderElementFactory ladderElementFactory = new
-	// SysmacLadderElementFactory();
-	// RungXML sysmacRung = createLadderRungExample(ladderElementFactory);
-	// sysmacRungs.getRungXML().add(sysmacRung);
-	// return sysmacRungs;
-	// }
 
 	private static RungXML createLadderRung(CxLadderModel cxLadderModel,
 			LadderElementFactoryFactory ladderElementFactoryFactory) {

@@ -16,7 +16,7 @@ public class CoilFactory implements LadderElementFactory<COIL> {
 			String programName, boolean inverted, boolean diffUp, boolean diffDown, boolean set,
 			boolean reset, String varName) {
 		LadderElement ladderElement = new LadderElement();
-		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setInstanceID(idFactory.createNextElementId());
 		ladderElement.setLadderElementType(COIL);
 		ladderElement.setInverted(Boolean.toString(inverted));
 		ladderElement.setDiffUp(Boolean.toString(diffUp));

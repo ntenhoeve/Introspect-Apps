@@ -97,7 +97,7 @@ public class InstructionFactory {
 			boolean isPolynomial, boolean isUserDefinedType, String powerPinInName,
 			String powerPinOutName) {
 		LadderElement ladderElement = new LadderElement();
-		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setInstanceID(idFactory.createNextElementId());
 		ladderElement.setLadderElementType(FUNCTION);
 		ladderElement.setTypeName(name);
 		ladderElement.setIsPolynomial(Boolean.FALSE.toString());
@@ -139,7 +139,7 @@ public class InstructionFactory {
 			String functionBlockName, String instanceName, boolean isUserDefinedType,
 			String powerPinInName, String powerPinOutName) {
 		LadderElement ladderElement = new LadderElement();
-		ladderElement.setInstanceID(idFactory.createNext());
+		ladderElement.setInstanceID(idFactory.createNextElementId());
 		ladderElement.setLadderElementType(FUNCTION_BLOCK);
 		ladderElement.setTypeName(functionBlockName);
 		ladderElement.setIsUserDefinedType(Boolean.FALSE.toString());
@@ -186,8 +186,8 @@ public class InstructionFactory {
 
 		LadderElement functionElement = ladderElements.get(0);
 
-		String functionConnectionPointId = idFactory.createNext();
-		String edgeId = idFactory.createNext();
+		String functionConnectionPointId = idFactory.createNextElementId();
+		String edgeId = idFactory.createNextElementId();
 		JAXBElement<ConnectionPoint> connectionPoint = ConnectionPointFactory
 				.create(functionConnectionPointId, edgeId, type, IS_NO_POWER_POINT);
 		int index = findNextConnectionPointIndex(functionElement, type);
@@ -200,14 +200,14 @@ public class InstructionFactory {
 
 		if (varName != null) {
 			LadderElement varElement = new LadderElement();
-			varElement.setInstanceID(idFactory.createNext());
+			varElement.setInstanceID(idFactory.createNextElementId());
 			varElement.setLadderElementType(VARIABLE);
 			varElement.setVariableName(varName);
 			varElement.setBaseVariableName(varName);
 			varElement.setProgramName(programName);
 			varElement.setBaseVariableDataType(varDataType.toString());
 
-			String variableConnectionPointId = idFactory.createNext();
+			String variableConnectionPointId = idFactory.createNextElementId();
 			connectionPoint = ConnectionPointFactory.create(variableConnectionPointId, edgeId,
 					type.getInverse(), null);
 			varElement.getContent().add(connectionPoint);
