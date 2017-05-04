@@ -13,6 +13,7 @@ import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModelFactory;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxVariable;
+import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxVariableFactory;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxUnmarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacClipboard;
@@ -61,9 +62,10 @@ public class MeynCxSysmacConverter extends Application {
 	}
 
 	private String createSysmacVariableData(List<CxLadderModel> cxLadderModels) {
-		 Set<CxVariable> cxVariables =CxLadderModelFactory.createVariables(cxLadderModels);
+		 Set<CxVariable> cxVariables =CxVariableFactory.createVariables(cxLadderModels);
+		 Set<CxVariable> cxVariablesWithoutSystemVariables = cxVariables.stream().filter(v-> !v.getName().startsWith("P_")).collect(Collectors.toSet());
 //		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariableExamples();
-//		String sysmacVariableData = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
+//	TODO	String sysmacVariableData = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariablesWithoutSystemVariables);
 		 String sysmacVariableData=SysmacSymbolDataFactory.createExample();
 		System.out.println(sysmacVariableData);
 		
