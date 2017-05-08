@@ -62,11 +62,11 @@ public class MeynCxSysmacConverter extends Application {
 	}
 
 	private String createSysmacVariableData(List<CxLadderModel> cxLadderModels) {
-		 Set<CxVariable> cxVariables =CxVariableFactory.createVariables(cxLadderModels);
-		 Set<CxVariable> cxVariablesWithoutSystemVariables = cxVariables.stream().filter(v-> !v.getName().startsWith("P_")).collect(Collectors.toSet());
-//		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariableExamples();
-//	TODO	String sysmacVariableData = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariablesWithoutSystemVariables);
-		 String sysmacVariableData=SysmacSymbolDataFactory.createExample();
+//		 Set<CxVariable> cxVariables =CxVariableFactory.createVariables(cxLadderModels);
+//		 Set<CxVariable> cxVariablesWithoutSystemVariables = cxVariables.stream().filter(v-> !v.getName().startsWith("P_")).collect(Collectors.toSet());
+		Set<CxVariable> cxVariablesWithoutSystemVariables = CxVariableFactory.createVariableExamples();
+		String sysmacVariableData = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariablesWithoutSystemVariables);
+//		 String sysmacVariableData=SysmacSymbolDataFactory.createExample();
 		System.out.println(sysmacVariableData);
 		
 		return sysmacVariableData;

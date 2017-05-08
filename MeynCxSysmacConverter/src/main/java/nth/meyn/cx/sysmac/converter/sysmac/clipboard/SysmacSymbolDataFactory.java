@@ -106,10 +106,11 @@ public class SysmacSymbolDataFactory {
 		
 		setVariableLinesLength(variableLines, prefix);
 
-		prefix[1060]=51;//TODO why???
+//		prefix[1060]=51;//TODO why???
+		prefix[1060]=26;//TODO why???
 		
 		String prefixString= new String(prefix);
-		prefixString = changePos612To65533(prefixString);//TODO why???
+//		prefixString = changePos612To65533(prefixString);//TODO why???
 		return prefixString;		
 	}
 

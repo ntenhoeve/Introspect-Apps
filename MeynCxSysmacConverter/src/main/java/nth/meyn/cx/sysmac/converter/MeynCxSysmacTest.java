@@ -45,43 +45,30 @@ public class MeynCxSysmacTest extends Application {
 	}
 
 	private void testSysmacSymbolData2() {
-		String example = SysmacSymbolDataFactory.createExample();
-		String clipboard = SysmacClipboard.getSymbolData();
+		String reference = SysmacSymbolDataFactory.createExample();
+//		String clipboard = SysmacClipboard.getSymbolData();
 		
-		Set<CxVariable> cxVariables=new HashSet<>();
-		cxVariables.add( createVariable("A"));
-		cxVariables.add( createVariable("B"));
+		Set<CxVariable> cxVariables = CxVariableFactory.createVariableExamples();
 //		cxVariables.add( createVariable("C"));
 		String created = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
-		System.out.println("clipboard");
-		System.out.println(clipboard);
+		System.out.println("reference");
+		System.out.println(reference);
 		
-		String clipboardCoreData = clipboard.substring(clipboard.indexOf(EN_VARIABLES));
-		clipboardCoreData=clipboardCoreData.substring(0,clipboardCoreData.indexOf(EN_VARIABLES,1)+EN_VARIABLES.length());
-		System.err.println(clipboardCoreData);
-		System.err.println(clipboardCoreData.length());
 		
 		System.out.println("created");
 		System.out.println(created);
-		System.out.println(StringUtils.indexOfDifference(created, clipboard));
 		
 		   int i;
-	        for (i = 0; i < clipboard.length() && i < created.length(); ++i) {
-	            if (clipboard.charAt(i) != created.charAt(i)) {
-	            	System.out.println(i+"-"+(int)clipboard.charAt(i)+":"+(int)created.charAt(i));
+	        for (i = 0; i < reference.length() && i < created.length(); ++i) {
+	            if (reference.charAt(i) != created.charAt(i)) {
+	            	System.out.println(i+"-"+(int)reference.charAt(i)+":"+(int)created.charAt(i)+"="+reference.charAt(i)+":"+created.charAt(i));
 	            }
 	        }
 		
 
 	}
 
-	private CxVariable createVariable(String name) {
-		CxVariable cxVariable=new CxVariable();
-		cxVariable.setDataType(CxDataType.BOOL);
-		cxVariable.setName(name);
-		cxVariable.setComment(name);
-		return cxVariable;
-	}
+
 
 	
 	

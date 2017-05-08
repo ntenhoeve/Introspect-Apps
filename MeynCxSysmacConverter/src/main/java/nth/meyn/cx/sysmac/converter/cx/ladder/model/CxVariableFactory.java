@@ -96,6 +96,20 @@ public class CxVariableFactory {
 		return variable;
 	}
 
+	public static Set<CxVariable> createVariableExamples() {
+		Set<CxVariable> cxVariables=new HashSet<>();
+		cxVariables.add( createVariable("iTest1","Input variable 1"));
+		cxVariables.add( createVariable("oTest1","Ouput variabale 1"));
+		return cxVariables;
+	}
+
+	private static CxVariable createVariable(String name, String comment) {
+		CxVariable cxVariable=new CxVariable();
+		cxVariable.setDataType(CxDataType.BOOL);
+		cxVariable.setName(name);
+		cxVariable.setComment(comment);
+		return cxVariable;
+	}
 //	public static Set<CxVariable> createVariableExamples() {
 //		Set<CxVariable> variables = new HashSet<>();
 //		CxVariable variable = createVariable("iTest1,0,0,0,,FALSE,Example:Input variable 1,");
