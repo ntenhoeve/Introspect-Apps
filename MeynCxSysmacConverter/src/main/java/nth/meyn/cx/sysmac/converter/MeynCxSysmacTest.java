@@ -39,9 +39,88 @@ public class MeynCxSysmacTest extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-	testSysmacSymbolData2();
+//	testSysmacSymbolDataWithABC();
+	
+	testSysmacSymbolDataWithABD();
+	
 		Platform.exit();
 
+	}
+
+	private void testSysmacSymbolDataWithABD() {
+
+		String sysmacSymbolDataFromClipboard = SysmacClipboard.getSymbolData();
+		
+		Set<CxVariable> cxVariables=new HashSet<>();
+		CxVariable varableA = new CxVariable();
+		varableA.setName("A");
+		varableA.setDataType(CxDataType.BOOL);
+		varableA.setComment("A");
+		cxVariables.add(varableA);
+		
+		CxVariable varableB = new CxVariable();
+		varableB.setName("B");
+		varableB.setDataType(CxDataType.BOOL);
+		varableB.setComment("B");
+		cxVariables.add(varableB);
+		
+		CxVariable varableC = new CxVariable();
+		varableC.setName("D");
+		varableC.setDataType(CxDataType.BOOL);
+		varableC.setComment("D");
+		cxVariables.add(varableC);
+		
+		///Set<CxVariable> cxVariables = CxVariableFactory.createVariables(cxLadderModels);
+		
+		String sysmacSymbolDataCreated= SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
+		
+		printDifference(sysmacSymbolDataFromClipboard, sysmacSymbolDataCreated);
+		
+		
+	}
+
+	private void printDifference(String s1,	String s2) {
+		for (int i = 0; i < s1.length() && i < s2.length(); ++i) {
+            if (s1.charAt(i) != s2.charAt(i)) {
+            	System.out.println(i+": "+s1.charAt(i) +"<>"+ s2.charAt(i)+"   "+(int)s1.charAt(i) +"<>"+ (int)s2.charAt(i));
+            }
+        }
+		
+	}
+
+	private void testSysmacSymbolDataWithABC() throws JAXBException {
+		List<CxLadderModel> cxLadderModels = createCxLadderModelsFromClipboard();
+
+//		String sysmacSymbolData1 = SysmacSymbolDataFactory.createExampleWithABCVariables();
+//		
+//		Set<CxVariable> cxVariables=new HashSet<>();
+//		CxVariable varableA = new CxVariable();
+//		varableA.setName("A");
+//		varableA.setDataType(CxDataType.BOOL);
+//		varableA.setComment("A");
+//		cxVariables.add(varableA);
+//		
+//		CxVariable varableB = new CxVariable();
+//		varableB.setName("B");
+//		varableB.setDataType(CxDataType.BOOL);
+//		varableB.setComment("B");
+//		cxVariables.add(varableB);
+//		
+//		CxVariable varableC = new CxVariable();
+//		varableC.setName("C");
+//		varableC.setDataType(CxDataType.BOOL);
+//		varableC.setComment("C");
+//		cxVariables.add(varableC);
+		
+		Set<CxVariable> cxVariables = CxVariableFactory.createVariables(cxLadderModels);
+		
+		String sysmacSymbolData2= SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
+//		System.out.println(StringUtils.indexOfDifference(sysmacSymbolData1, sysmacSymbolData2));
+		
+		String sysmacLadderData = createSysmacLadderData(cxLadderModels);
+
+		SysmacClipboard.putLadderRungs(sysmacLadderData, sysmacSymbolData2);
+		
 	}
 
 	private void testSysmacSymbolData2() {

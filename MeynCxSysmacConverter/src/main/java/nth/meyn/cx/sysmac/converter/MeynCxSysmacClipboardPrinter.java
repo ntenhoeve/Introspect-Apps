@@ -12,6 +12,7 @@ import javafx.scene.input.DataFormat;
 import javafx.stage.Stage;
 import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacClipboard;
+import nth.meyn.cx.sysmac.converter.util.StringToArrayCodeUtil;
 
 public class MeynCxSysmacClipboardPrinter extends Application {
 	public static void main(String[] args) {
@@ -39,6 +40,7 @@ public class MeynCxSysmacClipboardPrinter extends Application {
 			case SysmacClipboard.VARIABLE_NAMES:	
 				Object clipboardContent = clipboard.getContent(dataFormat);
 				print(clipboardContent);
+				System.out.println(StringToArrayCodeUtil.print((ByteBuffer) clipboardContent));
 				break;
 			default:
 				break;

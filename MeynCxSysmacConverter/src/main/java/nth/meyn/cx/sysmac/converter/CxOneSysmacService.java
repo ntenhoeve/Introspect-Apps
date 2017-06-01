@@ -2,13 +2,16 @@ package nth.meyn.cx.sysmac.converter;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.input.Clipboard;
 import javafx.stage.Stage;
+import nth.introspect.layer2service.ServiceObject;
+import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
 import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModelFactory;
@@ -23,31 +26,72 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacMarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacRungsFactory;
 
-public class MeynCxSysmacConverter extends Application {
+/**
+ * {@link ServiceObject} that also is an JavaFx application so we can use the JavaFX clipboard classes which are more adavnced than those of Swing
+ * @author nilsth
+ *
+ */
+public class CxOneSysmacService extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
+	public CxOneSysmacService() {
+		initializeJavaFxEnvironment(); 
 	}
 
+	private void initializeJavaFxEnvironment() {
+		new JFXPanel();
+	}
+	
+	@Hidden()
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void init() throws Exception {
+		super.init();
+	}
+	
+	
+	
+	public void convertClipboardToSysmacRungs() {
+		 
+		Platform.runLater(new Runnable() {
+            @Override public void run() {
+            	List<CxLadderModel> cxLadderModels;
+				try {
+					cxLadderModels = createCxLadderModelsFromClipboard();
+	        		String sysmacLadderData = createSysmacLadderData(cxLadderModels);
+//	    TODO    		SysmacClipboard.putLadderRungs(sysmacLadderData);
 
-		 convertLadderFromCxClipboardToSysmacClipboard(); 
-		 System.out.println("Done");
+				} catch (JAXBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		Platform.exit();
+              }
+        });
+		
 
 	}
 
+	public void convertClipboardToInternalVariables() {
+		Platform.runLater(new Runnable() {
+            @Override public void run() {
+            	List<CxLadderModel> cxLadderModels;
+				try {
+					cxLadderModels = createCxLadderModelsFromClipboard();
+					Set<CxVariable> cxVariables = CxVariableFactory.createVariables(cxLadderModels);
+					String table = SysmacSymbolDataFactory.createAsTextTable(cxVariables);
+//		    TODO  		SysmacClipboard.putVariables(table);
 
-	private void convertLadderFromCxClipboardToSysmacClipboard() throws JAXBException {
-		List<CxLadderModel> cxLadderModels = createCxLadderModelsFromClipboard();
+				} catch (JAXBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		String sysmacSymbolData = createSysmacVariableData(cxLadderModels);
+              }
+        });
 
-		String sysmacLadderData = createSysmacLadderData(cxLadderModels);
+	}
 
-		SysmacClipboard.putLadderRungs(sysmacLadderData, sysmacSymbolData);
+	public void convertClipboardToInternalInOutVariables() {
+
 	}
 
 	private String createSysmacLadderData(List<CxLadderModel> cxLadderModels) throws JAXBException {
@@ -57,21 +101,10 @@ public class MeynCxSysmacConverter extends Application {
 		System.out.println(sysmacLadderXml);
 		String sysmacLadderData = SysmacLadderDataFactory.create(sysmacLadderXml);
 		// String sysmacLadderData=SysmacLadderDataFactory.createExample();
-		
+
 		return sysmacLadderData;
 	}
 
-	private String createSysmacVariableData(List<CxLadderModel> cxLadderModels) {
-//		 Set<CxVariable> cxVariables =CxVariableFactory.createVariables(cxLadderModels);
-//		 Set<CxVariable> cxVariablesWithoutSystemVariables = cxVariables.stream().filter(v-> !v.getName().startsWith("P_")).collect(Collectors.toSet());
-
-//		Set<CxVariable> cxVariablesWithoutSystemVariables = CxVariableFactory.createVariableExamples();
-//		String sysmacVariableData = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariablesWithoutSystemVariables);
-		 String sysmacVariableData=SysmacSymbolDataFactory.createExample();
-		System.out.println(sysmacVariableData);
-		
-		return sysmacVariableData;
-	}
 
 	private List<CxLadderModel> createCxLadderModelsFromClipboard() throws JAXBException {
 		String cxXml = CxClipboard.getLadderXml();
@@ -79,6 +112,12 @@ public class MeynCxSysmacConverter extends Application {
 		List<CxLadderModel> cxLadderModels = CxLadderModelFactory
 				.createLadderModels(cxLadderDiagram);
 		return cxLadderModels;
+	}
+
+	@Hidden()
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		
 	}
 
 }

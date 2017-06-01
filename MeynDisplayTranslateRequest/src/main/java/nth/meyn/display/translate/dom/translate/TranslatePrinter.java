@@ -11,9 +11,11 @@ public class TranslatePrinter {
 				out.print(",");
 			}
 			firstValue=false;
-			if (value!=null) {
+			if (value==null) {
+				out.print("\"\"");
+			} else {
 				out.print('"');
-				out.print(value);
+				out.print(value.replace("\n", "\\n"));
 				out.print('"');
 			}
 		}

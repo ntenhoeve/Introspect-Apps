@@ -27,6 +27,9 @@ public class SysmacLadderDataFactory {
 		return ladderXml;
 	}
 
+	
+
+
 	public static String create(String sysmacLadderXml) {
 //		sysmacLadderXml = fixXmlLenghtIssue(sysmacLadderXml);
 

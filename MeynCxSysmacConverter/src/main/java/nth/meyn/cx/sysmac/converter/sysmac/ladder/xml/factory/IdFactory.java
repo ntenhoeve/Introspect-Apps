@@ -32,8 +32,8 @@ public class IdFactory {
 
 	public String createNextVariableId() {
 		variableId++;
-//		String id = String.format("07c93356-3dd8-4e3b-896f-4788%08d", variableId);
-		String id = UUID.randomUUID().toString();
+		String id = String.format("07c93356-3dd8-4e3b-896f-4788%08d", variableId);
+//		String id = UUID.randomUUID().toString();
 		return id;
 	}
 
