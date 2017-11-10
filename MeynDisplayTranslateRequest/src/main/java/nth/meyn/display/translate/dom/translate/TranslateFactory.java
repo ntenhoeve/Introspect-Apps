@@ -29,6 +29,7 @@ public class TranslateFactory {
 	private static final String ONLY_WHEN_NOT_PRECEEDS_WITH_COMMA = "(?<!\\,)";
 	private static final String ONLY_WHEN_NOT_FOLLOWED_WITH_COMMA = "(?!,)";
 
+	
 	public static DownloadStream createTranslateRequest(File omronDisplayCvsFile)
 			throws URISyntaxException, IOException {
 		InputStreamReader reader = createReader(omronDisplayCvsFile);
@@ -50,9 +51,11 @@ public class TranslateFactory {
 			parser.close();
 			reader.close();
 		}
-		File file = new File("XXXXDEYY English to ZZZZZ.csv");
-		return new DownloadStream(file, out);
+		
+		File destinationFile=DestinationFileFactory.create(omronDisplayCvsFile);
+		return new DownloadStream(destinationFile, out);
 	}
+
 
 	private static void writeFirstLines(PrintStream printStream, File omronDisplayCvsFile)
 			throws IOException, URISyntaxException {

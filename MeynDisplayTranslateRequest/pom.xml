@@ -113,11 +113,6 @@
 
 
 	<dependencies>
-		<dependency>
-			<groupId>nth.reflect.framework</groupId>
-			<artifactId>reflect-for-swing</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<!-- <dependency> <groupId>net.sourceforge.csvjdbc</groupId> <artifactId>csvjdbc</artifactId> 
 			<version>1.0.28</version> </dependency> -->
 		<dependency>
@@ -129,6 +124,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>nth.reflect.framework</groupId>
+			<artifactId>reflect-for-javafx</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

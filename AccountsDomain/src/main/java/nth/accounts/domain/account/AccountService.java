@@ -1,7 +1,8 @@
 package nth.accounts.domain.account;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.List;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.tag.Tag;
@@ -21,10 +22,9 @@ public class AccountService {
 	}
 
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public List<Account> allAccountsOfUser(Tag userToFind) throws Exception {
-		List<Account> allAccounts = allAccounts();
-		AccountUserFilter filter = new AccountUserFilter(userToFind);
-		return FilterUtil.filter(allAccounts, filter);
+	public List<Account> allAccountsOfTag(Tag tagToFind) throws Exception {
+		List<Account> filteredAccounts = allAccounts().stream().filter(a -> a.getTags().contains(tagToFind)).collect(Collectors.toList());
+		return filteredAccounts;
 	}
 
 	public List<Account> allAccounts() throws Exception {

@@ -16,7 +16,7 @@ import nth.introspect.layer5provider.reflection.behavior.order.Order;
 
 public class Account {
 	private String accountName;
-	private Tag tag;
+	private List<Tag> tags;
 	private List<AccountAttribute> attributes;
 
 	public Account() {
@@ -33,28 +33,10 @@ public class Account {
 		this.accountName = accountName;
 	}
 
+	
 	@Order(sequenceNumber = 2)
-	public Tag getUser() {
-		return tag;
-	}
-
-	public void setUser(Tag tag) {
-		this.tag = tag;
-	}
-
-	@Order(sequenceNumber = 3)
 	public List<AccountAttribute> getAttributes() {
 		return attributes;
-	}
-
-	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void userPutUser(Tag tag) {
-		setUser(tag);
-	}
-
-	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
-	public void userClearUser() {
-		setUser(null);
 	}
 
 	public void setAttributes(List<AccountAttribute> attributes) {
@@ -126,10 +108,31 @@ public class Account {
 		clipboard.setContents(selection, selection);
 	}
 
+	
+	@Order(sequenceNumber = 3)
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public void tagsAddTag(Tag tag) {
+		tags.add(tag);
+	}
+
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	public void tagsRemoveTag(Tag tag) {
+		tags.remove(tag);
+	}
+
+	
 	@Override
 	public String toString() {
 		TitleBuilder titleBuilder = new TitleBuilder("-");
-		titleBuilder.append(tag.getName());
+		titleBuilder.append(tags);
 		titleBuilder.append(accountName);
 		return titleBuilder.toString();
 	}
