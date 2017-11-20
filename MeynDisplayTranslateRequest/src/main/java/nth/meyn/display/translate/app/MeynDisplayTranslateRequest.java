@@ -33,12 +33,6 @@ public class MeynDisplayTranslateRequest extends ReflectApplicationForJavaFX {
 	}
 
 	@Override
-	public Color getSecondaryColor() {
-		return MaterialColorPalette.GREY;
-	}
-
-	
-	@Override
 	public Color getAccentColor() {
 		return MaterialColorPalette.ORANGE;
 	}
