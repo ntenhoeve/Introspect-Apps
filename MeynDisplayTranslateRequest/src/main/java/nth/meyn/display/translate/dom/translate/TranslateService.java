@@ -25,12 +25,12 @@ public class TranslateService {
 	private static final String CSV_EXTENTION_FILTER = "*.csv";
 	private static final String CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY = "CSV language file exported from CX-Designer";
 
-	public DownloadStream createTranslateRequest(UploadStream uploadStream) throws URISyntaxException, IOException {
-		return TranslateFactory.createTranslateRequest(uploadStream.getFile());
+	public DownloadStream createTranslateRequest(TranslateInfo translateInfo) throws URISyntaxException, IOException {
+		return TranslateFactory.createTranslateRequest(translateInfo);
 	}
 	
-	public UploadStream createTranslateRequestParameterFactory() {
-		return new UploadStream(CSV_LANGUAGE_FILE_EXPORTED_FROM_OMRON_DISPLAY, CSV_EXTENTION_FILTER);
+	public TranslateInfo createTranslateRequestParameterFactory() {	
+		return new TranslateInfo();
 	}
 
 //	public String findAbreviationCandidates(UploadStream uploadStream) throws URISyntaxException,

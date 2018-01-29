@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TranslateRecord {
 
+	private static final int MAX_ALARM_TEXT_LENGTH = 80;
 	private static final String NEW_LINE = "\n";
 	static final String ENGLISH = "English";
 	public static final Regex REGEX_NUMBERS_ONLY = new Regex().literal("-",
@@ -110,7 +111,7 @@ public class TranslateRecord {
 	private int getMaxNrOfCharacters(CSVRecord csvRecord) {
 		String property = csvRecord.get(PROPERTY);
 		if (property.contains("AlarmMessage")) {
-			return 65;
+			return MAX_ALARM_TEXT_LENGTH;
 		} else {
 			String englishText = csvRecord.get(ENGLISH);
 			return (int) (getMaxNrOfCharacters(englishText) * 1.2);

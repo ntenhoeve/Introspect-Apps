@@ -20,6 +20,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import nth.introspect.layer1userinterface.controller.DownloadStream;
+import nth.introspect.layer1userinterface.controller.UploadStream;
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
 
@@ -30,16 +31,17 @@ public class TranslateFactory {
 	private static final String ONLY_WHEN_NOT_FOLLOWED_WITH_COMMA = "(?!,)";
 
 	
-	public static DownloadStream createTranslateRequest(File omronDisplayCvsFile)
+	public static DownloadStream createTranslateRequest(TranslateInfo translateInfo)
 			throws URISyntaxException, IOException {
-		InputStreamReader reader = createReader(omronDisplayCvsFile);
+		File sourceFile = translateInfo.getCxDesignerExportFile().getFile();
+		InputStreamReader reader = createReader(sourceFile);
 		skipFirstLine(reader);
 
 		CSVParser parser = createParser(reader);
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		PrintStream printStream = new PrintStream(out, false, StandardCharsets.UTF_16.toString());
-		writeFirstLines(printStream, omronDisplayCvsFile);
+		writeFirstLines(printStream, translateInfo);
 
 		Abbreviations abbreviations = AbbreviationRepository.read();
 		try {
@@ -52,13 +54,15 @@ public class TranslateFactory {
 			reader.close();
 		}
 		
-		File destinationFile=DestinationFileFactory.create(omronDisplayCvsFile);
+		File destinationFile=DestinationFileFactory.create(translateInfo);
 		return new DownloadStream(destinationFile, out);
 	}
 
 
-	private static void writeFirstLines(PrintStream printStream, File omronDisplayCvsFile)
+	private static void writeFirstLines(PrintStream printStream,TranslateInfo translateInfo )
 			throws IOException, URISyntaxException {
+		File omronDisplayCvsFile=translateInfo.getCxDesignerExportFile().getFile();
+		String language=translateInfo.getTranslateToLanguage();
 		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		char ch;
 
@@ -73,7 +77,7 @@ public class TranslateFactory {
 			ch = (char) reader.read();
 			if (ch == '\r') {
 				printStream.print(
-						",\"New Language                                                                                   \"");
+						",\""+language+"                                                                                   \"");
 				printStream.print(",\"How to translate\"");
 				printStream.print(",\"Maximum translation size\"");
 				printStream.print(",\"Translation tips\"\n");

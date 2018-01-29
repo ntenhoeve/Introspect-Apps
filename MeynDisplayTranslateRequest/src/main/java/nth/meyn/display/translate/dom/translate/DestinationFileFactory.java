@@ -11,7 +11,9 @@ public class DestinationFileFactory {
 	 * Creates a file with format: SOURCE_PATH\XXXXDEYY English to ZZZZZ.csv
 	 * with help of the source file path
 	 */
-	public static File create(File sourceFile) {
+	public static File create(TranslateInfo translateInfo) {
+		File sourceFile = translateInfo.getCxDesignerExportFile().getFile();
+		String language=translateInfo.getTranslateToLanguage();
 		StringBuilder destinationPath = new StringBuilder();
 		Optional<String> customerAndPanelNr = getCustomerNumberAndPanelNr(sourceFile);
 		destinationPath.append(getSourceFolder(sourceFile));
@@ -19,7 +21,9 @@ public class DestinationFileFactory {
 		destinationPath.append(getCustomerNumber(customerAndPanelNr));
 		destinationPath.append("DE");
 		destinationPath.append(getPanelNumber(customerAndPanelNr));
-		destinationPath.append(" English to ZZZZZ.csv");
+		destinationPath.append(" English to ");
+		destinationPath.append(language);
+		destinationPath.append(".csv");
 
 		File destinationFile = new File(destinationPath.toString());
 
