@@ -11,6 +11,7 @@ import nth.meyn.controls.configurator.dom.equipment.EquipmentTemplate;
 import nth.meyn.controls.configurator.dom.equipment.EquipmentTemplateService;
 import nth.meyn.controls.configurator.dom.project.ProjectService;
 import nth.meyn.controls.configurator.dom.project.ProjectTemplateService;
+import nth.meyn.controls.configurator.dom.settings.SettingsRepository;
 import nth.meyn.controls.configurator.dom.site.SiteService;
 import nth.reflect.javafx.ReflectApplicationForJavaFX;
 
@@ -23,7 +24,7 @@ public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
 
 	@Override
 	public List<Class<?>> getInfrastructureClasses() {
-		return null;
+		return Arrays.asList(SettingsRepository.class);
 	}
 
 	@Override
