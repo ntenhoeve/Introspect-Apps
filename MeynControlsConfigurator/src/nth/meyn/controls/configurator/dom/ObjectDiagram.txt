@@ -1,0 +1,16 @@
+Rapid
+
+Project:
+- ProjectTemplate:Rapid Plus 4.0
+- nr:1
+- site:7113-Tyson-Union City TN-USA
+- panel:DE12
+- so:100123
+- fo:700123
+- Equipment:
+  - Equipment: Product Conveyor
+    - Order 1, Module: Motor Group, Variant Simple, Option ...
+  - Equipment Template:Rapid Plus 4.0
+    - Modules: (add and remove)
+    - Order:1, Module: 1st Rapid Carrousel
+  - 
