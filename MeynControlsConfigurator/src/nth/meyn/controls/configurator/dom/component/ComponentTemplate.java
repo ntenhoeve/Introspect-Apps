@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.introspect.layer5provider.reflection.behavior.description.Description;
+import nth.meyn.controls.configurator.dom.function.FunctionOrComponent;
 
-@Description(englishDescription = "A electric component like relay or motor, or a group of components such as a display panel, motor group, etc.")
-public class ComponentTemplate  {
+@Description(englishDescription = "A electric component like a sensor oractuator such as a valve, relays or motor. A component can have multiple variants, e.g. a proximity sensor can have multiple types or brands. A ComponentTemplate can be referenced by many FunctionTemplates)")
+public class ComponentTemplate implements FunctionOrComponent {
 	private String name;
+	private String abbreviation;
 	private LocalDateTime version;
 	private List<ComponentTemplateTag> tags;
 	// TODO add attributes
@@ -22,12 +24,22 @@ public class ComponentTemplate  {
 		tags=new ArrayList<>();
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
 	}
 
 	public LocalDateTime getVersion() {

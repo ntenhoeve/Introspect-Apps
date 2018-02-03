@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.introspect.layer5provider.reflection.behavior.description.Description;
-import nth.meyn.controls.configurator.dom.equipment.EquipmentTemplateRules;
+import nth.meyn.controls.configurator.dom.equipment.EquipmentTemplateRule;
 
 @Description(englishDescription = "An generic project template to generate e.g. a evisceration line panel or whole leg deboner")
 public class ProjectTemplate {
 
 	private String name;
 	private LocalDateTime version;
-	private List<EquipmentTemplateRules> equipmentTemplateRules;
+	private List<EquipmentTemplateRule> equipmentTemplateRule;
 
 	public ProjectTemplate() {
-		equipmentTemplateRules=new ArrayList<>();
+		equipmentTemplateRule=new ArrayList<>();
 	}
 	
 	public String getName() {
@@ -34,12 +34,12 @@ public class ProjectTemplate {
 		this.version = version;
 	}
 
-	public List<EquipmentTemplateRules> getEquipmentTemplateRules() {
-		return equipmentTemplateRules;
+	public List<EquipmentTemplateRule> getEquipmentTemplateRules() {
+		return equipmentTemplateRule;
 	}
 
-	public void setEquipmentTemplateRules(List<EquipmentTemplateRules> equipmentTemplates) {
-		this.equipmentTemplateRules = equipmentTemplates;
+	public void setEquipmentTemplateRules(List<EquipmentTemplateRule> equipmentTemplates) {
+		this.equipmentTemplateRule = equipmentTemplates;
 	}
 
 

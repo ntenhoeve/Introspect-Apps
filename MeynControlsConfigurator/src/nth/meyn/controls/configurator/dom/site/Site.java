@@ -3,8 +3,18 @@ package nth.meyn.controls.configurator.dom.site;
 public class Site {
 	private int number;
 	private String customerName;
-	private String siteCity;
-	private String siteCountry;
+	private String city;
+	private String country;
+
+	public Site(int number, String customerName, String city, String country) {
+		this.number = number;
+		this.customerName = customerName;
+		this.city = city;
+		this.country = country;
+	}
+	
+	public Site(){
+	}
 
 	public int getNumber() {
 		return number;
@@ -22,20 +32,20 @@ public class Site {
 		this.customerName = customerName;
 	}
 
-	public String getSiteCity() {
-		return siteCity;
+	public String getCity() {
+		return city;
 	}
 
-	public void setSiteCity(String siteCity) {
-		this.siteCity = siteCity;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getSiteCountry() {
-		return siteCountry;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setSiteCountry(String siteCountry) {
-		this.siteCountry = siteCountry;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 }

@@ -2,8 +2,8 @@ package nth.meyn.controls.configurator.dom.equipment;
 
 import nth.introspect.layer5provider.reflection.behavior.description.Description;
 
-@Description(englishDescription="Tels how many of Equipment (e.g. pluckers) are alowed in a project and on what pages of the electrical diagram they are placed")
-public class EquipmentTemplateRules {
+@Description(englishDescription="Tels how many of EquipmentTemplates (e.g. pluckers) are alowed in a ProjectTemplate and on what pages of the electrical diagram they are placed. A ProjectTemplate has a unique reference to a EquipmentRule")
+public class EquipmentTemplateRule {
 	private EquipmentTemplate equipmentTemplate;
 	private int minimumInstances;
 	private int maximumInstances;

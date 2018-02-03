@@ -5,56 +5,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.introspect.layer5provider.reflection.behavior.description.Description;
-import nth.meyn.controls.configurator.dom.component.Component;
 
-@Description(englishDescription = "A part of equipment that is responsible for one function (e.g. transport, turning, plucking, lifting, temperature control) made out of none or more components")
-public class FunctionTemplate {
+@Description(englishDescription = "A part of equipment that is responsible for one function (e.g. transport, turning, plucking, lifting, temperature control) made out of none or more other functions or components. The functions can be seen as the branches and components can be seen as the leafs. An EquipmentTemplate has a unique reference to a FunctionTemplate. A function name is a single verb e.g. Convey, Turn, Lift, Fill, Heat, Pluck, Transfer")
+public class FunctionTemplate implements FunctionOrComponent {
 	private String name;
 	private String abbreviation;
-	private LocalDateTime version;
-	private int order;
-	private List<Component> components;
-	
+	private List<FunctionOrComponent> functionAndComponentTemplates;
+
 	public FunctionTemplate() {
-		components=new ArrayList<>();
+		functionAndComponentTemplates = new ArrayList<>();
 	}
-	
+
+	@Override
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
 	public String getAbbreviation() {
 		return abbreviation;
 	}
+
 	public void setAbbreviation(String abbreviation) {
 		this.abbreviation = abbreviation;
 	}
-	public LocalDateTime getVersion() {
-		return version;
-	}
-	public void setVersion(LocalDateTime version) {
-		this.version = version;
-	}
-	public int getOrder() {
-		return order;
-	}
-	public void setOrder(int order) {
-		this.order = order;
+
+	public List<FunctionOrComponent> getFunctionAndComponentTemplates() {
+		return functionAndComponentTemplates;
 	}
 
-	public List<Component> getComponents() {
-		return components;
+	public void setFunctionAndComponentTemplates(List<FunctionOrComponent> functionAndComponentTemplates) {
+		this.functionAndComponentTemplates = functionAndComponentTemplates;
 	}
 
-	public void setComponents(List<Component> components) {
-		this.components = components;
-	}
-	
-	
-
-		
 	// TODO add attributes
 	// TODO add electric schematic template (EPlan macro's)
 	// TODO add plc program template
@@ -62,5 +49,4 @@ public class FunctionTemplate {
 	// TODO add FAT template doc
 	// TODO add IO
 
-	
 }

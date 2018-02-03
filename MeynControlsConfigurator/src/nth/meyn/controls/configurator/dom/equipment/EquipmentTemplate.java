@@ -9,7 +9,7 @@ import nth.meyn.controls.configurator.dom.component.ComponentTemplateTag;
 import nth.meyn.controls.configurator.dom.function.FunctionTemplate;
 import nth.meyn.controls.configurator.dom.named.Named;
 
-@Description(englishDescription = "A template for a machine or software product (e.g. a shackle washer, plucker, re-hanger or rapid) made out of components")
+@Description(englishDescription = "A template for a machine or software product (e.g. a shackle washer, plucker, re-hanger or rapid) made out of functions and components. Multiple EquipmentRules may have references to a EquipmentTemplate")
 public class EquipmentTemplate implements Named {
 	private String name;
 	private String abbreviation;
@@ -20,6 +20,8 @@ public class EquipmentTemplate implements Named {
 
 	public EquipmentTemplate() {
 	  tags=new ArrayList<>();
+	  functionTemplates=new ArrayList<>();
+	  options=new ArrayList<>();
 	}
 	
 	public String getName() {
