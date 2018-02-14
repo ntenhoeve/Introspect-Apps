@@ -6,4 +6,8 @@ public class ProjectService {
 	public List<Project> allProjects() {
 		return null;//TODO
 	}
+	
+	public Project viewProject(Project project) {
+		return project;
+	}
 }

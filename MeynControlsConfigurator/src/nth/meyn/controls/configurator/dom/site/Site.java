@@ -1,5 +1,7 @@
 package nth.meyn.controls.configurator.dom.site;
 
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
+
 public class Site {
 	private int number;
 	private String customerName;
@@ -16,6 +18,7 @@ public class Site {
 	public Site(){
 	}
 
+	@Order(sequenceNumber=1)
 	public int getNumber() {
 		return number;
 	}
@@ -24,6 +27,7 @@ public class Site {
 		this.number = number;
 	}
 
+	@Order(sequenceNumber=2)
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -32,6 +36,7 @@ public class Site {
 		this.customerName = customerName;
 	}
 
+	@Order(sequenceNumber=3)
 	public String getCity() {
 		return city;
 	}
@@ -40,6 +45,7 @@ public class Site {
 		this.city = city;
 	}
 
+	@Order(sequenceNumber=4)
 	public String getCountry() {
 		return country;
 	}
