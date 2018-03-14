@@ -1,1 +1,0 @@
-java -jar SoftwareDocumentationGenerator.jar createHtmlDocumentation "M:/My Git/Introspect-Apps" "SoftwareDocumentationGenerator" "C:/Users/nilsth/My Git/Introspect-Apps/SoftwareDocumentationGenerator/doc"

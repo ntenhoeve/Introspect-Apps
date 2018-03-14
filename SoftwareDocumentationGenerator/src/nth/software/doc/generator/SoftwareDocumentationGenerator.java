@@ -3,7 +3,6 @@ package nth.software.doc.generator;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.introspect.generic.util.ClassList;
 import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 import nth.software.doc.generator.model.Chapter;
 import nth.software.doc.generator.model.SubChapter;
@@ -26,6 +25,7 @@ import nth.software.doc.generator.service.DocumentationService;
  * site and Wiki)</li>
  * <li>All your project documentation is directly available to the developer in
  * the form of JavaDoc</li>
+ * <li>the documentation is included during re-factoring by the IDE (e.g. renaming of classes)</li>
  * <li>Basic formating can be used with HTML in JavaDoc</li>
  * <li>GitHub Html page and or Wiki pages can automatically be committed
  * (uploaded)</li>
@@ -83,22 +83,19 @@ import nth.software.doc.generator.service.DocumentationService;
 public class SoftwareDocumentationGenerator extends
 		IntrospectApplicationForCommandLine {
 
-	public SoftwareDocumentationGenerator(String[] commandLineArguments) {
-		super(commandLineArguments);
-	}
 
 	public static void main(String[] commandLineArguments) {
-		new SoftwareDocumentationGenerator(commandLineArguments);
+		launch(commandLineArguments);
 	}
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return new ClassList(DocumentationService.class);
+		return Arrays.asList(DocumentationService.class);
 	}
 
 	@Override
 	public List<Class<?>> getInfrastructureClasses() {
-		return new ClassList(GitRepository.class);
+		return Arrays.asList(GitRepository.class);
 	}
 
 }
