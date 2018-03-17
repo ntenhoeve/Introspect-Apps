@@ -1,6 +1,5 @@
 package nth.meyn.connect.dom.module.settings;
 
-import nth.introspect.layer1userinterface.controller.DownloadStream;
 import nth.introspect.layer1userinterface.controller.UploadStream;
 
 public class ConfigurationService {
