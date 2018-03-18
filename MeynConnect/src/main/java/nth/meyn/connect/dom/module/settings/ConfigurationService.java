@@ -3,11 +3,11 @@ package nth.meyn.connect.dom.module.settings;
 import nth.introspect.layer1userinterface.controller.UploadStream;
 
 public class ConfigurationService {
-	public void uploadConfigurationFile(UploadStream uploadStream) {
+	public void loadConfigurationFile(UploadStream uploadStream) {
 		//TODO
 	}
 	
-	public UploadStream uploadConfigurationFileParameterFactory() {
+	public UploadStream loadConfigurationFileParameterFactory() {
 		UploadStream uploadStream=new UploadStream("Meyn Connect configuration file", "*.xml");
 		return uploadStream;
 	}

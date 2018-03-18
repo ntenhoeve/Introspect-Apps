@@ -16,6 +16,7 @@ import nth.meyn.connect.dom.arrival.lot.LotService;
 import nth.meyn.connect.dom.arrival.transport.TransportService;
 import nth.meyn.connect.dom.module.efficiency.EfficiencyService;
 import nth.meyn.connect.dom.module.foodsafetyquality.FoodSafetyAndQualityService;
+import nth.meyn.connect.dom.module.maintenance.MaintenanceOrderService;
 import nth.meyn.connect.dom.module.maintenance.MaintenanceService;
 import nth.meyn.connect.dom.module.orderprocessing.OrderProcessingService;
 import nth.meyn.connect.dom.module.settings.ConfigurationService;
@@ -38,7 +39,7 @@ public class MeynConnect extends ReflectApplicationForJavaFX {
 		return Arrays.asList(EfficiencyService.class, OrderProcessingService.class,
 				TrackingAndTracingService.class, GrowerService.class, FlockService.class,
 				TransportService.class, LotService.class, FoodSafetyAndQualityService.class,
-				MaintenanceService.class, SettingsService.class, BirdTypeService.class, LocationService.class, ConfigurationService.class);
+				MaintenanceService.class, MaintenanceOrderService.class, SettingsService.class, BirdTypeService.class, LocationService.class, ConfigurationService.class);
 	}
 
 	@Override
