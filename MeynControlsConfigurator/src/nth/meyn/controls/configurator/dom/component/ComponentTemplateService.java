@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+import nth.meyn.controls.configurator.dom.named.Tag;
 
 public class ComponentTemplateService {
 
@@ -33,7 +34,7 @@ public class ComponentTemplateService {
 				if (componentTemplate.getName().toLowerCase().contains(lowerTextToFind)) {
 				return false;
 				} else {
-					for ( ComponentTemplateTag tag : componentTemplate.getTags()) {
+					for ( Tag tag : componentTemplate.getTags()) {
 						if (tag.getName()!=null && tag.getName().toLowerCase().contains(lowerTextToFind)) {
 							return true;
 						}
@@ -46,7 +47,7 @@ public class ComponentTemplateService {
 
 	
 	
-	public List<ComponentTemplateTag> allComponentTemplateTags() {
+	public List<Tag> allComponentTemplateTags() {
 		return ComponentTemplateExampleFactory.getTags();
 	}
 	

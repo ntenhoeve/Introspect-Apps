@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import nth.meyn.controls.configurator.dom.named.Tag;
+
 public class ComponentTemplateExampleFactory {
 	public static final String O2_CONCENTRATION_SENSOR = "O2 Concentration Sensor";
 	public static final String CYLINDER_WITH_3_4_VALVE_WITH_2_SPEEDS = "Cylinder with 3/4 Valve with 2 speeds";
@@ -15,8 +17,8 @@ public class ComponentTemplateExampleFactory {
 	public static final String ELECTRIC_MOTOR_GROUP_WITH_FREQUENCY_CONTROLLER = "Electric Motor Group with Frequency Controller";
 	public static final String INDUCTIVE_PROXIMITY_SENSOR = "Inductive Proximity Sensor";
 	public static final String RELATIVE_ENCODER = "Relative Encode";
-	private static ComponentTemplateTag actuatorTag;
-	private static ComponentTemplateTag sensorTag;
+	private static Tag actuatorTag;
+	private static Tag sensorTag;
 
 	static {
 		actuatorTag = createActuatorTag();
@@ -119,20 +121,20 @@ public class ComponentTemplateExampleFactory {
 		return motorGroup1;
 	}
 
-	public static ComponentTemplateTag createActuatorTag() {
-		ComponentTemplateTag actuatorTag = new ComponentTemplateTag();
+	public static Tag createActuatorTag() {
+		Tag actuatorTag = new Tag();
 		actuatorTag.setName("Actuator");
 		return actuatorTag;
 	}
 
-	public static ComponentTemplateTag createSensorTag() {
-		ComponentTemplateTag actuatorTag = new ComponentTemplateTag();
+	public static Tag createSensorTag() {
+		Tag actuatorTag = new Tag();
 		actuatorTag.setName("Sensor");
 		return actuatorTag;
 	}
 
-	public static List<ComponentTemplateTag> getTags() {
-		List<ComponentTemplateTag> tags = new ArrayList<>();
+	public static List<Tag> getTags() {
+		List<Tag> tags = new ArrayList<>();
 		tags.add(actuatorTag);
 		tags.add(sensorTag);
 		return tags;

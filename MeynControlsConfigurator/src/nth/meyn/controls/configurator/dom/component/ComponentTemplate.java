@@ -6,13 +6,14 @@ import java.util.List;
 
 import nth.introspect.layer5provider.reflection.behavior.description.Description;
 import nth.meyn.controls.configurator.dom.function.FunctionOrComponent;
+import nth.meyn.controls.configurator.dom.named.Tag;
 
 @Description(englishDescription = "A electric component like a sensor oractuator such as a valve, relays or motor. A component can have multiple variants, e.g. a proximity sensor can have multiple types or brands. A ComponentTemplate can be referenced by many FunctionTemplates)")
 public class ComponentTemplate implements FunctionOrComponent {
 	private String name;
 	private String abbreviation;
 	private LocalDateTime version;
-	private List<ComponentTemplateTag> tags;
+	private List<Tag> tags;
 	// TODO add attributes
 	// TODO add electric schematic template (EPlan macro's)
 	// TODO add plc program template
@@ -50,11 +51,11 @@ public class ComponentTemplate implements FunctionOrComponent {
 		this.version = version;
 	}
 
-	public List<ComponentTemplateTag> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(List<ComponentTemplateTag> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 	

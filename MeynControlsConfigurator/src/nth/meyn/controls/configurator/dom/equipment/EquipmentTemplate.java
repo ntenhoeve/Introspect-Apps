@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.introspect.layer5provider.reflection.behavior.description.Description;
-import nth.meyn.controls.configurator.dom.component.ComponentTemplateTag;
 import nth.meyn.controls.configurator.dom.function.FunctionTemplate;
 import nth.meyn.controls.configurator.dom.named.Named;
+import nth.meyn.controls.configurator.dom.named.Tag;
 
 @Description(englishDescription = "A template for a machine or software product (e.g. a shackle washer, plucker, re-hanger or rapid) made out of functions and components. Multiple EquipmentRules may have references to a EquipmentTemplate")
 public class EquipmentTemplate implements Named {
 	private String name;
 	private String abbreviation;
 	private LocalDateTime version;
-	private List<ComponentTemplateTag> tags;
+	private List<Tag> tags;
 	private List<FunctionTemplate> functionTemplates;
 	private List<EquipmentOption> options;
 
@@ -42,10 +42,10 @@ public class EquipmentTemplate implements Named {
 	public void setVersion(LocalDateTime version) {
 		this.version = version;
 	}
-	public List<ComponentTemplateTag> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
-	public void setTags(List<ComponentTemplateTag> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 
