@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import nth.meyn.connect.dom.asset.Asset;
+
 public class MaintenanceOrder {
 	private MaintenanceOrderPriority priority;
 	private Asset asset;

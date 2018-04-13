@@ -2,7 +2,7 @@ package nth.meyn.connect.dom.module.efficiency;
 
 import nth.introspect.layer5provider.reflection.behavior.format.Format;
 import nth.introspect.layer5provider.reflection.behavior.order.Order;
-import nth.meyn.connect.dom.module.maintenance.Asset;
+import nth.meyn.connect.dom.asset.Asset;
 
 public class EfficiencyOverview {
 	private Asset asset;

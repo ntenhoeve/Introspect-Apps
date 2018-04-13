@@ -7,6 +7,7 @@ import nth.introspect.layer5provider.reflection.behavior.displayname.DisplayName
 import nth.introspect.layer5provider.reflection.behavior.icon.Icon;
 import nth.introspect.layer5provider.reflection.behavior.serviceobjectchildren.ServiceObjectChildren;
 import nth.introspect.ui.style.fontawesome.FontAwesomeUrl;
+import nth.meyn.connect.dom.asset.Asset;
 
 @Icon(iconURL=FontAwesomeUrl.WRENCH)
 @DisplayName(englishName="Maintenance")

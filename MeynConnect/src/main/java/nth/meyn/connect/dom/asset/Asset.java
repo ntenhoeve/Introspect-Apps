@@ -1,4 +1,4 @@
-package nth.meyn.connect.dom.module.maintenance;
+package nth.meyn.connect.dom.asset;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,11 @@ public class Asset {
 		assets = new ArrayList<>();
 	}
 
+	public Asset(String name) {
+		this();
+		this.name=name;
+	}
+	//TODO make multilingual;
 	@Order(sequenceNumber=10)
 	public String getName() {
 		return name;
