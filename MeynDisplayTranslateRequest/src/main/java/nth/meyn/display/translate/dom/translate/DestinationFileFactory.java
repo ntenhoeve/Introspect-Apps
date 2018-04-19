@@ -34,7 +34,7 @@ public class DestinationFileFactory {
 		if (customerAndPanelNr.isPresent()) {
 			return customerAndPanelNr.get().substring(4, 6);
 		} else {
-			return "YY";
+			return "??";
 		}
 	}
 
@@ -42,7 +42,7 @@ public class DestinationFileFactory {
 		if (customerAndPanelNr.isPresent()) {
 			return customerAndPanelNr.get().substring(0, 4);
 		} else {
-			return "XXXX";
+			return "????";
 		}
 	}
 

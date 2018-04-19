@@ -121,7 +121,7 @@ public class TranslateFactory {
 		// return new CSVParser(reader,CSVFormat.EXCEL.withHeader());
 
 		return CSVFormat.EXCEL.withIgnoreEmptyLines().withRecordSeparator('\n').withQuote('"')
-				.withFirstRecordAsHeader().withEscape('\\').withDelimiter(',').withTrim()
+				.withFirstRecordAsHeader().withEscape('\\').withEscape('/').withEscape('|').withDelimiter(',').withTrim()
 				.parse(reader);
 	}
 

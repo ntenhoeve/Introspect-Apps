@@ -58,9 +58,11 @@ public class TranslateRecord {
 			} else if (componentCodes.hasMatchIn(englishText)) {
 				int lastPos = componentCodes.findLastPos(englishText);
 				textToTranslate = englishText.substring(0,lastPos)+" ";
+				textToTranslate="";// translate agency wants this field empty, because their translate tool does not accept pre-filled values.
 				translationType = TranslationType.TRANSLATE_AFTER_COMPONENT_CODES;
 			}
 		}
+
 
 		values.add(textToTranslate);
 		values.add(translationType.toString());
