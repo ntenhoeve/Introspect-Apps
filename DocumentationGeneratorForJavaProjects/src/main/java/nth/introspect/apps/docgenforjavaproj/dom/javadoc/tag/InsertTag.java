@@ -2,10 +2,10 @@ package nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag;
 
 import java.util.Map;
 
-import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFile;
-
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
+
+import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFile;
 
 public class InsertTag extends InlineTag {
 
@@ -25,6 +25,9 @@ public class InsertTag extends InlineTag {
 
 	@Override
 	protected Element getElement(String fileName)  {
+		if (!javaFiles.containsKey(fileName)) {
+			throw new RuntimeException("Could not find a java file with name:"+fileName);
+		}
 		JavaFile javaFile=javaFiles.get(fileName);
 		String javaDoc=javaFile.getJavaDocOfClassDescriptor();
 		return new Element(Tag.valueOf("p"),"").html(javaDoc);

@@ -81,6 +81,10 @@ public class JavaFile {
 				// This line is needed because the previous line does not remove the first crlf
 				regexParser.removeFirst("\r\n");
 			}
+			if (regexParser.startsWith("\n")) {
+				// This line is needed because the previous line does not remove the first crlf
+				regexParser.removeFirst("\n");
+			}
 
 			if (regexParser.startsWith(START_JAVADOC_COMMENTS)) {
 				regexParser.removeFirst(START_JAVADOC_COMMENTS);
@@ -94,7 +98,7 @@ public class JavaFile {
 				
 				documentation = regexParser.getResult();
 			} else {
-				documentation = "";
+				throw new RuntimeException("Could not get javadoc of class of java file:"+javaFile.getAbsolutePath());
 			}
 		}
 		return documentation;

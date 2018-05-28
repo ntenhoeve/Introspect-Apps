@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import nth.introspect.apps.docgenforjavaproj.dom.documentation.DocumentationInfo;
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.InlineTag;
 import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.InlineTagFactory;
+import nth.introspect.apps.docgenforjavaproj.dom.javadoc.tag.InsertTag;
 import nth.introspect.apps.docgenforjavaproj.dom.javafile.JavaFile;
 import nth.introspect.generic.util.StringUtil;
 import nth.introspect.generic.util.TitleBuilder;
@@ -40,6 +41,8 @@ public class JavaDocFactory {
 
 		setBookmarkIds(html);
 
+		
+		System.out.println(html);
 		
 		// TODO convert internal references to bookmarks (id's of H1, H2 and H3
 		// elements)
@@ -95,12 +98,13 @@ public class JavaDocFactory {
 			while (foundMatch) {
 				foundMatch = false;
 				Matcher matcher = inlineTag.getRegex().toMatcher(javaDoc);
-				if (matcher.find()) {
+				if (matcher.find()){
 					foundMatch = true;
 					int start = matcher.start();
 					int end = matcher.end();
 					String tag = javaDoc.substring(start, end);
 					String replacement = inlineTag.getReplacementText(tag);
+
 					javaDoc = javaDoc.substring(0, start) + replacement
 							+ javaDoc.substring(end);
 				}
