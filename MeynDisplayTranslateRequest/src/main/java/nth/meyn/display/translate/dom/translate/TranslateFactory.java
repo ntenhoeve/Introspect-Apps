@@ -70,11 +70,15 @@ public class TranslateFactory {
 		do {
 			ch = (char) reader.read();
 			printStream.print(ch);
+//			System.out.print(ch);
 		} while (ch != '\n');
 
+//		System.out.println("===");
+		
 		// copy second line
 		do {
 			ch = (char) reader.read();
+			//System.out.print(ch);
 			if (ch == '\r') {
 				printStream.print(
 						",\""+language+"                                                                                   \"");
@@ -84,7 +88,7 @@ public class TranslateFactory {
 			} else {
 				printStream.print(ch);
 			}
-		} while (ch != '\r');
+		} while (ch != '\r' || ch==-1);
 	}
 
 	private static void skipFirstLine(InputStreamReader reader)
@@ -121,7 +125,7 @@ public class TranslateFactory {
 		// return new CSVParser(reader,CSVFormat.EXCEL.withHeader());
 
 		return CSVFormat.EXCEL.withIgnoreEmptyLines().withRecordSeparator('\n').withQuote('"')
-				.withFirstRecordAsHeader().withEscape('\\').withEscape('/').withEscape('|').withEscape('%').withDelimiter(',').withTrim()
+				.withFirstRecordAsHeader().withDelimiter(',').withTrim()
 				.parse(reader);
 	}
 
