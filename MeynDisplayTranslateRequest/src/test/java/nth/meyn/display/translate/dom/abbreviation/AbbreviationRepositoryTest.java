@@ -1,7 +1,5 @@
 package nth.meyn.display.translate.dom.abbreviation;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 
