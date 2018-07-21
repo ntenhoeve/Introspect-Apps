@@ -1,0 +1,61 @@
+package nth.foldersynch.dom.device;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import nth.foldersynch.dom.task.FolderSynchTask;
+import nth.introspect.generic.util.TitleBuilder;
+import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+
+public class Device {
+	private String ownerName;
+	private DeviceType deviceType;
+	private List<FolderSynchTask> tasks;
+
+	
+	public Device() {
+		tasks=new ArrayList<>();
+	}
+
+	@Order(sequenceNumber=10)
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	@Order(sequenceNumber=20)
+	public DeviceType getDeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	@Order(sequenceNumber=30)
+	public List<FolderSynchTask> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<FolderSynchTask> tasks) {
+		this.tasks = tasks;
+	}
+
+	@Override
+	public String toString() {
+		return new TitleBuilder().append(ownerName).append(deviceType).toString();
+	}
+	
+	public void modifyTasks(FolderSynchTask task) {
+		
+	}
+	
+	@ParameterFactory 
+	public void addTasks(FolderSynchTask task) {
+		tasks.add(task);
+	}
+}
