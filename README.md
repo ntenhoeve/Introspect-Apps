@@ -1,4 +1,3 @@
-Introspect-Apps
-===============
+Reflect-Framework-Apps
 
-Applications I made using the Introspect Framework
+Applications made using the Introspect Framework
