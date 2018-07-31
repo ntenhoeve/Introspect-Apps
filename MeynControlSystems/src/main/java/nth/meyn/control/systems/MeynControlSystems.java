@@ -3,7 +3,6 @@ package nth.meyn.control.systems;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.introspect.ui.swing.IntrospectApplicationForSwing;
 import nth.meyn.control.systems.dom.customer.CustomerRepository;
 import nth.meyn.control.systems.dom.customer.CustomerService;
 import nth.meyn.control.systems.dom.customerorder.CustomerOrderRepository;
@@ -12,8 +11,9 @@ import nth.meyn.control.systems.dom.employee.EmployeeRepository;
 import nth.meyn.control.systems.dom.employee.EmployeeService;
 import nth.meyn.control.systems.dom.project.ProjectService;
 import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
+import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
-public class MeynControlSystems extends IntrospectApplicationForSwing {
+public class MeynControlSystems extends ReflecttApplicationForSwing {
 
 	public static void main(String[] commandLineArguments) {
 		launch();

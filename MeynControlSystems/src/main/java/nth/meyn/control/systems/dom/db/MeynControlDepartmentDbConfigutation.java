@@ -1,11 +1,11 @@
 package nth.meyn.control.systems.dom.db;
 
-import nth.introspect.infrastructure.hibernate.HibernateConfiguration;
 import nth.meyn.control.systems.dom.activity.Activity;
 import nth.meyn.control.systems.dom.customer.Customer;
 import nth.meyn.control.systems.dom.customerorder.CustomerOrder;
 import nth.meyn.control.systems.dom.employee.Employee;
 import nth.meyn.control.systems.dom.factoryorder.FactoryOrder;
+import nth.reflect.infra.hibernate.HibernateConfiguration;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.MySQLDialect;

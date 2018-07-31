@@ -2,7 +2,7 @@ package nth.foldersynch.dom.device;
 
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 public class DeviceService {
 

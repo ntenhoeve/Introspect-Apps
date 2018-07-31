@@ -13,11 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
-
 import org.apache.commons.io.IOUtils;
+
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 public class FolderService {
 	/**

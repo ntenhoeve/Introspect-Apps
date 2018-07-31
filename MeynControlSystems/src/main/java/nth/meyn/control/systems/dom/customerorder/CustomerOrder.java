@@ -12,14 +12,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import nth.introspect.generic.util.TitleBuilder;
-import nth.introspect.infrastructure.hibernate.entity.EntityId;
-import nth.introspect.layer5provider.reflection.behavior.format.Format;
-import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
-import nth.introspect.layer5provider.reflection.behavior.hidden.HiddenFor;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.meyn.control.systems.dom.customer.Customer;
 import nth.meyn.control.systems.dom.factoryorder.FactoryOrder;
+import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.reflect.fw.layer5provider.reflection.behavior.format.Format;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.Hidden;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.HiddenFor;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.infra.hibernate.entity.EntityId;
 
 /**
  * @author nilsth

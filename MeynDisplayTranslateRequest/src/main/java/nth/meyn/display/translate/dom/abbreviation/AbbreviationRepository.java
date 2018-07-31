@@ -13,7 +13,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import nth.introspect.layer5provider.url.application.ApplicationUrl;
+import nth.reflect.fw.layer5provider.url.application.ApplicationUrl;
 
 public class AbbreviationRepository {
 

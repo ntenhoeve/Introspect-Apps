@@ -1,6 +1,6 @@
 package nth.meyn.vltissuelist.dom.customer;
 
-import nth.introspect.infrastructure.hibernate.HibernateRepository;
+import nth.reflect.infra.hibernate.HibernateRepository;
 
 public class CustomerRepository extends HibernateRepository<Customer> {
 

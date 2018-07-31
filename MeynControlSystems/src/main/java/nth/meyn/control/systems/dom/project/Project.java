@@ -2,11 +2,11 @@ package nth.meyn.control.systems.dom.project;
 
 import java.util.Date;
 
-import nth.introspect.layer5provider.reflection.behavior.format.Format;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.meyn.control.systems.dom.customer.Customer;
 import nth.meyn.control.systems.dom.customerorder.CustomerOrder;
 import nth.meyn.control.systems.dom.factoryorder.FactoryOrder;
+import nth.reflect.fw.layer5provider.reflection.behavior.format.Format;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 /**
  * Wraper class for an {@link CustomerOrder} and {@link FactoryOrder}

@@ -3,8 +3,8 @@ package nth.meyn.controls.configurator.dom.equipment;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 
 public class EquipmentTemplateService {
 	public List<EquipmentTemplateTag> allEquipmentTemplateTags() {

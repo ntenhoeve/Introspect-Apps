@@ -1,6 +1,6 @@
 package nth.meyn.controls.configurator.dom.site;
 
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class Site {
 	private int number;

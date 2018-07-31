@@ -6,9 +6,9 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.introspect.generic.xml.XmlConverter;
-import nth.introspect.layer1userinterface.controller.DownloadStream;
-import nth.introspect.layer5provider.notification.NotificationProvider;
+import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.layer5provider.notification.NotificationProvider;
+import nth.reflect.infra.generic.xml.XmlConverter;
 
 public class JetStreamScalderService {
 

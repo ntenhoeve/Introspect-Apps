@@ -1,9 +1,9 @@
 package nth.meyn.vltissuelist.dom.customer;
 
-import nth.introspect.infrastructure.hibernate.HibernateConfiguration;
-
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.MySQLDialect;
+
+import nth.reflect.infra.hibernate.HibernateConfiguration;
 
 public class MeynControlDepartmentDbConfigutation extends
 		HibernateConfiguration {

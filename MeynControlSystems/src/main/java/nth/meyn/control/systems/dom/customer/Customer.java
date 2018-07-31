@@ -8,11 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import nth.introspect.generic.util.TitleBuilder;
-import nth.introspect.layer5provider.reflection.behavior.format.Format;
-import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
-import nth.introspect.layer5provider.reflection.behavior.hidden.HiddenFor;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.reflect.fw.layer5provider.reflection.behavior.format.Format;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.Hidden;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.HiddenFor;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 @Entity
 @Table(name="_customers")

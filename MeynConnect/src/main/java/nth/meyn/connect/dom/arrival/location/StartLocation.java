@@ -1,6 +1,6 @@
 package nth.meyn.connect.dom.arrival.location;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 @Description(englishDescription="Physical, geographical or local grouping determined by the site where processing has started, e.g. Container Arrival System Line 1")
 public class StartLocation {

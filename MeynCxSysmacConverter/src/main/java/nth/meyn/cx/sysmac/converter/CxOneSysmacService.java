@@ -10,8 +10,6 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.input.Clipboard;
 import javafx.stage.Stage;
-import nth.introspect.layer2service.ServiceObject;
-import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
 import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModelFactory;
@@ -25,6 +23,8 @@ import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacSymbolDataFactory;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacMarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacRungsFactory;
+import nth.reflect.fw.layer2service.ServiceObject;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.Hidden;
 
 /**
  * {@link ServiceObject} that also is an JavaFx application so we can use the JavaFX clipboard classes which are more adavnced than those of Swing

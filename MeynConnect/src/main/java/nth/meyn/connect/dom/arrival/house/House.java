@@ -1,6 +1,6 @@
 package nth.meyn.connect.dom.arrival.house;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 @Description(englishDescription="A building where birds are grown")
 public class House {

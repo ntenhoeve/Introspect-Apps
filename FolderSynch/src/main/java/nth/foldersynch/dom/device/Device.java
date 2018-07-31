@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.foldersynch.dom.task.FolderSynchTask;
-import nth.introspect.generic.util.TitleBuilder;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 public class Device {
 	private String ownerName;

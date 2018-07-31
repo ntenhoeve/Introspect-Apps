@@ -1,7 +1,7 @@
 package nth.meyn.control.systems.dom.employee;
 
-import nth.introspect.infrastructure.hibernate.HibernateRepository;
 import nth.meyn.control.systems.dom.db.MeynControlDepartmentDbConfigutation;
+import nth.reflect.infra.hibernate.HibernateRepository;
 
 public class EmployeeRepository extends HibernateRepository<Employee> {
 

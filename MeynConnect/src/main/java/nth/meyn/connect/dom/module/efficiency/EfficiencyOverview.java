@@ -1,8 +1,8 @@
 package nth.meyn.connect.dom.module.efficiency;
 
-import nth.introspect.layer5provider.reflection.behavior.format.Format;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.meyn.connect.dom.asset.Asset;
+import nth.reflect.fw.layer5provider.reflection.behavior.format.Format;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class EfficiencyOverview {
 	private Asset asset;

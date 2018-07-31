@@ -7,11 +7,11 @@ import nth.foldersynch.dom.config.ConfigurationRepository;
 import nth.foldersynch.dom.config.ConfigurationService;
 import nth.foldersynch.dom.device.DeviceRepository;
 import nth.foldersynch.dom.device.DeviceService;
-import nth.introspect.generic.xml.XmlConverter;
-import nth.introspect.infrastructure.xmlfilerepository.XmlFileRepository;
-import nth.introspect.ui.swing.IntrospectApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.infra.generic.xml.XmlConverter;
+import nth.reflect.infra.xmlfilerepository.XmlFileRepository;
 
-public class FolderSynch extends IntrospectApplicationForSwing {
+public class FolderSynch extends ReflecttApplicationForSwing {
 
 	public static void main(String[] args) {
 		launch();

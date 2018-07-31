@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import nth.introspect.generic.regex.LetterTypes;
-import nth.introspect.generic.regex.Regex;
-import nth.introspect.generic.regex.Repetition;
+import nth.reflect.fw.generic.regex.LetterTypes;
+import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.fw.generic.regex.Repetition;
 
 public class Abbreviations {
 

@@ -9,14 +9,14 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import nth.introspect.layer1userinterface.controller.DownloadStream;
-import nth.introspect.layer1userinterface.controller.UploadStream;
-import nth.introspect.layer5provider.reflection.behavior.displayname.DisplayName;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.behavior.icon.Icon;
-import nth.introspect.ui.style.fontawesome.FontAwesomeUrl;
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
+import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.layer1userinterface.controller.UploadStream;
+import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @DisplayName(englishName = "Translate")
 @Icon(iconURL = FontAwesomeUrl.FLAG)

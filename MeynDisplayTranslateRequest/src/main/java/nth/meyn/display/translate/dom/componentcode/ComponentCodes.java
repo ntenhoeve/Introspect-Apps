@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 
-import nth.introspect.generic.regex.LetterTypes;
-import nth.introspect.generic.regex.Regex;
-import nth.introspect.generic.regex.Repetition;
+import nth.reflect.fw.generic.regex.LetterTypes;
+import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.fw.generic.regex.Repetition;
 
 public class ComponentCodes {
 	private static final Regex REGEX_COMPONENT_CODE = new Regex()

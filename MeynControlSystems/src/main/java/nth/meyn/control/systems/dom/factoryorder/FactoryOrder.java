@@ -8,11 +8,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import nth.introspect.infrastructure.hibernate.entity.EntityId;
-import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
-import nth.introspect.layer5provider.reflection.behavior.hidden.HiddenFor;
 import nth.meyn.control.systems.dom.activity.Activity;
 import nth.meyn.control.systems.dom.activity.ActivityStatus;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.Hidden;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.HiddenFor;
+import nth.reflect.infra.hibernate.entity.EntityId;
 
 @Entity
 @Table(name="processdata")

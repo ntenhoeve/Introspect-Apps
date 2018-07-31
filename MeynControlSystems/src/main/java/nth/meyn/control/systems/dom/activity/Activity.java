@@ -6,8 +6,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import nth.introspect.infrastructure.hibernate.entity.EntityId;
 import nth.meyn.control.systems.dom.employee.Employee;
+import nth.reflect.infra.hibernate.entity.EntityId;
 
 @Entity
 @Table(name = "activitydata")

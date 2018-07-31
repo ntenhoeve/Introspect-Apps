@@ -3,9 +3,9 @@ package nth.meyn.connect.dom.arrival.flock;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 public class BirdTypeService {
 	public List<BirdType> allBirdTypes() {

@@ -2,11 +2,11 @@ package nth.meyn.connect.dom.arrival.grower;
 
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.meyn.connect.dom.arrival.house.House;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 @Description(englishDescription="A farmer that grows birds")
 public class Grower {

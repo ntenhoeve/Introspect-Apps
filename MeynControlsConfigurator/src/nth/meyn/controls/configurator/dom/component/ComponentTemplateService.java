@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.meyn.controls.configurator.dom.named.Tag;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 public class ComponentTemplateService {
 

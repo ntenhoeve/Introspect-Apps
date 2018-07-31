@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.image.Image;
-import nth.introspect.layer5provider.reflection.behavior.displayname.DisplayName;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.behavior.icon.Icon;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
-import nth.introspect.ui.style.fontawesome.FontAwesomeUrl;
 import nth.meyn.connect.dom.asset.Asset;
+import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @Icon(iconURL=FontAwesomeUrl.LINE_CHART)
 @DisplayName(englishName = "Efficiency")

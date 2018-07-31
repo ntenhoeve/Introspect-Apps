@@ -3,10 +3,10 @@ package nth.meyn.vltissuelist.dom.issue;
 import java.io.File;
 import java.util.Date;
 
-import nth.introspect.layer5provider.reflection.behavior.format.Format;
-import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.meyn.vltissuelist.dom.folder.project.ProjectType;
+import nth.reflect.fw.layer5provider.reflection.behavior.format.Format;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.Hidden;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class Issue {
 

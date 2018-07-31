@@ -19,10 +19,10 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import nth.introspect.layer1userinterface.controller.DownloadStream;
-import nth.introspect.layer1userinterface.controller.UploadStream;
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
+import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.layer1userinterface.controller.UploadStream;
 
 public class TranslateFactory {
 

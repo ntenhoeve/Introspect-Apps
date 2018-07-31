@@ -2,10 +2,10 @@ package nth.meyn.jetstreamscalder.dom.scalder;
 
 import java.util.List;
 
-import nth.introspect.layer5provider.notification.NotificationProvider;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
 import nth.meyn.jetstreamscalder.dom.section.Section;
 import nth.meyn.jetstreamscalder.dom.section.SectionFactory;
+import nth.reflect.fw.layer5provider.notification.NotificationProvider;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class ScalderRow {
 

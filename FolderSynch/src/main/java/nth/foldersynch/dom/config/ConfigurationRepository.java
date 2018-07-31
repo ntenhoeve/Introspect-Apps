@@ -4,10 +4,10 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import nth.introspect.generic.xml.XmlConverter;
-import nth.introspect.infrastructure.xmlfilerepository.XmlFileRepository;
-import nth.introspect.layer4infrastructure.InfrastructureContainer;
-import nth.introspect.layer5provider.reflection.ReflectionProvider;
+import nth.reflect.fw.layer4infrastructure.InfrastructureContainer;
+import nth.reflect.fw.layer5provider.reflection.ReflectionProvider;
+import nth.reflect.infra.generic.xml.XmlConverter;
+import nth.reflect.infra.xmlfilerepository.XmlFileRepository;
 
 public class ConfigurationRepository {
 

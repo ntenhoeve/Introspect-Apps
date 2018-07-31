@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.generic.util.TitleBuilder;
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
 import nth.meyn.controls.configurator.dom.function.FunctionTemplate;
 import nth.meyn.controls.configurator.dom.named.Named;
 import nth.meyn.controls.configurator.dom.named.Tag;
+import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 @Description(englishDescription = "A template for a machine or software product (e.g. a shackle washer, plucker, re-hanger or rapid) made out of functions and components. Multiple EquipmentRules may have references to a EquipmentTemplate")
 public class EquipmentTemplate implements Named {

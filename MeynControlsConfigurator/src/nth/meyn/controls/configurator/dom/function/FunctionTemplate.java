@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 @Description(englishDescription = "A part of equipment that is responsible for one function (e.g. transport, turning, plucking, lifting, temperature control) made out of none or more other functions or components. The functions can be seen as the branches and components can be seen as the leafs. An EquipmentTemplate has a unique reference to a FunctionTemplate. A function name is a single verb e.g. Convey, Turn, Lift, Fill, Heat, Pluck, Transfer")
 public class FunctionTemplate implements FunctionOrComponent {

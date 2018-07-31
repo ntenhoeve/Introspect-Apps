@@ -3,8 +3,8 @@ package nth.accounts.domain.tag;
 import java.util.List;
 
 import nth.accounts.domain.repository.AccountRepository;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 
 public class TagService {
 

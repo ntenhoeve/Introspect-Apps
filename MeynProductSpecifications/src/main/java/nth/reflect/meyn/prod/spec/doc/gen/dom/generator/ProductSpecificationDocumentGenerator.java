@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 
-import nth.introspect.layer1userinterface.controller.DownloadStream;
-import nth.introspect.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
+import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.reflect.meyn.prod.spec.doc.gen.dom.order.SalesOrder;
 import nth.reflect.meyn.prod.spec.doc.gen.dom.order.SalesOrderService;
 

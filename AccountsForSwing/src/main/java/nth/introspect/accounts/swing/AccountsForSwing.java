@@ -6,10 +6,10 @@ import java.util.List;
 import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.tag.TagService;
-import nth.introspect.generic.xml.XmlConverter;
-import nth.introspect.ui.swing.IntrospectApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.infra.generic.xml.XmlConverter;
 
-public class AccountsForSwing extends IntrospectApplicationForSwing {
+public class AccountsForSwing extends ReflecttApplicationForSwing {
 
 	public static void main(String[] args) {
 		launch();

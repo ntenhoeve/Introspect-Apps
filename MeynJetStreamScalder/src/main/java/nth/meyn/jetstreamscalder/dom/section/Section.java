@@ -1,7 +1,7 @@
 package nth.meyn.jetstreamscalder.dom.section;
 
-import nth.introspect.generic.util.StringUtil;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.generic.util.StringUtil;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public abstract class Section {
 

@@ -3,11 +3,11 @@ package nth.meyn.jetstreamscalder.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.generic.xml.XmlConverter;
-import nth.introspect.ui.swing.IntrospectApplicationForSwing;
 import nth.meyn.jetstreamscalder.dom.scalder.JetStreamScalderService;
+import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.infra.generic.xml.XmlConverter;
 
-public class MeynJetStreamScalder extends IntrospectApplicationForSwing {
+public class MeynJetStreamScalder extends ReflecttApplicationForSwing {
 
 	public static void main(String[] args) {
 		launch();

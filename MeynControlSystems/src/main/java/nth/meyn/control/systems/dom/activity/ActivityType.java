@@ -1,6 +1,6 @@
 package nth.meyn.control.systems.dom.activity;
 
-import nth.introspect.generic.util.StringUtil;
+import nth.reflect.fw.generic.util.StringUtil;
 
 public enum ActivityType {
 	HARDWARE_ENGINEERING(17, 8), SOFTWARE_ENGINEERING(8, 2), LAYOUT_ENGINEERING(

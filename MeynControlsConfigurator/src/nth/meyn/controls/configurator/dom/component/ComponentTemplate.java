@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
 import nth.meyn.controls.configurator.dom.function.FunctionOrComponent;
 import nth.meyn.controls.configurator.dom.named.Tag;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 @Description(englishDescription = "A electric component like a sensor oractuator such as a valve, relays or motor. A component can have multiple variants, e.g. a proximity sensor can have multiple types or brands. A ComponentTemplate can be referenced by many FunctionTemplates)")
 public class ComponentTemplate implements FunctionOrComponent {

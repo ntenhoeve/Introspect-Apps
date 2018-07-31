@@ -3,10 +3,10 @@ package nth.meyn.vltissuelist.dom.folder.plc;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import nth.introspect.generic.regex.Regex;
-import nth.introspect.generic.regex.Repetition;
 import nth.meyn.vltissuelist.dom.folder.vlt.VltFolder;
 import nth.meyn.vltissuelist.dom.folder.vlt.VltFolderFilter;
+import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.fw.generic.regex.Repetition;
 
 public class PlcFolder {
 

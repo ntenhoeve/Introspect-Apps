@@ -1,6 +1,6 @@
 package nth.foldersynch.dom.config;
 
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class Configuration {
 	private String ftpServerAddress;

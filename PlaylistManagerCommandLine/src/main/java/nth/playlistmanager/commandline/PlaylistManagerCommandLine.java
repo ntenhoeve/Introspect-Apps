@@ -3,10 +3,10 @@ package nth.playlistmanager.commandline;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
 import nth.playlistmanager.domain.PlaylistService;
+import nth.reflect.fw.ui.commandline.ReflectApplicationForCommandLine;
 
-public class PlaylistManagerCommandLine extends IntrospectApplicationForCommandLine{
+public class PlaylistManagerCommandLine extends ReflectApplicationForCommandLine{
 
 	/**
 	 * @param args

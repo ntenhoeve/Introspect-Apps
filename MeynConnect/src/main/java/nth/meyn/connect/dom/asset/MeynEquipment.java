@@ -1,6 +1,6 @@
 package nth.meyn.connect.dom.asset;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 @Description(englishDescription="A Meyn line such as a container system, De-feathering line, evisceration line, spin chiller, deboning machines, etc...")
 public class MeynEquipment extends Asset {

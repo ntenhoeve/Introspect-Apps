@@ -1,11 +1,11 @@
 package nth.meyn.connect.dom.module.settings;
 
-import nth.introspect.layer5provider.reflection.behavior.displayname.DisplayName;
-import nth.introspect.layer5provider.reflection.behavior.icon.Icon;
-import nth.introspect.layer5provider.reflection.behavior.serviceobjectchildren.ServiceObjectChildren;
-import nth.introspect.ui.style.fontawesome.FontAwesomeUrl;
 import nth.meyn.connect.dom.arrival.flock.BirdTypeService;
 import nth.meyn.connect.dom.arrival.location.LocationService;
+import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
+import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.layer5provider.reflection.behavior.serviceobjectchildren.ServiceObjectChildren;
+import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @Icon(iconURL=FontAwesomeUrl.COGS)
 @ServiceObjectChildren(serviceClasses={BirdTypeService.class, LocationService.class, ConfigurationService.class})

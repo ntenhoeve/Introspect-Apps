@@ -3,10 +3,10 @@ package nth.meyn.jetstreamscalder.dom.scalder;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.notification.NotificationProvider;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionMode;
-import nth.introspect.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.notification.NotificationProvider;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class JetStreamScalder {
 	private static final int SECONDS_IN_AN_HOUR = 3600;

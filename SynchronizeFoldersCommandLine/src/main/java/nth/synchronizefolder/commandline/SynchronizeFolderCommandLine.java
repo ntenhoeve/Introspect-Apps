@@ -3,11 +3,11 @@ package nth.synchronizefolder.commandline;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.url.UrlProvider;
-import nth.introspect.ui.commandline.IntrospectApplicationForCommandLine;
+import nth.reflect.fw.layer5provider.url.UrlProvider;
+import nth.reflect.fw.ui.commandline.ReflectApplicationForCommandLine;
 import nth.synchronizefolder.domain.FolderService;
 
-public class SynchronizeFolderCommandLine extends IntrospectApplicationForCommandLine{
+public class SynchronizeFolderCommandLine extends ReflectApplicationForCommandLine{
 
 
 	/**

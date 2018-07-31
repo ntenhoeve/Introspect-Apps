@@ -7,7 +7,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-import nth.introspect.layer5provider.reflection.behavior.hidden.Hidden;
+import nth.reflect.fw.layer5provider.reflection.behavior.hidden.Hidden;
 
 
 public class SalesOrderService {

@@ -2,8 +2,8 @@ package nth.meyn.vltissuelist.dom.issue;
 
 import java.util.List;
 
-import nth.introspect.excel.repository.ExcelRepository;
-import nth.introspect.layer5provider.reflection.ReflectionProvider;
+import nth.reflect.fw.layer5provider.reflection.ReflectionProvider;
+import nth.reflect.infra.excel.repository.ExcelRepository;
 
 public class IssueExcelRepository extends ExcelRepository<Issue> {
 

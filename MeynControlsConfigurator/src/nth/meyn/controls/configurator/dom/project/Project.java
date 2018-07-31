@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.introspect.layer5provider.reflection.behavior.description.Description;
 import nth.meyn.controls.configurator.dom.equipment.Equipment;
 import nth.meyn.controls.configurator.dom.site.Site;
+import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
 /**
  * @author nilsth

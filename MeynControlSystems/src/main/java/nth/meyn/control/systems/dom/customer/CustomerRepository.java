@@ -2,8 +2,8 @@ package nth.meyn.control.systems.dom.customer;
 
 import java.util.List;
 
-import nth.introspect.infrastructure.hibernate.HibernateRepository;
 import nth.meyn.control.systems.dom.db.MeynControlDepartmentDbConfigutation;
+import nth.reflect.infra.hibernate.HibernateRepository;
 
 public class CustomerRepository extends HibernateRepository<Customer> {
 

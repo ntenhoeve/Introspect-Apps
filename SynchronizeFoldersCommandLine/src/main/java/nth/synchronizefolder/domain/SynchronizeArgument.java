@@ -2,7 +2,7 @@ package nth.synchronizefolder.domain;
 
 import java.io.File;
 
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class SynchronizeArgument {
 	private File source;

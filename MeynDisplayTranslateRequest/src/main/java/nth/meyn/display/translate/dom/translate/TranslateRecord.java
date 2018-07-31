@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import nth.introspect.generic.regex.Regex;
-import nth.introspect.generic.regex.Repetition;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
 import nth.meyn.display.translate.dom.componentcode.ComponentCodes;
+import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.fw.generic.regex.Repetition;
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;

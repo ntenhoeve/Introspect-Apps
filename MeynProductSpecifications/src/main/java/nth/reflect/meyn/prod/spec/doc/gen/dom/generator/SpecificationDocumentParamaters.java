@@ -1,6 +1,6 @@
 package nth.reflect.meyn.prod.spec.doc.gen.dom.generator;
 
-import nth.introspect.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class SpecificationDocumentParamaters {
 	private boolean includeTechnicalSpecifications;

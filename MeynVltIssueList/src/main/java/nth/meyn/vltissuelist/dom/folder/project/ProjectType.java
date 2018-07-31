@@ -2,7 +2,7 @@ package nth.meyn.vltissuelist.dom.folder.project;
 
 import java.io.File;
 
-import nth.introspect.generic.util.StringUtil;
+import nth.reflect.fw.generic.util.StringUtil;
 
 public enum ProjectType {
 	ARRIVAL_SYSTEM("aanvoer", "arrival", "cas", "container", "departure", "tilt","crate","washer"), DEFEATHERING_LINE(

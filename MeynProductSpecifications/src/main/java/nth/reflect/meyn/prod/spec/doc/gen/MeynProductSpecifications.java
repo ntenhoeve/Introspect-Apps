@@ -4,11 +4,11 @@ package nth.reflect.meyn.prod.spec.doc.gen;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.introspect.ui.swing.IntrospectApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 import nth.reflect.meyn.prod.spec.doc.gen.dom.generator.ProductSpecificationDocumentGenerator;
 import nth.reflect.meyn.prod.spec.doc.gen.dom.order.SalesOrderService;
 
-public class MeynProductSpecifications extends IntrospectApplicationForSwing{
+public class MeynProductSpecifications extends ReflecttApplicationForSwing{
 
 	public static void main(String[] commandLineArguments) {
 		launch();

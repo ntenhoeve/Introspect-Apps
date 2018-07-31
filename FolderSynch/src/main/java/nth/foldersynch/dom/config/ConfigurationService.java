@@ -1,6 +1,6 @@
 package nth.foldersynch.dom.config;
 
-import nth.introspect.layer5provider.reflection.behavior.displayname.DisplayName;
+import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 
 @DisplayName(englishName="Configuration")
 public class ConfigurationService {

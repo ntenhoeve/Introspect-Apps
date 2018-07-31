@@ -3,11 +3,11 @@ package nth.meyn.vltissuelist.dom.issue;
 import java.io.File;
 import java.util.Map;
 
-import nth.introspect.excel.repository.reader.ExcelTableReader;
-import nth.introspect.excel.repository.sheetfilter.AllSheetsFilter;
-import nth.introspect.excel.repository.sheetfilter.SheetFilter;
-
 import org.apache.poi.ss.usermodel.Row;
+
+import nth.reflect.infra.excel.repository.reader.ExcelTableReader;
+import nth.reflect.infra.excel.repository.sheetfilter.AllSheetsFilter;
+import nth.reflect.infra.excel.repository.sheetfilter.SheetFilter;
 
 public class IssueExcelRepositoryReader extends ExcelTableReader<Issue> {
 	private static final String NUMBER_OF_UNITS = "Number of units";
