@@ -8,12 +8,12 @@ import nth.meyn.connect.dom.asset.Asset;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
-@Icon(iconURL=FontAwesomeUrl.LINE_CHART)
+@FontIcon(fontIconUrl=FontAwesomeUrl.LINE_CHART)
 @DisplayName(englishName = "Efficiency")
 public class EfficiencyService {
 

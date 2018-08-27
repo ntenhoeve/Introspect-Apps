@@ -11,11 +11,11 @@ import nth.meyn.connect.dom.arrival.lot.LotService;
 import nth.meyn.connect.dom.arrival.transport.TransportService;
 import nth.meyn.connect.dom.module.trackingtracing.tracking.TrackingOverview;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
-import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.serviceobjectchildren.ServiceObjectChildren;
 import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
-@Icon(iconURL=FontAwesomeUrl.ARROWS_H)
+@FontIcon(fontIconUrl=FontAwesomeUrl.ARROWS_H)
 @DisplayName(englishName = "Tracking & Tracing")
 @ServiceObjectChildren(serviceClasses = { GrowerService.class, FlockService.class,
 		TransportService.class, LotService.class })

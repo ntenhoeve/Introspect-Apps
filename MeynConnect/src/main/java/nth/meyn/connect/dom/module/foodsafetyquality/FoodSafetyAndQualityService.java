@@ -4,10 +4,10 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
-import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
-@Icon(iconURL=FontAwesomeUrl.SHIELD)
+@FontIcon(fontIconUrl=FontAwesomeUrl.SHIELD)
 @DisplayName(englishName="Food safety & Quality")
 public class FoodSafetyAndQualityService {
 

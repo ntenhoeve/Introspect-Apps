@@ -15,11 +15,11 @@ import nth.reflect.fw.layer1userinterface.controller.UploadStream;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
-import nth.reflect.fw.layer5provider.reflection.behavior.icon.Icon;
+import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @DisplayName(englishName = "Translate")
-@Icon(iconURL = FontAwesomeUrl.FLAG)
+@FontIcon(fontIconUrl = FontAwesomeUrl.FLAG)
 public class TranslateService {
 
 	private static final String CSV_EXTENTION_FILTER = "*.csv";
