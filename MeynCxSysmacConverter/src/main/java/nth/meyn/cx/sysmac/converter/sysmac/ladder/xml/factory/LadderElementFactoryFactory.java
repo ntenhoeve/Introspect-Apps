@@ -27,7 +27,7 @@ import nth.meyn.cx.sysmac.converter.sysmac.types.SysmacConnectionPointType;
 
 public class LadderElementFactoryFactory {
 
-	private static final String FACTORY = "Factory";
+	private static final String FACTORY = "RandomGenerator";
 	private static final String DIFF_DOWN_PREFIX = "%";
 	private static final String DIFF_UP_PREFIX = "@";
 	private static final String INVERSE_PREFIX = "!";

@@ -72,7 +72,7 @@ import nth.reflect.app.swdocgen.dom.page.wiki.GitHubWikiPageFactory;
  * that is the root of your documentation that ties in all this other
  * documentation classes or interfaces with help of the {@insert ...} tag.
  * E.G."ReflectDocumentation"</li>
- * <li>{GIT_HUB_USER_NAME}: User name of GitHub account. E.g.:"ntenhoeve"</li>
+ * <li>{GIT_HUB_USER_NAME}: UserTestObject name of GitHub account. E.g.:"ntenhoeve"</li>
  * <li>{GIT_HUB_PASSWORD}: Password of GitHub account. E.g.:"Password123"</li>
  * <li>{FILE_LOCATION_LOCAL_GIT_HUB_WIKI_REPOSITORY}: Local file location of the
  * GitHub repository for the Wiki pages. E.g.:"M:\My
@@ -117,7 +117,7 @@ import nth.reflect.app.swdocgen.dom.page.wiki.GitHubWikiPageFactory;
  * that is the root of your documentation that ties in all this other
  * documentation classes or interfaces with help of the {@insert ...} tag.
  * E.G."ReflectDocumentation"</li>
- * <li>{GIT_HUB_USER_NAME}: User name of GitHub account. E.g.:"ntenhoeve"</li>
+ * <li>{GIT_HUB_USER_NAME}: UserTestObject name of GitHub account. E.g.:"ntenhoeve"</li>
  * <li>{GIT_HUB_PASSWORD}: Password of GitHub account. E.g.:"Password123"</li>
  * <li>{FILE_LOCATION_LOCAL_GIT_HUB_WEB_REPOSITORY}: Local file location of the
  * GitHub repository for the Web page. E.g.:"M:\My Git\ntenhoeve.github.io"</li>

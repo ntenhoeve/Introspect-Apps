@@ -11,7 +11,7 @@ public class RobotsTxt implements WritableFile {
 	private final File file;
 	private static final String UTF_8_ENCODING = "UTF-8";
 	private static final String DISALLOW_NOTHING = "Disallow:";
-	private static final String ALL_USER_AGENTS = "User-agent: *";
+	private static final String ALL_USER_AGENTS = "UserTestObject-agent: *";
 	private static final String ROBOTS_TXT = "robots.txt";
 	
 	public RobotsTxt(File destinationFolder) {

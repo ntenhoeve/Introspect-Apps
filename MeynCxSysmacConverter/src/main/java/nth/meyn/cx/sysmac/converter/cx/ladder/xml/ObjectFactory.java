@@ -24,7 +24,7 @@ import javax.xml.namespace.QName;
  * content can consist of schema derived interfaces 
  * and classes representing the binding of schema 
  * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * groups.  RandomGenerator methods for each of these are 
  * provided in this class.
  * 
  */

@@ -6,9 +6,6 @@ import java.util.List;
 import nth.meyn.display.translate.dom.translate.TranslateService;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.applicationicon.ApplicationIcon;
-import nth.reflect.fw.ui.style.ContentColor;
-import nth.reflect.fw.ui.style.MaterialColorPalette;
-import nth.reflect.fw.ui.style.basic.Color;
 
 @ApplicationIcon(iconURL="reflect-class-resource://nth.meyn.display.translate.app.MeynDisplayTranslateRequest/meyn32x32.png")
 public class MeynDisplayTranslateRequest extends ReflectApplicationForJavaFX {
@@ -29,20 +26,20 @@ public class MeynDisplayTranslateRequest extends ReflectApplicationForJavaFX {
 	}
 
 	
-	@Override
-	public Color getPrimaryColor() {
-		return MaterialColorPalette.TEAL;
-	}
-
-	@Override
-	public Color getAccentColor() {
-		return MaterialColorPalette.ORANGE;
-	}
-
-	@Override
-	public ContentColor getContentColor() {
-		return ContentColor.WHITE;
-	}
+//	@Override
+//	public Color getPrimaryColor() {
+//		return MaterialColorPalette.TEAL;
+//	}
+//
+//	@Override
+//	public Color getAccentColor() {
+//		return MaterialColorPalette.ORANGE;
+//	}
+//
+//	@Override
+//	public ContentColor getContentColor() {
+//		return ContentColor.WHITE;
+//	}
 
 
 
