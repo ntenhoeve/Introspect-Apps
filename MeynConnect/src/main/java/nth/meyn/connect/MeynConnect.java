@@ -20,6 +20,8 @@ import nth.meyn.connect.dom.module.settings.SettingsService;
 import nth.meyn.connect.dom.module.trackingtracing.TrackingAndTracingService;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
+import nth.reflect.fw.ui.style.MaterialColorPalette;
+import nth.reflect.fw.ui.style.ReflectColors;
 
 /**
  * TODO: {@link BirdType}, {@link LotService} DataBaseSettingsService and
@@ -33,10 +35,10 @@ public class MeynConnect extends ReflectApplicationForJavaFX {
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return Arrays.asList(EfficiencyService.class, OrderProcessingService.class,
-				TrackingAndTracingService.class, GrowerService.class, FlockService.class,
-				TransportService.class, LotService.class, FoodSafetyAndQualityService.class,
-				MaintenanceService.class, MaintenanceOrderService.class, SettingsService.class, BirdTypeService.class, LocationService.class, ConfigurationService.class);
+		return Arrays.asList(EfficiencyService.class, OrderProcessingService.class, TrackingAndTracingService.class,
+				GrowerService.class, FlockService.class, TransportService.class, LotService.class,
+				FoodSafetyAndQualityService.class, MaintenanceService.class, MaintenanceOrderService.class,
+				SettingsService.class, BirdTypeService.class, LocationService.class, ConfigurationService.class);
 	}
 
 	@Override
@@ -44,20 +46,11 @@ public class MeynConnect extends ReflectApplicationForJavaFX {
 		return null;
 	}
 
-//	@Override
-//	public Color getPrimaryColor() {
-//		return MaterialColorPalette.TEAL;
-//	}
-//
-//	@Override
-//	public Color getAccentColor() {
-//		return MaterialColorPalette.ORANGE;
-//	}
-//
-//	@Override
-//	public ContentColor getContentColor() {
-//		return ContentColor.WHITE;
-//	}
+	@Override
+	public ReflectColors getColors() {
+		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
+				MaterialColorPalette.white());
+	}
 
 	public static void main(String[] args) {
 		launch(args);

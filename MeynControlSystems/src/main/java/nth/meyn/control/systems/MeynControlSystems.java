@@ -11,6 +11,8 @@ import nth.meyn.control.systems.dom.employee.EmployeeRepository;
 import nth.meyn.control.systems.dom.employee.EmployeeService;
 import nth.meyn.control.systems.dom.project.ProjectService;
 import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
+import nth.reflect.fw.ui.style.MaterialColorPalette;
+import nth.reflect.fw.ui.style.ReflectColors;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
 public class MeynControlSystems extends ReflecttApplicationForSwing {
@@ -21,15 +23,19 @@ public class MeynControlSystems extends ReflecttApplicationForSwing {
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return Arrays.asList(ProjectService.class, CustomerService.class,
-				EmployeeService.class);
+		return Arrays.asList(ProjectService.class, CustomerService.class, EmployeeService.class);
 	}
 
 	@Override
 	public List<Class<?>> getInfrastructureClasses() {
-		return Arrays.asList(MeynControlDepartmentDbConfigutation.class,
-				CustomerRepository.class, EmployeeRepository.class,
-				CustomerOrderRepository.class, TimeLineExcelReport.class);
+		return Arrays.asList(MeynControlDepartmentDbConfigutation.class, CustomerRepository.class,
+				EmployeeRepository.class, CustomerOrderRepository.class, TimeLineExcelReport.class);
+	}
+
+	@Override
+	public ReflectColors getColors() {
+		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
+				MaterialColorPalette.white());
 	}
 
 }

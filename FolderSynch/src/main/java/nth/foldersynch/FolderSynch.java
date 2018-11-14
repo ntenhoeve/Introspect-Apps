@@ -7,6 +7,8 @@ import nth.foldersynch.dom.config.ConfigurationRepository;
 import nth.foldersynch.dom.config.ConfigurationService;
 import nth.foldersynch.dom.device.DeviceRepository;
 import nth.foldersynch.dom.device.DeviceService;
+import nth.reflect.fw.ui.style.MaterialColorPalette;
+import nth.reflect.fw.ui.style.ReflectColors;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 import nth.reflect.infra.xmlfilerepository.XmlFileRepository;
@@ -26,6 +28,12 @@ public class FolderSynch extends ReflecttApplicationForSwing {
 	public List<Class<?>> getInfrastructureClasses() {
 		return Arrays.asList(XmlConverter.class, XmlFileRepository.class, DeviceRepository.class,
 				ConfigurationRepository.class);
+	}
+
+	@Override
+	public ReflectColors getColors() {
+		return new ReflectColors(MaterialColorPalette.blue700(), MaterialColorPalette.orange500(),
+				MaterialColorPalette.white());
 	}
 
 }

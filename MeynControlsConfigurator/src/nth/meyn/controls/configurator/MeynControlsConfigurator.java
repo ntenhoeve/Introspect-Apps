@@ -10,12 +10,15 @@ import nth.meyn.controls.configurator.dom.project.ProjectTemplateService;
 import nth.meyn.controls.configurator.dom.settings.SettingsRepository;
 import nth.meyn.controls.configurator.dom.site.SiteService;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
+import nth.reflect.fw.ui.style.MaterialColorPalette;
+import nth.reflect.fw.ui.style.ReflectColors;
 
 public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return Arrays.asList(ComponentTemplateService.class, EquipmentTemplateService.class, ProjectTemplateService.class, SiteService.class, ProjectService.class);
+		return Arrays.asList(ComponentTemplateService.class, EquipmentTemplateService.class,
+				ProjectTemplateService.class, SiteService.class, ProjectService.class);
 	}
 
 	@Override
@@ -23,21 +26,12 @@ public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
 		return Arrays.asList(SettingsRepository.class);
 	}
 
-//	@Override
-//	public Color getPrimaryColor() {
-//		return MaterialColorPalette.TEAL;
-//	}
-//
-//	@Override
-//	public Color getAccentColor() {
-//		return MaterialColorPalette.ORANGE;
-//	}
-//
-//	@Override
-//	public ContentColor getContentColor() {
-//		return ContentColor.WHITE;
-//	}
-	
+	@Override
+	public ReflectColors getColors() {
+		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
+				MaterialColorPalette.white());
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}

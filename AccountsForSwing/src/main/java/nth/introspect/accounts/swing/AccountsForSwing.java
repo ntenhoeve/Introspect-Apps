@@ -6,6 +6,8 @@ import java.util.List;
 import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.tag.TagService;
+import nth.reflect.fw.ui.style.MaterialColorPalette;
+import nth.reflect.fw.ui.style.ReflectColors;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 
@@ -15,6 +17,7 @@ public class AccountsForSwing extends ReflecttApplicationForSwing {
 		launch();
 	}
 
+	@Override
 	public List<Class<?>> getServiceClasses() {
 		List<Class<?>> serviceClasses = new ArrayList<Class<?>>();
 		serviceClasses.add(AccountService.class);
@@ -22,10 +25,17 @@ public class AccountsForSwing extends ReflecttApplicationForSwing {
 		return serviceClasses;
 	}
 
+	@Override
 	public List<Class<?>> getInfrastructureClasses() {
 		List<Class<?>> infrastructureClasses = new ArrayList<Class<?>>();
 		infrastructureClasses.add(AccountRepository.class);
 		infrastructureClasses.add(XmlConverter.class);
 		return infrastructureClasses;
+	}
+
+	@Override
+	public ReflectColors getColors() {
+		return new ReflectColors(MaterialColorPalette.blue700(), MaterialColorPalette.orange500(),
+				MaterialColorPalette.white());
 	}
 }
