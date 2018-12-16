@@ -22,6 +22,7 @@ import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.ui.style.MaterialColorPalette;
 import nth.reflect.fw.ui.style.ReflectColors;
+import nth.reflect.fw.ui.style.basic.Color;
 
 /**
  * TODO: {@link BirdType}, {@link LotService} DataBaseSettingsService and
@@ -48,8 +49,7 @@ public class MeynConnect extends ReflectApplicationForJavaFX {
 
 	@Override
 	public ReflectColors getColors() {
-		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
-				MaterialColorPalette.white());
+		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 	public static void main(String[] args) {

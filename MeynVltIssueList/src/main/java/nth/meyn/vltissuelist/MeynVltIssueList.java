@@ -8,6 +8,7 @@ import nth.meyn.vltissuelist.dom.issue.IssueExcelRepository2;
 import nth.meyn.vltissuelist.dom.issue.IssueService;
 import nth.reflect.fw.ui.style.MaterialColorPalette;
 import nth.reflect.fw.ui.style.ReflectColors;
+import nth.reflect.fw.ui.style.basic.Color;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
 public class MeynVltIssueList extends ReflecttApplicationForSwing {
@@ -29,8 +30,7 @@ public class MeynVltIssueList extends ReflecttApplicationForSwing {
 
 	@Override
 	public ReflectColors getColors() {
-		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
-				MaterialColorPalette.white());
+		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 }

@@ -12,6 +12,7 @@ import nth.meyn.controls.configurator.dom.site.SiteService;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.ui.style.MaterialColorPalette;
 import nth.reflect.fw.ui.style.ReflectColors;
+import nth.reflect.fw.ui.style.basic.Color;
 
 public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
 
@@ -28,8 +29,7 @@ public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
 
 	@Override
 	public ReflectColors getColors() {
-		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
-				MaterialColorPalette.white());
+		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 	public static void main(String[] args) {

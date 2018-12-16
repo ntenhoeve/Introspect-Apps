@@ -13,6 +13,7 @@ import nth.meyn.control.systems.dom.project.ProjectService;
 import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
 import nth.reflect.fw.ui.style.MaterialColorPalette;
 import nth.reflect.fw.ui.style.ReflectColors;
+import nth.reflect.fw.ui.style.basic.Color;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
 public class MeynControlSystems extends ReflecttApplicationForSwing {
@@ -34,8 +35,7 @@ public class MeynControlSystems extends ReflecttApplicationForSwing {
 
 	@Override
 	public ReflectColors getColors() {
-		return new ReflectColors(MaterialColorPalette.green700(), MaterialColorPalette.orange500(),
-				MaterialColorPalette.white());
+		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 }
