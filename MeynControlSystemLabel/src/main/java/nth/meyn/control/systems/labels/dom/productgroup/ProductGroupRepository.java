@@ -20,12 +20,12 @@ public class ProductGroupRepository {
 		meynControlSystemRepository.persist(productGroup);
 	}
 
-	public void delete(ProductGroup productGroup) throws Exception {
-		meynControlSystemRepository.delete(productGroup);
-	}
-
 	public void modify(ProductGroup productGroup) throws Exception {
 		meynControlSystemRepository.persist(productGroup);
+	}
+
+	public void delete(ProductGroup productGroup) throws Exception {
+		meynControlSystemRepository.delete(productGroup);
 	}
 
 }
