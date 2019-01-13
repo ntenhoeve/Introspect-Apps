@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
+import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
 import nth.reflect.fw.layer1userinterface.controller.UploadStream;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
-import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @DisplayName(englishName = "Translate")
 @FontIcon(fontIconUrl = FontAwesomeUrl.FLAG)

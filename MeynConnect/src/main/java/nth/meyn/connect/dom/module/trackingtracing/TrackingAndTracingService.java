@@ -10,9 +10,9 @@ import nth.meyn.connect.dom.arrival.grower.GrowerService;
 import nth.meyn.connect.dom.arrival.lot.LotService;
 import nth.meyn.connect.dom.arrival.transport.TransportService;
 import nth.meyn.connect.dom.module.trackingtracing.tracking.TrackingOverview;
+import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
-import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.ARROWS_H)
 @DisplayName(englishName = "Tracking & Tracing")

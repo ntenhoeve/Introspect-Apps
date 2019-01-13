@@ -6,9 +6,9 @@ import java.util.List;
 import nth.meyn.vltissuelist.dom.customer.CustomerRepository;
 import nth.meyn.vltissuelist.dom.issue.IssueExcelRepository2;
 import nth.meyn.vltissuelist.dom.issue.IssueService;
-import nth.reflect.fw.ui.style.MaterialColorPalette;
-import nth.reflect.fw.ui.style.ReflectColors;
-import nth.reflect.fw.ui.style.basic.Color;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
 public class MeynVltIssueList extends ReflecttApplicationForSwing {

@@ -3,9 +3,9 @@ package nth.meyn.connect.dom.module.foodsafetyquality;
 import java.util.List;
 
 import javafx.scene.image.Image;
+import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
-import nth.reflect.fw.ui.style.fontawesome.FontAwesomeUrl;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.SHIELD)
 @DisplayName(englishName="Food safety & Quality")

@@ -3,9 +3,9 @@ package nth.meyn.cx.sysmac.converter;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.reflect.fw.ui.style.MaterialColorPalette;
-import nth.reflect.fw.ui.style.ReflectColors;
-import nth.reflect.fw.ui.style.basic.Color;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
 public class Main extends ReflecttApplicationForSwing {

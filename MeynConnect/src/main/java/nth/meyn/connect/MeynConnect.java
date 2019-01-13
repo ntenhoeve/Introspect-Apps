@@ -18,11 +18,11 @@ import nth.meyn.connect.dom.module.orderprocessing.OrderProcessingService;
 import nth.meyn.connect.dom.module.settings.ConfigurationService;
 import nth.meyn.connect.dom.module.settings.SettingsService;
 import nth.meyn.connect.dom.module.trackingtracing.TrackingAndTracingService;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
-import nth.reflect.fw.ui.style.MaterialColorPalette;
-import nth.reflect.fw.ui.style.ReflectColors;
-import nth.reflect.fw.ui.style.basic.Color;
 
 /**
  * TODO: {@link BirdType}, {@link LotService} DataBaseSettingsService and

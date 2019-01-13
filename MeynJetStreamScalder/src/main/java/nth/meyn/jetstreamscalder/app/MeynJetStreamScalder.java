@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.meyn.jetstreamscalder.dom.scalder.JetStreamScalderService;
-import nth.reflect.fw.ui.style.MaterialColorPalette;
-import nth.reflect.fw.ui.style.ReflectColors;
-import nth.reflect.fw.ui.style.basic.Color;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 

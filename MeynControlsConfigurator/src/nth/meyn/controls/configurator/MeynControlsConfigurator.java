@@ -9,10 +9,10 @@ import nth.meyn.controls.configurator.dom.project.ProjectService;
 import nth.meyn.controls.configurator.dom.project.ProjectTemplateService;
 import nth.meyn.controls.configurator.dom.settings.SettingsRepository;
 import nth.meyn.controls.configurator.dom.site.SiteService;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
-import nth.reflect.fw.ui.style.MaterialColorPalette;
-import nth.reflect.fw.ui.style.ReflectColors;
-import nth.reflect.fw.ui.style.basic.Color;
 
 public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
 
