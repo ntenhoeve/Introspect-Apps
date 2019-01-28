@@ -7,15 +7,17 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
 import nth.reflect.app.swdocgen.dom.documentation.GitHubWikiInfo;
-import nth.reflect.app.swdocgen.dom.page.ElementUtil;
+import nth.reflect.app.swdocgen.dom.html.ElementUtil;
 
 public class WikiContentsPage extends WikiPage {
 
-	private Element h1;
+	private final Element h1;
+	private final WikiPageReferenceFactory referenceFactory;
 
 	public WikiContentsPage(GitHubWikiInfo info, Document javaDoc, Element h1) {
 		super(info, javaDoc);
 		this.h1 = h1;
+		referenceFactory = new WikiPageReferenceFactory(javaDoc);
 	}
 
 	@Override
@@ -31,6 +33,11 @@ public class WikiContentsPage extends WikiPage {
 	@Override
 	public String getTitle() {
 		return h1.html();
+	}
+
+	@Override
+	protected String createFileName(String title) {
+		return referenceFactory.createFileName(h1);
 	};
 
 }

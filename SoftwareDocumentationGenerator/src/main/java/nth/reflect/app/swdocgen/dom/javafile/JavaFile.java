@@ -4,15 +4,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import nth.reflect.app.swdocgen.dom.javadoc.tag.EndTag;
-import nth.reflect.app.swdocgen.dom.javadoc.tag.HtmlLinkToReference;
-import nth.reflect.fw.generic.regex.Regex;
-import nth.reflect.fw.generic.regex.Repetition;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
+import org.jsoup.select.Elements;
+
+import nth.reflect.app.swdocgen.dom.javadoc.tag.EndTag;
+import nth.reflect.app.swdocgen.dom.javadoc.tag.InlineTag;
+import nth.reflect.app.swdocgen.dom.javadoc.tag.InlineTagFactory;
+import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.fw.generic.regex.Repetition;
 
 /**
  * 
@@ -22,55 +29,62 @@ import org.jsoup.parser.Tag;
 
 public class JavaFile {
 
-	private static final String JAVA_EXTENSION = ".java";
+	private static final String HREF = "href";
+	public static final String FILE_EXTENSION = ".java";
 	private static final Regex END_OF_COMMENT = new Regex().literal("*/");
-	private static final Pattern PACKAGE_LINE = new Regex().beginOfLine()
-			.whiteSpace(Repetition.zeroOrMoreTimes()).literal("package")
-			.whiteSpace(Repetition.oneOrMoreTimes())
-			.literals("a-zA-Z", Repetition.oneOrMoreTimes())
-			.anyCharacter(Repetition.zeroOrMoreTimes()).literal(";")
-			.whiteSpace(Repetition.zeroOrMoreTimes()).toPattern();
-	private static final Pattern IMPORT_LINE = new Regex().multiLineMode()
-			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes())
-			.literal("import").whiteSpace(Repetition.oneOrMoreTimes())
-			.literals("a-zA-Z", Repetition.oneOrMoreTimes())
-			.anyCharacter(Repetition.zeroOrMoreTimes()).literal(";")
+	private static final Pattern PACKAGE_LINE = new Regex().beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes())
+			.literal("package").whiteSpace(Repetition.oneOrMoreTimes()).literals("a-zA-Z", Repetition.oneOrMoreTimes())
+			.anyCharacter(Repetition.zeroOrMoreTimes()).literal(";").whiteSpace(Repetition.zeroOrMoreTimes())
+			.toPattern();
+	private static final Pattern IMPORT_LINE = new Regex().multiLineMode().beginOfLine()
+			.whiteSpace(Repetition.zeroOrMoreTimes()).literal("import").whiteSpace(Repetition.oneOrMoreTimes())
+			.literals("a-zA-Z", Repetition.oneOrMoreTimes()).anyCharacter(Repetition.zeroOrMoreTimes()).literal(";")
 			.whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
-	private static final Pattern SINGLE_LINE_COMMENT = new Regex().multiLineMode()
-			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes())
-			.literal("//").anyCharacter(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
-	private static final Pattern STARTS_WITH_ASTRIX = new Regex()
-			.multiLineMode().beginOfLine()
+	private static final Pattern SINGLE_LINE_COMMENT = new Regex().multiLineMode().beginOfLine()
+			.whiteSpace(Repetition.zeroOrMoreTimes()).literal("//").anyCharacter(Repetition.zeroOrMoreTimes())
+			.endOfLine().toPattern();
+	private static final Pattern STARTS_WITH_ASTRIX = new Regex().multiLineMode().beginOfLine()
 			.whiteSpaceWithoutCrLf(Repetition.zeroOrMoreTimes()).literals("*").toPattern();
-	private static final Pattern EMPTY_LINE = new Regex().multiLineMode()
-			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
+	private static final Pattern EMPTY_LINE = new Regex().multiLineMode().beginOfLine()
+			.whiteSpace(Repetition.zeroOrMoreTimes()).endOfLine().toPattern();
 	private static final String START_JAVADOC_COMMENTS = "/**";
+	private static final String SRC = "src";
 
-	private File javaFile;
-	private String documentation;
+	private final File javaFile;
 	private String contents;
+	private final DocumentationFiles documentationFiles;
+	private Document javaDocHtml;
+	private String javaDocText;
+	private final ReferenceName referenceName;
 
-	public JavaFile(File javaFile) {
+	public JavaFile(DocumentationFiles documentationFiles, File javaFile, ReferenceName referenceName) {
+		this.documentationFiles = documentationFiles;
 		this.javaFile = javaFile;
+		this.referenceName = referenceName;
 	}
 
-	private String getContents() throws IOException {
+	public DocumentationFiles getDocumentationFiles() {
+		return documentationFiles;
+	}
+
+	private String readContent() throws IOException {
 		if (contents == null) {
 			byte[] encoded = Files.readAllBytes(javaFile.toPath());
-			// Charset used by eclipse: Window -> Preferences -> General -> Workspace : Text file encoding CP1252
+			// Charset used by eclipse: Window -> Preferences -> General ->
+			// Workspace : Text file encoding CP1252
 			Charset DEFAULT_TEXT_ENCODING = Charset.forName("Cp1252");
 			contents = new String(encoded, DEFAULT_TEXT_ENCODING);
 		}
 		return contents;
 	}
 
-	public String getJavaDocOfClassDescriptor() {
-		if (documentation == null) {
+	private String getJavaDocTextOfClassDescriptor() {
+		if (javaDocText == null) {
 			String contents;
 			try {
-				contents = getContents();
+				contents = readContent();
 			} catch (IOException e) {
-				throw new RuntimeException("Could not read javadoc of file:"+javaFile.getAbsolutePath());
+				throw new RuntimeException("Could not read javadoc of file:" + javaFile.getAbsolutePath());
 			}
 			RegexParser regexParser = new RegexParser(contents);
 			regexParser.removeAll(PACKAGE_LINE);
@@ -78,92 +92,113 @@ public class JavaFile {
 			regexParser.removeAll(SINGLE_LINE_COMMENT);
 			regexParser.removeAll(EMPTY_LINE);
 			if (regexParser.startsWith("\r\n")) {
-				// This line is needed because the previous line does not remove the first crlf
+				// This line is needed because the previous line does not remove
+				// the first crlf
 				regexParser.removeFirst("\r\n");
 			}
 			if (regexParser.startsWith("\n")) {
-				// This line is needed because the previous line does not remove the first crlf
+				// This line is needed because the previous line does not remove
+				// the first crlf
 				regexParser.removeFirst("\n");
 			}
 
-			if (regexParser.startsWith(START_JAVADOC_COMMENTS)) {
+			boolean foundJavaDocText = regexParser.startsWith(START_JAVADOC_COMMENTS);
+			if (foundJavaDocText) {
 				regexParser.removeFirst(START_JAVADOC_COMMENTS);
 				regexParser.removeFrom(END_OF_COMMENT);
 				regexParser.removeAll(STARTS_WITH_ASTRIX);
-				
-				String reference=createRefferenceElement().toString();
-				regexParser.insert(reference,0);
+
+				String reference = createRefferenceElement().toString();
+				regexParser.insert(reference, 0);
 
 				removeEndTags(regexParser);
-				
-				documentation = regexParser.getResult();
+
+				javaDocText = regexParser.getResult();
 			} else {
-				throw new RuntimeException("Could not get javadoc of class of java file:"+javaFile.getAbsolutePath());
+				javaDocText = "";
 			}
 		}
-		return documentation;
+		return javaDocText;
+	}
+
+	public Document getJavaDocHtmlOfClassDescriptor() {
+		if (javaDocHtml == null) {
+			String javaDocText = getJavaDocTextOfClassDescriptor();
+			try {
+				javaDocText = replaceAllInlineTags(javaDocText, documentationFiles);
+			} catch (Exception e) {
+				throw new RuntimeException("Could not replace all inline tags for: " + javaFile, e);
+			}
+			javaDocHtml = Jsoup.parse(javaDocText, "UTF-8");
+			updateImageSrc(javaDocHtml);
+			updateAref(javaDocHtml);
+			// TODO fix link referenceName
+
+		}
+		return javaDocHtml;
+	}
+
+	private void updateAref(Document javaDocHtml) {
+		Elements aElements = javaDocHtml.select("a[href^=ReferenceName_]");
+		for (Element aElement : aElements) {
+			String href = aElement.attr(HREF);
+			if (href.startsWith(ReferenceName.PREFIX)) {
+				Optional<ReferenceName> result = documentationFiles
+						.findJavaFileResourceName(referenceName.withFileName(href));
+				if (result.isPresent()) {
+					aElement.attributes().put(HREF, result.get().toString());
+				}
+			}
+		}
+	}
+
+	private void updateImageSrc(Document javaDocHtml) {
+		Elements imageElements = javaDocHtml.select("img[src]");
+		for (Element imageElement : imageElements) {
+			String src = imageElement.attr(SRC);
+			if (!src.startsWith(ReferenceName.PREFIX)) {
+				Optional<ReferenceName> result = documentationFiles
+						.findResourceFileResourceName(referenceName.withFileName(src));
+				if (result.isPresent()) {
+					imageElement.attributes().put(SRC, result.get().toString());
+				}
+			}
+		}
+	}
+
+	private static String replaceAllInlineTags(String javaDoc, DocumentationFiles documentationFiles)
+			throws IOException {
+
+		List<InlineTag> inlineTags = InlineTagFactory.getAllInlineTags(documentationFiles);
+
+		for (InlineTag inlineTag : inlineTags) {
+			boolean foundMatch = true;
+			while (foundMatch) {
+				foundMatch = false;
+				Matcher matcher = inlineTag.getRegex().toMatcher(javaDoc);
+				if (matcher.find()) {
+					foundMatch = true;
+					int start = matcher.start();
+					int end = matcher.end();
+					String tag = javaDoc.substring(start, end);
+					String replacement = inlineTag.getReplacementText(tag);
+
+					javaDoc = javaDoc.substring(0, start) + replacement + javaDoc.substring(end);
+				}
+			}
+		}
+
+		return javaDoc;
 	}
 
 	private Element createRefferenceElement() {
-		return new Element(Tag.valueOf("a"), "").attr("id",HtmlLinkToReference.REFERENCE+ getNameWithoutExtention());
+		return new Element(Tag.valueOf("a"), "").attr("id", referenceName.toString());
 	}
 
 	private void removeEndTags(RegexParser regexParser) {
 		for (EndTag endTag : EndTag.values()) {
 			regexParser.removeFrom(endTag.asRegex());
 		}
-	}
-
-//	private String createRefferenceComment() {
-//		StringBuilder comment=new StringBuilder();
-//		comment.append(BEGIN_HTML_COMMENT);
-//		comment.append(HtmlLinkToReference.REFERENCE);
-//		comment.append(":");
-//		comment.append(getNameWithoutExtention());
-//		comment.append(END_HTML_COMMENT);
-//		return comment.toString();
-//	}
-
-	public String getNameWithoutExtention() {
-		String nameWithoutExtention=javaFile.getName().replace(JAVA_EXTENSION, "");
-		return nameWithoutExtention;
-	}
-	
-	/**
-	 * Searches for a resource file (like a image) in the same package as java file
-	 */
-	public File getResourcePath(String resourceName){
-		String path = javaFile.getParent()+"/"+resourceName;
-		File file=new File(path);
-		if (file.exists()) {
-		return file;
-		} 
-		String mavenSourceFolder = createMainMavenFolder("java");
-		String mavenResourceFolder = createMainMavenFolder("resources");
-		if (file.getAbsolutePath().contains(mavenSourceFolder)) {
-			file=new File(file.getAbsolutePath().replace(mavenSourceFolder, mavenResourceFolder) );
-			if (file.exists()) {
-				return file;
-			}
-		}
-		return null;
-	}
-
-
-	private String createMainMavenFolder(String suffix) {
-		StringBuilder folder=new StringBuilder();
-		folder.append(File.separator);
-		folder.append("src");
-		folder.append(File.separator);
-		folder.append("main");
-		folder.append(File.separator);
-		folder.append(suffix);
-		folder.append(File.separator);
-		return folder.toString();
-	}
-
-	public static boolean isJavaFile(File file) {
-		return file.isFile()&&file.getName().toLowerCase().endsWith(JAVA_EXTENSION);
 	}
 
 }

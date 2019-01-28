@@ -2,16 +2,16 @@ package nth.reflect.app.swdocgen.dom.page.web;
 
 import java.util.List;
 
-import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
-import nth.reflect.app.swdocgen.dom.page.ElementUtil;
-import nth.reflect.fw.generic.util.StringUtil;
-
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.DocumentType;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
+
+import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
+import nth.reflect.app.swdocgen.dom.html.ElementUtil;
+import nth.reflect.fw.generic.util.StringUtil;
 
 public class FancyWebPage extends WebPage {
 
@@ -21,12 +21,8 @@ public class FancyWebPage extends WebPage {
 
 	@Override
 	public Document createContents() {
-		// TODO wiki pages
-		// TODO rename project to IntrospectDocumentationGenerator and add
-		// IntrospectDocs to Maven resources
-		// TODO check doc
-		String title=getTitle();
-		
+		String title = getTitle();
+
 		Document doc = createDocument(title);
 
 		createHead(doc);
@@ -54,15 +50,13 @@ public class FancyWebPage extends WebPage {
 	}
 
 	private void createTitleBar(String title, Element divPage) {
-		Element divHeader = divPage.appendElement("div").attr("class",
-				"header Fixed");
+		Element divHeader = divPage.appendElement("div").attr("class", "header Fixed");
 		divHeader.appendElement("a").attr("href", "#menu");
 		divHeader.append(title);
 	}
 
 	private void createContents(Document javaDoc, Element divPage) {
-		Element divContent = divPage.appendElement("div")
-				.attr("class", "content").attr("id", "content");
+		Element divContent = divPage.appendElement("div").attr("class", "content").attr("id", "content");
 		Elements h1Elements = javaDoc.select("h1");
 		for (Element h1 : h1Elements) {
 			List<Node> chapterNodes = ElementUtil.findChapterNodes(h1);
@@ -73,40 +67,26 @@ public class FancyWebPage extends WebPage {
 	private void createHead(Document doc) {
 		Element head = doc.head();
 		head.appendElement("meta").attr("charset", "utf-8");
-		head.appendElement("meta")
-				.attr("name", "viewport")
-				.attr("content",
-						"width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes");
+		head.appendElement("meta").attr("name", "viewport").attr("content",
+				"width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes");
 
-		head.appendElement("link").attr("type", "text/css")
-				.attr("rel", "stylesheet").attr("href", "css/demo.css");
-		head.appendElement("link").attr("type", "text/css")
-				.attr("rel", "stylesheet")
-				.attr("href", "dist/core/css/jquery.mmenu.all.css");
-		head.appendElement("link").attr("type", "text/css")
-				.attr("rel", "stylesheet")
-				.attr("href", "dist/addons/css/jquery.mmenu.dragopen.css");
+		head.appendElement("link").attr("type", "text/css").attr("rel", "stylesheet").attr("href", "css/demo.css");
+		head.appendElement("link").attr("type", "text/css").attr("rel", "stylesheet").attr("href",
+				"dist/core/css/jquery.mmenu.all.css");
+		head.appendElement("link").attr("type", "text/css").attr("rel", "stylesheet").attr("href",
+				"dist/addons/css/jquery.mmenu.dragopen.css");
 
+		head.appendElement("script").attr("type", "text/javascript").attr("src",
+				"http://hammerjs.github.io/dist/hammer.min.js");
+		head.appendElement("script").attr("type", "text/javascript").attr("src",
+				"http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js");
+		head.appendElement("script").attr("type", "text/javascript").attr("src", "dist/core/js/jquery.mmenu.min.js");
+		head.appendElement("script").attr("type", "text/javascript").attr("src",
+				"dist/addons/js/jquery.mmenu.dragopen.min.js");
+		head.appendElement("script").attr("type", "text/javascript").attr("src",
+				"dist/addons/js/jquery.mmenu.fixedelements.min.js");
 		head.appendElement("script").attr("type", "text/javascript")
-				.attr("src", "http://hammerjs.github.io/dist/hammer.min.js");
-		head.appendElement("script")
-				.attr("type", "text/javascript")
-				.attr("src",
-						"http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js");
-		head.appendElement("script").attr("type", "text/javascript")
-				.attr("src", "dist/core/js/jquery.mmenu.min.js");
-		head.appendElement("script").attr("type", "text/javascript")
-				.attr("src", "dist/addons/js/jquery.mmenu.dragopen.min.js");
-		head.appendElement("script")
-				.attr("type", "text/javascript")
-				.attr("src",
-						"dist/addons/js/jquery.mmenu.fixedelements.min.js");
-		head.appendElement("script")
-				.attr("type", "text/javascript")
-				.appendChild(
-						new DataNode(
-								getJavaScriptToEnsureTitleVisibilityForBookmarks(),
-								""));
+				.appendChild(new DataNode(getJavaScriptToEnsureTitleVisibilityForBookmarks(), ""));
 		head.appendElement("script").attr("type", "text/javascript")
 				.appendChild(new DataNode(getJavaScriptToHandleMenu(), ""));
 	}
@@ -118,40 +98,16 @@ public class FancyWebPage extends WebPage {
 		Elements chaptersAndParagraph = javaDoc.select("h1,h2");
 		for (Element chapterOrParagraph : chaptersAndParagraph) {
 			if ("h1".equals(chapterOrParagraph.tagName())) {
-				Element lih1 = ulh1.appendElement("li").appendElement("a")
-						.attr("href", "#" + chapterOrParagraph.id())
+				Element lih1 = ulh1.appendElement("li").appendElement("a").attr("href", "#" + chapterOrParagraph.id())
 						.html(chapterOrParagraph.html());
 				ulh2 = lih1.appendElement("ul");
 			}
 			if ("h2".equals(chapterOrParagraph.tagName())) {
-				ulh2.appendElement("li").appendElement("a")
-						.attr("href", "#" + chapterOrParagraph.id())
+				ulh2.appendElement("li").appendElement("a").attr("href", "#" + chapterOrParagraph.id())
 						.html(chapterOrParagraph.html());
 			}
 		}
 	}
-
-//	private Element addChapterElements(Element chapterDiv, Element h1) {
-//		Element parent = h1.parent();
-//		if (parent == null) {
-//			return chapterDiv;
-//		}
-//
-//		Elements siblings = parent.children();
-//		int startIndex = siblings.indexOf(h1) + 1;
-//
-//		chapterDiv.appendChild(h1);
-//
-//		for (int index = startIndex; index < siblings.size(); index++) {
-//			Element sibling = siblings.get(index);
-//			if ("h1".equals(sibling.tagName())) {
-//				return chapterDiv;
-//			} else {
-//				chapterDiv.appendChild(sibling);
-//			}
-//		}
-//		return chapterDiv;
-//	}
 
 	private String getJavaScriptToEnsureTitleVisibilityForBookmarks() {
 		StringBuilder js = new StringBuilder();
@@ -202,57 +158,6 @@ public class FancyWebPage extends WebPage {
 		js.append("	);");
 		js.append("});");
 
-//		js.append("$(function() {");
-//		js.append("$('nav#menu').mmenu({");
-//		js.append("	extensions	: [ 'effect-slide-menu', 'pageshadow' ],");
-//		js.append("	searchfield	: true,");
-//		js.append("	counters	: true,");
-//		js.append("	navbar 		: {");
-//		js.append("		MaterialAppBarTitle		: 'Advanced menu'");
-//		js.append("	},");
-//		js.append("	navbars		: [");
-//		js.append("		{");
-//		js.append("			position	: 'top',");
-//		js.append("			content		: [ 'searchfield' ]");
-//		js.append("		}, {");
-//		js.append("			position	: 'top',");
-//		js.append("			content		: [");
-//		js.append("				'prev',");
-//		js.append("				'MaterialAppBarTitle',");
-//		js.append("				'close'");
-//		js.append("			]");
-//		js.append("		}, {");
-//		js.append("			position	: 'bottom',");
-//		js.append("			content		: [");
-//		js.append("				'<a href='http://mmenu.frebsite.nl/wordpress-plugin.html' target='_blank'>WordPress plugin</a>'");
-//			js.append("			]");
-//		js.append("		}");
-//		js.append("	]");
-//		js.append("});");
-//		js.append("});");
-		
-		
-//		js.append("	var api = $menu.data( 'mmenu' );");
-//		js.append("	api.bind( 'closed',");
-//		js.append("		function()");
-//		js.append("		{");
-//		js.append("			if ( $anchor )");
-//		js.append("			{");
-//		js.append("				var href = $anchor.attr( 'href' );");
-//		js.append("				$anchor = false;");
-//		js.append("");
-//		js.append("				if ( href.slice( 0, 1 ) == '#' )");
-//		js.append("				{");
-//		js.append("					$html.animate({");
-//		js.append("						scrollTop: $( href ).offset().top -50");
-//		js.append("					});	");
-//		js.append("				}");
-//		js.append("			}");
-//		js.append("		}");
-//		js.append("	);");
-//		js.append("});");
-
-		
 		return js.toString();
 	}
 
@@ -262,15 +167,6 @@ public class FancyWebPage extends WebPage {
 		fileName.append(StringUtil.convertToCamelCase(title, true));
 		fileName.append(".html");
 		return fileName.toString();
-	}
-
-	@Override
-	protected String createReference(Element hElement) {
-		StringBuilder reference = new StringBuilder();
-		reference.append("#");
-		reference.append(hElement.id());
-		return reference.toString();
-		// TODO add reference to page when splitting up in multiple pages
 	}
 
 }

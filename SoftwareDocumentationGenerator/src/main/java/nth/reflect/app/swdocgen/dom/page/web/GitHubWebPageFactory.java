@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,10 +13,12 @@ import org.jsoup.select.Elements;
 
 import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
 import nth.reflect.app.swdocgen.dom.github.GitRepository;
+import nth.reflect.app.swdocgen.dom.html.AttributeName;
+import nth.reflect.app.swdocgen.dom.html.ElementName;
+import nth.reflect.app.swdocgen.dom.html.JSoupQuery;
 import nth.reflect.app.swdocgen.dom.javadoc.JavaDocFactory;
-import nth.reflect.app.swdocgen.dom.javadoc.tag.HtmlLinkToReference;
-import nth.reflect.app.swdocgen.dom.javafile.JavaFile;
-import nth.reflect.app.swdocgen.dom.javafile.JavaFileFactory;
+import nth.reflect.app.swdocgen.dom.javafile.DocumentationFiles;
+import nth.reflect.app.swdocgen.dom.javafile.ReferenceName;
 import nth.reflect.app.swdocgen.dom.page.FileUtil;
 import nth.reflect.app.swdocgen.dom.page.WritableFile;
 
@@ -30,10 +32,11 @@ public class GitHubWebPageFactory {
 
 	public void createGitHubWebPages(GitHubWebInfo info) throws IOException {
 
-		Map<String, JavaFile> javaFiles = JavaFileFactory
-				.findAllJavaFilesInFolder(info.getProjectsFolder());
+		DocumentationFiles documentationFiles = new DocumentationFiles(info.getProjectsFolder());
 
-		Document javaDoc = JavaDocFactory.getAllJavaDoc(info, javaFiles);
+		Document javaDoc = JavaDocFactory.getAllJavaDoc(info, documentationFiles);
+
+		JavaDocFactory.updateAllReferences(javaDoc, new WebPageRefenceFactory());
 
 		List<WritableFile> webPages = createWebPages(info, javaDoc);
 
@@ -41,7 +44,7 @@ public class GitHubWebPageFactory {
 
 		writeWebPages(webPages);
 
-		copyResources(info.getGithubWebProjectLocation(), javaFiles, webPages);
+		copyResources(info.getGithubWebProjectLocation(), documentationFiles, webPages);
 
 		copyMenuFiles(info.getGithubWebProjectLocation());
 
@@ -59,34 +62,30 @@ public class GitHubWebPageFactory {
 
 	}
 
-	private void copyResources(File destinationFolder,
-			Map<String, JavaFile> javaFiles, List<WritableFile> webPages) {
+	private void copyResources(File destinationFolder, DocumentationFiles documentationFiles,
+			List<WritableFile> webPages) {
 		for (WritableFile page : webPages) {
 
 			if (page instanceof WebPage) {
 				WebPage webPage = (WebPage) page;
 				Document document = webPage.getContents();
-				Elements elements = document
-						.select("img[src],a[id^=Reference_]");
+				String query = new JSoupQuery().addElement(ElementName.IMG, AttributeName.SRC).toString();
+				Elements imgElements = document.select(query);
 
-				String javaFileName = null;
-				for (Element element : elements) {
-					String elementName = element.nodeName();
-					if (elementName.equals("a")
-							&& element.id().startsWith(
-									HtmlLinkToReference.REFERENCE)) {
-						javaFileName = element.id().replace(
-								HtmlLinkToReference.REFERENCE, "");
-					} else if (elementName.equals("img")) {
-						String src = element.attr("src");
-						JavaFile javaFile = javaFiles.get(javaFileName);
-						File source = javaFile.getResourcePath(src);
-						File target = new File(destinationFolder,
-								source.getName());
-						try {
-							FileUtil.copyFolder(source, target);
-						} catch (IOException e) {
-							e.printStackTrace();
+				for (Element imgElement : imgElements) {
+					String elementName = imgElement.nodeName();
+					if (elementName.equals(ElementName.IMG)) {
+						String src = imgElement.attr(AttributeName.SRC);
+						ReferenceName referenceName = new ReferenceName(src);
+						Optional<File> result = documentationFiles.findResourceFile(referenceName);
+						if (result.isPresent()) {
+							File resourceFile = result.get();
+							File target = new File(destinationFolder, referenceName.withoutPreFix());
+							try {
+								FileUtil.copyFolder(resourceFile, target);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}
@@ -100,14 +99,13 @@ public class GitHubWebPageFactory {
 		}
 	}
 
-	private List<WritableFile> createWebPages(GitHubWebInfo info,
-			Document javaDoc) {
+	private List<WritableFile> createWebPages(GitHubWebInfo info, Document javaDoc) {
 
 		FancyWebPage fancyWebPage = new FancyWebPage(info, javaDoc.clone());
 
 		List<WritableFile> webPages = new ArrayList<>();
 		webPages.add(fancyWebPage);
-		webPages.add(new IndexWebPage(info, javaDoc.clone(),fancyWebPage.getFile()));
+		webPages.add(new IndexWebPage(info, javaDoc.clone(), fancyWebPage.getFile()));
 		webPages.add(new RobotsTxt(info.getGithubWebProjectLocation()));
 		webPages.add(new SiteMap(info, fancyWebPage.getFile()));
 		webPages.add(new PrintableWebPage(info, javaDoc.clone()));

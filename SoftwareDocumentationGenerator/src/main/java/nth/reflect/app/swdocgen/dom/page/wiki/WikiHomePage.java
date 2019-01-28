@@ -1,12 +1,14 @@
 package nth.reflect.app.swdocgen.dom.page.wiki;
 
-import java.io.File;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import nth.reflect.app.swdocgen.dom.documentation.GitHubWikiInfo;
+import nth.reflect.app.swdocgen.dom.html.AttributeName;
+import nth.reflect.app.swdocgen.dom.html.ElementName;
+import nth.reflect.app.swdocgen.dom.html.JSoupQuery;
+import nth.reflect.app.swdocgen.dom.javadoc.ReferenceFactory;
 
 public class WikiHomePage extends WikiPage {
 
@@ -16,33 +18,34 @@ public class WikiHomePage extends WikiPage {
 
 	@Override
 	public Document createContents() {
-		Elements chapters = getJavaDoc().select("h1,h2");
-
+		String query = new JSoupQuery().addElement(ElementName.H1).addElement(ElementName.H2).toString();
+		Elements h1h2Elements = getJavaDoc().select(query);
+		ReferenceFactory referenceFactory = new WikiPageReferenceFactory(getJavaDoc());
 		Document doc = new Document("");
 		Element ul = null;
-		for (Element chapter : chapters) {
-			if (chapter.nodeName().equals("h1")) {
-				Element h3 = doc.appendElement("h3");
-				Element a = h3.appendElement("a");
-				a.html(chapter.html());
-				a.attr(HREF, createReference(chapter));
-				ul = doc.appendElement("ul");
-			} else if (chapter.nodeName().equals("h2")) {
-				Element li = ul.appendElement("li");
-				Element a = li.appendElement("a");
-				a.html(chapter.html());
-				a.attr(HREF, createReference(chapter));
+		Element h1 = null;
+		for (Element hElement : h1h2Elements) {
+			if (hElement.nodeName().equals(ElementName.H1)) {
+				h1 = hElement;
+				Element h3 = doc.appendElement(ElementName.H3);
+				Element a = h3.appendElement(ElementName.A);
+				a.html(hElement.html());
+				a.attr(AttributeName.HREF, referenceFactory.createH1Reference(hElement));
+				ul = doc.appendElement(ElementName.UL);
+			} else if (hElement.nodeName().equals(ElementName.H2)) {
+				Element li = ul.appendElement(ElementName.LI);
+				Element a = li.appendElement(ElementName.A);
+				a.html(hElement.html());
+				Element h2 = hElement;
+				a.attr(AttributeName.HREF, referenceFactory.createH2Reference(h1, h2));
 			}
 		}
 		return doc;
 	}
 
 	@Override
-	protected java.io.File createFile(String title) {
-		StringBuilder filePath = new StringBuilder();
-		filePath.append(getDestinationFolder());
-		filePath.append("/Home.md");
-		File file = new File(filePath.toString());
-		return file;
-	};
+	protected String createFileName(String title) {
+		return "Home.md";
+	}
+
 }

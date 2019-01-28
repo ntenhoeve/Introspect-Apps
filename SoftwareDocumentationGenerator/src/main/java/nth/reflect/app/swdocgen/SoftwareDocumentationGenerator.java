@@ -6,16 +6,15 @@ import java.util.List;
 import nth.reflect.app.swdocgen.dom.documentation.DocumentationService;
 import nth.reflect.app.swdocgen.dom.github.GitRepository;
 import nth.reflect.app.swdocgen.dom.javadoc.JavaDocFactory;
-import nth.reflect.app.swdocgen.dom.javafile.JavaFileFactory;
 import nth.reflect.app.swdocgen.dom.page.web.GitHubWebPageFactory;
 import nth.reflect.app.swdocgen.dom.page.wiki.GitHubWikiPageFactory;
 import nth.reflect.fw.ui.commandline.ReflectApplicationForCommandLine;
 
 /**
  * The {@link SoftwareDocumentationGenerator} is a
- * {@link ReflectApplicationForCommandLine} which will parse <a
- * href="http://en.wikipedia.org/wiki/Javadoc">JavaDoc</a> of a given class to
- * generate different styles of documents (see {@link DocumentationService}).
+ * {@link ReflectApplicationForCommandLine} which will parse
+ * <a href="http://en.wikipedia.org/wiki/Javadoc">JavaDoc</a> of a given class
+ * to generate different styles of documents (see {@link DocumentationService}).
  * The {@link SoftwareDocumentationGenerator} will only use the class or
  * interface description (the java doc before the class or interface keyword).
  * It will ignore JavaDoc of fields, and methods
@@ -42,13 +41,13 @@ import nth.reflect.fw.ui.commandline.ReflectApplicationForCommandLine;
  * the png extension and be located in the same package.This .</li>
  * <li>You can insert other class or interface files using the Javadoc in-line
  * tag &lt;@insert ClassName&gt;</li>
- * <li>You can include {@link Chapter}s by adding a MaterialAppBarTitle between &lt;H1&gt; &lt;/H1&gt;
- * tags</li>
- * <li>You can include {@link SubChapter}s by adding a MaterialAppBarTitle between &lt;H2&gt;
- * &lt;/H2&gt; tags</li>
- * <li>You can include {@link SubSubChapter}s by adding a MaterialAppBarTitle between &lt;H3&gt;
- * &lt;/H3&gt; tags. Sub {@link SubSubChapter}s are normally not rendered in the table of
- * contents</li>
+ * <li>You can include {@link Chapter}s by adding a MaterialAppBarTitle between
+ * &lt;H1&gt; &lt;/H1&gt; tags</li>
+ * <li>You can include {@link SubChapter}s by adding a MaterialAppBarTitle
+ * between &lt;H2&gt; &lt;/H2&gt; tags</li>
+ * <li>You can include {@link SubSubChapter}s by adding a MaterialAppBarTitle
+ * between &lt;H3&gt; &lt;/H3&gt; tags. Sub {@link SubSubChapter}s are normally
+ * not rendered in the table of contents</li>
  * <li>It is good practice to create a documentation class that ties all the
  * java files together in one document.</li>
  * </ul>
@@ -80,8 +79,7 @@ import nth.reflect.fw.ui.commandline.ReflectApplicationForCommandLine;
  * 
  * @author nilsth
  */
-public class SoftwareDocumentationGenerator extends
-		ReflectApplicationForCommandLine {
+public class SoftwareDocumentationGenerator extends ReflectApplicationForCommandLine {
 
 	public static void main(String[] commandLineArguments) {
 		launch(commandLineArguments);
@@ -94,7 +92,8 @@ public class SoftwareDocumentationGenerator extends
 
 	@Override
 	public List<Class<?>> getInfrastructureClasses() {
-		return Arrays.asList(GitRepository.class, JavaFileFactory.class, JavaDocFactory.class, GitHubWebPageFactory.class, GitHubWikiPageFactory.class);
+		return Arrays.asList(GitRepository.class, JavaDocFactory.class, GitHubWebPageFactory.class,
+				GitHubWikiPageFactory.class);
 	}
 
 }

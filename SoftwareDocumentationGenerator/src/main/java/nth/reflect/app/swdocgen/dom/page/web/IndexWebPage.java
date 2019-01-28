@@ -3,7 +3,6 @@ package nth.reflect.app.swdocgen.dom.page.web;
 import java.io.File;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
 
@@ -16,7 +15,7 @@ import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
 public class IndexWebPage extends WebPage {
 
 	private static final String INDEX_HTML = "index.html";
-	private File homePage;
+	private final File homePage;
 
 	public IndexWebPage(GitHubWebInfo info, Document javaDoc, File homePage) {
 		super(info.getGithubWebProjectLocation(), info.getClassName(), javaDoc);
@@ -24,16 +23,14 @@ public class IndexWebPage extends WebPage {
 	}
 
 	@Override
-	public  Document createContents() {
+	public Document createContents() {
 		Document doc = Document.createShell("");
 		StringBuilder content = new StringBuilder();
 		content.append("0; url=");
 		content.append(homePage.getName());
-		doc.head().appendElement("meta").attr("http-equiv", "refresh")
-				.attr("content", content.toString());
+		doc.head().appendElement("meta").attr("http-equiv", "refresh").attr("content", content.toString());
 		return doc;
 	}
-
 
 	@Override
 	protected File createFile(String title) {
@@ -44,11 +41,5 @@ public class IndexWebPage extends WebPage {
 		File file = new File(filePath.toString());
 		return file;
 	}
-
-	@Override
-	protected String createReference(Element hElement) {
-		return null;// not applicable
-	}
-
 
 }

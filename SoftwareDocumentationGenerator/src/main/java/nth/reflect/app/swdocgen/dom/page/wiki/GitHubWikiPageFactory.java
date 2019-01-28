@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,10 +12,12 @@ import org.jsoup.select.Elements;
 
 import nth.reflect.app.swdocgen.dom.documentation.GitHubWikiInfo;
 import nth.reflect.app.swdocgen.dom.github.GitRepository;
+import nth.reflect.app.swdocgen.dom.html.AttributeName;
+import nth.reflect.app.swdocgen.dom.html.ElementName;
+import nth.reflect.app.swdocgen.dom.html.JSoupQuery;
 import nth.reflect.app.swdocgen.dom.javadoc.JavaDocFactory;
-import nth.reflect.app.swdocgen.dom.javadoc.tag.HtmlLinkToReference;
-import nth.reflect.app.swdocgen.dom.javafile.JavaFile;
-import nth.reflect.app.swdocgen.dom.javafile.JavaFileFactory;
+import nth.reflect.app.swdocgen.dom.javafile.DocumentationFiles;
+import nth.reflect.app.swdocgen.dom.javafile.ReferenceName;
 import nth.reflect.app.swdocgen.dom.page.FileUtil;
 
 public class GitHubWikiPageFactory {
@@ -28,10 +30,11 @@ public class GitHubWikiPageFactory {
 
 	public void createGitHubWikiPages(GitHubWikiInfo info) throws IOException {
 
-		Map<String, JavaFile> javaFiles = JavaFileFactory
-				.findAllJavaFilesInFolder(info.getProjectsFolder());
+		DocumentationFiles documentationFiles = new DocumentationFiles(info.getProjectsFolder());
 
-		Document javaDoc = JavaDocFactory.getAllJavaDoc(info, javaFiles);
+		Document javaDoc = JavaDocFactory.getAllJavaDoc(info, documentationFiles);
+
+		JavaDocFactory.updateAllReferences(javaDoc, new WikiPageReferenceFactory(javaDoc));
 
 		List<WikiPage> webPages = createWebPages(info, javaDoc);
 
@@ -39,40 +42,33 @@ public class GitHubWikiPageFactory {
 
 		writeWebPages(webPages);
 
-		copyResources(info.getGitHubWikiProjectLocation(), javaFiles, webPages);
+		copyResources(info.getGitHubWikiProjectLocation(), documentationFiles, webPages);
 
 		gitRepository.commitAndPush(info, info.getGitHubWikiProjectLocation());
 	}
 
-
-	private void copyResources(File destinationFolder,
-			Map<String, JavaFile> javaFiles, List<WikiPage> wikiPages) {
+	private void copyResources(File destinationFolder, DocumentationFiles documentationFiles,
+			List<WikiPage> wikiPages) {
 		for (WikiPage wikiPage : wikiPages) {
 			Document document = wikiPage.getContents();
-			Elements elements = document.select("img[src],a[id^=Reference_]");
+			String query = new JSoupQuery().addElement(ElementName.IMG, AttributeName.SRC).toString();
+			Elements imgElements = document.select(query);
 
-			String javaFileName = null;
-			for (Element element : elements) {
-				String elementName = element.nodeName();
-				if (elementName.equals("a")
-						&& element.id().startsWith(
-								HtmlLinkToReference.REFERENCE)) {
-					javaFileName = element.id().replace(
-							HtmlLinkToReference.REFERENCE, "");
-				} else if (elementName.equals("img")) {
-					String src = element.attr("src");
-					JavaFile javaFile = javaFiles.get(javaFileName);
-					File source = javaFile.getResourcePath(src);
-					File target = new File(destinationFolder, source.getName());
+			for (Element imgElement : imgElements) {
+				String resourceReferenceName = imgElement.attr(AttributeName.SRC);
+				ReferenceName referenceName = new ReferenceName(resourceReferenceName);
+				Optional<File> result = documentationFiles.findResourceFile(referenceName);
+				if (result.isPresent()) {
+					File resourceFile = result.get();
+					File target = new File(destinationFolder, referenceName.withoutPreFix());
 					try {
-						FileUtil.copyFolder(source, target);
+						FileUtil.copyFolder(resourceFile, target);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-
 	}
 
 	private void writeWebPages(List<WikiPage> wikiPages) throws IOException {
@@ -84,11 +80,11 @@ public class GitHubWikiPageFactory {
 	private List<WikiPage> createWebPages(GitHubWikiInfo info, Document javaDoc) {
 		List<WikiPage> webPages = new ArrayList<>();
 		webPages.add(new WikiHomePage(info, javaDoc.clone()));
-		Elements h1Elements = javaDoc.select("h1");
+		Elements h1Elements = javaDoc.select(ElementName.H1);
 		for (Element h1 : h1Elements) {
 			webPages.add(new WikiContentsPage(info, javaDoc.clone(), h1));
 		}
-		
+
 		return webPages;
 	}
 }

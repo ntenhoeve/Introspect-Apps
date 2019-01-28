@@ -2,15 +2,17 @@ package nth.reflect.app.swdocgen.dom.page.web;
 
 import java.util.List;
 
-import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
-import nth.reflect.app.swdocgen.dom.page.ElementUtil;
-import nth.reflect.fw.generic.util.StringUtil;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.DocumentType;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
+
+import nth.reflect.app.swdocgen.dom.documentation.GitHubWebInfo;
+import nth.reflect.app.swdocgen.dom.html.AttributeName;
+import nth.reflect.app.swdocgen.dom.html.ElementName;
+import nth.reflect.app.swdocgen.dom.html.ElementUtil;
+import nth.reflect.fw.generic.util.StringUtil;
 
 public class PrintableWebPage extends WebPage {
 
@@ -21,7 +23,7 @@ public class PrintableWebPage extends WebPage {
 	@Override
 	public Document createContents() {
 		Document doc = createDocument(getTitle());
-		
+
 		createHead(doc);
 
 		Element body = doc.body();
@@ -38,35 +40,32 @@ public class PrintableWebPage extends WebPage {
 
 	@Override
 	protected String createFileName(String title) {
-		StringBuilder fileName=new StringBuilder();
+		StringBuilder fileName = new StringBuilder();
 		fileName.append(StringUtil.convertToCamelCase(title, true));
 		fileName.append("_Printable.html");
 		return fileName.toString();
 	}
 
-
 	private static void createHead(Document doc) {
 		Element head = doc.head();
 		head.appendElement("meta").attr("charset", "utf-8");
-		head.appendElement("meta")
-				.attr("name", "viewport")
-				.attr("content",
-						"width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes");
+		head.appendElement("meta").attr("name", "viewport").attr("content",
+				"width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes");
 	}
 
 	private static Document createDocument(String title) {
 		Document doc = new Document("");
-		doc.appendChild(new DocumentType("html", "", "", ""));
-		Element html = doc.appendElement("html");
-		html.appendElement("head");
-		html.appendElement("body");
+		doc.appendChild(new DocumentType(ElementName.HTML, "", "", ""));
+		Element html = doc.appendElement(ElementName.HTML);
+		html.appendElement(ElementName.HEAD);
+		html.appendElement(ElementName.BODY);
 		doc.title(title);
 		return doc;
 	}
 
 	private static void createContent(Document javaDoc, Element body) {
-		Element divContent = body.appendElement("div").attr("id", "content");
-		Elements h1Elements = javaDoc.select("h1");
+		Element divContent = body.appendElement(ElementName.DIV).attr(AttributeName.ID, "content");
+		Elements h1Elements = javaDoc.select(ElementName.H1);
 		for (Element h1 : h1Elements) {
 			List<Node> chapterNodes = ElementUtil.findChapterNodes(h1);
 			ElementUtil.addAllNodes(divContent, chapterNodes);
@@ -75,41 +74,28 @@ public class PrintableWebPage extends WebPage {
 	}
 
 	private static void createFrontCover(Document javaDoc, Element body) {
-		Element firstChapter = javaDoc.select("h1").first();
-		List<Node> frontCoverElements = ElementUtil
-				.findAllNodesBefore(firstChapter);
-		Element divFrontCover = body.appendElement("div").attr("id",
-				"frontCover");
+		Element firstChapter = javaDoc.select(ElementName.H1).first();
+		List<Node> frontCoverElements = ElementUtil.findAllNodesBefore(firstChapter);
+		Element divFrontCover = body.appendElement(ElementName.DIV).attr(AttributeName.ID, "frontCover");
 		ElementUtil.addAllNodes(divFrontCover, frontCoverElements);
 	}
 
 	private static void createTableOfContents(Document javaDoc, Element body) {
-		Element divToc = body.appendElement("div")
-				.attr("id", "tableOfContents");
-		divToc.appendElement("h1").html("Contents");
+		Element divToc = body.appendElement(ElementName.DIV).attr(AttributeName.ID, "tableOfContents");
+		divToc.appendElement(ElementName.H1).html("Contents");
 		Element ulh2 = null;
 		Elements chaptersAndParagraph = javaDoc.select("h1,h2");
 		for (Element chapterOrParagraph : chaptersAndParagraph) {
-			if ("h1".equals(chapterOrParagraph.tagName())) {
-				divToc.appendElement("h3").appendElement("a")
-						.attr(HREF, "#" + chapterOrParagraph.id())
-						.html(chapterOrParagraph.html());
-				ulh2 = divToc.appendElement("ul");
+			if (ElementName.H1.equals(chapterOrParagraph.tagName())) {
+				divToc.appendElement(ElementName.H3).appendElement(ElementName.A)
+						.attr(AttributeName.HREF, "#" + chapterOrParagraph.id()).html(chapterOrParagraph.html());
+				ulh2 = divToc.appendElement(ElementName.UL);
 			}
-			if ("h2".equals(chapterOrParagraph.tagName())) {
-				ulh2.appendElement("li").appendElement("a")
-						.attr(HREF, "#" + chapterOrParagraph.id())
-						.html(chapterOrParagraph.html());
+			if (ElementName.H2.equals(chapterOrParagraph.tagName())) {
+				ulh2.appendElement(ElementName.LI).appendElement(ElementName.A)
+						.attr(AttributeName.HREF, "#" + chapterOrParagraph.id()).html(chapterOrParagraph.html());
 			}
 		}
-	}
-
-	@Override
-	protected String createReference(Element hElement) {
-		StringBuilder reference = new StringBuilder();
-		reference.append("#");
-		reference.append(hElement.id());
-		return reference.toString();
 	}
 
 }

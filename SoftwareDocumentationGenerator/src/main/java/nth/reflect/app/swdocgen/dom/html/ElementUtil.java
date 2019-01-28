@@ -1,4 +1,4 @@
-package nth.reflect.app.swdocgen.dom.page;
+package nth.reflect.app.swdocgen.dom.html;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -33,8 +33,7 @@ public class ElementUtil {
 			List<Node> childNodes = (List<Node>) childNodesField.get(element);
 			return childNodes;
 		} catch (Exception e) {
-			throw new RuntimeException("Could not get the nodes of element: "
-					+ element, e);
+			throw new RuntimeException("Could not get the nodes of element: " + element, e);
 		}
 	}
 
@@ -59,8 +58,7 @@ public class ElementUtil {
 
 		for (int index = startIndex; index < parentNodes.size(); index++) {
 			Node parentNode = parentNodes.get(index);
-			if (parentNode instanceof Element
-					&& ((Element) parentNode).tagName().equals("h1")) {
+			if (parentNode instanceof Element && ((Element) parentNode).tagName().equals("h1")) {
 				return chapterNodes;
 			} else {
 				chapterNodes.add(parentNode);
@@ -78,8 +76,7 @@ public class ElementUtil {
 		return found;
 	}
 
-	public static Element findPreviousHElement(Elements sequence,
-			Element reference) {
+	public static Element findPreviousHElement(Elements sequence, Element reference) {
 		int index = sequence.indexOf(reference);
 		for (index = sequence.indexOf(reference); index >= 0; index--) {
 			Element element = sequence.get(index);
@@ -90,12 +87,26 @@ public class ElementUtil {
 		return null;
 	}
 
+	public static Element findPreviousH2Element(Element h3) {
+		Elements hElements = findAllHElements(h3);
+		Element currentH2 = null;
+		for (Element h : hElements) {
+			if (h.nodeName().equals("h2")) {
+				currentH2 = h;
+			}
+			if (h.html().equals(h3.html())) {
+				return currentH2;
+			}
+		}
+		return null;
+	}
+
 	public static Element findPreviousH1Element(Element hElement) {
-		Elements hElements=findAllHElements(hElement);
+		Elements hElements = findAllHElements(hElement);
 		Element currentH1 = null;
 		for (Element h : hElements) {
 			if (h.nodeName().equals("h1")) {
-				currentH1=h;
+				currentH1 = h;
 			}
 			if (h.html().equals(hElement.html())) {
 				return currentH1;
@@ -105,19 +116,20 @@ public class ElementUtil {
 	}
 
 	private static Elements findAllHElements(Element element) {
-		Element root=findRootElement(element);
-		return  root.select("h1,h2,h3");
+		Element root = findRootElement(element);
+		return root.select("h1,h2,h3");
 	}
 
 	private static Element findRootElement(Element element) {
 		Element parent;
 		do {
-			parent=element.parent();
-			if (parent==null) {
+			parent = element.parent();
+			if (parent == null) {
 				return element;
 			}
-			element=parent;
-		} while (parent!=null); 
+			element = parent;
+		} while (parent != null);
 		return null;
 	}
+
 }
