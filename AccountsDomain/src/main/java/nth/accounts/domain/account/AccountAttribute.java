@@ -24,10 +24,7 @@ public class AccountAttribute {
 
 	@Override
 	public String toString() {
-		TitleBuilder titleBuilder=new TitleBuilder(":");
-		titleBuilder.append(name);
-		titleBuilder.append(value);
-		return titleBuilder.toString();
+		return TitleBuilder.getInstance(":").append(name).append(value).toString();
 	}
 
 }

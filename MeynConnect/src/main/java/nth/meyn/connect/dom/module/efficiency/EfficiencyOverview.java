@@ -12,7 +12,7 @@ public class EfficiencyOverview {
 	private double quality;
 	private int numberOfProductsToday;
 
-	@Order(sequenceNumber = 10)
+	@Order(value = 10)
 	public Asset getAsset() {
 		return asset;
 	}
@@ -21,7 +21,7 @@ public class EfficiencyOverview {
 		this.asset = asset;
 	}
 
-	@Order(sequenceNumber = 20)
+	@Order(value = 20)
 	public EfficencyStatus getStatus() {
 		return status;
 	}
@@ -31,13 +31,13 @@ public class EfficiencyOverview {
 	}
 
 	@Format(pattern="##0'%'")//TODO
-	@Order(sequenceNumber = 30)
+	@Order(value = 30)
 	public double getOveralEquipmentEfficiency() {
 		return availability/100 * performance/100 * quality/100 *100;
 	}
 
 	@Format(pattern="##0'%'")//TODO
-	@Order(sequenceNumber = 40)
+	@Order(value = 40)
 	public double getAvailability() {
 		return availability;
 	}
@@ -47,7 +47,7 @@ public class EfficiencyOverview {
 	}
 
 	@Format(pattern="##0'%'")//TODO
-	@Order(sequenceNumber = 50)
+	@Order(value = 50)
 	public double getPerformance() {
 		return performance;
 	}
@@ -57,7 +57,7 @@ public class EfficiencyOverview {
 	}
 
 	@Format(pattern="##0'%'")//TODO
-	@Order(sequenceNumber = 60)
+	@Order(value = 60)
 	public double getQuality() {
 		return quality;
 	}
@@ -66,7 +66,7 @@ public class EfficiencyOverview {
 		this.quality = quality;
 	}
 
-	@Order(sequenceNumber = 70)
+	@Order(value = 70)
 	public int getNumberOfProductsToday() {
 		return numberOfProductsToday;
 	}

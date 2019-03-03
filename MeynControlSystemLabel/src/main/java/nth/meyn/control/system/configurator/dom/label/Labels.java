@@ -1,4 +1,4 @@
-package nth.meyn.control.systems.labels.dom.label;
+package nth.meyn.control.system.configurator.dom.label;
 
 import java.util.ArrayList;
 import java.util.List;

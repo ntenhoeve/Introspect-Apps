@@ -10,7 +10,7 @@ public class SynchronizeArgument {
 	private boolean removeOldFiles;
 	private boolean skipSameNameAndSize;
 
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public File getSource() {
 		return source;
 	}
@@ -18,7 +18,7 @@ public class SynchronizeArgument {
 	public void setSource(File source) {
 		this.source = source;
 	}
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public File getDestination() {
 		return destination;
 	}
@@ -27,7 +27,7 @@ public class SynchronizeArgument {
 		this.destination = destination;
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(value=3)
 	public boolean isRemoveOldFiles() {
 		return removeOldFiles;
 	}

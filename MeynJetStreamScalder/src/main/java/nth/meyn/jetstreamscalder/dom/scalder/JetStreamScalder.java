@@ -28,7 +28,7 @@ public class JetStreamScalder {
 		setScaldingMethod(ScaldingMethod.EPIDERMIS_OFF_WHITE_BREAST);
 	}
 
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public String getCustomer() {
 		return customer;
 	}
@@ -37,7 +37,7 @@ public class JetStreamScalder {
 		this.customer = customer;
 	}
 
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public ShacklePitch getShacklePitch() {
 		return shacklePitch;
 	}
@@ -50,7 +50,7 @@ public class JetStreamScalder {
 
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(value=3)
 	public int getLineSpeedInBph() {
 		return lineSpeedInBph;
 	}
@@ -60,7 +60,7 @@ public class JetStreamScalder {
 		notificationProvider.refreshUserInterface();
 	}
 
-	@Order(sequenceNumber=4)
+	@Order(value=4)
 	public ScaldingMethod getScaldingMethod() {
 		return scaldingMethod;
 	}
@@ -72,7 +72,7 @@ public class JetStreamScalder {
 		notificationProvider.refreshUserInterface();
 	}
 
-	@Order(sequenceNumber=5)
+	@Order(value=5)
 	public List<ScalderRow> getScalderRows() {
 		return scalderRows;
 	}

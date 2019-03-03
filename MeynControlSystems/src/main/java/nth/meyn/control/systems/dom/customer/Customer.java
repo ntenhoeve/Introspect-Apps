@@ -15,7 +15,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.hidden.HiddenFor;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 @Entity
-@Table(name="_customers")
+@Table(name = "_customers")
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = -6462915990348598074L;
@@ -27,50 +27,55 @@ public class Customer implements Serializable {
 
 	@Id
 	@GeneratedValue
-	@Hidden(propertyHiddenFor=HiddenFor.TABLES_AND_FORMS)
+	@Hidden(propertyHiddenFor = HiddenFor.TABLES_AND_FORMS)
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	@Order(sequenceNumber=0)
-	@Format( pattern="####")
-	@Column(name="Location")
+
+	@Order(value = 0)
+	@Format(pattern = "####")
+	@Column(name = "Location")
 	public int getNumber() {
 		return number;
 	}
+
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	
-	@Order(sequenceNumber=1)
+
+	@Order(value = 1)
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getCountry() {
 		return country;
 	}
 
-	@Order(sequenceNumber=1)
+	@Order(value = 1)
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
 	public String getCity() {
 		return city;
 	}
-	
-	@Order(sequenceNumber=1)
+
+	@Order(value = 1)
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
 	@Override
 	public String toString() {
-		return new TitleBuilder().append(number).append(name).append(city).append(country).toString();
+		return TitleBuilder.getInstance().append(number).append(name).append(city).append(country).toString();
 	}
 }

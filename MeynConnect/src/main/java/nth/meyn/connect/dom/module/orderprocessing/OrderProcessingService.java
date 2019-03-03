@@ -12,27 +12,27 @@ import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 @DisplayName(englishName="ProductionOrder Processing")
 public class OrderProcessingService {
 
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public List<ProductionOrder> feet() {
 		return new ArrayList<>();
 	}
 	
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public List<ProductionOrder> wholeBirds() {
 		return new ArrayList<>();
 	}
 	
-	@Order(sequenceNumber=3)
+	@Order(value=3)
 	public List<ProductionOrder> wings() {
 		return new ArrayList<>();
 	}
 	
-	@Order(sequenceNumber=4)
+	@Order(value=4)
 	public List<ProductionOrder> breastCaps() {
 		return new ArrayList<>();
 	}
 	
-	@Order(sequenceNumber=5)
+	@Order(value=5)
 	public List<ProductionOrder> legs() {
 		return new ArrayList<>();
 	}

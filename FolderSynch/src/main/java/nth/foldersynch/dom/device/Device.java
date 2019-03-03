@@ -13,12 +13,11 @@ public class Device {
 	private DeviceType deviceType;
 	private List<FolderSynchTask> tasks;
 
-	
 	public Device() {
-		tasks=new ArrayList<>();
+		tasks = new ArrayList<>();
 	}
 
-	@Order(sequenceNumber=10)
+	@Order(value = 10)
 	public String getOwnerName() {
 		return ownerName;
 	}
@@ -27,7 +26,7 @@ public class Device {
 		this.ownerName = ownerName;
 	}
 
-	@Order(sequenceNumber=20)
+	@Order(value = 20)
 	public DeviceType getDeviceType() {
 		return deviceType;
 	}
@@ -36,7 +35,7 @@ public class Device {
 		this.deviceType = deviceType;
 	}
 
-	@Order(sequenceNumber=30)
+	@Order(value = 30)
 	public List<FolderSynchTask> getTasks() {
 		return tasks;
 	}
@@ -47,14 +46,14 @@ public class Device {
 
 	@Override
 	public String toString() {
-		return new TitleBuilder().append(ownerName).append(deviceType).toString();
+		return TitleBuilder.getInstance().append(ownerName).append(deviceType).toString();
 	}
-	
+
 	public void modifyTasks(FolderSynchTask task) {
-		
+
 	}
-	
-	@ParameterFactory 
+
+	@ParameterFactory
 	public void addTasks(FolderSynchTask task) {
 		tasks.add(task);
 	}

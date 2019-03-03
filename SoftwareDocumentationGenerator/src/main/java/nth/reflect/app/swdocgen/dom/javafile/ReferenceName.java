@@ -67,6 +67,9 @@ public class ReferenceName {
 	}
 
 	public ReferenceName withFileName(String fileName) {
+		if (fileName.equals("nth.reflect.fw.gui.component.mainwindow.MainWindow")) {
+			System.out.println();
+		}
 		int posLastSeperator = referenceName.lastIndexOf(SEPARATOR);
 		String preFix = referenceName.substring(0, posLastSeperator + SEPARATOR.length());
 		return new ReferenceName(preFix + fileName.toLowerCase());

@@ -10,7 +10,7 @@ public class Configuration {
 	private String ftpDatabasePath;
 	private String deviceName;
 
-	@Order(sequenceNumber = 0)
+	@Order(value = 0)
 	public String getFtpServerAddress() {
 		return ftpServerAddress;
 	}
@@ -19,7 +19,7 @@ public class Configuration {
 		this.ftpServerAddress = ftpServerAddress;
 	}
 
-	@Order(sequenceNumber = 10)
+	@Order(value = 10)
 	public String getFtpServerPort() {
 		return ftpServerPort;
 	}
@@ -28,7 +28,7 @@ public class Configuration {
 		this.ftpServerPort = ftpServerPort;
 	}
 
-	@Order(sequenceNumber = 20)
+	@Order(value = 20)
 	public String getFtpDatabaseUserName() {
 		return ftpDatabaseUserName;
 	}
@@ -37,7 +37,7 @@ public class Configuration {
 		this.ftpDatabaseUserName = ftpDatabaseUserName;
 	}
 
-	@Order(sequenceNumber = 30)
+	@Order(value = 30)
 	public String getFtpDatabasePassword() {
 		return ftpDatabasePassword;
 	}
@@ -46,7 +46,7 @@ public class Configuration {
 		this.ftpDatabasePassword = ftpDatabasePassword;
 	}
 
-	@Order(sequenceNumber = 40)
+	@Order(value = 40)
 	public String getFtpDatabasePath() {
 		return ftpDatabasePath;
 	}
@@ -55,7 +55,7 @@ public class Configuration {
 		this.ftpDatabasePath = ftpDatabasePath;
 	}
 
-	@Order(sequenceNumber = 50)
+	@Order(value = 50)
 	public String getDeviceName() {
 		return deviceName;
 	}

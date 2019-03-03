@@ -1,5 +1,6 @@
-package nth.meyn.control.systems.labels.dom.repository;
+package nth.meyn.control.system.configurator.dom.repository;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
@@ -11,8 +12,11 @@ public class MeynControlSystemRepository extends nth.reflect.infra.xmlfilereposi
 
 	public MeynControlSystemRepository(ReflectionProvider reflectionProvider, InfrastructureContainer providerContainer)
 			throws MalformedURLException, URISyntaxException {
-		super(new XmlConverter(reflectionProvider, providerContainer),
-				MeynControlSystemRepository.class.getSimpleName(), true);
+		super(createDataBaseFile(), new XmlConverter(reflectionProvider, providerContainer), true);
+	}
+
+	private static File createDataBaseFile() {
+		return new File("C:/Users/nilsth/" + MeynControlSystemRepository.class.getSimpleName() + ".xml");
 	}
 
 }

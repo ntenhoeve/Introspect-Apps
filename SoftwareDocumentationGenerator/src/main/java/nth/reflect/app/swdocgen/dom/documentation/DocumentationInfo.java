@@ -9,14 +9,14 @@ public class DocumentationInfo {
 	private File projectsFolder;
 	private String className;
 	
-	@Order(sequenceNumber= 1)
+	@Order(value= 1)
 	public File getProjectsFolder() {
 		return projectsFolder;
 	}
 	public void setProjectsFolder(File projectsFolder) {
 		this.projectsFolder = projectsFolder;
 	}
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public String getClassName() {
 		return className;
 	}

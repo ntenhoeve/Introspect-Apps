@@ -39,7 +39,7 @@ public class ReferenceNameFindIterator implements Iterator<String> {
 		if (hasNext()) {
 			int separatorPos = referenceName.indexOf(ReferenceName.SEPARATOR);
 			referenceName = referenceName.substring(separatorPos + ReferenceName.SEPARATOR.length());
-			return referenceName;
+			return "_" + referenceName;
 		}
 		throw new NoSuchElementException();
 	}

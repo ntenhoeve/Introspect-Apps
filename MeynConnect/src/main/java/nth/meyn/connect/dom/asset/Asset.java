@@ -19,7 +19,7 @@ public class Asset {
 		this.name=name;
 	}
 	//TODO make multilingual;
-	@Order(sequenceNumber=10)
+	@Order(value=10)
 	public String getName() {
 		return name;
 	}
@@ -28,7 +28,7 @@ public class Asset {
 		this.name = name;
 	}
 
-	@Order(sequenceNumber=20)
+	@Order(value=20)
 	public List<Asset> getAssets() {
 		return assets;
 	}

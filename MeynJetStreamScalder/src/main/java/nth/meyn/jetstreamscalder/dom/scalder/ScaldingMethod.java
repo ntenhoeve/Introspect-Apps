@@ -29,14 +29,14 @@ public enum ScaldingMethod {
 		this.maxTempInCelsius = maxTempInCelcius;
 	}
 	
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public String getMethodName() {
 		String methodName=StringUtil.eliphantCaseToNormal(name());
 		return methodName;
 	};
 
 
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public String getTemperature() {
 		StringBuilder temp = new StringBuilder();
 		temp.append(minTempInCelsius);
@@ -53,7 +53,7 @@ public enum ScaldingMethod {
 		return temp.toString();
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(value=3)
 	public String getDuration() {
 		StringBuilder duration = new StringBuilder();
 			duration.append(recommandedTimeInSeconds);

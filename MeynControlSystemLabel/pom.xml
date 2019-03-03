@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nth.reflect.app</groupId>
-	<artifactId>MeynControlSystemLabel</artifactId>
+	<artifactId>MeynControlSystemConfigurator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Application to create edit and print label for Meyn Control Systems</description>
 

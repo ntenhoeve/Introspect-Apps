@@ -8,7 +8,7 @@ public class HtmlInfo extends DocumentationInfo {
 
 	private File destinationFolder;
 
-	@Order(sequenceNumber= 11)
+	@Order(value= 11)
 	public File getDestinationFolder() {
 		return destinationFolder;
 	}

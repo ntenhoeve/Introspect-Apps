@@ -8,7 +8,7 @@ public class GitHubWikiInfo extends GitHubInfo {
 
 	private File gitHubWikiProjectLocation;
 
-	@Order(sequenceNumber=21)
+	@Order(value=21)
 	public File getGitHubWikiProjectLocation() {
 		return gitHubWikiProjectLocation;
 	}

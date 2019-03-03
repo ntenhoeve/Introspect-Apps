@@ -1,4 +1,4 @@
-package nth.meyn.control.systems.labels.dom.label;
+package nth.meyn.control.system.configurator.dom.label;
 
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
@@ -8,7 +8,7 @@ public class Label {
 	private String line3;
 	private String line4;
 
-	@Order(sequenceNumber = 1)
+	@Order(value = 1)
 	public String getLine1() {
 		return line1;
 	}
@@ -17,7 +17,7 @@ public class Label {
 		this.line1 = line1;
 	}
 
-	@Order(sequenceNumber = 2)
+	@Order(value = 2)
 	public String getLine2() {
 		return line2;
 	}
@@ -26,7 +26,7 @@ public class Label {
 		this.line2 = line2;
 	}
 
-	@Order(sequenceNumber = 3)
+	@Order(value = 3)
 	public String getLine3() {
 		return line3;
 	}
@@ -35,7 +35,7 @@ public class Label {
 		this.line3 = line3;
 	}
 
-	@Order(sequenceNumber = 4)
+	@Order(value = 4)
 	public String getLine4() {
 		return line4;
 	}

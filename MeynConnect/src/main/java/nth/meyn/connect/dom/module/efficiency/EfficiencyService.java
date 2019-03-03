@@ -17,43 +17,43 @@ import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.Parame
 @DisplayName(englishName = "Efficiency")
 public class EfficiencyService {
 
-	@Order(sequenceNumber=10)
+	@Order(value=10)
 	public List<EfficiencyOverview> efficiencyOverviews() {
 		return EfficiencyOverviewExampleFactory.create();
 	}
 
-	@Order(sequenceNumber=20)
+	@Order(value=20)
 	@ExecutionMode(mode=ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public EfficiencyGraph efficiencyGraph(EfficiencyOverview efficiencyOverview) {
 		return efficiencyGraph(efficiencyOverview.getAsset());
 	}
 	
-	@Order(sequenceNumber=21)
+	@Order(value=21)
 	@ExecutionMode(mode=ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public EfficiencyGraph efficiencyGraph(Asset asset) {
 		return new EfficiencyGraph();
 	}
 	
-	@Order(sequenceNumber=31)
+	@Order(value=31)
 	@ExecutionMode(mode=ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public TroughputGraph troughputGraph(EfficiencyOverview efficiencyOverview) {
 		return troughputGraph(efficiencyOverview.getAsset());
 	}
 	
-	@Order(sequenceNumber=32)
+	@Order(value=32)
 	@ExecutionMode(mode=ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public TroughputGraph troughputGraph(Asset asset) {
 		return new TroughputGraph();
 	}
 
 
-	@Order(sequenceNumber=41)
+	@Order(value=41)
 	@ExecutionMode(mode=ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<EfficiencyIssue> efficiencyIssues(EfficiencyOverview efficiencyOverview) {
 		return efficiencyIssues(efficiencyOverview.getAsset());
 	}
 	
-	@Order(sequenceNumber=42)
+	@Order(value=42)
 	@ExecutionMode(mode=ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public List<EfficiencyIssue> efficiencyIssues(Asset asset) {
 		return new ArrayList<>();

@@ -5,7 +5,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public abstract class Section {
 
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public String getName() {
 		String className=this.getClass().getSimpleName();
 		String name=StringUtil.convertToNormalCase(className);

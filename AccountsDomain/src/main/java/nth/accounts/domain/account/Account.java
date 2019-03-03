@@ -24,7 +24,7 @@ public class Account {
 	}
 
 	@NotNull
-	@Order(sequenceNumber = 1)
+	@Order(value = 1)
 	public String getAccountName() {
 		return accountName;
 	}
@@ -33,8 +33,7 @@ public class Account {
 		this.accountName = accountName;
 	}
 
-	
-	@Order(sequenceNumber = 2)
+	@Order(value = 2)
 	public List<AccountAttribute> getAttributes() {
 		return attributes;
 	}
@@ -108,8 +107,7 @@ public class Account {
 		clipboard.setContents(selection, selection);
 	}
 
-	
-	@Order(sequenceNumber = 3)
+	@Order(value = 3)
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -128,13 +126,9 @@ public class Account {
 		tags.remove(tag);
 	}
 
-	
 	@Override
 	public String toString() {
-		TitleBuilder titleBuilder = new TitleBuilder("-");
-		titleBuilder.append(tags);
-		titleBuilder.append(accountName);
-		return titleBuilder.toString();
+		return TitleBuilder.getInstance("-").append(tags).append(accountName).toString();
 	}
 
 }

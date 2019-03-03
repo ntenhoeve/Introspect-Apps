@@ -14,7 +14,7 @@ public class FolderSynchTask {
 	private String includeFilter;
 	private String excludeFilter;
 
-	@Order(sequenceNumber=10)
+	@Order(value=10)
 	public String getFtpUserName() {
 		return ftpUserName;
 	}
@@ -23,7 +23,7 @@ public class FolderSynchTask {
 		this.ftpUserName = ftpUserName;
 	}
 
-	@Order(sequenceNumber=20)
+	@Order(value=20)
 	public String getFtpPassword() {
 		return ftpPassword;
 	}
@@ -32,7 +32,7 @@ public class FolderSynchTask {
 		this.ftpPassword = ftpPassword;
 	}
 
-	@Order(sequenceNumber=30)
+	@Order(value=30)
 	public String getServerFolder() {
 		return serverFolder;
 	}
@@ -41,7 +41,7 @@ public class FolderSynchTask {
 		this.serverFolder = serverFolder;
 	}
 
-	@Order(sequenceNumber=40)
+	@Order(value=40)
 	public String getLocalFolder() {
 		return localFolder;
 	}
@@ -50,7 +50,7 @@ public class FolderSynchTask {
 		this.localFolder = localFolder;
 	}
 
-	@Order(sequenceNumber=50)
+	@Order(value=50)
 	public Direction getDirection() {
 		return direction;
 	}
@@ -59,7 +59,7 @@ public class FolderSynchTask {
 		this.direction = direction;
 	}
 	
-	@Order(sequenceNumber=60)
+	@Order(value=60)
 	public Override getOverride() {
 		return override;
 	}
@@ -68,7 +68,7 @@ public class FolderSynchTask {
 		this.override = override;
 	}
 
-	@Order(sequenceNumber=70)
+	@Order(value=70)
 	public boolean isIncludeSubFolders() {
 		return includeSubFolders;
 	}
@@ -77,7 +77,7 @@ public class FolderSynchTask {
 		this.includeSubFolders = includeSubFolders;
 	}
 
-	@Order(sequenceNumber=80)
+	@Order(value=80)
 	public boolean isRemoveFilesAndFolders() {
 		return removeFilesAndFolders;
 	}
@@ -86,7 +86,7 @@ public class FolderSynchTask {
 		this.removeFilesAndFolders = removeFilesAndFolders;
 	}
 
-	@Order(sequenceNumber=90)
+	@Order(value=90)
 	public String getIncludeFilter() {
 		return includeFilter;
 	}
@@ -95,7 +95,7 @@ public class FolderSynchTask {
 		this.includeFilter = includeFilter;
 	}
 
-	@Order(sequenceNumber=100)
+	@Order(value=100)
 	public String getExcludeFilter() {
 		return excludeFilter;
 	}

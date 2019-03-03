@@ -166,10 +166,9 @@ public class JavaFile {
 		}
 	}
 
-	private static String replaceAllInlineTags(String javaDoc, DocumentationFiles documentationFiles)
-			throws IOException {
+	private String replaceAllInlineTags(String javaDoc, DocumentationFiles documentationFiles) throws IOException {
 
-		List<InlineTag> inlineTags = InlineTagFactory.getAllInlineTags(documentationFiles);
+		List<InlineTag> inlineTags = InlineTagFactory.getAllInlineTags(documentationFiles, referenceName);
 
 		for (InlineTag inlineTag : inlineTags) {
 			boolean foundMatch = true;

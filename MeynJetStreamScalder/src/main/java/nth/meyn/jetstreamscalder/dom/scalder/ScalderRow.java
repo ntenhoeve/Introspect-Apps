@@ -22,7 +22,7 @@ public class ScalderRow {
 		sections = SectionFactory.create(rowType, numberOfSections);
 	}
 
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public RowType getRowType() {
 		return rowType;
 	}
@@ -35,7 +35,7 @@ public class ScalderRow {
 		notificationProvider.refreshUserInterface();
 	}
 
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public NumberOfSections getNumberOfSections() {
 		return numberOfSections;
 	}
@@ -61,7 +61,7 @@ public class ScalderRow {
 		notificationProvider.refreshUserInterface();
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(value=3)
 	public int getEffectiveScaldingLengthInMm() {
 		int effectiveScaldingLengthInMm = 0;
 		for (Section section : sections) {
@@ -71,7 +71,7 @@ public class ScalderRow {
 		return effectiveScaldingLengthInMm;
 	}
 
-	@Order(sequenceNumber=4)
+	@Order(value=4)
 	public double getLengthInMm() {
 		int lengthInMm = 0;
 		for (Section section : sections) {
@@ -80,7 +80,7 @@ public class ScalderRow {
 		return lengthInMm;
 	}
 
-	@Order(sequenceNumber=5)
+	@Order(value=5)
 	public double getWidthInMm() {
 		if (sections.size() > 0) {
 			return sections.get(0).getWidthInMm();
@@ -89,7 +89,7 @@ public class ScalderRow {
 		}
 	}
 
-	@Order(sequenceNumber=6)
+	@Order(value=6)
 	public double getWaterVolumeInLiters() {
 		int volumeInLiters = 0;
 		for (Section section : sections) {

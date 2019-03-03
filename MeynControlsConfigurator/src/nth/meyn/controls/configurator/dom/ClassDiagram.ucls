@@ -2,8 +2,8 @@
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="nth.meyn.controls.configurator.dom.equipment.EquipmentTemplate" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/equipment/EquipmentTemplate.java" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/equipment/EquipmentTemplate.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1249" y="490"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -13,8 +13,8 @@
     </display>  
   </class>  
   <class id="2" language="java" name="nth.meyn.controls.configurator.dom.project.Project" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/project/Project.java" binary="false" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/project/Project.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="142" y="215"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -24,8 +24,8 @@
     </display>  
   </class>  
   <class id="3" language="java" name="nth.meyn.controls.configurator.dom.function.FunctionTemplate" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/function/FunctionTemplate.java" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/function/FunctionTemplate.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1610" y="681"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -35,9 +35,9 @@
     </display>  
   </class>  
   <class id="4" language="java" name="nth.meyn.controls.configurator.dom.project.ProjectTemplate" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/project/ProjectTemplate.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/project/ProjectTemplate.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="517" y="57"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
     </display>  
   </class>  
   <class id="5" language="java" name="nth.meyn.controls.configurator.dom.equipment.Equipment" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/equipment/Equipment.java" binary="false" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/equipment/Equipment.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="568" y="485"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -56,8 +56,8 @@
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="nth.meyn.controls.configurator.dom.site.Site" project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/site/Site.java" binary="false" 
+  <class id="6" language="java" name="nth.meyn.controls.configurator.dom.site.Site" project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/site/Site.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-106" y="14"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -67,8 +67,8 @@
     </display>  
   </class>  
   <class id="7" language="java" name="nth.meyn.controls.configurator.dom.component.ComponentTemplate" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/component/ComponentTemplate.java" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/component/ComponentTemplate.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2028" y="786"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -78,8 +78,8 @@
     </display>  
   </class>  
   <class id="8" language="java" name="nth.meyn.controls.configurator.dom.equipment.EquipmentTemplateRule" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/equipment/EquipmentTemplateRule.java" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/equipment/EquipmentTemplateRule.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="903" y="192"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -89,8 +89,8 @@
     </display>  
   </class>  
   <interface id="9" language="java" name="nth.meyn.controls.configurator.dom.function.FunctionOrComponent" 
-    project="MeynControlsConfigurator" 
-    file="/MeynControlsConfigurator/src/nth/meyn/controls/configurator/dom/function/FunctionOrComponent.java" 
+    project="MeynControlConfiguratorOld" 
+    file="/MeynControlConfiguratorOld/src/nth/meyn/controls/configurator/dom/function/FunctionOrComponent.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1875" y="504"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
@@ -99,92 +99,96 @@
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <association id="10">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="11" name="equipmentTemplate">        
+  <realization id="10">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="11">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="12" name="functionAndComponentTemplates">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="12" minimum="0" maximum="1">        
+      <multiplicity id="13" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="14">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="15">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="16" name="equipmentTemplate">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="13">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <association id="14">    
+  <association id="18">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="15" name="site">        
+      <attribute id="19" name="projectTemplate">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="16" minimum="0" maximum="1">        
+      <multiplicity id="20" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="17">    
+  <association id="21">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="18" name="equipment">        
+      <attribute id="22" name="equipment">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="2147483647">        
+      <multiplicity id="23" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="21" name="functionAndComponentTemplates"/>      
-      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
+  <association id="24">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="24" name="equipmentTemplate">        
+      <attribute id="25" name="equipmentTemplate">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="1">        
+      <multiplicity id="26" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="26">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
   <association id="27">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="28" name="site">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="28" name="functionTemplates">        
+      <attribute id="31" name="functionTemplates">        
         <position height="0" width="0" x="141" y="130"/>      
       </attribute>      
-      <multiplicity id="29" minimum="0" maximum="2147483647">        
+      <multiplicity id="32" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="141" y="130"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="31" name="projectTemplate">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="33">    

@@ -7,14 +7,14 @@ public class GitHubInfo extends DocumentationInfo {
 	private String gitHubUserName;
 	private String gitHubPassword;
 	
-	@Order(sequenceNumber=11)
+	@Order(value=11)
 	public String getGitHubUserName() {
 		return gitHubUserName;
 	}
 	public void setGitHubUserName(String gitHubUserName) {
 		this.gitHubUserName = gitHubUserName;
 	}
-	@Order(sequenceNumber=12)
+	@Order(value=12)
 	public String getGitHubPassword() {
 		return gitHubPassword;
 	}

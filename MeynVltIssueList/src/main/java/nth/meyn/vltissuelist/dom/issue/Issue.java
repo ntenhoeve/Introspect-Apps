@@ -22,7 +22,7 @@ public class Issue {
 	private int numberOfVlts;
 	private File projectFolder;
 
-	@Order(sequenceNumber = 1)
+	@Order(value = 1)
 	@Format(pattern = "####")
 	public int getCustomerNumber() {
 		return customerNumber;
@@ -32,7 +32,7 @@ public class Issue {
 		this.customerNumber = customerNumber;
 	}
 
-	@Order(sequenceNumber = 2)
+	@Order(value = 2)
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -41,7 +41,7 @@ public class Issue {
 		this.customerName = customerName;
 	}
 
-	@Order(sequenceNumber = 3)
+	@Order(value = 3)
 	public String getCustomerCountry() {
 		return customerCountry;
 	}
@@ -50,7 +50,7 @@ public class Issue {
 		this.customerCountry = customerCountry;
 	}
 
-	@Order(sequenceNumber = 4)
+	@Order(value = 4)
 	public String getCustomerCity() {
 		return customerCity;
 	}
@@ -61,7 +61,7 @@ public class Issue {
 
 	
 
-	@Order(sequenceNumber = 10)
+	@Order(value = 10)
 	public String getElectricalSchematic() {
 		return electricalSchematic;
 	}
@@ -70,7 +70,7 @@ public class Issue {
 		this.electricalSchematic = electricalSchematic;
 	}
 
-	@Order(sequenceNumber = 11)
+	@Order(value = 11)
 	@Format(pattern = "yyyy-dd-MM")
 	public Date getDesignDate() {
 		return designDate;
@@ -80,7 +80,7 @@ public class Issue {
 		this.designDate = designDate;
 	}
 
-	@Order(sequenceNumber = 12)
+	@Order(value = 12)
 	public String getProjectDescription() {
 		return projectDescription;
 	}
@@ -89,7 +89,7 @@ public class Issue {
 		this.projectDescription = projectDescription;
 	}
 	
-	@Order(sequenceNumber = 13)
+	@Order(value = 13)
 	public String getElectricProjectInfo() {
 		if (projectFolder==null) {
 			return UNKNOWN;
@@ -97,19 +97,19 @@ public class Issue {
 		return projectFolder.getName();
 	}
 
-	@Order(sequenceNumber = 14)
+	@Order(value = 14)
 	public ProjectType getProjectType() {
 		return ProjectType.valueOf(projectFolder);
 	}
 
 
 	@Hidden
-	@Order(sequenceNumber = 15)
+	@Order(value = 15)
 	public String getLineNr() {
 		return lineNr;
 	}
 
-	@Order(sequenceNumber = 16)
+	@Order(value = 16)
 	public boolean isParameterCorrected() {
 		ProjectType projectType=getProjectType();
 		if (ProjectType.RAPID==projectType) {
@@ -124,16 +124,16 @@ public class Issue {
 		return false;
 	}
 
-	@Order(sequenceNumber = 17)
+	@Order(value = 17)
 	public Date getParameterCorrectionDate() {
 		return null;
 	}
 	
-	@Order(sequenceNumber = 18)
+	@Order(value = 18)
 	public String getParameterCorrectedBy() {
 		return isParameterCorrected()?"Parameter 804 was correct from beginning":"";
 	}
-	@Order(sequenceNumber = 19)
+	@Order(value = 19)
 	public int getNumberOfVlts() {
 		return numberOfVlts;
 	}
@@ -142,7 +142,7 @@ public class Issue {
 		this.numberOfVlts = numberOfVlts;
 	}
 
-	@Order(sequenceNumber = 20)
+	@Order(value = 20)
 	public File getProjectFolder() {
 		return projectFolder;
 	}

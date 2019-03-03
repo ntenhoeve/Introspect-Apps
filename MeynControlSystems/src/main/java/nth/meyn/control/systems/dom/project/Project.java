@@ -30,29 +30,29 @@ public class Project {
 	}
 
 	@Format(pattern="Y - ww")
-	@Order(sequenceNumber=1)
+	@Order(value=1)
 	public Date getExWorksDate() {
 		return exWorksDate;
 	}
 
-	@Order(sequenceNumber=2)
+	@Order(value=2)
 	public Customer getCustomer() {
 		return customer;
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(value=3)
 	@Format(pattern="######")
 	public Integer getCustomerOrderNumber() {
 		return customerOrderNumber;
 	}
 
-	@Order(sequenceNumber=4)
+	@Order(value=4)
 	@Format(pattern="######")
 	public Integer getProjectRelatedCosts() {
 		return projectRelatedCosts;
 	}
 
-	@Order(sequenceNumber=5)
+	@Order(value=5)
 	public String getFactoryOrderName() {
 		return factoryOrderName;
 	}

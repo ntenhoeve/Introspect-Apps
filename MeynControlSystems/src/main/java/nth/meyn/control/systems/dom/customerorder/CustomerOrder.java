@@ -36,8 +36,7 @@ public class CustomerOrder extends EntityId {
 	private Customer customer;
 	private List<FactoryOrder> factoryOrders;
 
-
-	@Hidden(propertyHiddenFor=HiddenFor.TABLES_AND_FORMS)
+	@Hidden(propertyHiddenFor = HiddenFor.TABLES_AND_FORMS)
 	public boolean isDeleted() {
 		return deleted;
 	}
@@ -46,8 +45,7 @@ public class CustomerOrder extends EntityId {
 		this.deleted = deleted;
 	}
 
-
-	@Order(sequenceNumber=1)
+	@Order(value = 1)
 	@Format(pattern = "Y - ww")
 	public Date getExWorksDate() {
 		return exWorksDate;
@@ -57,11 +55,9 @@ public class CustomerOrder extends EntityId {
 		this.exWorksDate = exWorksDate;
 	}
 
-	
-	
-	@Order(sequenceNumber=2)
+	@Order(value = 2)
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="Location", referencedColumnName="Location", insertable=false, updatable=false)
+	@JoinColumn(name = "Location", referencedColumnName = "Location", insertable = false, updatable = false)
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -70,7 +66,7 @@ public class CustomerOrder extends EntityId {
 		this.customer = customer;
 	}
 
-	@Order(sequenceNumber=3)
+	@Order(value = 3)
 	@Format(pattern = "######")
 	@Column(name = "Proj_Order")
 	public Integer getCustomerOrderNumber() {
@@ -81,8 +77,7 @@ public class CustomerOrder extends EntityId {
 		this.customerOrderNumber = customerOrderNumber;
 	}
 
-	
-	@Order(sequenceNumber=4)
+	@Order(value = 4)
 	@Format(pattern = "######")
 	@Column(name = "PRC")
 	public Integer getProjectRelatedCosts() {
@@ -93,7 +88,7 @@ public class CustomerOrder extends EntityId {
 		this.projectRelatedCosts = projectRelatedCosts;
 	}
 
-	@Order(sequenceNumber=5)
+	@Order(value = 5)
 	public String getInfo() {
 		return Info;
 	}
@@ -103,7 +98,7 @@ public class CustomerOrder extends EntityId {
 	}
 
 	@OneToMany()
-	@JoinColumn(name="ProjectID")
+	@JoinColumn(name = "ProjectID")
 	public List<FactoryOrder> getFactoryOrders() {
 		return factoryOrders;
 	}
@@ -114,18 +109,19 @@ public class CustomerOrder extends EntityId {
 
 	@Transient
 	public boolean isCompleted() {
-		for (FactoryOrder factoryOrder: getFactoryOrders()) {
+		for (FactoryOrder factoryOrder : getFactoryOrders()) {
 			if (!factoryOrder.isCompleted()) {
 				return false;
 			}
 		}
 		return true;
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
-		return new TitleBuilder().append(customerOrderNumber).append(projectRelatedCosts).append(customer).toString();
+		return TitleBuilder.getInstance().append(customerOrderNumber).append(projectRelatedCosts).append(customer)
+				.toString();
 	}
 
 }

@@ -7,10 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
@@ -66,18 +62,17 @@ public class FolderService {
 	 */
 	public static final long ONE_TB = ONE_KB * ONE_GB;
 
-	@ParameterFactory 
+	@ParameterFactory
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void synchronize(SynchronizeArgument synchronizeArgument) throws IOException {
 		// source
 		File source = synchronizeArgument.getSource().getCanonicalFile();
-		if (!source.exists() ) {
+		if (!source.exists()) {
 			throw new RuntimeException("Source: " + source.getAbsolutePath() + " does not exist");
 		}
 		if (!source.isDirectory()) {
 			throw new RuntimeException("Source: " + source.getAbsolutePath() + " is not a folder");
 		}
-		
 
 		// destination
 		File destination = synchronizeArgument.getDestination();
@@ -94,13 +89,16 @@ public class FolderService {
 		synchronize(source, destination, removeOldFiles, skipSameNameAndSize);
 	}
 
-	private void synchronize(File srcFolder, File destFolder, boolean removeOldFiles, boolean skipSameNameAndSize) throws IOException {
+	private void synchronize(File srcFolder, File destFolder, boolean removeOldFiles, boolean skipSameNameAndSize)
+			throws IOException {
 		// recurse
 		File[] srcFiles = srcFolder.listFiles();
 		File[] destFiles = destFolder.listFiles();
-		if (srcFiles == null) { 
-			// null if abstract pathname does not denote a directory, or if an I/O error occurs
-			// so no: throw new IOException("Failed to list contents of " + srcFolder);
+		if (srcFiles == null) {
+			// null if abstract pathname does not denote a directory, or if an
+			// I/O error occurs
+			// so no: throw new IOException("Failed to list contents of " +
+			// srcFolder);
 			return;
 		}
 		if (destFolder.exists()) {
@@ -108,7 +106,7 @@ public class FolderService {
 				throw new IOException("Destination '" + destFolder + "' exists but is not a directory");
 			}
 		} else {
-			System.out.println("Make:   " + shortFileName(destFolder));
+			// System.out.println("Make: " + shortFileName(destFolder));
 			if (!destFolder.mkdirs() && !destFolder.isDirectory()) {
 				throw new IOException("Destination '" + destFolder + "' directory cannot be created");
 			}
@@ -117,56 +115,41 @@ public class FolderService {
 			throw new IOException("Destination '" + destFolder + "' cannot be written to");
 		}
 		for (File srcFile : srcFiles) {
-			//System.out.println("A1");
 			File dstFile = new File(destFolder, srcFile.getName());
 			if (srcFile.isDirectory()) {
-				//System.out.println("A1");
 				synchronize(srcFile, dstFile, removeOldFiles, skipSameNameAndSize);
-				//System.out.println("A3");
 			} else {
-				//System.out.println("A5");
 				if (skipSameNameAndSize && compares(srcFile, dstFile)) {
-					System.out.println("Skip:   " + shortFileName(srcFile));
+					// System.out.println("Skip: " + shortFileName(srcFile));
 				} else {
-					System.out.println("Copy:   " + shortFileName(srcFile));
+					// System.out.println("Copy: " + shortFileName(srcFile));
 					copyFile(srcFile, dstFile);
 				}
 			}
-			//System.out.println("A6");
 
 		}
-		//System.out.println("A7");
 
 		if (removeOldFiles && destFiles != null) {
 			for (File destFile : destFiles) {
-				//System.out.println("A8" + destFile);
 
 				if (!containsComparableFile(srcFiles, destFile)) {
-					System.out.println("Remove: " + shortFileName(destFile));
+					// System.out.println("Remove: " + shortFileName(destFile));
 					if (destFile.isDirectory()) {
-						//System.out.println("A9");
 
 						deleteDirectory(destFile);
-						//System.out.println("A10");
 
 					} else {
-						//System.out.println("A11");
 						destFile.delete();
-						//System.out.println("A12");
 
 					}
 				}
-				//System.out.println("A13");
 
 			}
-			//System.out.println("A14");
 
 		}
-		//System.out.println("A15");
 
 		// Do this last, as the above has probably affected directory metadata
 		destFolder.setLastModified(srcFolder.lastModified());
-		//System.out.println("A15");
 
 	}
 
@@ -310,7 +293,8 @@ public class FolderService {
 		boolean bothExist = file1.exists() && file2.exists();
 		if (!bothExist)
 			return false;
-		boolean sameType = (!file1.isDirectory() && !file2.isDirectory()) || (file1.isDirectory() && file2.isDirectory());
+		boolean sameType = (!file1.isDirectory() && !file2.isDirectory())
+				|| (file1.isDirectory() && file2.isDirectory());
 		if (!sameType)
 			return false;
 		if (!file1.isDirectory()) {// SIZE is ignored if it is a directory
@@ -318,7 +302,8 @@ public class FolderService {
 			if (!sameSize)
 				return false;
 		}
-		// boolean sameFile=(file1.getCanonicalFile().equals(file2.getCanonicalFile()));
+		// boolean
+		// sameFile=(file1.getCanonicalFile().equals(file2.getCanonicalFile()));
 		return true;
 	}
 

@@ -24,7 +24,6 @@ public class Equipment {
 		// todo update options;
 	}
 
-
 	public List<EquipmentOption> getOptions() {
 		return options;
 	}
@@ -45,10 +44,7 @@ public class Equipment {
 		if (equipmentTemplate == null) {
 			return "";
 		} else {
-			TitleBuilder titleBuilder=new TitleBuilder();
-			titleBuilder.append(equipmentTemplate.getName());
-			titleBuilder.append(instanceNumber);
-			return titleBuilder.toString();
+			return TitleBuilder.getInstance().append(equipmentTemplate.getName()).append(instanceNumber).toString();
 		}
 	}
 

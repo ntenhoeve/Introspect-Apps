@@ -174,7 +174,7 @@ public class TimeLineExcelReport {
 
 	private String createLongCustomerOrderTitle(CustomerOrder customerOrder) {
 		StringBuilder title = new StringBuilder();
-		title.append("Order:");
+		title.append("PropertyActionMethod:");
 		title.append(customerOrder.getCustomerOrderNumber());
 		title.append(", Project related costs:");
 		title.append(customerOrder.getProjectRelatedCosts());
