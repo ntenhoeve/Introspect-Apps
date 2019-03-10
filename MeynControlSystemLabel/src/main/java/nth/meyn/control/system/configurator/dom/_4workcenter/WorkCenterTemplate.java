@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 
 import nth.meyn.control.system.configurator.dom._5workunit.WorkUnitRule;
+import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
@@ -63,4 +64,8 @@ public class WorkCenterTemplate {
 		this.workUnitRules = workUnitRules;
 	}
 
+	@Override
+	public String toString() {
+		return TitleBuilder.getInstance().append(name).toString();
+	}
 }

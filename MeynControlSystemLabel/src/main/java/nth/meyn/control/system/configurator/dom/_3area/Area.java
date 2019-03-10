@@ -7,7 +7,11 @@ import javax.validation.constraints.NotBlank;
 
 import nth.meyn.control.system.configurator.dom._4workcenter.WorkCenterTemplate;
 import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
+import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.PropertyActionMethod;
@@ -44,14 +48,30 @@ public class Area {
 	}
 
 	@Order(10.1)
+	@PropertyActionMethod("WorkCenterTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
+	public WorkCenterTemplate viewWorkCenterTemplate(WorkCenterTemplate workCenterTemplate) {
+		return workCenterTemplate;
+	}
+
+	@Order(10.1)
+	@PropertyActionMethod("WorkCenterTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
+	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
+	public void modifyWorkCenterTemplate(WorkCenterTemplate workCenterTemplate) {
+	}
+
+	@Order(10.3)
 	@ParameterFactory
 	@PropertyActionMethod("WorkCenterTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
 	public void addNewWorkCenterTemplate(WorkCenterTemplate workCenterTemplate) {
 		workCenterTemplates.add(workCenterTemplate);
 	}
 
-	@Order(10.2)
+	@Order(10.4)
 	@PropertyActionMethod("WorkCenterTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
 	public void removeWorkCenterTemplate(WorkCenterTemplate workCenterTemplate) {
 		workCenterTemplates.remove(workCenterTemplate);
 	}
