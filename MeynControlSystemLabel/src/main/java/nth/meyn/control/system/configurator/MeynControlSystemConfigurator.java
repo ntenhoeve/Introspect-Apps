@@ -11,8 +11,9 @@ import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ReflectColors;
 import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
+import nth.reflect.fw.layer5provider.reflection.behavior.applicationicon.ApplicationIcon;
 
-//@ApplicationIcon(iconURL = "reflect-class-resource://nth.meyn.control.system.configurator.labels.MeynControlSystems/meyn32x32.png")
+@ApplicationIcon(iconURL = "reflect-class-resource://nth.meyn.control.system.configurator.MeynControlSystemConfigurator/meyn32x32.png")
 public class MeynControlSystemConfigurator extends ReflectApplicationForJavaFX {
 
 	public static void main(String[] commandLineArguments) {
