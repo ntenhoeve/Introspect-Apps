@@ -3,6 +3,7 @@ package nth.meyn.control.system.configurator.dom._5workunit;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 public class WorkUnitRule {
+
 	private WorkUnitTemplate workUnitTemplate;
 	private int minimumInstances;
 	private int maximumInstances;

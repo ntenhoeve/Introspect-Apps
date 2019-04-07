@@ -24,6 +24,7 @@ public class Area {
 	private List<WorkCenterTemplate> workCenterTemplates = new ArrayList<>();
 
 	@ReadOnlyActionMethod
+	@FontIcon(fontIconUrl = FontAwesomeUrl.INFO_CIRCLE)
 	public String info() {
 		return Area.class.getSimpleName() + "= " + DESCRIPTION;
 	}
@@ -49,6 +50,7 @@ public class Area {
 
 	@Order(10.1)
 	@PropertyActionMethod("WorkCenterTemplates")
+	@ReadOnlyActionMethod
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
 	public WorkCenterTemplate viewWorkCenterTemplate(WorkCenterTemplate workCenterTemplate) {
 		return workCenterTemplate;
@@ -72,6 +74,7 @@ public class Area {
 	@Order(10.4)
 	@PropertyActionMethod("WorkCenterTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
 	public void removeWorkCenterTemplate(WorkCenterTemplate workCenterTemplate) {
 		workCenterTemplates.remove(workCenterTemplate);
 	}
@@ -80,20 +83,33 @@ public class Area {
 		return workCenterTemplates.size() == 0;
 	}
 
-	@Order(10.3)
+	@Order(10.5)
+	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_UP)
 	@PropertyActionMethod("WorkCenterTemplates")
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void moveWorkCenterTemplateUp(WorkCenterTemplate workCenterTemplate) {
-		workCenterTemplates.add(workCenterTemplate);
+		int index = workCenterTemplates.indexOf(workCenterTemplate);
+		if (index > 0) {
+			workCenterTemplates.remove(workCenterTemplate);
+			workCenterTemplates.add(index - 1, workCenterTemplate);
+		}
+
 	}
 
 	public boolean moveWorkCenterTemplateUpHidden() {
 		return workCenterTemplates.size() < 2;
 	}
 
-	@Order(10.4)
+	@Order(10.6)
 	@PropertyActionMethod("WorkCenterTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_DOWN)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void moveWorkCenterTemplateDown(WorkCenterTemplate workCenterTemplate) {
-		workCenterTemplates.add(workCenterTemplate);
+		int index = workCenterTemplates.indexOf(workCenterTemplate);
+		if (index < workCenterTemplates.size() - 1) {
+			workCenterTemplates.remove(workCenterTemplate);
+			workCenterTemplates.add(index + 1, workCenterTemplate);
+		}
 	}
 
 	public boolean moveWorkCenterTemplateDownHidden() {

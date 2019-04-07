@@ -16,7 +16,7 @@ public class MeynControlSystemRepository extends nth.reflect.infra.xmlfilereposi
 	}
 
 	private static File createDataBaseFile() {
-		return new File("C:/Users/nilsth/" + MeynControlSystemRepository.class.getSimpleName() + ".xml");
+		return new File("C:/Users/nilsth/My Databases/" + MeynControlSystemRepository.class.getSimpleName() + ".xml");
 	}
 
 }

@@ -91,6 +91,7 @@ public class FolderService {
 
 	private void synchronize(File srcFolder, File destFolder, boolean removeOldFiles, boolean skipSameNameAndSize)
 			throws IOException {
+		System.out.println();
 		// recurse
 		File[] srcFiles = srcFolder.listFiles();
 		File[] destFiles = destFolder.listFiles();
@@ -121,9 +122,11 @@ public class FolderService {
 			} else {
 				if (skipSameNameAndSize && compares(srcFile, dstFile)) {
 					// System.out.println("Skip: " + shortFileName(srcFile));
+					System.out.print("-");
 				} else {
 					// System.out.println("Copy: " + shortFileName(srcFile));
 					copyFile(srcFile, dstFile);
+					System.out.print(">");
 				}
 			}
 
@@ -134,13 +137,11 @@ public class FolderService {
 
 				if (!containsComparableFile(srcFiles, destFile)) {
 					// System.out.println("Remove: " + shortFileName(destFile));
+					System.out.print("-");
 					if (destFile.isDirectory()) {
-
 						deleteDirectory(destFile);
-
 					} else {
 						destFile.delete();
-
 					}
 				}
 

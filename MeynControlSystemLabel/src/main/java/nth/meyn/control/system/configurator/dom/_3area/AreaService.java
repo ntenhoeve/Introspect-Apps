@@ -2,6 +2,7 @@ package nth.meyn.control.system.configurator.dom._3area;
 
 import java.util.List;
 
+import nth.meyn.control.system.configurator.dom.repository.MeynControlSystemRepository;
 import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
@@ -10,15 +11,15 @@ import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.Parame
 
 public class AreaService {
 
-	private final AreaFactory areaFactory;
+	private final MeynControlSystemRepository meynControlSystemRepository;
 
-	public AreaService(AreaFactory areaFactory) {
-		this.areaFactory = areaFactory;
-
+	public AreaService(MeynControlSystemRepository meynControlSystemRepository) {
+		this.meynControlSystemRepository = meynControlSystemRepository;
 	}
 
-	public List<Area> allAreas() {
-		return areaFactory.getAll();
+	public List<Area> allAreas() throws Exception {
+		List<Area> areas = (List<Area>) meynControlSystemRepository.getAll(Area.class);
+		return areas;
 	}
 
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
@@ -29,15 +30,15 @@ public class AreaService {
 
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
-	public void modifyArea(Area area) {
-
+	public void modifyArea(Area area) throws Exception {
+		meynControlSystemRepository.persist(area);
 	}
 
 	@ParameterFactory
 	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
-	public void newArea(Area area) {
-
+	public void newArea(Area area) throws Exception {
+		meynControlSystemRepository.persist(area);
 	}
 
 }
