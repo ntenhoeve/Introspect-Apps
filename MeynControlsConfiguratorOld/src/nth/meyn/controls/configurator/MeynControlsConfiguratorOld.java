@@ -14,7 +14,7 @@ import nth.reflect.fw.gui.style.ReflectColors;
 import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 
-public class MeynControlsConfigurator extends ReflectApplicationForJavaFX {
+public class MeynControlsConfiguratorOld extends ReflectApplicationForJavaFX {
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
