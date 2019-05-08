@@ -128,7 +128,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance("-").append(tags).append(accountName).toString();
+		return new TitleBuilder().setSeperator("-").append(tags).append(accountName).toString();
 	}
 
 }

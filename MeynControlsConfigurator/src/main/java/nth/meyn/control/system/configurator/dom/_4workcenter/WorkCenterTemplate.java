@@ -151,6 +151,6 @@ public class WorkCenterTemplate {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance().append(name).toString();
+		return new TitleBuilder().append(name).toString();
 	}
 }

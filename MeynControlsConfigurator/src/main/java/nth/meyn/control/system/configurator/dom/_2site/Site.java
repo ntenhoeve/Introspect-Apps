@@ -81,6 +81,7 @@ public class Site {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance("-").append(number).append(owner).append(city).append(country).toString();
+		return new TitleBuilder().setSeperator("-").append(number).append(owner).append(city).append(country)
+				.toString();
 	}
 }

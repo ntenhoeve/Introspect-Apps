@@ -120,7 +120,7 @@ public class CustomerOrder extends EntityId {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance().append(customerOrderNumber).append(projectRelatedCosts).append(customer)
+		return new TitleBuilder().append(customerOrderNumber).append(projectRelatedCosts).append(customer)
 				.toString();
 	}
 

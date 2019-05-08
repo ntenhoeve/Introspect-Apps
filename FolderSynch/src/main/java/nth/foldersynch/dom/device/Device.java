@@ -46,7 +46,7 @@ public class Device {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance().append(ownerName).append(deviceType).toString();
+		return new TitleBuilder().append(ownerName).append(deviceType).toString();
 	}
 
 	public void modifyTasks(FolderSynchTask task) {

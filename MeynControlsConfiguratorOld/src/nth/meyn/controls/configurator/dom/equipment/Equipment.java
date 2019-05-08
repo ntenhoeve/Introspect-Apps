@@ -44,7 +44,7 @@ public class Equipment {
 		if (equipmentTemplate == null) {
 			return "";
 		} else {
-			return TitleBuilder.getInstance().append(equipmentTemplate.getName()).append(instanceNumber).toString();
+			return new TitleBuilder().append(equipmentTemplate.getName()).append(instanceNumber).toString();
 		}
 	}
 

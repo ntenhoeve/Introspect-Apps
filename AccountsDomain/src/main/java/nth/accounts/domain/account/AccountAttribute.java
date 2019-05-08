@@ -24,7 +24,7 @@ public class AccountAttribute {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance(":").append(name).append(value).toString();
+		return new TitleBuilder().setSeperator(":").append(name).append(value).toString();
 	}
 
 }

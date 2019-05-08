@@ -76,6 +76,6 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance().append(number).append(name).append(city).append(country).toString();
+		return new TitleBuilder().append(number).append(name).append(city).append(country).toString();
 	}
 }

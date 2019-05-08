@@ -118,6 +118,6 @@ public class Area {
 
 	@Override
 	public String toString() {
-		return TitleBuilder.getInstance().append(name).toString();
+		return new TitleBuilder().append(name).toString();
 	}
 }

@@ -3,6 +3,7 @@ package nth.meyn.control.system.configurator.dom._5workunit;
 import java.util.List;
 
 import nth.meyn.control.system.configurator.dom._6equipmentmodule.EquipmentModule;
+import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
@@ -37,6 +38,11 @@ public class WorkUnitTemplate {
 
 	public void setEquipmentModules(List<EquipmentModule> equipmentModules) {
 		this.equipmentModules = equipmentModules;
+	}
+
+	@Override
+	public String toString() {
+		return new TitleBuilder().append(name).toString();
 	}
 
 }
