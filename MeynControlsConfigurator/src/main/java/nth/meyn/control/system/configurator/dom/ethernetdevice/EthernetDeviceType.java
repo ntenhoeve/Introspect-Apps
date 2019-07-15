@@ -1,12 +1,12 @@
-package nth.meyn.control.system.configurator.dom.internetdevice;
+package nth.meyn.control.system.configurator.dom.ethernetdevice;
 
 import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = InternetDeviceType.DESCRIPTION)
-public class InternetDeviceType {
+@Description(englishDescription = EthernetDeviceType.DESCRIPTION)
+public class EthernetDeviceType {
 
 	static final String DESCRIPTION = "A device connected to the local Meyn Internet, e.g.: A PLC, HMI, Camera Grading System, Distribution Manager, Server Computer, Desktop Computer (not remote IO)";
 
@@ -24,6 +24,11 @@ public class InternetDeviceType {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

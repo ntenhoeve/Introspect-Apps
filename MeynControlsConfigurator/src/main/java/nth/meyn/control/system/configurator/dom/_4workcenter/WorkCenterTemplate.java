@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 
 import nth.meyn.control.system.configurator.dom._5workunit.WorkUnitRule;
+import nth.meyn.control.system.configurator.dom.ethernetdevice.EthernetDeviceTemplate;
 import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
@@ -26,6 +27,7 @@ public class WorkCenterTemplate {
 	private String refferenceToProductDefinition;
 	private String refferenceToRiskAnnalysis;
 	private List<WorkUnitRule> workUnitRules = new ArrayList<>();
+	private List<EthernetDeviceTemplate> ethernetDeviceTemplates = new ArrayList<>();
 
 	@ReadOnlyActionMethod
 	@FontIcon(fontIconUrl = FontAwesomeUrl.INFO_CIRCLE)
@@ -52,7 +54,7 @@ public class WorkCenterTemplate {
 		this.functionalDesignVersion = functionalDesignVersion;
 	}
 
-	@Order(value = 20)
+	@Order(value = 90)
 	public String getRefferenceToProductDefinition() {
 		return refferenceToProductDefinition;
 	}
@@ -147,6 +149,84 @@ public class WorkCenterTemplate {
 
 	public boolean moveWorkUnitRuleDownHidden() {
 		return workUnitRules.size() < 2;
+	}
+
+	@Order(value = 90)
+	public List<EthernetDeviceTemplate> getEthernetDeviceTemplates() {
+		return ethernetDeviceTemplates;
+	}
+
+	public void setEthernetDeviceTemplates(List<EthernetDeviceTemplate> ethernetDeviceTemplates) {
+		if (ethernetDeviceTemplates != null) {
+			this.ethernetDeviceTemplates = ethernetDeviceTemplates;
+		}
+	}
+
+	@Order(90.1)
+	@PropertyActionMethod("EthernetDeviceTemplates")
+	@ReadOnlyActionMethod
+	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
+	public EthernetDeviceTemplate viewEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+		return ethernetDeviceTemplate;
+	}
+
+	@Order(90.1)
+	@PropertyActionMethod("EthernetDeviceTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
+	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
+	public void modifyEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	}
+
+	@Order(90.3)
+	@ParameterFactory
+	@PropertyActionMethod("EthernetDeviceTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
+	public void addNewEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+		ethernetDeviceTemplates.add(ethernetDeviceTemplate);
+	}
+
+	@Order(90.4)
+	@PropertyActionMethod("EthernetDeviceTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
+	public void removeEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+		ethernetDeviceTemplates.remove(ethernetDeviceTemplate);
+	}
+
+	public boolean removeEthernetDeviceTemplateHidden() {
+		return ethernetDeviceTemplates.size() == 0;
+	}
+
+	@Order(90.5)
+	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_UP)
+	@PropertyActionMethod("EthernetDeviceTemplates")
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public void moveEthernetDeviceTemplateUp(EthernetDeviceTemplate EthernetDeviceTemplate) {
+		int index = ethernetDeviceTemplates.indexOf(EthernetDeviceTemplate);
+		if (index > 0) {
+			ethernetDeviceTemplates.remove(EthernetDeviceTemplate);
+			ethernetDeviceTemplates.add(index - 1, EthernetDeviceTemplate);
+		}
+	}
+
+	public boolean moveEthernetDeviceTemplateUpHidden() {
+		return ethernetDeviceTemplates.size() < 2;
+	}
+
+	@Order(90.6)
+	@PropertyActionMethod("EthernetDeviceTemplates")
+	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_DOWN)
+	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
+	public void moveEthernetDeviceTemplateDown(EthernetDeviceTemplate EthernetDeviceTemplate) {
+		int index = ethernetDeviceTemplates.indexOf(EthernetDeviceTemplate);
+		if (index < ethernetDeviceTemplates.size() - 1) {
+			ethernetDeviceTemplates.remove(EthernetDeviceTemplate);
+			ethernetDeviceTemplates.add(index + 1, EthernetDeviceTemplate);
+		}
+	}
+
+	public boolean moveEthernetDeviceTemplateDownHidden() {
+		return ethernetDeviceTemplates.size() < 2;
 	}
 
 	@Override

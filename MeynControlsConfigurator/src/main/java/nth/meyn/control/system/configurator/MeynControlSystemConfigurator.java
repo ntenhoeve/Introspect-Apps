@@ -5,6 +5,7 @@ import java.util.List;
 
 import nth.meyn.control.system.configurator.dom._3area.AreaFactory;
 import nth.meyn.control.system.configurator.dom._3area.AreaService;
+import nth.meyn.control.system.configurator.dom.ethernetdevice.EthernetDeviceTypeService;
 import nth.meyn.control.system.configurator.dom.label.LabelService;
 import nth.meyn.control.system.configurator.dom.repository.MeynControlSystemRepository;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
@@ -22,7 +23,7 @@ public class MeynControlSystemConfigurator extends ReflectApplicationForJavaFX {
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
-		return Arrays.asList(AreaService.class, LabelService.class);
+		return Arrays.asList(AreaService.class, EthernetDeviceTypeService.class, LabelService.class);
 	}
 
 	@Override
