@@ -45,6 +45,15 @@ public class WorkCenterTemplate {
 		this.name = name;
 	}
 
+	@Order(value = 5)
+	public String getRefferenceToProductDefinition() {
+		return refferenceToProductDefinition;
+	}
+
+	public void setRefferenceToProductDefinition(String refferenceToProductDefinition) {
+		this.refferenceToProductDefinition = refferenceToProductDefinition;
+	}
+
 	@Order(value = 10)
 	public String getFunctionalDesignVersion() {
 		return functionalDesignVersion;
@@ -52,15 +61,6 @@ public class WorkCenterTemplate {
 
 	public void setFunctionalDesignVersion(String functionalDesignVersion) {
 		this.functionalDesignVersion = functionalDesignVersion;
-	}
-
-	@Order(value = 90)
-	public String getRefferenceToProductDefinition() {
-		return refferenceToProductDefinition;
-	}
-
-	public void setRefferenceToProductDefinition(String refferenceToProductDefinition) {
-		this.refferenceToProductDefinition = refferenceToProductDefinition;
 	}
 
 	@Order(value = 30)
