@@ -5,4 +5,4 @@ echo Dit zal de belangrijkste documenten uit my documents copieren naar een exte
 echo Controleer of N: drive gelinked is aan de NAS of annuleer met crtl-c
 pause
 
-java -jar SynchronizeFolders.jar "Synchronize C to N Drive.commands"
+java -jar SynchronizeFolders.jar "Synchronize C to Z Drive.commands"
