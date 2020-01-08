@@ -1,8 +1,0 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>reflect-for-vaadin10-mdc-top-app-bar</groupId>
-  <artifactId>top-app-bar</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Google Material Design Components (MDC) - Top App Bar</name>
-  <description>Html lib from Google MDC, See: https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar</description>
-</project>
