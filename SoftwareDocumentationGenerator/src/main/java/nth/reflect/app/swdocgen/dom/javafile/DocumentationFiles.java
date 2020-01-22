@@ -1,6 +1,8 @@
 package nth.reflect.app.swdocgen.dom.javafile;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +36,25 @@ public class DocumentationFiles {
 		javaFiles = new HashMap<>();
 		resourceFiles = new HashMap<>();
 		System.out.println("Reading folder: " + rootFolder);
-		populateFromFolder(rootFolder);
+		
+		FileFilter filter=createProjectFolderFilter();
+		File[] projectFiles = rootFolder.listFiles(filter);
+		for (File projectFolder : projectFiles) {
+			populateFromFolder(projectFolder);	
+		}
 		System.out.println("Reading done.");
+	}
+
+	private FileFilter createProjectFolderFilter() {
+		return new FileFilter() {
+			
+			@Override
+			public boolean accept(File file) {
+				boolean isDirectory = file.isDirectory();
+				boolean isValidProjectName=!file.getName().contains(".");
+				return isDirectory && isValidProjectName;
+			}
+		};
 	}
 
 	public void populateFromFolder(File folder) {
