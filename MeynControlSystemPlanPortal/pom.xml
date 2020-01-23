@@ -147,7 +147,7 @@
 		<dependency>
 			<groupId>com.github.reflect-framework</groupId>
 			<artifactId>reflect-for-vaadin14</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -155,7 +155,7 @@
 			<artifactId>
 				reflect-infrastructure-hibernate-repository
 			</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

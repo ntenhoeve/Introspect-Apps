@@ -16,12 +16,12 @@
 		<dependency>
 			<groupId>com.github.reflect-framework</groupId>
 			<artifactId>reflect-for-javafx</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.reflect-framework</groupId>
 			<artifactId>reflect-infrastructure-xml-file-repository</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
