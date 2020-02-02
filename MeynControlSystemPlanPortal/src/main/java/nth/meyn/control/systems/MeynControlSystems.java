@@ -11,9 +11,14 @@ import nth.meyn.control.systems.dom.employee.EmployeeRepository;
 import nth.meyn.control.systems.dom.employee.EmployeeService;
 import nth.meyn.control.systems.dom.project.ProjectService;
 import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.ui.vaadin.ReflectApplicationForVaadin14;
 
 public class MeynControlSystems extends ReflectApplicationForVaadin14 {
+
+	private static final long serialVersionUID = -4783332388976200258L;
 
 	@Override
 	public List<Class<?>> getServiceClasses() {
@@ -26,9 +31,9 @@ public class MeynControlSystems extends ReflectApplicationForVaadin14 {
 				EmployeeRepository.class, CustomerOrderRepository.class, TimeLineExcelReport.class);
 	}
 
-//	@Override
-//	public ReflectColors getColors() {
-//		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
-//	}
+	@Override
+	public ReflectColors getColors() {
+		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
+	}
 
 }
