@@ -9,7 +9,7 @@ import nth.meyn.control.system.configurator.dom.ethernetdevice.EthernetDeviceTyp
 import nth.meyn.control.system.configurator.dom.label.LabelService;
 import nth.meyn.control.system.configurator.dom.repository.MeynControlSystemRepository;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
-import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.applicationicon.ApplicationIcon;
@@ -32,8 +32,8 @@ public class MeynControlSystemConfigurator extends ReflectApplicationForJavaFX {
 	}
 
 	@Override
-	public ReflectColors getColors() {
-		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
+	public ColorProvider getColorProvider() {
+		return new ColorProvider(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 }

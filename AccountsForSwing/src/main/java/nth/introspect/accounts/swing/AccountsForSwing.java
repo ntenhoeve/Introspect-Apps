@@ -7,7 +7,7 @@ import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.tag.TagService;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
-import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 
@@ -34,8 +34,8 @@ public class AccountsForSwing extends ReflecttApplicationForSwing {
 	}
 
 	@Override
-	public ReflectColors getColors() {
-		return new ReflectColors(MaterialColorPalette.blue700(), MaterialColorPalette.orange500(),
+	public ColorProvider getColorProvider() {
+		return new ColorProvider(MaterialColorPalette.blue700(), MaterialColorPalette.orange500(),
 				MaterialColorPalette.white());
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import nth.reflect.fw.gui.style.MaterialColorPalette;
-import nth.reflect.fw.gui.style.ReflectColors;
+import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
 
@@ -25,8 +25,8 @@ public class Main extends ReflecttApplicationForSwing {
 	}
 
 	@Override
-	public ReflectColors getColors() {
-		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
+	public ColorProvider getColorProvider() {
+		return new ColorProvider(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 }

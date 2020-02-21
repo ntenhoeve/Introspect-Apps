@@ -18,8 +18,8 @@ import nth.meyn.connect.dom.module.orderprocessing.OrderProcessingService;
 import nth.meyn.connect.dom.module.settings.ConfigurationService;
 import nth.meyn.connect.dom.module.settings.SettingsService;
 import nth.meyn.connect.dom.module.trackingtracing.TrackingAndTracingService;
+import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
-import nth.reflect.fw.gui.style.ReflectColors;
 import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
@@ -48,8 +48,8 @@ public class MeynConnect extends ReflectApplicationForJavaFX {
 	}
 
 	@Override
-	public ReflectColors getColors() {
-		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
+	public ColorProvider getColorProvider() {
+		return new ColorProvider(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 	public static void main(String[] args) {

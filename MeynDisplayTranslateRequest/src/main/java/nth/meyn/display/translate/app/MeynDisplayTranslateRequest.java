@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import nth.meyn.display.translate.dom.translate.TranslateService;
+import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
-import nth.reflect.fw.gui.style.ReflectColors;
 import nth.reflect.fw.gui.style.basic.Color;
 import nth.reflect.fw.javafx.ReflectApplicationForJavaFX;
 import nth.reflect.fw.layer5provider.reflection.behavior.applicationicon.ApplicationIcon;
@@ -28,8 +28,8 @@ public class MeynDisplayTranslateRequest extends ReflectApplicationForJavaFX {
 	}
 
 	@Override
-	public ReflectColors getColors() {
-		return new ReflectColors(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
+	public ColorProvider getColorProvider() {
+		return new ColorProvider(new Color(0, 120, 91), MaterialColorPalette.orange500(), MaterialColorPalette.white());
 	}
 
 }

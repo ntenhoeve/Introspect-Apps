@@ -3,7 +3,7 @@ package nth.synchronizefolder.commandline;
 import java.util.ArrayList;
 import java.util.List;
 
-import nth.reflect.fw.layer5provider.url.UrlProvider;
+import nth.reflect.fw.layer5provider.url.ReflectUrlStreamHandler;
 import nth.reflect.fw.ui.commandline.ReflectApplicationForCommandLine;
 import nth.synchronizefolder.domain.FolderService;
 
