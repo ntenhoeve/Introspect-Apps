@@ -181,13 +181,13 @@ public class JavaFile {
 					int end = matcher.end();
 					String tag = javaDoc.substring(start, end);
 					String replacement = inlineTag.getReplacementText(tag);
-
 					javaDoc = javaDoc.substring(0, start) + replacement + javaDoc.substring(end);
 				}
 			}
 		}
 
 		return javaDoc;
+
 	}
 
 	private Element createRefferenceElement() {
