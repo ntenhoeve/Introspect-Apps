@@ -7,10 +7,10 @@ import nth.meyn.jetstreamscalder.dom.scalder.JetStreamScalderService;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.basic.Color;
-import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 
-public class MeynJetStreamScalder extends ReflecttApplicationForSwing {
+public class MeynJetStreamScalder extends ReflectApplicationForSwing {
 
 	public static void main(String[] args) {
 		launch();

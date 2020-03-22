@@ -14,9 +14,9 @@ import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.basic.Color;
-import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
 
-public class MeynControlSystems extends ReflecttApplicationForSwing {
+public class MeynControlSystems extends ReflectApplicationForSwing {
 
 	public static void main(String[] commandLineArguments) {
 		launch();

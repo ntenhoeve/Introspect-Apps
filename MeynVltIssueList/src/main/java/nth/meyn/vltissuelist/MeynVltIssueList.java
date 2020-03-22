@@ -9,9 +9,9 @@ import nth.meyn.vltissuelist.dom.issue.IssueService;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.basic.Color;
-import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
 
-public class MeynVltIssueList extends ReflecttApplicationForSwing {
+public class MeynVltIssueList extends ReflectApplicationForSwing {
 
 	public static void main(String[] commandLineArguments) {
 		launch();

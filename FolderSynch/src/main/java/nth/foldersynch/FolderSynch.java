@@ -9,11 +9,11 @@ import nth.foldersynch.dom.device.DeviceRepository;
 import nth.foldersynch.dom.device.DeviceService;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
-import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 import nth.reflect.infra.xmlfilerepository.XmlFileRepository;
 
-public class FolderSynch extends ReflecttApplicationForSwing {
+public class FolderSynch extends ReflectApplicationForSwing {
 
 	public static void main(String[] args) {
 		launch();

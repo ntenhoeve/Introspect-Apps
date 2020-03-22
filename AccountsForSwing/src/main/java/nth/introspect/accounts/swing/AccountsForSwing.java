@@ -8,10 +8,10 @@ import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.tag.TagService;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
-import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 
-public class AccountsForSwing extends ReflecttApplicationForSwing {
+public class AccountsForSwing extends ReflectApplicationForSwing {
 
 	public static void main(String[] args) {
 		launch();

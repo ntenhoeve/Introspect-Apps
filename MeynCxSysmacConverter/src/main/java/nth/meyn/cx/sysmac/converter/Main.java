@@ -6,9 +6,9 @@ import java.util.List;
 import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
 import nth.reflect.fw.gui.style.basic.Color;
-import nth.reflect.fw.ui.swing.ReflecttApplicationForSwing;
+import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
 
-public class Main extends ReflecttApplicationForSwing {
+public class Main extends ReflectApplicationForSwing {
 
 	public static void main(String[] commandLineArguments) {
 		launch();
