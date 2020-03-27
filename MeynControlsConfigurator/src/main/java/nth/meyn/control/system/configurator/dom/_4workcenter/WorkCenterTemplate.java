@@ -15,7 +15,6 @@ import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.Execution
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
-import nth.reflect.fw.layer5provider.reflection.info.actionmethod.PropertyActionMethod;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
 @Description(englishDescription = WorkCenterTemplate.DESCRIPTION)
@@ -84,45 +83,40 @@ public class WorkCenterTemplate {
 	}
 
 	@Order(10.1)
-	@PropertyActionMethod("WorkUnitRules")
 	@ReadOnlyActionMethod
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
-	public WorkUnitRule viewWorkUnitTemplate(WorkUnitRule workUnitRule) {
+	public WorkUnitRule workUnitRulesView(WorkUnitRule workUnitRule) {
 		return workUnitRule;
 	}
 
 	@Order(10.1)
-	@PropertyActionMethod("WorkUnitRules")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
-	public void modifyWorkUnitRule(WorkUnitRule workUnitRule) {
+	public void workUnitRulesModify(WorkUnitRule workUnitRule) {
 	}
 
 	@Order(10.3)
 	@ParameterFactory
-	@PropertyActionMethod("WorkUnitRules")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
-	public void addNewUnitRuleTemplate(WorkUnitRule workUnitTemplate) {
+	public void workUnitRulesAddNew(WorkUnitRule workUnitTemplate) {
 		workUnitRules.add(workUnitTemplate);
 	}
 
 	@Order(10.4)
-	@PropertyActionMethod("WorkUnitRules")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
-	public void removeWorkUnitRule(WorkUnitRule workUnitRule) {
+	public void workUnitRulesRemove(WorkUnitRule workUnitRule) {
 		workUnitRules.remove(workUnitRule);
 	}
 
-	public boolean removeWorkUnitRuleHidden() {
+	public boolean workUnitRulesRemoveHidden() {
 		return workUnitRules.size() == 0;
 	}
 
 	@Order(10.5)
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_UP)
-	@PropertyActionMethod("WorkUnitRules")
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveWorkUnitRuleUp(WorkUnitRule workUnitRule) {
+	public void workUnitRulesRemoveMoveUp(WorkUnitRule workUnitRule) {
 		int index = workUnitRules.indexOf(workUnitRule);
 		if (index > 0) {
 			workUnitRules.remove(workUnitRule);
@@ -131,15 +125,14 @@ public class WorkCenterTemplate {
 
 	}
 
-	public boolean moveWorkUnitRuleUpHidden() {
+	public boolean workUnitRulesRemoveMoveUpHidden() {
 		return workUnitRules.size() < 2;
 	}
 
 	@Order(10.6)
-	@PropertyActionMethod("WorkUnitRules")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_DOWN)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveWorkUnitRuleDown(WorkUnitRule workUnitRule) {
+	public void workUnitRulesRemoveMoveDown(WorkUnitRule workUnitRule) {
 		int index = workUnitRules.indexOf(workUnitRule);
 		if (index < workUnitRules.size() - 1) {
 			workUnitRules.remove(workUnitRule);
@@ -147,7 +140,7 @@ public class WorkCenterTemplate {
 		}
 	}
 
-	public boolean moveWorkUnitRuleDownHidden() {
+	public boolean workUnitRulesRemoveMoveDownHidden() {
 		return workUnitRules.size() < 2;
 	}
 
@@ -163,45 +156,40 @@ public class WorkCenterTemplate {
 	}
 
 	@Order(90.1)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@ReadOnlyActionMethod
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
-	public EthernetDeviceTemplate viewEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public EthernetDeviceTemplate ethernetDeviceTemplatesView(EthernetDeviceTemplate ethernetDeviceTemplate) {
 		return ethernetDeviceTemplate;
 	}
 
 	@Order(90.1)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
-	public void modifyEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesModify(EthernetDeviceTemplate ethernetDeviceTemplate) {
 	}
 
 	@Order(90.3)
 	@ParameterFactory
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
-	public void addNewEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesAddNew(EthernetDeviceTemplate ethernetDeviceTemplate) {
 		ethernetDeviceTemplates.add(ethernetDeviceTemplate);
 	}
 
 	@Order(90.4)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
-	public void removeEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesRemove(EthernetDeviceTemplate ethernetDeviceTemplate) {
 		ethernetDeviceTemplates.remove(ethernetDeviceTemplate);
 	}
 
-	public boolean removeEthernetDeviceTemplateHidden() {
+	public boolean ethernetDeviceTemplatesRemoveHidden() {
 		return ethernetDeviceTemplates.size() == 0;
 	}
 
 	@Order(90.5)
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_UP)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveEthernetDeviceTemplateUp(EthernetDeviceTemplate EthernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesRemoveMoveUp(EthernetDeviceTemplate EthernetDeviceTemplate) {
 		int index = ethernetDeviceTemplates.indexOf(EthernetDeviceTemplate);
 		if (index > 0) {
 			ethernetDeviceTemplates.remove(EthernetDeviceTemplate);
@@ -209,15 +197,14 @@ public class WorkCenterTemplate {
 		}
 	}
 
-	public boolean moveEthernetDeviceTemplateUpHidden() {
+	public boolean ethernetDeviceTemplatesRemoveMoveUpHidden() {
 		return ethernetDeviceTemplates.size() < 2;
 	}
 
 	@Order(90.6)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_DOWN)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveEthernetDeviceTemplateDown(EthernetDeviceTemplate EthernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesRemoveMoveDown(EthernetDeviceTemplate EthernetDeviceTemplate) {
 		int index = ethernetDeviceTemplates.indexOf(EthernetDeviceTemplate);
 		if (index < ethernetDeviceTemplates.size() - 1) {
 			ethernetDeviceTemplates.remove(EthernetDeviceTemplate);
@@ -225,7 +212,7 @@ public class WorkCenterTemplate {
 		}
 	}
 
-	public boolean moveEthernetDeviceTemplateDownHidden() {
+	public boolean ethernetDeviceTemplatesRemoveMoveDownHidden() {
 		return ethernetDeviceTemplates.size() < 2;
 	}
 

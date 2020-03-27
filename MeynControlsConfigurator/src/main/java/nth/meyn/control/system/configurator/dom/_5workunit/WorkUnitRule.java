@@ -5,7 +5,6 @@ import nth.reflect.fw.gui.style.fontawesome.FontAwesomeUrl;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
-import nth.reflect.fw.layer5provider.reflection.info.actionmethod.PropertyActionMethod;
 
 public class WorkUnitRule {
 
@@ -26,22 +25,20 @@ public class WorkUnitRule {
 
 	@ParameterFactory
 	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
-	@PropertyActionMethod("WorkUnitTemplate")
-	public void createWorkUnitTemplate(WorkUnitTemplate workUnitTemplate) {
+	public void workUnitTemplateCreate(WorkUnitTemplate workUnitTemplate) {
 		this.workUnitTemplate = workUnitTemplate;
 	}
 
-	public boolean createWorkUnitTemplateHidden() {
+	public boolean workUnitTemplateCreateHidden() {
 		return this.workUnitTemplate != null;
 	}
 
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
-	@PropertyActionMethod("WorkUnitTemplate")
-	public void modifyWorkUnitTemplate(WorkUnitTemplate workUnitTemplate) {
+	public void workUnitTemplateCreateModify(WorkUnitTemplate workUnitTemplate) {
 		this.workUnitTemplate = workUnitTemplate;
 	}
 
-	public boolean modifyWorkUnitTemplateHidden() {
+	public boolean workUnitTemplateCreateModify() {
 		return this.workUnitTemplate == null;
 	}
 

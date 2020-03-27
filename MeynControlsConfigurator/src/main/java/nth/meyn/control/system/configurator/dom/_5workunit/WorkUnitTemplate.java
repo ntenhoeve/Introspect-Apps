@@ -14,7 +14,6 @@ import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.Execution
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
-import nth.reflect.fw.layer5provider.reflection.info.actionmethod.PropertyActionMethod;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
 @Description(englishDescription = WorkUnitTemplate.DESCRIPTION)
@@ -51,45 +50,40 @@ public class WorkUnitTemplate {
 	}
 
 	@Order(10.1)
-	@PropertyActionMethod("EquipmentModuleTemplates")
 	@ReadOnlyActionMethod
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
-	public EquipmentModuleTemplate viewWorkUnitTemplate(EquipmentModuleTemplate equipmentModuleTemplate) {
+	public EquipmentModuleTemplate equipmentModuleTemplatesView(EquipmentModuleTemplate equipmentModuleTemplate) {
 		return equipmentModuleTemplate;
 	}
 
 	@Order(10.1)
-	@PropertyActionMethod("EquipmentModuleTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
-	public void modifyEquipmentModuleTemplate(EquipmentModule equipmentModule) {
+	public void equipmentModuleTemplatesModify(EquipmentModule equipmentModule) {
 	}
 
 	@Order(10.3)
 	@ParameterFactory
-	@PropertyActionMethod("EquipmentModuleTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
-	public void addNewEquipmentModuleTemplate(EquipmentModuleTemplate equipmentModuleTemplate) {
+	public void equipmentModuleTemplatesAddNew(EquipmentModuleTemplate equipmentModuleTemplate) {
 		equipmentModuleTemplates.add(equipmentModuleTemplate);
 	}
 
 	@Order(10.4)
-	@PropertyActionMethod("EquipmentModuleTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
-	public void removeEquipmentModuleTemplate(EquipmentModuleTemplate equipmentModuleTemplate) {
+	public void equipmentModuleTemplatesRemove(EquipmentModuleTemplate equipmentModuleTemplate) {
 		equipmentModuleTemplates.remove(equipmentModuleTemplate);
 	}
 
-	public boolean removeEquipmentModuleTemplateHidden() {
+	public boolean equipmentModuleTemplatesRemoveHidden() {
 		return equipmentModuleTemplates.size() == 0;
 	}
 
 	@Order(10.5)
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_UP)
-	@PropertyActionMethod("EquipmentModuleTemplates")
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveEquipmentModuleTemplateUp(EquipmentModuleTemplate equipmentModuleTemplate) {
+	public void equipmentModuleTemplatesMoveUp(EquipmentModuleTemplate equipmentModuleTemplate) {
 		int index = equipmentModuleTemplates.indexOf(equipmentModuleTemplate);
 		if (index > 0) {
 			equipmentModuleTemplates.remove(equipmentModuleTemplate);
@@ -97,15 +91,14 @@ public class WorkUnitTemplate {
 		}
 	}
 
-	public boolean moveEquipmentModuleTemplateUpHidden() {
+	public boolean equipmentModuleTemplatesMoveUpHidden() {
 		return equipmentModuleTemplates.size() < 2;
 	}
 
 	@Order(10.6)
-	@PropertyActionMethod("EquipmentModuleTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_DOWN)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveEquipmentModuleTemplateDown(EquipmentModuleTemplate equipmentModuleTemplate) {
+	public void equipmentModuleTemplatesMoveDown(EquipmentModuleTemplate equipmentModuleTemplate) {
 		int index = equipmentModuleTemplates.indexOf(equipmentModuleTemplate);
 		if (index < equipmentModuleTemplates.size() - 1) {
 			equipmentModuleTemplates.remove(equipmentModuleTemplate);
@@ -113,7 +106,7 @@ public class WorkUnitTemplate {
 		}
 	}
 
-	public boolean moveEquipmentModuleTemplateDownHidden() {
+	public boolean equipmentModuleTemplatesMoveDownHidden() {
 		return equipmentModuleTemplates.size() < 2;
 	}
 
@@ -129,45 +122,40 @@ public class WorkUnitTemplate {
 	}
 
 	@Order(20.1)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@ReadOnlyActionMethod
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EYE)
-	public EthernetDeviceTemplate viewEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public EthernetDeviceTemplate ethernetDeviceTemplatesView(EthernetDeviceTemplate ethernetDeviceTemplate) {
 		return ethernetDeviceTemplate;
 	}
 
 	@Order(20.1)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.EDIT)
 	@ExecutionMode(mode = ExecutionModeType.EDIT_PARAMETER_THEN_EXECUTE_METHOD_OR_CANCEL)
-	public void modifyEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesModify(EthernetDeviceTemplate ethernetDeviceTemplate) {
 	}
 
 	@Order(20.3)
 	@ParameterFactory
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.PLUS)
-	public void addNewEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesAddNew(EthernetDeviceTemplate ethernetDeviceTemplate) {
 		ethernetDeviceTemplates.add(ethernetDeviceTemplate);
 	}
 
 	@Order(20.4)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.TRASH)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_AFTER_CONFORMATION)
-	public void removeEthernetDeviceTemplate(EthernetDeviceTemplate ethernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesRemove(EthernetDeviceTemplate ethernetDeviceTemplate) {
 		ethernetDeviceTemplates.remove(ethernetDeviceTemplate);
 	}
 
-	public boolean removeEthernetDeviceTemplateHidden() {
+	public boolean ethernetDeviceTemplatesRemoveHidden() {
 		return ethernetDeviceTemplates.size() == 0;
 	}
 
 	@Order(20.5)
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_UP)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveEthernetDeviceTemplateUp(EthernetDeviceTemplate EthernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesMoveUp(EthernetDeviceTemplate EthernetDeviceTemplate) {
 		int index = ethernetDeviceTemplates.indexOf(EthernetDeviceTemplate);
 		if (index > 0) {
 			ethernetDeviceTemplates.remove(EthernetDeviceTemplate);
@@ -175,15 +163,14 @@ public class WorkUnitTemplate {
 		}
 	}
 
-	public boolean moveEthernetDeviceTemplateUpHidden() {
+	public boolean ethernetDeviceTemplatesMoveUpHidden() {
 		return ethernetDeviceTemplates.size() < 2;
 	}
 
 	@Order(20.6)
-	@PropertyActionMethod("EthernetDeviceTemplates")
 	@FontIcon(fontIconUrl = FontAwesomeUrl.ARROW_DOWN)
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
-	public void moveEthernetDeviceTemplateDown(EthernetDeviceTemplate EthernetDeviceTemplate) {
+	public void ethernetDeviceTemplatesRemoveMoveDown(EthernetDeviceTemplate EthernetDeviceTemplate) {
 		int index = ethernetDeviceTemplates.indexOf(EthernetDeviceTemplate);
 		if (index < ethernetDeviceTemplates.size() - 1) {
 			ethernetDeviceTemplates.remove(EthernetDeviceTemplate);
@@ -191,7 +178,7 @@ public class WorkUnitTemplate {
 		}
 	}
 
-	public boolean moveEthernetDeviceTemplateDownHidden() {
+	public boolean ethernetDeviceTemplatesRemoveMoveDownHidden() {
 		return ethernetDeviceTemplates.size() < 2;
 	}
 
