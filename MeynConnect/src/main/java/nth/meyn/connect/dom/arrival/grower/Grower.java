@@ -8,7 +8,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.Execution
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
-@Description(englishDescription="A farmer that grows birds")
+@Description(defaultEnglish="A farmer that grows birds")
 public class Grower {
 	private String code;
 	private String name;

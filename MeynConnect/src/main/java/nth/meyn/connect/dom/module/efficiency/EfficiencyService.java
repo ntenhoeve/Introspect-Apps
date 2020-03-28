@@ -14,7 +14,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.LINE_CHART)
-@DisplayName(englishName = "Efficiency")
+@DisplayName(defaultEnglish = "Efficiency")
 public class EfficiencyService {
 
 	@Order(value=10)

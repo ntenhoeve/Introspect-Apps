@@ -16,7 +16,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = WorkUnitTemplate.DESCRIPTION)
+@Description(defaultEnglish = WorkUnitTemplate.DESCRIPTION)
 public class WorkUnitTemplate {
 	static final String DESCRIPTION = "A template for a logical group of equipment that can be switched on or off together. This is typically a system or machine, e.g.: a scalder, plucker, rehanger. A workunits contains one or more Equipment Modules, e.g. a temperature conroller, line speed controller.";
 	private String name;

@@ -6,7 +6,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = EquipmentModule.DESCRIPTION)
+@Description(defaultEnglish = EquipmentModule.DESCRIPTION)
 public class EquipmentModule {
 
 	static final String DESCRIPTION = "Functional group of control modules to achieve a specific process activity (a function), e.g. a temperature controller, Conveyor, Deskinner, etc";

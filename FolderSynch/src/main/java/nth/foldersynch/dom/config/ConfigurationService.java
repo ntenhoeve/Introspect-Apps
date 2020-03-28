@@ -2,7 +2,7 @@ package nth.foldersynch.dom.config;
 
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 
-@DisplayName(englishName="Configuration")
+@DisplayName(defaultEnglish="Configuration")
 public class ConfigurationService {
 
 	private ConfigurationRepository configurationRepository;

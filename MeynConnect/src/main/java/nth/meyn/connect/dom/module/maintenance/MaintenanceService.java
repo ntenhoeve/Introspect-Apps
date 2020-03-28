@@ -9,7 +9,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.WRENCH)
-@DisplayName(englishName="Maintenance")
+@DisplayName(defaultEnglish="Maintenance")
 public class MaintenanceService {
 
 	public List<Asset> assets() {

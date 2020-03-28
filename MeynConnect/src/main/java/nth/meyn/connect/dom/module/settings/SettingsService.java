@@ -8,7 +8,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 //@ServiceObjectChildren(serviceClasses={BirdTypeService.class, LocationService.class, ConfigurationService.class})
 public class SettingsService {
 
-	@DisplayName(englishName="Modify LDAP Settings")
+	@DisplayName(defaultEnglish="Modify LDAP Settings")
 	public void modifyLdapSettings(LdapSettings ldapSettings) {
 		//TODO
 	}

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
-@Description(englishDescription="A department that contains one or more Meyn lines")
+@Description(defaultEnglish="A department that contains one or more Meyn lines")
 public class MeynDepartment extends Asset {
 
 	

@@ -16,7 +16,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = Area.DESCRIPTION)
+@Description(defaultEnglish = Area.DESCRIPTION)
 public class Area {
 	static final String DESCRIPTION = "Physical, geographical or local grouping determined by the site, e.g.: Life Bird Handling, Slaughtering, etc";
 	private String name;

@@ -9,7 +9,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.BALANCE_SCALE)
-@DisplayName(englishName="ProductionOrder Processing")
+@DisplayName(defaultEnglish="ProductionOrder Processing")
 public class OrderProcessingService {
 
 	@Order(value=1)

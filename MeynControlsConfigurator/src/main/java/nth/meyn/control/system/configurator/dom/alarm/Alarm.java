@@ -12,7 +12,7 @@ public class Alarm {
 	private AlarmSeverity severity;
 	private List<AlarmText> translatedTexts;
 
-	@Description(englishDescription = "Name as used in alarm structure of functionblock")
+	@Description(defaultEnglish = "Name as used in alarm structure of functionblock")
 	@Order(value = 1)
 	public String getName() {
 		return name;

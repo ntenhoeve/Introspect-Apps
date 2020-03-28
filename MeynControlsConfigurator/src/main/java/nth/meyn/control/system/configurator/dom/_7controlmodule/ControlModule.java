@@ -7,7 +7,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = ControlModule.DESCRIPTION)
+@Description(defaultEnglish = ControlModule.DESCRIPTION)
 public class ControlModule {
 	static final String DESCRIPTION = "A Control Module typically a sensor (e.g. a emergency stop) or actuator (e.g. a pneumatic valve) or a combination of sensors and actuators (e.g. a motor group or frequency controlled drive)";
 	private String name;

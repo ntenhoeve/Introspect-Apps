@@ -3,7 +3,7 @@ package nth.meyn.control.system.configurator.dom._7controlmodule;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 
-@Description(englishDescription = "Represents a PLC input or output (of any data type)")
+@Description(defaultEnglish = "Represents a PLC input or output (of any data type)")
 public class Io {
 	private String name;
 	private IoType IoType;

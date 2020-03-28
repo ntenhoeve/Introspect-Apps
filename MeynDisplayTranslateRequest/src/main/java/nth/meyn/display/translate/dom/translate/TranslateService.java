@@ -18,7 +18,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.Execution
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 
-@DisplayName(englishName = "Translate")
+@DisplayName(defaultEnglish = "Translate")
 @FontIcon(fontIconUrl = FontAwesomeUrl.FLAG)
 public class TranslateService {
 

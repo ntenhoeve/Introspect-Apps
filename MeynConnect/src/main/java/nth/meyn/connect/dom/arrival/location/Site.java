@@ -2,7 +2,7 @@ package nth.meyn.connect.dom.arrival.location;
 
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
-@Description(englishDescription="Physical, geographical or local grouping determined by the enterprise")
+@Description(defaultEnglish="Physical, geographical or local grouping determined by the enterprise")
 public class Site {
 private String name;
 

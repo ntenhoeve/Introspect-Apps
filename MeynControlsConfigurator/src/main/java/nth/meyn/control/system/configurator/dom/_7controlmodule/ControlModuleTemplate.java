@@ -9,7 +9,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = ControlModuleTemplate.DESCRIPTION)
+@Description(defaultEnglish = ControlModuleTemplate.DESCRIPTION)
 public class ControlModuleTemplate {
 	static final String DESCRIPTION = "A template for a Controll Module (sometimes also called a typical), e.g.: a sensor, push button, pneumatic valve, motor group, or frequency controller";
 	private String name;

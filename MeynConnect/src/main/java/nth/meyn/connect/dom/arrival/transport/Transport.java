@@ -10,7 +10,7 @@ import nth.meyn.connect.dom.arrival.location.StartLocation;
 import nth.meyn.connect.dom.arrival.lot.Lot;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
-@Description(englishDescription = "Transportation of a complete or part of a flock with one transportation vehicle (truck)")
+@Description(defaultEnglish = "Transportation of a complete or part of a flock with one transportation vehicle (truck)")
 public class Transport {
 	private String code;
 	private House house;

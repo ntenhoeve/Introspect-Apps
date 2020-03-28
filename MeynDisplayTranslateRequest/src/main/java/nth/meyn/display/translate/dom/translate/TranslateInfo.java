@@ -19,7 +19,7 @@ public class TranslateInfo {
 
 	@NotEmpty
 	@Order(value = 1)
-	@DisplayName(englishName = "CX Designer export file")
+	@DisplayName(defaultEnglish = "CX Designer export file")
 	public UploadStream getCxDesignerExportFile() {
 		return cxDesignerExportFile;
 	}

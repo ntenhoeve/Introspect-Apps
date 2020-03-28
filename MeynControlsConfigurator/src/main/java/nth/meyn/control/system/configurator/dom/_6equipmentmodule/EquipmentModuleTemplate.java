@@ -10,7 +10,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = EquipmentModuleTemplate.DESCRIPTION)
+@Description(defaultEnglish = EquipmentModuleTemplate.DESCRIPTION)
 public class EquipmentModuleTemplate {
 
 	static final String DESCRIPTION = "A template for a functional group of control modules to achieve a specific process activity, e.g. a temperature controller, Conveyor, Deskinner, etc";

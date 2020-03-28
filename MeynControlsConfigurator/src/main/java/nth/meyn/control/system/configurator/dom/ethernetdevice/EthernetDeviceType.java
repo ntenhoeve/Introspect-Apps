@@ -5,7 +5,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.description.Description
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = EthernetDeviceType.DESCRIPTION)
+@Description(defaultEnglish = EthernetDeviceType.DESCRIPTION)
 public class EthernetDeviceType {
 
 	static final String DESCRIPTION = "A device connected to the local Meyn Internet, e.g.: A PLC, HMI, Camera Grading System, Distribution Manager, Server Computer, Desktop Computer (not remote IO)";

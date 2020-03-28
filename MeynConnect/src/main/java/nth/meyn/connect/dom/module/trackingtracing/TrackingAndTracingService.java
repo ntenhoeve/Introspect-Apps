@@ -15,7 +15,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.ARROWS_H)
-@DisplayName(englishName = "Tracking & Tracing")
+@DisplayName(defaultEnglish = "Tracking & Tracing")
 //@ServiceObjectChildren(serviceClasses = { GrowerService.class, FlockService.class,
 //		TransportService.class, LotService.class })
 public class TrackingAndTracingService {

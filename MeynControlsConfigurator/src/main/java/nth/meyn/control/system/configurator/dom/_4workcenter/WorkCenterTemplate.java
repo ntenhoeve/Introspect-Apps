@@ -17,7 +17,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
 import nth.reflect.fw.layer5provider.reflection.behavior.parameterfactory.ParameterFactory;
 import nth.reflect.fw.layer5provider.reflection.info.actionmethod.ReadOnlyActionMethod;
 
-@Description(englishDescription = WorkCenterTemplate.DESCRIPTION)
+@Description(defaultEnglish = WorkCenterTemplate.DESCRIPTION)
 public class WorkCenterTemplate {
 
 	static final String DESCRIPTION = "A template for a physical location on the shop floor that provides specific manufacturing capabilities. This is typically a production line, e.g.: Slaughter Line. At Meyn a Work Center is the equavilant to a Main Control Panel. A work center contains one or more work units, e.g. equipment like scalders or pluckers.";

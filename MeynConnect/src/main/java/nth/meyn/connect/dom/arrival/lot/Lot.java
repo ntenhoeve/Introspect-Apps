@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import nth.meyn.connect.dom.arrival.location.StartLocation;
 import nth.reflect.fw.layer5provider.reflection.behavior.description.Description;
 
-@Description(englishDescription = "A group of products (e.g. live birds, breast caps, fillets) that are being processed in one sequence on the same line or equipment and have the same origin (transport)")
+@Description(defaultEnglish = "A group of products (e.g. live birds, breast caps, fillets) that are being processed in one sequence on the same line or equipment and have the same origin (transport)")
 public class Lot {
 	private String code;
 	private LocalDateTime startDateTime;

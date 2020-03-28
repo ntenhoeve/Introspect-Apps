@@ -8,7 +8,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName
 import nth.reflect.fw.layer5provider.reflection.behavior.fonticon.FontIcon;
 
 @FontIcon(fontIconUrl=FontAwesomeUrl.SHIELD)
-@DisplayName(englishName="Food safety & Quality")
+@DisplayName(defaultEnglish="Food safety & Quality")
 public class FoodSafetyAndQualityService {
 
 	public Image condemned() {

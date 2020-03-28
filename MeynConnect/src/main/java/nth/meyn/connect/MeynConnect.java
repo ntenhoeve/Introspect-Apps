@@ -31,7 +31,7 @@ import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName
  * @author nilsth
  *
  */
-@DisplayName(englishName = "Meyn Connect")
+@DisplayName(defaultEnglish = "Meyn Connect")
 public class MeynConnect extends ReflectApplicationForJavaFX {
 
 	@Override
