@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.security.InvalidParameterException;
 
-import nth.reflect.fw.generic.regex.Regex;
-import nth.reflect.fw.generic.regex.Repetition;
+import nth.reflect.util.regex.Regex;
+import nth.reflect.util.regex.Repetition;
 
 public class CustomerFolderFilter implements FileFilter {
 

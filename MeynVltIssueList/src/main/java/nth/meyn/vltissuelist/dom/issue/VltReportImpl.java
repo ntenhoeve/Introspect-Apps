@@ -1,7 +1,5 @@
 package nth.meyn.vltissuelist.dom.issue;
 
-import java.io.IOException;
-
 import nth.meyn.vltissuelist.dom.vlt.VltFile;
 
 

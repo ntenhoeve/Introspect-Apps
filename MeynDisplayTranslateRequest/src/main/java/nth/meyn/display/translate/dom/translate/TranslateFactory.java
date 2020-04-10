@@ -12,8 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -22,7 +20,6 @@ import org.apache.commons.csv.CSVRecord;
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
 import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
-import nth.reflect.fw.layer1userinterface.controller.UploadStream;
 
 public class TranslateFactory {
 
@@ -30,7 +27,6 @@ public class TranslateFactory {
 	private static final String ONLY_WHEN_NOT_PRECEEDS_WITH_COMMA = "(?<!\\,)";
 	private static final String ONLY_WHEN_NOT_FOLLOWED_WITH_COMMA = "(?!,)";
 
-	
 	public static DownloadStream createTranslateRequest(TranslateInfo translateInfo)
 			throws URISyntaxException, IOException {
 		File sourceFile = translateInfo.getCxDesignerExportFile().getFile();
@@ -53,16 +49,15 @@ public class TranslateFactory {
 			parser.close();
 			reader.close();
 		}
-		
-		File destinationFile=DestinationFileFactory.create(translateInfo);
+
+		File destinationFile = DestinationFileFactory.create(translateInfo);
 		return new DownloadStream(destinationFile, out);
 	}
 
-
-	private static void writeFirstLines(PrintStream printStream,TranslateInfo translateInfo )
+	private static void writeFirstLines(PrintStream printStream, TranslateInfo translateInfo)
 			throws IOException, URISyntaxException {
-		File omronDisplayCvsFile=translateInfo.getCxDesignerExportFile().getFile();
-		String language=translateInfo.getTranslateToLanguage();
+		File omronDisplayCvsFile = translateInfo.getCxDesignerExportFile().getFile();
+		String language = translateInfo.getTranslateToLanguage();
 		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		char ch;
 
@@ -74,33 +69,32 @@ public class TranslateFactory {
 		} while (ch != '\n');
 
 //		System.out.println("===");
-		
+
 		// copy second line
 		do {
 			ch = (char) reader.read();
-			//System.out.print(ch);
+			// System.out.print(ch);
 			if (ch == '\r') {
-				printStream.print(
-						",\""+language+"                                                                                   \"");
+				printStream
+						.print(",\"" + language
+								+ "                                                                                   \"");
 				printStream.print(",\"How to translate\"");
 				printStream.print(",\"Maximum translation size\"");
 				printStream.print(",\"Translation tips\"\n");
 			} else {
 				printStream.print(ch);
 			}
-		} while (ch != '\r' || ch==-1);
+		} while (ch != '\r' || ch == -1);
 	}
 
-	private static void skipFirstLine(InputStreamReader reader)
-			throws IOException, URISyntaxException {
+	private static void skipFirstLine(InputStreamReader reader) throws IOException, URISyntaxException {
 		char ch;
 		do {
 			ch = (char) reader.read();
 		} while (ch != '\n');
 	}
 
-	public static String findAbreviationCandidates(File omronDisplayCvsFile)
-			throws URISyntaxException, IOException {
+	public static String findAbreviationCandidates(File omronDisplayCvsFile) throws URISyntaxException, IOException {
 		Set<String> candidates = new HashSet<>();
 		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		skipFirstLine(reader);
@@ -120,24 +114,26 @@ public class TranslateFactory {
 		return candidates.toString();
 	}
 
-	private static CSVParser createParser(InputStreamReader reader)
-			throws IOException, URISyntaxException {
+	private static CSVParser createParser(InputStreamReader reader) throws IOException, URISyntaxException {
 		// return new CSVParser(reader,CSVFormat.EXCEL.withHeader());
 
-		return CSVFormat.EXCEL.withIgnoreEmptyLines().withRecordSeparator('\n').withQuote('"')
-				.withFirstRecordAsHeader().withDelimiter(',').withTrim()
+		return CSVFormat.EXCEL
+				.withIgnoreEmptyLines()
+				.withRecordSeparator('\n')
+				.withQuote('"')
+				.withFirstRecordAsHeader()
+				.withDelimiter(',')
+				.withTrim()
 				.parse(reader);
 	}
 
-	private static InputStreamReader createReader(File omronDisplayCvsFile)
-			throws URISyntaxException, IOException {
+	private static InputStreamReader createReader(File omronDisplayCvsFile) throws URISyntaxException, IOException {
 		InputStream fis = new FileInputStream(omronDisplayCvsFile);
 		InputStreamReader reader = new InputStreamReader(fis, StandardCharsets.UTF_16);
 		return reader;
 	}
 
-	public static String validateTranslations(File omronDisplayCvsFile)
-			throws URISyntaxException, IOException {
+	public static String validateTranslations(File omronDisplayCvsFile) throws URISyntaxException, IOException {
 		StringBuilder report = new StringBuilder();
 		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		skipFirstLine(reader);

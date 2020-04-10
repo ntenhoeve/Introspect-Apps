@@ -3,8 +3,8 @@ package nth.meyn.vltissuelist.dom.folder.plc;
 import java.io.File;
 import java.io.FileFilter;
 
-import nth.reflect.fw.generic.regex.Regex;
-import nth.reflect.fw.generic.regex.Repetition;
+import nth.reflect.util.regex.Regex;
+import nth.reflect.util.regex.Repetition;
 
 public class PlcFolderFilter implements FileFilter {
 

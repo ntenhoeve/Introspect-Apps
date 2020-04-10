@@ -2,7 +2,6 @@ package nth.reflect.app.swdocgen.dom.javafile;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

@@ -11,7 +11,7 @@
 	<name>MeynVltIssueList</name>
 	<url>http://maven.apache.org</url>
 
-	
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -73,6 +73,11 @@
 			<artifactId>
 				reflect-infrastructure-hibernate-repository
 			</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.reflect-framework</groupId>
+			<artifactId>reflect-unit-regex</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

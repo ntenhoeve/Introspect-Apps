@@ -1,6 +1,6 @@
 package nth.reflect.app.swdocgen.dom.javadoc.tag;
 
-import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.util.regex.Regex;
 
 
 public enum EndTag {

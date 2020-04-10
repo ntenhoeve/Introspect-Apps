@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import nth.reflect.fw.generic.regex.Regex;
+import nth.reflect.util.regex.Regex;
 
 public class RegexParser {
 

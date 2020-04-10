@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 
 import nth.meyn.vltissuelist.dom.folder.vlt.VltFolder;
 import nth.meyn.vltissuelist.dom.folder.vlt.VltFolderFilter;
-import nth.reflect.fw.generic.regex.Regex;
-import nth.reflect.fw.generic.regex.Repetition;
+import nth.reflect.util.regex.Regex;
+import nth.reflect.util.regex.Repetition;
 
 public class PlcFolder {
 

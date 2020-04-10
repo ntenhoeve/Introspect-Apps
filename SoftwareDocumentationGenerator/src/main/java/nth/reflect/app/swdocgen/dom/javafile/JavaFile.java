@@ -18,8 +18,8 @@ import org.jsoup.select.Elements;
 import nth.reflect.app.swdocgen.dom.javadoc.tag.EndTag;
 import nth.reflect.app.swdocgen.dom.javadoc.tag.InlineTag;
 import nth.reflect.app.swdocgen.dom.javadoc.tag.InlineTagFactory;
-import nth.reflect.fw.generic.regex.Regex;
-import nth.reflect.fw.generic.regex.Repetition;
+import nth.reflect.util.regex.Regex;
+import nth.reflect.util.regex.Repetition;
 
 /**
  * 

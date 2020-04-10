@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.jsoup.nodes.Element;
 
-import nth.reflect.fw.generic.regex.Regex;
-import nth.reflect.fw.generic.regex.Repetition;
+import nth.reflect.util.regex.Regex;
+import nth.reflect.util.regex.Repetition;
 
 public abstract class InlineTag {
 	

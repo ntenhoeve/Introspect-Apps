@@ -2,6 +2,7 @@ package nth.reflect.app.swdocgen.dom.documentation;
 
 import java.io.IOException;
 
+import nth.reflect.app.swdocgen.SoftwareDocumentationGenerator;
 import nth.reflect.app.swdocgen.dom.page.web.GitHubWebPageFactory;
 import nth.reflect.app.swdocgen.dom.page.wiki.GitHubWikiPageFactory;
 

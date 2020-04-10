@@ -9,7 +9,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
+import org.apache.poi.common.usermodel.Hyperlink;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFHyperlink;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import nth.meyn.vltissuelist.dom.folder.customer.CustomerFolder;
 import nth.meyn.vltissuelist.dom.folder.mcs.MeynControlSystemsFolder;
@@ -21,17 +30,6 @@ import nth.meyn.vltissuelist.dom.vlt.VltFile;
 import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
 import nth.reflect.fw.layer5provider.reflection.ReflectionProvider;
 import nth.reflect.infra.excel.repository.ExcelRepository;
-
-import org.apache.poi.common.usermodel.Hyperlink;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFHyperlink;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class IssueExcelRepository2 extends ExcelRepository<Issue> {
 
