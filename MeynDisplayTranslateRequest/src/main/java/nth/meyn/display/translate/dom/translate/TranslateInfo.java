@@ -2,9 +2,9 @@ package nth.meyn.display.translate.dom.translate;
 
 import javax.validation.constraints.NotEmpty;
 
-import nth.reflect.fw.layer1userinterface.controller.UploadStream;
 import nth.reflect.fw.layer5provider.reflection.behavior.displayname.DisplayName;
 import nth.reflect.fw.layer5provider.reflection.behavior.order.Order;
+import nth.reflect.fw.stream.UploadStream;
 
 public class TranslateInfo {
 

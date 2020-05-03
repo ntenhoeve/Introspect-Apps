@@ -27,8 +27,8 @@ import nth.meyn.vltissuelist.dom.folder.project.ProjectFolder;
 import nth.meyn.vltissuelist.dom.folder.software.SoftwareFolder;
 import nth.meyn.vltissuelist.dom.folder.vlt.VltFolder;
 import nth.meyn.vltissuelist.dom.vlt.VltFile;
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
 import nth.reflect.fw.layer5provider.reflection.ReflectionProvider;
+import nth.reflect.fw.stream.DownloadStream;
 import nth.reflect.infra.excel.repository.ExcelRepository;
 
 public class IssueExcelRepository2 extends ExcelRepository<Issue> {

@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.stream.DownloadStream;
 
 public class WorkBookUtil {
 

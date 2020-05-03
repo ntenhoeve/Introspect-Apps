@@ -19,7 +19,7 @@ import org.apache.commons.csv.CSVRecord;
 
 import nth.meyn.display.translate.dom.abbreviation.AbbreviationRepository;
 import nth.meyn.display.translate.dom.abbreviation.Abbreviations;
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.stream.DownloadStream;
 
 public class TranslateFactory {
 

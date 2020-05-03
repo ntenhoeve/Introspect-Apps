@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
 import nth.reflect.fw.layer5provider.notification.NotificationProvider;
+import nth.reflect.fw.stream.DownloadStream;
 import nth.reflect.infra.generic.xml.XmlConverter;
 
 public class JetStreamScalderService {

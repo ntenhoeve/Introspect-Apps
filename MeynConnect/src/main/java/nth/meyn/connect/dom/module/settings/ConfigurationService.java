@@ -1,6 +1,6 @@
 package nth.meyn.connect.dom.module.settings;
 
-import nth.reflect.fw.layer1userinterface.controller.UploadStream;
+import nth.reflect.fw.stream.UploadStream;
 
 public class ConfigurationService {
 	public void loadConfigurationFile(UploadStream uploadStream) {

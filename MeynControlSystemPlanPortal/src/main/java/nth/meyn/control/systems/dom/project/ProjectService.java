@@ -8,7 +8,7 @@ import nth.meyn.control.systems.dom.customerorder.CustomerOrder;
 import nth.meyn.control.systems.dom.customerorder.CustomerOrderRepository;
 import nth.meyn.control.systems.dom.factoryorder.FactoryOrder;
 import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.stream.DownloadStream;
 
 public class ProjectService {
 

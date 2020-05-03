@@ -26,7 +26,7 @@ import nth.meyn.control.systems.dom.activity.ActivityType;
 import nth.meyn.control.systems.dom.customerorder.CustomerOrder;
 import nth.meyn.control.systems.dom.customerorder.CustomerOrderRepository;
 import nth.meyn.control.systems.dom.factoryorder.FactoryOrder;
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
+import nth.reflect.fw.stream.DownloadStream;
 
 //TODO Activity status late 
 //TODO waiting dialog

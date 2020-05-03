@@ -3,10 +3,10 @@ package nth.meyn.vltissuelist.dom.issue;
 import java.io.IOException;
 
 import nth.meyn.vltissuelist.dom.vlt.VltFile;
-import nth.reflect.fw.layer1userinterface.controller.DownloadStream;
-import nth.reflect.fw.layer1userinterface.controller.UploadStream;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionMode;
 import nth.reflect.fw.layer5provider.reflection.behavior.executionmode.ExecutionModeType;
+import nth.reflect.fw.stream.DownloadStream;
+import nth.reflect.fw.stream.UploadStream;
 
 public class IssueService {
 
