@@ -1,8 +1,6 @@
 package nth.meyn.cx.sysmac.converter;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 
@@ -12,8 +10,6 @@ import javafx.stage.Stage;
 import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModelFactory;
-import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxVariable;
-import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxVariableFactory;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxLadderDiagram;
 import nth.meyn.cx.sysmac.converter.cx.ladder.xml.CxUnmarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacClipboard;

@@ -7,9 +7,9 @@ import nth.foldersynch.dom.config.ConfigurationRepository;
 import nth.foldersynch.dom.config.ConfigurationService;
 import nth.foldersynch.dom.device.DeviceRepository;
 import nth.foldersynch.dom.device.DeviceService;
-import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
-import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.swing.ReflectApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 import nth.reflect.infra.xmlfilerepository.XmlFileRepository;
 

@@ -6,9 +6,9 @@ import java.util.List;
 import nth.accounts.domain.account.AccountService;
 import nth.accounts.domain.repository.AccountRepository;
 import nth.accounts.domain.tag.TagService;
-import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
-import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
+import nth.reflect.fw.swing.ReflectApplicationForSwing;
 import nth.reflect.infra.generic.xml.XmlConverter;
 
 public class AccountsForSwing extends ReflectApplicationForSwing {

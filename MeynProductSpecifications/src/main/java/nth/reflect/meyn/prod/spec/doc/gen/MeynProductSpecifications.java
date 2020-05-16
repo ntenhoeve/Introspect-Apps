@@ -3,10 +3,10 @@ package nth.reflect.meyn.prod.spec.doc.gen;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.basic.Color;
-import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
+import nth.reflect.fw.swing.ReflectApplicationForSwing;
 import nth.reflect.meyn.prod.spec.doc.gen.dom.generator.ProductSpecificationDocumentGenerator;
 import nth.reflect.meyn.prod.spec.doc.gen.dom.order.SalesOrderService;
 

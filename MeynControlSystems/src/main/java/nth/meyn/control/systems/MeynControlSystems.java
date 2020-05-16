@@ -11,10 +11,10 @@ import nth.meyn.control.systems.dom.employee.EmployeeRepository;
 import nth.meyn.control.systems.dom.employee.EmployeeService;
 import nth.meyn.control.systems.dom.project.ProjectService;
 import nth.meyn.control.systems.dom.timeline.TimeLineExcelReport;
-import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.ColorProvider;
+import nth.reflect.fw.gui.style.MaterialColorPalette;
 import nth.reflect.fw.gui.style.basic.Color;
-import nth.reflect.fw.ui.swing.ReflectApplicationForSwing;
+import nth.reflect.fw.swing.ReflectApplicationForSwing;
 
 public class MeynControlSystems extends ReflectApplicationForSwing {
 

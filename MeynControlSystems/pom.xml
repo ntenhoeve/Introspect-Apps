@@ -38,7 +38,7 @@
 
 		<dependency>
 			<groupId>com.github.reflect-framework</groupId>
-			<artifactId>reflect-for-swing</artifactId>
+			<artifactId>reflect-framework-for-swing</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
