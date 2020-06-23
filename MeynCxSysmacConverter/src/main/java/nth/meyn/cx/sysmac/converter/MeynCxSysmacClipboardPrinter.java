@@ -1,60 +1,48 @@
 package nth.meyn.cx.sysmac.converter;
 
 import java.nio.ByteBuffer;
-import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.DataFormat;
-import javafx.stage.Stage;
-import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
-import nth.meyn.cx.sysmac.converter.sysmac.clipboard.SysmacClipboard;
-import nth.meyn.cx.sysmac.converter.util.StringToArrayCodeUtil;
-
-public class MeynCxSysmacClipboardPrinter extends Application {
+public class MeynCxSysmacClipboardPrinter {// extends Application {
 	public static void main(String[] args) {
-		launch(args);
+//		launch(args);
 	}
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+//	@Override
+//	public void start(Stage primaryStage) throws Exception {
+//
+//		Clipboard clipboard = Clipboard.getSystemClipboard();
+//		Set<DataFormat> contentTypes = clipboard.getContentTypes();
+//		for (DataFormat dataFormat : contentTypes) {
+//			System.out.println("---");
+//			System.out.println(dataFormat);
+//
+//			String dataFormatId = getDataFormatId(dataFormat);
+//			switch (dataFormatId) {
+//			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_EXTRACTED_SYMBOLS_CLIPBOARD_FORMAT:
+//			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_EXTRACTED_GLOBAL_SYMBOLS_CLIPBOARD_FORMAT:
+//			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_LADDER_ELEMENT_CLIPBOARD_FORMAT:
+//			case CxClipboard.OMRON_POU_LADDER_CLIP_BOARD_FORMAT:
+//			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_RESOURCE_HANDLE_CLIPBOARD_FORMAT:
+//			case SysmacClipboard.LADDER_SNIPPET_XML :
+//			case SysmacClipboard.LADDER_SNIPPET_ASSIGNED_VARIABLES :
+//			case SysmacClipboard.VARIABLE_NAMES:	
+//				Object clipboardContent = clipboard.getContent(dataFormat);
+//				print(clipboardContent);
+//				System.out.println(StringToArrayCodeUtil.print((ByteBuffer) clipboardContent));
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+//		Platform.exit();
+//	}
 
-		Clipboard clipboard = Clipboard.getSystemClipboard();
-		Set<DataFormat> contentTypes = clipboard.getContentTypes();
-		for (DataFormat dataFormat : contentTypes) {
-			System.out.println("---");
-			System.out.println(dataFormat);
-
-			String dataFormatId = getDataFormatId(dataFormat);
-			switch (dataFormatId) {
-			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_EXTRACTED_SYMBOLS_CLIPBOARD_FORMAT:
-			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_EXTRACTED_GLOBAL_SYMBOLS_CLIPBOARD_FORMAT:
-			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_LADDER_ELEMENT_CLIPBOARD_FORMAT:
-			case CxClipboard.OMRON_POU_LADDER_CLIP_BOARD_FORMAT:
-			case CxClipboard.OMRON_CX_PROGRAMMER_2_0_RESOURCE_HANDLE_CLIPBOARD_FORMAT:
-			case SysmacClipboard.LADDER_SNIPPET_XML :
-			case SysmacClipboard.LADDER_SNIPPET_ASSIGNED_VARIABLES :
-			case SysmacClipboard.VARIABLE_NAMES:	
-				Object clipboardContent = clipboard.getContent(dataFormat);
-				print(clipboardContent);
-				System.out.println(StringToArrayCodeUtil.print((ByteBuffer) clipboardContent));
-				break;
-			default:
-				break;
-			}
-		}
-		Platform.exit();
-	}
-
-	private String getDataFormatId(DataFormat dataFormat) {
-		String dataFormatId = dataFormat.toString();
-		dataFormatId=StringUtils.removeStart(dataFormatId, "[");
-		dataFormatId=StringUtils.removeEnd(dataFormatId, "]");
-		return dataFormatId;
-	}
+//	private String getDataFormatId(DataFormat dataFormat) {
+//		String dataFormatId = dataFormat.toString();
+//		dataFormatId = StringUtils.removeStart(dataFormatId, "[");
+//		dataFormatId = StringUtils.removeEnd(dataFormatId, "]");
+//		return dataFormatId;
+//	}
 
 	private void print(Object clipboardContent) {
 		ByteBuffer byteBuffer = (ByteBuffer) clipboardContent;

@@ -5,7 +5,6 @@
 // Generated on: 2017.04.04 at 09:21:47 PM CEST 
 //
 
-
 package nth.meyn.cx.sysmac.converter.sysmac.ladder.xml;
 
 import java.io.Serializable;
@@ -24,11 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -126,467 +127,445 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "rungXML"
-})
+@XmlType(name = "", propOrder = { "rungXML" })
 @XmlRootElement(name = "Rungs")
 public class Rungs {
 
-    @XmlElement(name = "RungXML")
-    protected List<Rungs.RungXML> rungXML;
+	@XmlElement(name = "RungXML")
+	protected List<Rungs.RungXML> rungXML;
 
-    /**
-     * Gets the value of the rungXML property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the rungXML property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRungXML().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Rungs.RungXML }
-     * 
-     * 
-     */
-    public List<Rungs.RungXML> getRungXML() {
-        if (rungXML == null) {
-            rungXML = new ArrayList<Rungs.RungXML>();
-        }
-        return this.rungXML;
-    }
+	/**
+	 * Gets the value of the rungXML property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a snapshot.
+	 * Therefore any modification you make to the returned list will be present
+	 * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+	 * for the rungXML property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getRungXML().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link Rungs.RungXML }
+	 * 
+	 * 
+	 */
+	public List<Rungs.RungXML> getRungXML() {
+		if (rungXML == null) {
+			rungXML = new ArrayList<Rungs.RungXML>();
+		}
+		return this.rungXML;
+	}
 
+	/**
+	 * <p>
+	 * Java class for anonymous complex type.
+	 * 
+	 * <p>
+	 * The following schema fragment specifies the expected content contained within
+	 * this class.
+	 * 
+	 * <pre>
+	 * &lt;complexType>
+	 *   &lt;complexContent>
+	 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+	 *       &lt;sequence>
+	 *         &lt;element name="LadderElement" maxOccurs="unbounded" minOccurs="0">
+	 *           &lt;complexType>
+	 *             &lt;complexContent>
+	 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+	 *                 &lt;sequence>
+	 *                   &lt;element name="ConnectionPoint" maxOccurs="unbounded" minOccurs="0">
+	 *                     &lt;complexType>
+	 *                       &lt;complexContent>
+	 *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+	 *                           &lt;sequence>
+	 *                             &lt;element name="Edge">
+	 *                               &lt;complexType>
+	 *                                 &lt;simpleContent>
+	 *                                   &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+	 *                                     &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                                   &lt;/extension>
+	 *                                 &lt;/simpleContent>
+	 *                               &lt;/complexType>
+	 *                             &lt;/element>
+	 *                           &lt;/sequence>
+	 *                           &lt;attribute name="connectionPointType" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                         &lt;/restriction>
+	 *                       &lt;/complexContent>
+	 *                     &lt;/complexType>
+	 *                   &lt;/element>
+	 *                   &lt;element name="PinViewModel" maxOccurs="unbounded" minOccurs="0">
+	 *                     &lt;complexType>
+	 *                       &lt;simpleContent>
+	 *                         &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+	 *                           &lt;attribute name="IsInput" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="Name" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="Datatype" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="Negated" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="IsInOutVariable" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="Visible" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                           &lt;attribute name="EdgeDirectionType" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                         &lt;/extension>
+	 *                       &lt;/simpleContent>
+	 *                     &lt;/complexType>
+	 *                   &lt;/element>
+	 *                 &lt;/sequence>
+	 *                 &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="ladderElementType" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="inverted" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="diffUp" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="diffDown" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="variableName" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="baseVariableName" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="ProgramName" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="baseVariableDataType" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="set" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="reset" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="IsLeftPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="IsRightPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="sourceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="targetID" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="Focusable" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="typeName" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="IsUserDefinedType" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="IsPolynomial" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *               &lt;/restriction>
+	 *             &lt;/complexContent>
+	 *           &lt;/complexType>
+	 *         &lt;/element>
+	 *       &lt;/sequence>
+	 *       &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *       &lt;attribute name="Label" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *       &lt;attribute name="Height" type="{http://www.w3.org/2001/XMLSchema}float" />
+	 *       &lt;attribute name="Width" type="{http://www.w3.org/2001/XMLSchema}short" />
+	 *     &lt;/restriction>
+	 *   &lt;/complexContent>
+	 * &lt;/complexType>
+	 * </pre>
+	 * 
+	 * 
+	 */
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "", propOrder = { "ladderElement" })
+	public static class RungXML {
 
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="LadderElement" maxOccurs="unbounded" minOccurs="0">
-     *           &lt;complexType>
-     *             &lt;complexContent>
-     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                 &lt;sequence>
-     *                   &lt;element name="ConnectionPoint" maxOccurs="unbounded" minOccurs="0">
-     *                     &lt;complexType>
-     *                       &lt;complexContent>
-     *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                           &lt;sequence>
-     *                             &lt;element name="Edge">
-     *                               &lt;complexType>
-     *                                 &lt;simpleContent>
-     *                                   &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *                                     &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                                   &lt;/extension>
-     *                                 &lt;/simpleContent>
-     *                               &lt;/complexType>
-     *                             &lt;/element>
-     *                           &lt;/sequence>
-     *                           &lt;attribute name="connectionPointType" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                         &lt;/restriction>
-     *                       &lt;/complexContent>
-     *                     &lt;/complexType>
-     *                   &lt;/element>
-     *                   &lt;element name="PinViewModel" maxOccurs="unbounded" minOccurs="0">
-     *                     &lt;complexType>
-     *                       &lt;simpleContent>
-     *                         &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *                           &lt;attribute name="IsInput" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="Name" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="Datatype" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="Negated" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="IsInOutVariable" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="Visible" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                           &lt;attribute name="EdgeDirectionType" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                         &lt;/extension>
-     *                       &lt;/simpleContent>
-     *                     &lt;/complexType>
-     *                   &lt;/element>
-     *                 &lt;/sequence>
-     *                 &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="ladderElementType" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="inverted" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="diffUp" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="diffDown" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="variableName" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="baseVariableName" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="ProgramName" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="baseVariableDataType" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="set" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="reset" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="IsLeftPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="IsRightPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="sourceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="targetID" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="Focusable" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="typeName" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="IsUserDefinedType" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="IsPolynomial" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *               &lt;/restriction>
-     *             &lt;/complexContent>
-     *           &lt;/complexType>
-     *         &lt;/element>
-     *       &lt;/sequence>
-     *       &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="Label" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="Height" type="{http://www.w3.org/2001/XMLSchema}float" />
-     *       &lt;attribute name="Width" type="{http://www.w3.org/2001/XMLSchema}short" />
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "ladderElement"
-    })
-    public static class RungXML {
+		@XmlElement(name = "LadderElement")
+		protected List<Rungs.RungXML.LadderElement> ladderElement;
+		@XmlAttribute(name = "Comment")
+		protected String comment;
+		@XmlAttribute(name = "Label")
+		protected String label;
+		@XmlAttribute(name = "Height")
+		protected Float height;
+		@XmlAttribute(name = "Width")
+		protected Short width;
 
-        @XmlElement(name = "LadderElement")
-        protected List<Rungs.RungXML.LadderElement> ladderElement;
-        @XmlAttribute(name = "Comment")
-        protected String comment;
-        @XmlAttribute(name = "Label")
-        protected String label;
-        @XmlAttribute(name = "Height")
-        protected Float height;
-        @XmlAttribute(name = "Width")
-        protected Short width;
+		/**
+		 * Gets the value of the ladderElement property.
+		 * 
+		 * <p>
+		 * This accessor method returns a reference to the live list, not a snapshot.
+		 * Therefore any modification you make to the returned list will be present
+		 * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+		 * for the ladderElement property.
+		 * 
+		 * <p>
+		 * For example, to add a new item, do as follows:
+		 * 
+		 * <pre>
+		 * getLadderElement().add(newItem);
+		 * </pre>
+		 * 
+		 * 
+		 * <p>
+		 * Objects of the following type(s) are allowed in the list
+		 * {@link Rungs.RungXML.LadderElement }
+		 * 
+		 * 
+		 */
+		public List<Rungs.RungXML.LadderElement> getLadderElement() {
+			if (ladderElement == null) {
+				ladderElement = new ArrayList<Rungs.RungXML.LadderElement>();
+			}
+			return this.ladderElement;
+		}
 
-        /**
-         * Gets the value of the ladderElement property.
-         * 
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the ladderElement property.
-         * 
-         * <p>
-         * For example, to add a new item, do as follows:
-         * <pre>
-         *    getLadderElement().add(newItem);
-         * </pre>
-         * 
-         * 
-         * <p>
-         * Objects of the following type(s) are allowed in the list
-         * {@link Rungs.RungXML.LadderElement }
-         * 
-         * 
-         */
-        public List<Rungs.RungXML.LadderElement> getLadderElement() {
-            if (ladderElement == null) {
-                ladderElement = new ArrayList<Rungs.RungXML.LadderElement>();
-            }
-            return this.ladderElement;
-        }
+		/**
+		 * Gets the value of the comment property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getComment() {
+			return comment;
+		}
 
-        /**
-         * Gets the value of the comment property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getComment() {
-            return comment;
-        }
+		/**
+		 * Sets the value of the comment property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setComment(String value) {
+			this.comment = value;
+		}
 
-        /**
-         * Sets the value of the comment property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setComment(String value) {
-            this.comment = value;
-        }
+		/**
+		 * Gets the value of the label property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getLabel() {
+			return label;
+		}
 
-        /**
-         * Gets the value of the label property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getLabel() {
-            return label;
-        }
+		/**
+		 * Sets the value of the label property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setLabel(String value) {
+			this.label = value;
+		}
 
-        /**
-         * Sets the value of the label property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setLabel(String value) {
-            this.label = value;
-        }
+		/**
+		 * Gets the value of the height property.
+		 * 
+		 * @return possible object is {@link Float }
+		 * 
+		 */
+		public Float getHeight() {
+			return height;
+		}
 
-        /**
-         * Gets the value of the height property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Float }
-         *     
-         */
-        public Float getHeight() {
-            return height;
-        }
+		/**
+		 * Sets the value of the height property.
+		 * 
+		 * @param value allowed object is {@link Float }
+		 * 
+		 */
+		public void setHeight(Float value) {
+			this.height = value;
+		}
 
-        /**
-         * Sets the value of the height property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Float }
-         *     
-         */
-        public void setHeight(Float value) {
-            this.height = value;
-        }
+		/**
+		 * Gets the value of the width property.
+		 * 
+		 * @return possible object is {@link Short }
+		 * 
+		 */
+		public Short getWidth() {
+			return width;
+		}
 
-        /**
-         * Gets the value of the width property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Short }
-         *     
-         */
-        public Short getWidth() {
-            return width;
-        }
+		/**
+		 * Sets the value of the width property.
+		 * 
+		 * @param value allowed object is {@link Short }
+		 * 
+		 */
+		public void setWidth(Short value) {
+			this.width = value;
+		}
 
-        /**
-         * Sets the value of the width property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Short }
-         *     
-         */
-        public void setWidth(Short value) {
-            this.width = value;
-        }
+		/**
+		 * <p>
+		 * Java class for anonymous complex type.
+		 * 
+		 * <p>
+		 * The following schema fragment specifies the expected content contained within
+		 * this class.
+		 * 
+		 * <pre>
+		 * &lt;complexType>
+		 *   &lt;complexContent>
+		 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+		 *       &lt;sequence>
+		 *         &lt;element name="ConnectionPoint" maxOccurs="unbounded" minOccurs="0">
+		 *           &lt;complexType>
+		 *             &lt;complexContent>
+		 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+		 *                 &lt;sequence>
+		 *                   &lt;element name="Edge">
+		 *                     &lt;complexType>
+		 *                       &lt;simpleContent>
+		 *                         &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+		 *                           &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                         &lt;/extension>
+		 *                       &lt;/simpleContent>
+		 *                     &lt;/complexType>
+		 *                   &lt;/element>
+		 *                 &lt;/sequence>
+		 *                 &lt;attribute name="connectionPointType" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *               &lt;/restriction>
+		 *             &lt;/complexContent>
+		 *           &lt;/complexType>
+		 *         &lt;/element>
+		 *         &lt;element name="PinViewModel" maxOccurs="unbounded" minOccurs="0">
+		 *           &lt;complexType>
+		 *             &lt;simpleContent>
+		 *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+		 *                 &lt;attribute name="IsInput" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="Name" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="Datatype" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="Negated" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="IsInOutVariable" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="Visible" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *                 &lt;attribute name="EdgeDirectionType" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *               &lt;/extension>
+		 *             &lt;/simpleContent>
+		 *           &lt;/complexType>
+		 *         &lt;/element>
+		 *       &lt;/sequence>
+		 *       &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="ladderElementType" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="inverted" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="diffUp" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="diffDown" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="variableName" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="baseVariableName" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="ProgramName" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="baseVariableDataType" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="set" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="reset" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="IsLeftPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="IsRightPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="sourceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="targetID" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="Focusable" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="typeName" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="IsUserDefinedType" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="IsPolynomial" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *     &lt;/restriction>
+		 *   &lt;/complexContent>
+		 * &lt;/complexType>
+		 * </pre>
+		 * 
+		 * 
+		 */
+		@XmlAccessorType(XmlAccessType.FIELD)
+		@XmlType(name = "", propOrder = { "content" })
+		public static class LadderElement {
 
+			@XmlElementRefs({ @XmlElementRef(name = "PinViewModel", type = JAXBElement.class, required = false),
+					@XmlElementRef(name = "ConnectionPoint", type = JAXBElement.class, required = false) })
+			@XmlMixed
+			protected List<Serializable> content;
+			@XmlAttribute(name = "instanceID")
+			protected String instanceID;
+			@XmlAttribute(name = "ladderElementType")
+			protected String ladderElementType;
+			@XmlAttribute(name = "textEntityID")
+			protected String textEntityID;
+			@XmlAttribute(name = "text")
+			protected String text;
+			@XmlAttribute(name = "inverted")
+			protected String inverted;
+			@XmlAttribute(name = "diffUp")
+			protected String diffUp;
+			@XmlAttribute(name = "diffDown")
+			protected String diffDown;
+			@XmlAttribute(name = "variableName")
+			protected String variableName;
+			@XmlAttribute(name = "baseVariableName")
+			protected String baseVariableName;
+			@XmlAttribute(name = "ProgramName")
+			protected String programName;
+			@XmlAttribute(name = "baseVariableDataType")
+			protected String baseVariableDataType;
+			@XmlAttribute(name = "set")
+			protected String set;
+			@XmlAttribute(name = "reset")
+			protected String reset;
+			@XmlAttribute(name = "IsLeftPowerRail")
+			protected String isLeftPowerRail;
+			@XmlAttribute(name = "IsRightPowerRail")
+			protected String isRightPowerRail;
+			@XmlAttribute(name = "sourceID")
+			protected String sourceID;
+			@XmlAttribute(name = "targetID")
+			protected String targetID;
+			@XmlAttribute(name = "Focusable")
+			protected String focusable;
+			@XmlAttribute(name = "typeName")
+			protected String typeName;
+			@XmlAttribute(name = "IsUserDefinedType")
+			protected String isUserDefinedType;
+			@XmlAttribute(name = "IsPolynomial")
+			protected String isPolynomial;
 
-        /**
-         * <p>Java class for anonymous complex type.
-         * 
-         * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
-         * <pre>
-         * &lt;complexType>
-         *   &lt;complexContent>
-         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *       &lt;sequence>
-         *         &lt;element name="ConnectionPoint" maxOccurs="unbounded" minOccurs="0">
-         *           &lt;complexType>
-         *             &lt;complexContent>
-         *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *                 &lt;sequence>
-         *                   &lt;element name="Edge">
-         *                     &lt;complexType>
-         *                       &lt;simpleContent>
-         *                         &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-         *                           &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                         &lt;/extension>
-         *                       &lt;/simpleContent>
-         *                     &lt;/complexType>
-         *                   &lt;/element>
-         *                 &lt;/sequence>
-         *                 &lt;attribute name="connectionPointType" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *               &lt;/restriction>
-         *             &lt;/complexContent>
-         *           &lt;/complexType>
-         *         &lt;/element>
-         *         &lt;element name="PinViewModel" maxOccurs="unbounded" minOccurs="0">
-         *           &lt;complexType>
-         *             &lt;simpleContent>
-         *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-         *                 &lt;attribute name="IsInput" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="Name" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="Datatype" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="Negated" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="IsInOutVariable" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="Visible" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *                 &lt;attribute name="EdgeDirectionType" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *               &lt;/extension>
-         *             &lt;/simpleContent>
-         *           &lt;/complexType>
-         *         &lt;/element>
-         *       &lt;/sequence>
-         *       &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="ladderElementType" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="inverted" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="diffUp" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="diffDown" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="variableName" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="baseVariableName" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="ProgramName" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="baseVariableDataType" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="set" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="reset" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="IsLeftPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="IsRightPowerRail" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="sourceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="targetID" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="Focusable" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="typeName" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="IsUserDefinedType" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="IsPolynomial" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *     &lt;/restriction>
-         *   &lt;/complexContent>
-         * &lt;/complexType>
-         * </pre>
-         * 
-         * 
-         */
-        @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "content"
-        })
-        public static class LadderElement {
+			/**
+			 * Gets the value of the content property.
+			 * 
+			 * <p>
+			 * This accessor method returns a reference to the live list, not a snapshot.
+			 * Therefore any modification you make to the returned list will be present
+			 * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+			 * for the content property.
+			 * 
+			 * <p>
+			 * For example, to add a new item, do as follows:
+			 * 
+			 * <pre>
+			 * getContent().add(newItem);
+			 * </pre>
+			 * 
+			 * 
+			 * <p>
+			 * Objects of the following type(s) are allowed in the list {@link JAXBElement
+			 * }{@code <}{@link Rungs.RungXML.LadderElement.PinViewModel }{@code >}
+			 * {@link JAXBElement
+			 * }{@code <}{@link Rungs.RungXML.LadderElement.ConnectionPoint }{@code >}
+			 * {@link String }
+			 * 
+			 * 
+			 */
+			public List<Serializable> getContent() {
+				if (content == null) {
+					content = new ArrayList<Serializable>();
+				}
+				return this.content;
+			}
 
-            @XmlElementRefs({
-                @XmlElementRef(name = "PinViewModel", type = JAXBElement.class, required = false),
-                @XmlElementRef(name = "ConnectionPoint", type = JAXBElement.class, required = false)
-            })
-            @XmlMixed
-            protected List<Serializable> content;
-            @XmlAttribute(name = "instanceID")
-            protected String instanceID;
-            @XmlAttribute(name = "ladderElementType")
-            protected String ladderElementType;
-            @XmlAttribute(name="textEntityID")
-            protected String textEntityID;
-            @XmlAttribute(name="text")
-            protected String text;
-            @XmlAttribute(name = "inverted")
-            protected String inverted;
-            @XmlAttribute(name = "diffUp")
-            protected String diffUp;
-            @XmlAttribute(name = "diffDown")
-            protected String diffDown;
-            @XmlAttribute(name = "variableName")
-            protected String variableName;
-            @XmlAttribute(name = "baseVariableName")
-            protected String baseVariableName;
-            @XmlAttribute(name = "ProgramName")
-            protected String programName;
-            @XmlAttribute(name = "baseVariableDataType")
-            protected String baseVariableDataType;
-            @XmlAttribute(name = "set")
-            protected String set;
-            @XmlAttribute(name = "reset")
-            protected String reset;
-            @XmlAttribute(name = "IsLeftPowerRail")
-            protected String isLeftPowerRail;
-            @XmlAttribute(name = "IsRightPowerRail")
-            protected String isRightPowerRail;
-            @XmlAttribute(name = "sourceID")
-            protected String sourceID;
-            @XmlAttribute(name = "targetID")
-            protected String targetID;
-            @XmlAttribute(name = "Focusable")
-            protected String focusable;
-            @XmlAttribute(name = "typeName")
-            protected String typeName;
-            @XmlAttribute(name = "IsUserDefinedType")
-            protected String isUserDefinedType;
-            @XmlAttribute(name = "IsPolynomial")
-            protected String isPolynomial;
+			/**
+			 * Gets the value of the instanceID property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getInstanceID() {
+				return instanceID;
+			}
 
-            /**
-             * Gets the value of the content property.
-             * 
-             * <p>
-             * This accessor method returns a reference to the live list,
-             * not a snapshot. Therefore any modification you make to the
-             * returned list will be present inside the JAXB object.
-             * This is why there is not a <CODE>set</CODE> method for the content property.
-             * 
-             * <p>
-             * For example, to add a new item, do as follows:
-             * <pre>
-             *    getContent().add(newItem);
-             * </pre>
-             * 
-             * 
-             * <p>
-             * Objects of the following type(s) are allowed in the list
-             * {@link JAXBElement }{@code <}{@link Rungs.RungXML.LadderElement.PinViewModel }{@code >}
-             * {@link JAXBElement }{@code <}{@link Rungs.RungXML.LadderElement.ConnectionPoint }{@code >}
-             * {@link String }
-             * 
-             * 
-             */
-            public List<Serializable> getContent() {
-                if (content == null) {
-                    content = new ArrayList<Serializable>();
-                }
-                return this.content;
-            }
+			/**
+			 * Sets the value of the instanceID property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setInstanceID(String value) {
+				this.instanceID = value;
+			}
 
-            /**
-             * Gets the value of the instanceID property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getInstanceID() {
-                return instanceID;
-            }
-
-            /**
-             * Sets the value of the instanceID property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setInstanceID(String value) {
-                this.instanceID = value;
-            }
-
-            
-            
-            public String getTextEntityID() {
+			public String getTextEntityID() {
 				return textEntityID;
 			}
 
@@ -594,8 +573,6 @@ public class Rungs {
 				this.textEntityID = textEntityID;
 			}
 
-			
-			
 			public String getText() {
 				return text;
 			}
@@ -605,957 +582,823 @@ public class Rungs {
 			}
 
 			/**
-             * Gets the value of the ladderElementType property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getLadderElementType() {
-                return ladderElementType;
-            }
-
-            /**
-             * Sets the value of the ladderElementType property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setLadderElementType(String value) {
-                this.ladderElementType = value;
-            }
-
-            /**
-             * Gets the value of the inverted property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getInverted() {
-                return inverted;
-            }
-
-            /**
-             * Sets the value of the inverted property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setInverted(String value) {
-                this.inverted = value;
-            }
-
-            /**
-             * Gets the value of the diffUp property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getDiffUp() {
-                return diffUp;
-            }
-
-            /**
-             * Sets the value of the diffUp property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setDiffUp(String value) {
-                this.diffUp = value;
-            }
-
-            /**
-             * Gets the value of the diffDown property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getDiffDown() {
-                return diffDown;
-            }
-
-            /**
-             * Sets the value of the diffDown property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setDiffDown(String value) {
-                this.diffDown = value;
-            }
-
-            /**
-             * Gets the value of the variableName property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getVariableName() {
-                return variableName;
-            }
-
-            /**
-             * Sets the value of the variableName property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setVariableName(String value) {
-                this.variableName = value;
-            }
-
-            /**
-             * Gets the value of the baseVariableName property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getBaseVariableName() {
-                return baseVariableName;
-            }
-
-            /**
-             * Sets the value of the baseVariableName property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setBaseVariableName(String value) {
-                this.baseVariableName = value;
-            }
-
-            /**
-             * Gets the value of the programName property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getProgramName() {
-                return programName;
-            }
-
-            /**
-             * Sets the value of the programName property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setProgramName(String value) {
-                this.programName = value;
-            }
-
-            /**
-             * Gets the value of the baseVariableDataType property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getBaseVariableDataType() {
-                return baseVariableDataType;
-            }
-
-            /**
-             * Sets the value of the baseVariableDataType property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setBaseVariableDataType(String value) {
-                this.baseVariableDataType = value;
-            }
-
-            /**
-             * Gets the value of the set property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getSet() {
-                return set;
-            }
-
-            /**
-             * Sets the value of the set property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setSet(String value) {
-                this.set = value;
-            }
-
-            /**
-             * Gets the value of the reset property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getReset() {
-                return reset;
-            }
-
-            /**
-             * Sets the value of the reset property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setReset(String value) {
-                this.reset = value;
-            }
-
-            /**
-             * Gets the value of the isLeftPowerRail property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getIsLeftPowerRail() {
-                return isLeftPowerRail;
-            }
-
-            /**
-             * Sets the value of the isLeftPowerRail property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setIsLeftPowerRail(String value) {
-                this.isLeftPowerRail = value;
-            }
-
-            /**
-             * Gets the value of the isRightPowerRail property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getIsRightPowerRail() {
-                return isRightPowerRail;
-            }
-
-            /**
-             * Sets the value of the isRightPowerRail property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setIsRightPowerRail(String value) {
-                this.isRightPowerRail = value;
-            }
-
-            /**
-             * Gets the value of the sourceID property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getSourceID() {
-                return sourceID;
-            }
-
-            /**
-             * Sets the value of the sourceID property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setSourceID(String value) {
-                this.sourceID = value;
-            }
-
-            /**
-             * Gets the value of the targetID property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getTargetID() {
-                return targetID;
-            }
-
-            /**
-             * Sets the value of the targetID property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setTargetID(String value) {
-                this.targetID = value;
-            }
-
-            /**
-             * Gets the value of the focusable property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getFocusable() {
-                return focusable;
-            }
-
-            /**
-             * Sets the value of the focusable property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setFocusable(String value) {
-                this.focusable = value;
-            }
-
-            /**
-             * Gets the value of the typeName property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getTypeName() {
-                return typeName;
-            }
-
-            /**
-             * Sets the value of the typeName property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setTypeName(String value) {
-                this.typeName = value;
-            }
-
-            /**
-             * Gets the value of the isUserDefinedType property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getIsUserDefinedType() {
-                return isUserDefinedType;
-            }
-
-            /**
-             * Sets the value of the isUserDefinedType property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setIsUserDefinedType(String value) {
-                this.isUserDefinedType = value;
-            }
-
-            /**
-             * Gets the value of the isPolynomial property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getIsPolynomial() {
-                return isPolynomial;
-            }
-
-            /**
-             * Sets the value of the isPolynomial property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setIsPolynomial(String value) {
-                this.isPolynomial = value;
-            }
-
-
-            /**
-             * <p>Java class for anonymous complex type.
-             * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
-             * 
-             * <pre>
-             * &lt;complexType>
-             *   &lt;complexContent>
-             *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-             *       &lt;sequence>
-             *         &lt;element name="Edge">
-             *           &lt;complexType>
-             *             &lt;simpleContent>
-             *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-             *                 &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *               &lt;/extension>
-             *             &lt;/simpleContent>
-             *           &lt;/complexType>
-             *         &lt;/element>
-             *       &lt;/sequence>
-             *       &lt;attribute name="connectionPointType" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *     &lt;/restriction>
-             *   &lt;/complexContent>
-             * &lt;/complexType>
-             * </pre>
-             * 
-             * 
-             */
-            @XmlAccessorType(XmlAccessType.FIELD)
-            @XmlType(name = "", propOrder = {
-                "edge"
-            })
-            public static class ConnectionPoint {
-
-                @XmlElement(name = "Edge", required = true)
-                protected Rungs.RungXML.LadderElement.ConnectionPoint.Edge edge;
-                @XmlAttribute(name = "connectionPointType")
-                protected String connectionPointType;
-                @XmlAttribute(name = "instanceID")
-                protected String instanceID;
-                @XmlAttribute(name = "PowerPin")
-                protected String powerPin;
-
-                /**
-                 * Gets the value of the edge property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link Rungs.RungXML.LadderElement.ConnectionPoint.Edge }
-                 *     
-                 */
-                public Rungs.RungXML.LadderElement.ConnectionPoint.Edge getEdge() {
-                    return edge;
-                }
-
-                /**
-                 * Sets the value of the edge property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link Rungs.RungXML.LadderElement.ConnectionPoint.Edge }
-                 *     
-                 */
-                public void setEdge(Rungs.RungXML.LadderElement.ConnectionPoint.Edge value) {
-                    this.edge = value;
-                }
-
-                /**
-                 * Gets the value of the connectionPointType property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getConnectionPointType() {
-                    return connectionPointType;
-                }
-
-                /**
-                 * Sets the value of the connectionPointType property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setConnectionPointType(String value) {
-                    this.connectionPointType = value;
-                }
-
-                /**
-                 * Gets the value of the instanceID property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getInstanceID() {
-                    return instanceID;
-                }
-
-                /**
-                 * Sets the value of the instanceID property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setInstanceID(String value) {
-                    this.instanceID = value;
-                }
-
-                /**
-                 * Gets the value of the powerPin property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getPowerPin() {
-                    return powerPin;
-                }
-
-                /**
-                 * Sets the value of the powerPin property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setPowerPin(String value) {
-                    this.powerPin = value;
-                }
-
-
-                /**
-                 * <p>Java class for anonymous complex type.
-                 * 
-                 * <p>The following schema fragment specifies the expected content contained within this class.
-                 * 
-                 * <pre>
-                 * &lt;complexType>
-                 *   &lt;simpleContent>
-                 *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-                 *       &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
-                 *     &lt;/extension>
-                 *   &lt;/simpleContent>
-                 * &lt;/complexType>
-                 * </pre>
-                 * 
-                 * 
-                 */
-                @XmlAccessorType(XmlAccessType.FIELD)
-                @XmlType(name = "", propOrder = {
-                    "value"
-                })
-                public static class Edge {
-
-                    @XmlValue
-                    protected String value;
-                    @XmlAttribute(name = "instanceID")
-                    protected String instanceID;
-
-                    /**
-                     * Gets the value of the value property.
-                     * 
-                     * @return
-                     *     possible object is
-                     *     {@link String }
-                     *     
-                     */
-                    public String getValue() {
-                        return value;
-                    }
-
-                    /**
-                     * Sets the value of the value property.
-                     * 
-                     * @param value
-                     *     allowed object is
-                     *     {@link String }
-                     *     
-                     */
-                    public void setValue(String value) {
-                        this.value = value;
-                    }
-
-                    /**
-                     * Gets the value of the instanceID property.
-                     * 
-                     * @return
-                     *     possible object is
-                     *     {@link String }
-                     *     
-                     */
-                    public String getInstanceID() {
-                        return instanceID;
-                    }
-
-                    /**
-                     * Sets the value of the instanceID property.
-                     * 
-                     * @param value
-                     *     allowed object is
-                     *     {@link String }
-                     *     
-                     */
-                    public void setInstanceID(String value) {
-                        this.instanceID = value;
-                    }
-
-                }
-
-            }
-
-
-            /**
-             * <p>Java class for anonymous complex type.
-             * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
-             * 
-             * <pre>
-             * &lt;complexType>
-             *   &lt;simpleContent>
-             *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-             *       &lt;attribute name="IsInput" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="Name" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="Datatype" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="Negated" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="IsInOutVariable" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="Visible" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *       &lt;attribute name="EdgeDirectionType" type="{http://www.w3.org/2001/XMLSchema}string" />
-             *     &lt;/extension>
-             *   &lt;/simpleContent>
-             * &lt;/complexType>
-             * </pre>
-             * 
-             * 
-             */
-            @XmlAccessorType(XmlAccessType.FIELD)
-            @XmlType(name = "", propOrder = {
-                "value"
-            })
-            public static class PinViewModel {
-
-                @XmlValue
-                protected String value;
-                @XmlAttribute(name = "IsInput")
-                protected String isInput;
-                @XmlAttribute(name = "Name")
-                protected String name;
-                @XmlAttribute(name = "Datatype")
-                protected String datatype;
-                @XmlAttribute(name = "Comment")
-                protected String comment;
-                @XmlAttribute(name = "Negated")
-                protected String negated;
-                @XmlAttribute(name = "IsInOutVariable")
-                protected String isInOutVariable;
-                @XmlAttribute(name = "PowerPin")
-                protected String powerPin;
-                @XmlAttribute(name = "Visible")
-                protected String visible;
-                @XmlAttribute(name = "EdgeDirectionType")
-                protected String edgeDirectionType;
-
-                /**
-                 * Gets the value of the value property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getValue() {
-                    return value;
-                }
-
-                /**
-                 * Sets the value of the value property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setValue(String value) {
-                    this.value = value;
-                }
-
-                /**
-                 * Gets the value of the isInput property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getIsInput() {
-                    return isInput;
-                }
-
-                /**
-                 * Sets the value of the isInput property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setIsInput(String value) {
-                    this.isInput = value;
-                }
-
-                /**
-                 * Gets the value of the name property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getName() {
-                    return name;
-                }
-
-                /**
-                 * Sets the value of the name property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setName(String value) {
-                    this.name = value;
-                }
-
-                /**
-                 * Gets the value of the datatype property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getDatatype() {
-                    return datatype;
-                }
-
-                /**
-                 * Sets the value of the datatype property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setDatatype(String value) {
-                    this.datatype = value;
-                }
-
-                /**
-                 * Gets the value of the comment property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getComment() {
-                    return comment;
-                }
-
-                /**
-                 * Sets the value of the comment property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setComment(String value) {
-                    this.comment = value;
-                }
-
-                /**
-                 * Gets the value of the negated property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getNegated() {
-                    return negated;
-                }
-
-                /**
-                 * Sets the value of the negated property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setNegated(String value) {
-                    this.negated = value;
-                }
-
-                /**
-                 * Gets the value of the isInOutVariable property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getIsInOutVariable() {
-                    return isInOutVariable;
-                }
-
-                /**
-                 * Sets the value of the isInOutVariable property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setIsInOutVariable(String value) {
-                    this.isInOutVariable = value;
-                }
-
-                /**
-                 * Gets the value of the powerPin property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getPowerPin() {
-                    return powerPin;
-                }
-
-                /**
-                 * Sets the value of the powerPin property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setPowerPin(String value) {
-                    this.powerPin = value;
-                }
-
-                /**
-                 * Gets the value of the visible property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getVisible() {
-                    return visible;
-                }
-
-                /**
-                 * Sets the value of the visible property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setVisible(String value) {
-                    this.visible = value;
-                }
-
-                /**
-                 * Gets the value of the edgeDirectionType property.
-                 * 
-                 * @return
-                 *     possible object is
-                 *     {@link String }
-                 *     
-                 */
-                public String getEdgeDirectionType() {
-                    return edgeDirectionType;
-                }
-
-                /**
-                 * Sets the value of the edgeDirectionType property.
-                 * 
-                 * @param value
-                 *     allowed object is
-                 *     {@link String }
-                 *     
-                 */
-                public void setEdgeDirectionType(String value) {
-                    this.edgeDirectionType = value;
-                }
-
-            }
-
-        }
-
-    }
+			 * Gets the value of the ladderElementType property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getLadderElementType() {
+				return ladderElementType;
+			}
+
+			/**
+			 * Sets the value of the ladderElementType property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setLadderElementType(String value) {
+				this.ladderElementType = value;
+			}
+
+			/**
+			 * Gets the value of the inverted property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getInverted() {
+				return inverted;
+			}
+
+			/**
+			 * Sets the value of the inverted property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setInverted(String value) {
+				this.inverted = value;
+			}
+
+			/**
+			 * Gets the value of the diffUp property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getDiffUp() {
+				return diffUp;
+			}
+
+			/**
+			 * Sets the value of the diffUp property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setDiffUp(String value) {
+				this.diffUp = value;
+			}
+
+			/**
+			 * Gets the value of the diffDown property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getDiffDown() {
+				return diffDown;
+			}
+
+			/**
+			 * Sets the value of the diffDown property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setDiffDown(String value) {
+				this.diffDown = value;
+			}
+
+			/**
+			 * Gets the value of the variableName property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getVariableName() {
+				return variableName;
+			}
+
+			/**
+			 * Sets the value of the variableName property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setVariableName(String value) {
+				this.variableName = value;
+			}
+
+			/**
+			 * Gets the value of the baseVariableName property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getBaseVariableName() {
+				return baseVariableName;
+			}
+
+			/**
+			 * Sets the value of the baseVariableName property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setBaseVariableName(String value) {
+				this.baseVariableName = value;
+			}
+
+			/**
+			 * Gets the value of the programName property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getProgramName() {
+				return programName;
+			}
+
+			/**
+			 * Sets the value of the programName property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setProgramName(String value) {
+				this.programName = value;
+			}
+
+			/**
+			 * Gets the value of the baseVariableDataType property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getBaseVariableDataType() {
+				return baseVariableDataType;
+			}
+
+			/**
+			 * Sets the value of the baseVariableDataType property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setBaseVariableDataType(String value) {
+				this.baseVariableDataType = value;
+			}
+
+			/**
+			 * Gets the value of the set property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getSet() {
+				return set;
+			}
+
+			/**
+			 * Sets the value of the set property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setSet(String value) {
+				this.set = value;
+			}
+
+			/**
+			 * Gets the value of the reset property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getReset() {
+				return reset;
+			}
+
+			/**
+			 * Sets the value of the reset property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setReset(String value) {
+				this.reset = value;
+			}
+
+			/**
+			 * Gets the value of the isLeftPowerRail property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getIsLeftPowerRail() {
+				return isLeftPowerRail;
+			}
+
+			/**
+			 * Sets the value of the isLeftPowerRail property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setIsLeftPowerRail(String value) {
+				this.isLeftPowerRail = value;
+			}
+
+			/**
+			 * Gets the value of the isRightPowerRail property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getIsRightPowerRail() {
+				return isRightPowerRail;
+			}
+
+			/**
+			 * Sets the value of the isRightPowerRail property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setIsRightPowerRail(String value) {
+				this.isRightPowerRail = value;
+			}
+
+			/**
+			 * Gets the value of the sourceID property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getSourceID() {
+				return sourceID;
+			}
+
+			/**
+			 * Sets the value of the sourceID property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setSourceID(String value) {
+				this.sourceID = value;
+			}
+
+			/**
+			 * Gets the value of the targetID property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getTargetID() {
+				return targetID;
+			}
+
+			/**
+			 * Sets the value of the targetID property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setTargetID(String value) {
+				this.targetID = value;
+			}
+
+			/**
+			 * Gets the value of the focusable property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getFocusable() {
+				return focusable;
+			}
+
+			/**
+			 * Sets the value of the focusable property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setFocusable(String value) {
+				this.focusable = value;
+			}
+
+			/**
+			 * Gets the value of the typeName property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getTypeName() {
+				return typeName;
+			}
+
+			/**
+			 * Sets the value of the typeName property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setTypeName(String value) {
+				this.typeName = value;
+			}
+
+			/**
+			 * Gets the value of the isUserDefinedType property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getIsUserDefinedType() {
+				return isUserDefinedType;
+			}
+
+			/**
+			 * Sets the value of the isUserDefinedType property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setIsUserDefinedType(String value) {
+				this.isUserDefinedType = value;
+			}
+
+			/**
+			 * Gets the value of the isPolynomial property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getIsPolynomial() {
+				return isPolynomial;
+			}
+
+			/**
+			 * Sets the value of the isPolynomial property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setIsPolynomial(String value) {
+				this.isPolynomial = value;
+			}
+
+			/**
+			 * <p>
+			 * Java class for anonymous complex type.
+			 * 
+			 * <p>
+			 * The following schema fragment specifies the expected content contained within
+			 * this class.
+			 * 
+			 * <pre>
+			 * &lt;complexType>
+			 *   &lt;complexContent>
+			 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+			 *       &lt;sequence>
+			 *         &lt;element name="Edge">
+			 *           &lt;complexType>
+			 *             &lt;simpleContent>
+			 *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+			 *                 &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *               &lt;/extension>
+			 *             &lt;/simpleContent>
+			 *           &lt;/complexType>
+			 *         &lt;/element>
+			 *       &lt;/sequence>
+			 *       &lt;attribute name="connectionPointType" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *     &lt;/restriction>
+			 *   &lt;/complexContent>
+			 * &lt;/complexType>
+			 * </pre>
+			 * 
+			 * 
+			 */
+			@XmlAccessorType(XmlAccessType.FIELD)
+			@XmlType(name = "", propOrder = { "edge" })
+			public static class ConnectionPoint {
+
+				@XmlElement(name = "Edge", required = true)
+				protected Rungs.RungXML.LadderElement.ConnectionPoint.Edge edge;
+				@XmlAttribute(name = "connectionPointType")
+				protected String connectionPointType;
+				@XmlAttribute(name = "instanceID")
+				protected String instanceID;
+				@XmlAttribute(name = "PowerPin")
+				protected String powerPin;
+
+				/**
+				 * Gets the value of the edge property.
+				 * 
+				 * @return possible object is
+				 *         {@link Rungs.RungXML.LadderElement.ConnectionPoint.Edge }
+				 * 
+				 */
+				public Rungs.RungXML.LadderElement.ConnectionPoint.Edge getEdge() {
+					return edge;
+				}
+
+				/**
+				 * Sets the value of the edge property.
+				 * 
+				 * @param value allowed object is
+				 *              {@link Rungs.RungXML.LadderElement.ConnectionPoint.Edge }
+				 * 
+				 */
+				public void setEdge(Rungs.RungXML.LadderElement.ConnectionPoint.Edge value) {
+					this.edge = value;
+				}
+
+				/**
+				 * Gets the value of the connectionPointType property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getConnectionPointType() {
+					return connectionPointType;
+				}
+
+				/**
+				 * Sets the value of the connectionPointType property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setConnectionPointType(String value) {
+					this.connectionPointType = value;
+				}
+
+				/**
+				 * Gets the value of the instanceID property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getInstanceID() {
+					return instanceID;
+				}
+
+				/**
+				 * Sets the value of the instanceID property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setInstanceID(String value) {
+					this.instanceID = value;
+				}
+
+				/**
+				 * Gets the value of the powerPin property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getPowerPin() {
+					return powerPin;
+				}
+
+				/**
+				 * Sets the value of the powerPin property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setPowerPin(String value) {
+					this.powerPin = value;
+				}
+
+				/**
+				 * <p>
+				 * Java class for anonymous complex type.
+				 * 
+				 * <p>
+				 * The following schema fragment specifies the expected content contained within
+				 * this class.
+				 * 
+				 * <pre>
+				 * &lt;complexType>
+				 *   &lt;simpleContent>
+				 *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+				 *       &lt;attribute name="instanceID" type="{http://www.w3.org/2001/XMLSchema}string" />
+				 *     &lt;/extension>
+				 *   &lt;/simpleContent>
+				 * &lt;/complexType>
+				 * </pre>
+				 * 
+				 * 
+				 */
+				@XmlAccessorType(XmlAccessType.FIELD)
+				@XmlType(name = "", propOrder = { "value" })
+				public static class Edge {
+
+					@XmlValue
+					protected String value;
+					@XmlAttribute(name = "instanceID")
+					protected String instanceID;
+
+					/**
+					 * Gets the value of the value property.
+					 * 
+					 * @return possible object is {@link String }
+					 * 
+					 */
+					public String getValue() {
+						return value;
+					}
+
+					/**
+					 * Sets the value of the value property.
+					 * 
+					 * @param value allowed object is {@link String }
+					 * 
+					 */
+					public void setValue(String value) {
+						this.value = value;
+					}
+
+					/**
+					 * Gets the value of the instanceID property.
+					 * 
+					 * @return possible object is {@link String }
+					 * 
+					 */
+					public String getInstanceID() {
+						return instanceID;
+					}
+
+					/**
+					 * Sets the value of the instanceID property.
+					 * 
+					 * @param value allowed object is {@link String }
+					 * 
+					 */
+					public void setInstanceID(String value) {
+						this.instanceID = value;
+					}
+
+				}
+
+			}
+
+			/**
+			 * <p>
+			 * Java class for anonymous complex type.
+			 * 
+			 * <p>
+			 * The following schema fragment specifies the expected content contained within
+			 * this class.
+			 * 
+			 * <pre>
+			 * &lt;complexType>
+			 *   &lt;simpleContent>
+			 *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+			 *       &lt;attribute name="IsInput" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="Name" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="Datatype" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="Negated" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="IsInOutVariable" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="PowerPin" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="Visible" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *       &lt;attribute name="EdgeDirectionType" type="{http://www.w3.org/2001/XMLSchema}string" />
+			 *     &lt;/extension>
+			 *   &lt;/simpleContent>
+			 * &lt;/complexType>
+			 * </pre>
+			 * 
+			 * 
+			 */
+			@XmlAccessorType(XmlAccessType.FIELD)
+			@XmlType(name = "", propOrder = { "value" })
+			public static class PinViewModel {
+
+				@XmlValue
+				protected String value;
+				@XmlAttribute(name = "IsInput")
+				protected String isInput;
+				@XmlAttribute(name = "Name")
+				protected String name;
+				@XmlAttribute(name = "Datatype")
+				protected String datatype;
+				@XmlAttribute(name = "Comment")
+				protected String comment;
+				@XmlAttribute(name = "Negated")
+				protected String negated;
+				@XmlAttribute(name = "IsInOutVariable")
+				protected String isInOutVariable;
+				@XmlAttribute(name = "PowerPin")
+				protected String powerPin;
+				@XmlAttribute(name = "Visible")
+				protected String visible;
+				@XmlAttribute(name = "EdgeDirectionType")
+				protected String edgeDirectionType;
+
+				/**
+				 * Gets the value of the value property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getValue() {
+					return value;
+				}
+
+				/**
+				 * Sets the value of the value property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setValue(String value) {
+					this.value = value;
+				}
+
+				/**
+				 * Gets the value of the isInput property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getIsInput() {
+					return isInput;
+				}
+
+				/**
+				 * Sets the value of the isInput property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setIsInput(String value) {
+					this.isInput = value;
+				}
+
+				/**
+				 * Gets the value of the name property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getName() {
+					return name;
+				}
+
+				/**
+				 * Sets the value of the name property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setName(String value) {
+					this.name = value;
+				}
+
+				/**
+				 * Gets the value of the datatype property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getDatatype() {
+					return datatype;
+				}
+
+				/**
+				 * Sets the value of the datatype property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setDatatype(String value) {
+					this.datatype = value;
+				}
+
+				/**
+				 * Gets the value of the comment property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getComment() {
+					return comment;
+				}
+
+				/**
+				 * Sets the value of the comment property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setComment(String value) {
+					this.comment = value;
+				}
+
+				/**
+				 * Gets the value of the negated property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getNegated() {
+					return negated;
+				}
+
+				/**
+				 * Sets the value of the negated property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setNegated(String value) {
+					this.negated = value;
+				}
+
+				/**
+				 * Gets the value of the isInOutVariable property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getIsInOutVariable() {
+					return isInOutVariable;
+				}
+
+				/**
+				 * Sets the value of the isInOutVariable property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setIsInOutVariable(String value) {
+					this.isInOutVariable = value;
+				}
+
+				/**
+				 * Gets the value of the powerPin property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getPowerPin() {
+					return powerPin;
+				}
+
+				/**
+				 * Sets the value of the powerPin property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setPowerPin(String value) {
+					this.powerPin = value;
+				}
+
+				/**
+				 * Gets the value of the visible property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getVisible() {
+					return visible;
+				}
+
+				/**
+				 * Sets the value of the visible property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setVisible(String value) {
+					this.visible = value;
+				}
+
+				/**
+				 * Gets the value of the edgeDirectionType property.
+				 * 
+				 * @return possible object is {@link String }
+				 * 
+				 */
+				public String getEdgeDirectionType() {
+					return edgeDirectionType;
+				}
+
+				/**
+				 * Sets the value of the edgeDirectionType property.
+				 * 
+				 * @param value allowed object is {@link String }
+				 * 
+				 */
+				public void setEdgeDirectionType(String value) {
+					this.edgeDirectionType = value;
+				}
+
+			}
+
+		}
+
+	}
 
 }

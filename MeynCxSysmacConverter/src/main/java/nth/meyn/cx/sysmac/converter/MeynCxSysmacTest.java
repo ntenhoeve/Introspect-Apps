@@ -8,9 +8,6 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.stage.Stage;
 import nth.meyn.cx.sysmac.converter.cx.clipboard.CxClipboard;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxDataType;
 import nth.meyn.cx.sysmac.converter.cx.ladder.model.CxLadderModel;
@@ -26,65 +23,66 @@ import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.Rungs;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacMarshaller;
 import nth.meyn.cx.sysmac.converter.sysmac.ladder.xml.SysmacRungsFactory;
 
-public class MeynCxSysmacTest extends Application {
-
+public class MeynCxSysmacTest { // extends Application {
 
 	private static final String EN_VARIABLES = "_EN=Variables";
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+//	@Override
+//	public void start(Stage primaryStage) throws Exception {
 
 //	testSysmacSymbolDataWithABC();
-	
-	testSysmacSymbolDataWithABD();
-	
-		Platform.exit();
 
-	}
+//	testSysmacSymbolDataWithABD();
+//	
+//		Platform.exit();
+//
+//	}
 
 	private void testSysmacSymbolDataWithABD() {
 
 		String sysmacSymbolDataFromClipboard = SysmacClipboard.getSymbolData();
-		
-		Set<CxVariable> cxVariables=new HashSet<>();
+
+		Set<CxVariable> cxVariables = new HashSet<>();
 		CxVariable varableA = new CxVariable();
 		varableA.setName("A");
 		varableA.setDataType(CxDataType.BOOL);
 		varableA.setComment("A");
 		cxVariables.add(varableA);
-		
+
 		CxVariable varableB = new CxVariable();
 		varableB.setName("B");
 		varableB.setDataType(CxDataType.BOOL);
 		varableB.setComment("B");
 		cxVariables.add(varableB);
-		
+
 		CxVariable varableC = new CxVariable();
 		varableC.setName("D");
 		varableC.setDataType(CxDataType.BOOL);
 		varableC.setComment("D");
 		cxVariables.add(varableC);
-		
-		///Set<CxVariable> cxVariables = CxVariableFactory.createVariables(cxLadderModels);
-		
-		String sysmacSymbolDataCreated= SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
-		
+
+		/// Set<CxVariable> cxVariables =
+		/// CxVariableFactory.createVariables(cxLadderModels);
+
+		String sysmacSymbolDataCreated = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
+
 		printDifference(sysmacSymbolDataFromClipboard, sysmacSymbolDataCreated);
-		
-		
+
 	}
 
-	private void printDifference(String s1,	String s2) {
+	private void printDifference(String s1, String s2) {
 		for (int i = 0; i < s1.length() && i < s2.length(); ++i) {
-            if (s1.charAt(i) != s2.charAt(i)) {
-            	System.out.println(i+": "+s1.charAt(i) +"<>"+ s2.charAt(i)+"   "+(int)s1.charAt(i) +"<>"+ (int)s2.charAt(i));
-            }
-        }
-		
+			if (s1.charAt(i) != s2.charAt(i)) {
+				System.out
+						.println(i + ": " + s1.charAt(i) + "<>" + s2.charAt(i) + "   " + (int) s1.charAt(i) + "<>"
+								+ (int) s2.charAt(i));
+			}
+		}
+
 	}
 
 	private void testSysmacSymbolDataWithABC() throws JAXBException {
@@ -110,63 +108,56 @@ public class MeynCxSysmacTest extends Application {
 //		varableC.setDataType(CxDataType.BOOL);
 //		varableC.setComment("C");
 //		cxVariables.add(varableC);
-		
+
 		Set<CxVariable> cxVariables = CxVariableFactory.createVariables(cxLadderModels);
-		
-		String sysmacSymbolData2= SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
+
+		String sysmacSymbolData2 = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
 //		System.out.println(StringUtils.indexOfDifference(sysmacSymbolData1, sysmacSymbolData2));
-		
+
 		String sysmacLadderData = createSysmacLadderData(cxLadderModels);
 
 		SysmacClipboard.putLadderRungs(sysmacLadderData, sysmacSymbolData2);
-		
+
 	}
 
 	private void testSysmacSymbolData2() {
 		String reference = SysmacSymbolDataFactory.createExample();
 //		String clipboard = SysmacClipboard.getSymbolData();
-		
+
 		Set<CxVariable> cxVariables = CxVariableFactory.createVariableExamples();
 //		cxVariables.add( createVariable("C"));
 		String created = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
 		System.out.println("reference");
 		System.out.println(reference);
-		
-		
+
 		System.out.println("created");
 		System.out.println(created);
-		
-		   int i;
-	        for (i = 0; i < reference.length() && i < created.length(); ++i) {
-	            if (reference.charAt(i) != created.charAt(i)) {
-	            	System.out.println(i+"-"+(int)reference.charAt(i)+":"+(int)created.charAt(i)+"="+reference.charAt(i)+":"+created.charAt(i));
-	            }
-	        }
-		
+
+		int i;
+		for (i = 0; i < reference.length() && i < created.length(); ++i) {
+			if (reference.charAt(i) != created.charAt(i)) {
+				System.out
+						.println(i + "-" + (int) reference.charAt(i) + ":" + (int) created.charAt(i) + "="
+								+ reference.charAt(i) + ":" + created.charAt(i));
+			}
+		}
 
 	}
 
-
-
-	
-	
 	private void testSysmacSymbolData1() {
 		String example = SysmacSymbolDataFactory.createExample();
 		String clipboard = SysmacClipboard.getSymbolData();
 		System.out.println(StringUtils.indexOfDifference(example, clipboard));
 //		
-		
-		byte b1=(byte)example.charAt(612);
-		byte b2=(byte)example.charAt(613);	
-		System.out.println(b1+","+b2);
-		
+
+		byte b1 = (byte) example.charAt(612);
+		byte b2 = (byte) example.charAt(613);
+		System.out.println(b1 + "," + b2);
+
 		String variableData = getVariableData(clipboard);
 		System.out.println(variableData);
 		System.out.println(variableData.length());
-		
-		
-		
-		
+
 //		byte[] ba1=new byte[] {0,0,b1,b2};
 //		ByteBuffer bb1=ByteBuffer.wrap(ba1);
 //		int bi1 = bb1.getInt();
@@ -180,15 +171,14 @@ public class MeynCxSysmacTest extends Application {
 //		System.out.println( (byte)clipboard.charAt(612) +":"+(byte)clipboard.charAt(613)+":"+clipboard.length()+":"+getVariableLength(clipboard));
 //		System.out.println((byte)example.charAt(612) +":"+(byte)example.charAt(613)+":"+example.length()+":"+getVariableLength(example));
 
-
 	}
 
 	private String getVariableData(String data) {
 		String MARKER = "_EN=Variables";
-		int startPos=data.indexOf(MARKER);
-		int endPos=data.indexOf(MARKER, startPos+1)+MARKER.length();
-		return data.substring(startPos,  endPos);
-		
+		int startPos = data.indexOf(MARKER);
+		int endPos = data.indexOf(MARKER, startPos + 1) + MARKER.length();
+		return data.substring(startPos, endPos);
+
 	}
 
 	// private void testLadderSysmacExampleVersusSysmacClipboard() {
@@ -318,7 +308,7 @@ public class MeynCxSysmacTest extends Application {
 	}
 
 	private String createSysmacVariableData(List<CxLadderModel> cxLadderModels) {
-		 Set<CxVariable> cxVariables =CxVariableFactory.createVariables(cxLadderModels);
+		Set<CxVariable> cxVariables = CxVariableFactory.createVariables(cxLadderModels);
 //		Set<CxVariable> cxVariables = CxLadderModelFactory.createVariableExamples();
 		String sysmacVariableData = SysmacSymbolDataFactory.createSysmacClipboardData(cxVariables);
 		// String sysmacVariableData=SysmacSymbolDataFactory.createExample();
@@ -329,8 +319,7 @@ public class MeynCxSysmacTest extends Application {
 	private List<CxLadderModel> createCxLadderModelsFromClipboard() throws JAXBException {
 		String cxXml = CxClipboard.getLadderXml();
 		CxLadderDiagram cxLadderDiagram = CxUnmarshaller.createCxLadderDiagram(cxXml);
-		List<CxLadderModel> cxLadderModels = CxLadderModelFactory
-				.createLadderModels(cxLadderDiagram);
+		List<CxLadderModel> cxLadderModels = CxLadderModelFactory.createLadderModels(cxLadderDiagram);
 		return cxLadderModels;
 	}
 
