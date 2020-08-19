@@ -1,5 +1,6 @@
-package nth.sysmac.user.alarms.generator.dom;
+package nth.sysmac.user.alarms.generator.dom.sysmac.project.xml;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -20,17 +21,34 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.project.SysmacProject;
+import nth.sysmac.user.alarms.generator.dom.sysmac.project.xml.exception.XPathNotFoundException;
+
+/**
+ * Represents an XML file within a {@link SysmacProject} file. The {@link SysmacProject} file is essentially a zip file.
+ * @author nilsth
+ *
+ */
 public class XmlFile {
 
-	private final Document document;
+	public static final String OEM_EXTENSION = ".oem";
+	protected final Document document;
+	protected final ZipEntry zipEntry;
+	protected final ZipFile zipFile;
 
 	public XmlFile(ZipFile zipFile, ZipEntry zipEntry) {
+		this.zipFile = zipFile;
+		this.zipEntry = zipEntry;
 		InputStream inputStream = getInputStream(zipFile, zipEntry);
-		document = parse(zipEntry, inputStream);
+		this.document = parse(zipEntry, inputStream);
+	}
+
+	public XmlFile(XmlFile xmlFile) {
+		this.zipFile = xmlFile.getZipFile();
+		this.zipEntry = xmlFile.getZipEntry();
+		this.document = xmlFile.getDocument();
 	}
 
 	private Document parse(ZipEntry zipEntry, InputStream inputStream) {
@@ -51,19 +69,25 @@ public class XmlFile {
 		}
 	}
 
-	/**
-	 * Using xPath the search the document
-	 * See https://www.baeldung.com/java-xpath
-	 */
-	public boolean containsDataTypes() {
-		System.out.println(this);
-		String expression = "/data/DataType";
+	public boolean containsNode(String xPathExpression) {
+		try {
+			findNode(xPathExpression);
+			return true;
+		} catch (Throwable t) {
+			return false;
+		}
+	}
+
+	public Node findNode(String xPathExpression) {
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		try {
-			Node node = (Node) xPath.compile(expression).evaluate(document, XPathConstants.NODE);
-			return node!=null;
+			Node node = (Node) xPath.compile(xPathExpression).evaluate(document, XPathConstants.NODE);
+			if (node == null) {
+				throw new XPathNotFoundException(this, xPathExpression);
+			}
+			return node;
 		} catch (XPathExpressionException e) {
-			return false;
+			throw new XPathNotFoundException(this, xPathExpression, e);
 		}
 	}
 
@@ -79,5 +103,25 @@ public class XmlFile {
 		} catch (Exception e) {
 			throw new RuntimeException("Error converting docoment to string", e);
 		}
+	}
+
+	public Document getDocument() {
+		return document;
+	}
+
+	public ZipFile getZipFile() {
+		return zipFile;
+	}
+
+	public ZipEntry getZipEntry() {
+		return zipEntry;
+	}
+
+	public String getZipPath() {
+		return zipFile.getName() + File.separator + zipEntry.getName();
+	}
+
+	public boolean hasOemExtension() {
+		return zipEntry.getName().endsWith(OEM_EXTENSION);
 	}
 }
