@@ -34,24 +34,11 @@ public class UserAlarmGenerationService {
 
 		for (String groupName : groupNames) {
 			UserAlarmGroup u = new UserAlarmGroup(groupName, eventVariable, eventDataType);
+			System.out.println(u);
 		}
 	}
 
-	}
 
-	private List<UserAlarm> createUserAlarms(DataType eventDataType, String groupName) {
-		for (DataType child : eventDataType.getChildren()) {
-			if (child.getName().startsWith(groupName)) {
-				UserAlarm userAlarm = createUserAlarm(child, groupName);
-			}
-		}
-		return null;
-	}
-
-	private UserAlarm createUserAlarm(DataType child, String groupName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	private DataType findRootEventDataType(List<DataType> dataTypes) {
 		for (DataType dataType : dataTypes) {

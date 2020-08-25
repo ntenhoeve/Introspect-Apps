@@ -9,6 +9,7 @@ public class DataTypePath extends ArrayList<DataType> {
 
 	/**
 	 * creates a copy of the current path
+	 * 
 	 * @param currentPath
 	 */
 	public DataTypePath(DataTypePath currentPath) {
@@ -22,13 +23,26 @@ public class DataTypePath extends ArrayList<DataType> {
 	private static final long serialVersionUID = -7086773437631128734L;
 
 	public String getVariableExpression(Variable eventVariable) {
-		TitleBuilder varExpression=new TitleBuilder();
+		TitleBuilder varExpression = new TitleBuilder();
 		varExpression.setSeperator(".");
 		varExpression.append(eventVariable.getName());
-		
+
 		for (DataType dataType : this) {
 			if (!dataType.getBaseType().isStruct()) {
 				varExpression.append(dataType.getName());
+			}
+		}
+		return varExpression.toString();
+	}
+
+	public String getTextExpression() {
+		TitleBuilder varExpression = new TitleBuilder();
+		varExpression.setSeperator(" ");
+
+		for (DataType dataType : this) {
+			if (!dataType.getBaseType().isStruct()) {
+				String comment = dataType.getComment().trim();
+				varExpression.append(comment);
 			}
 		}
 		return varExpression.toString();

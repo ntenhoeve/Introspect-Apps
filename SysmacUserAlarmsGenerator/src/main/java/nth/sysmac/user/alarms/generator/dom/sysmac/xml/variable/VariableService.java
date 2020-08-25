@@ -27,10 +27,10 @@ public class VariableService {
 		if (eventVariables.isEmpty()) {
 			throw new RuntimeException("Could not find any global HMI variables with type ending with " + S_EVENT);
 		}
-		if (eventVariables.size()==1) {
+		if (eventVariables.size()!=1) {
 			throw new RuntimeException("Expected only one global HMI variable a type ending with " + S_EVENT);
 		}
-		return eventVariables.get(1);
+		return eventVariables.get(0);
 	}
 
 	private Entity getGlobalHmiVariableEntity(SysmacProject sysmacProject) {

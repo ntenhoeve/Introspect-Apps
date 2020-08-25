@@ -41,7 +41,7 @@ public class UserAlarm {
 		title.append(SEPERATOR+"acknowledge=",acknowledge);
 		title.append(SEPERATOR+"page=",page);
 		title.append(SEPERATOR+"details=",details);
-		return toString();
+		return title.toString();
 	}
 
 }

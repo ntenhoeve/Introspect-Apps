@@ -77,26 +77,6 @@ public class DataType {
 		return nameSpace;
 	}
 
-	@Override
-	public String toString() {
-		TitleBuilder title = new TitleBuilder();
-		title.append(DataType.ELEMENT_NAME);
-		title.append(SEPARATOR + "nameSpace=", nameSpace);
-		title.append(SEPARATOR + "name=", name);
-		title.append(SEPARATOR + "reference=", getReference());
-		title.append(SEPARATOR + "baseType=", baseTypeExpression);
-		title.append(SEPARATOR + "comment=", comment);
-		title.contact(NEW_LINE);
-
-		for (DataType child : children) {
-			String[] childStrings = child.toString().split("\\n");
-			for (String childString : childStrings) {
-				title.append(INDENT, childString + NEW_LINE);
-			}
-		}
-
-		return title.toString();
-	}
 
 	public boolean hasChildrenWithName(String name) {
 		boolean found = getChildren().stream().anyMatch(d -> d.getName().equals(name));
@@ -189,6 +169,27 @@ public class DataType {
 	public boolean isLeaf() {
 		boolean isLeaf=getChildren().isEmpty();
 		return isLeaf;
+	}
+
+	@Override
+	public String toString() {
+		TitleBuilder title = new TitleBuilder();
+		title.append(DataType.ELEMENT_NAME);
+		title.append(SEPARATOR + "nameSpace=", nameSpace);
+		title.append(SEPARATOR + "name=", name);
+		title.append(SEPARATOR + "reference=", getReference());
+		title.append(SEPARATOR + "baseType=", baseTypeExpression);
+		title.append(SEPARATOR + "comment=", comment);
+		title.contact(NEW_LINE);
+
+		for (DataType child : children) {
+			String[] childStrings = child.toString().split("\\n");
+			for (String childString : childStrings) {
+				title.append(INDENT, childString + NEW_LINE);
+			}
+		}
+
+		return title.toString();
 	}
 
 }
