@@ -3,24 +3,27 @@ package nth.sysmac.user.alarms.generator;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.project.SysmacProject;
-import nth.sysmac.user.alarms.generator.dom.sysmac.project.xml.datatype.DataType;
-import nth.sysmac.user.alarms.generator.dom.sysmac.project.xml.datatype.namespace.NameSpace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.project.xml.entity.Entity;
+import nth.sysmac.user.alarms.generator.dom.sysmac.SysmacProject;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGenerationService;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypeService;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.namespace.NameSpace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.Entity;
 
 public class SysmacUserAlarmsGenerator {
 
 	public static void main(String[] args) {
-		File projectFile = Paths.get("C:/Users/nilsth/Documents/My Work Documents/Omron Projects/SysmacAlarmListGenerator/7609DE17-WLD-000-001m2008131503.smc2").toFile();
+		File projectFile = Paths.get(
+				"C:/Users/nilsth/Documents/My Work Documents/Omron Projects/SysmacAlarmListGenerator/7609DE17-WLD-000-001m2008131503.smc2")
+				.toFile();
 		SysmacProject sysmacProject = new SysmacProject(projectFile);
 //		printNameSpaces(sysmacProject);
-		printDataTypes(sysmacProject);
+//		printDataTypes(sysmacProject);
 //		printEntities(sysmacProject);
-		
-		
+		UserAlarmGenerationService userAlarmGenerationService=new UserAlarmGenerationService();
+		userAlarmGenerationService.generateUserAlarms(sysmacProject);
+
 ////		List<ZipEntry> files = sysmacProject.findFiles("DataTypes");
 //		List<ZipEntry> files = sysmacProject.findFiles("DataTypesManifest");
 //		List<ZipEntry> files = sysmacProject.findFiles("Unit\\Diagnostic");
@@ -36,22 +39,19 @@ public class SysmacUserAlarmsGenerator {
 //		}
 	}
 
+	private static void printDataTypes(SysmacProject sysmacProject) {
+		DataTypeService dataTypeService = new DataTypeService();
+		List<DataType> dataTypes = dataTypeService.getDataTypes(sysmacProject);
+		for (DataType dataType : dataTypes) {
+			System.out.println(dataType);
+		}
+	}
+
 	private static void printEntities(SysmacProject sysmacProject) {
 		Entity rootEntity = sysmacProject.getRootEntity();
 		System.out.println(rootEntity);
 	}
 
-	private static void printDataTypes(SysmacProject sysmacProject) {
-		List<DataType> dataTypes= sysmacProject.getDataTypes();
-		List<DataType> filteredDataTypes = dataTypes.stream().filter(d -> d.hasChildrenWithName("sEvent")).collect(Collectors.toList());
-		for (DataType dataType : filteredDataTypes) {
-			System.out.println(dataType);
-		}
-	}
-
-	private static void printNameSpaces(SysmacProject sysmacProject) {
-		List<NameSpace> nameSpaces= sysmacProject.getNameSpaces();
-		System.out.println(nameSpaces);
-	}
+	
 
 }
