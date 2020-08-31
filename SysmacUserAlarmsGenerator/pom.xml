@@ -37,7 +37,7 @@
 			<artifactId>reflect-framework</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.github.reflect-framework</groupId>
 			<artifactId>reflect-util-regex</artifactId>
@@ -45,9 +45,16 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.github.reflect-framework</groupId>
+			<artifactId>reflect-util-maven-plugin</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.5.2</version>
+			<scope>test</scope>
 		</dependency>
 
 

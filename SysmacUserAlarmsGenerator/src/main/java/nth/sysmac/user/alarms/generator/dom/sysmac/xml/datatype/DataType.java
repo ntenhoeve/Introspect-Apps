@@ -77,7 +77,6 @@ public class DataType {
 		return nameSpace;
 	}
 
-
 	public boolean hasChildrenWithName(String name) {
 		boolean found = getChildren().stream().anyMatch(d -> d.getName().equals(name));
 		return found;
@@ -103,14 +102,15 @@ public class DataType {
 	 * @param dataTypes
 	 */
 	public void addReferencedChilderen(List<DataType> dataTypes) {
-		baseType.getReference().ifPresent(reference -> {
+		if (children.isEmpty() && baseType.getReference().isPresent()) {
 			try {
+				String reference = baseType.getReference().get();
 				DataType referedDataType = find(dataTypes, reference);
 				children.add(referedDataType);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-		});
+		}
 		// COULD RESULT IN ENDLESS LOOP!!!
 		for (DataType child : children) {
 			child.addReferencedChilderen(dataTypes);
@@ -119,7 +119,7 @@ public class DataType {
 
 	private DataType find(List<DataType> dataTypes, String referenceToFind) {
 		for (DataType dataType : dataTypes) {
-			Optional<DataType> result=dataType.find(referenceToFind);
+			Optional<DataType> result = dataType.find(referenceToFind);
 			if (result.isPresent()) {
 				return result.get();
 			}
@@ -152,11 +152,11 @@ public class DataType {
 	public List<DataTypePath> findPaths(Predicate<DataType> predicate) {
 		return findPaths(predicate, new DataTypePath());
 	}
-	
+
 	public List<DataTypePath> findPaths(Predicate<DataType> predicate, DataTypePath currentPath) {
-		List<DataTypePath> foundPaths=new ArrayList<>();
-		currentPath.add(this);
+		List<DataTypePath> foundPaths = new ArrayList<>();
 		DataTypePath currentPathCopy = new DataTypePath(currentPath);
+		currentPathCopy.add(this);
 		if (predicate.test(this)) {
 			foundPaths.add(currentPathCopy);
 		}
@@ -167,7 +167,7 @@ public class DataType {
 	}
 
 	public boolean isLeaf() {
-		boolean isLeaf=getChildren().isEmpty();
+		boolean isLeaf = getChildren().isEmpty();
 		return isLeaf;
 	}
 

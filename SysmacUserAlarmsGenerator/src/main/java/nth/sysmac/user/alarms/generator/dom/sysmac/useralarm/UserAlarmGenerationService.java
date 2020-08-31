@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.SysmacProject;
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.OmronBaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypePath;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypeService;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.VariableService;
@@ -22,18 +24,16 @@ public class UserAlarmGenerationService {
 
 	public void generateUserAlarms(SysmacProject sysmacProject) {
 		List<DataType> dataTypes = dataTypeService.getDataTypes(sysmacProject);
-
 		Variable eventVariable = variableService.getGlobalHmiEventVariable(sysmacProject);
-		System.out.println(eventVariable);
-
 		DataType eventDataType = findRootEventDataType(dataTypes);
-		System.out.println(eventDataType);
-
 		GroupNames groupNames = new GroupNames(eventDataType);
-		System.out.println(groupNames);
+		
+		List<DataTypePath> dataTypePaths = eventDataType
+				.findPaths(d -> d.isLeaf() && d.getBaseType().getOmronType().isPresent()
+						&& OmronBaseType.BOOL.equals(d.getBaseType().getOmronType().get())); 
 
 		for (String groupName : groupNames) {
-			UserAlarmGroup u = new UserAlarmGroup(groupName, eventVariable, eventDataType);
+			UserAlarmGroup u = new UserAlarmGroup(groupName, eventVariable, dataTypePaths);
 			System.out.println(u);
 		}
 	}

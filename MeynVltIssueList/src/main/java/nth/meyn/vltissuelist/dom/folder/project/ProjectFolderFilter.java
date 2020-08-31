@@ -17,8 +17,8 @@ public class ProjectFolderFilter implements FileFilter {
 	public ProjectFolderFilter(String electricalSchematic) {
 		Regex electricalSchematicRegex = new Regex().ignoreCase().beginOfLine()
 				.decimal(Repetition.times(4))
-				.literal(".", Repetition.onceOrNotAtAll())
-				.literal("DE", Repetition.onceOrNotAtAll())
+				.literal(".", Repetition.zeroOrOneTime())
+				.literal("DE", Repetition.zeroOrOneTime())
 				.decimal(Repetition.times(2));
 		if (electricalSchematic == null
 				|| !electricalSchematicRegex.hasMatchIn(electricalSchematic)) {

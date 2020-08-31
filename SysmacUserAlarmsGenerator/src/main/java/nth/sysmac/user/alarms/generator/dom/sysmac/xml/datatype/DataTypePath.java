@@ -1,8 +1,11 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.BaseTypeArray;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
 public class DataTypePath extends ArrayList<DataType> {
@@ -22,7 +25,7 @@ public class DataTypePath extends ArrayList<DataType> {
 
 	private static final long serialVersionUID = -7086773437631128734L;
 
-	public String getVariableExpression(Variable eventVariable) {
+	public String getVariableExpression(Variable eventVariable, int arrayIndex) {
 		TitleBuilder varExpression = new TitleBuilder();
 		varExpression.setSeperator(".");
 		varExpression.append(eventVariable.getName());
@@ -30,6 +33,11 @@ public class DataTypePath extends ArrayList<DataType> {
 		for (DataType dataType : this) {
 			if (!dataType.getBaseType().isStruct()) {
 				varExpression.append(dataType.getName());
+				if (dataType.getBaseType().getArray().isPresent()) {
+					varExpression.append("(");
+					varExpression.append(arrayIndex);
+					varExpression.append(")");					
+				}
 			}
 		}
 		return varExpression.toString();
@@ -46,6 +54,72 @@ public class DataTypePath extends ArrayList<DataType> {
 			}
 		}
 		return varExpression.toString();
+	}
+
+	public void verifyOnlyOneArray() {
+		int dataTypesWithArray = dataTypesWithArray();
+		if (dataTypesWithArray > 1) {
+			throw new RuntimeException("DataType path: " + this + " has multipe arrays. This is not supported for: "
+					+ SysmacUserAlarmsGenerator.class.getSimpleName());
+		}
+	}
+
+	private int dataTypesWithArray() {
+		int dataTypesWithArray = 0;
+		for (DataType dataType : this) {
+			if (dataType.getBaseType().getArray().isPresent()) {
+				dataTypesWithArray++;
+			}
+		}
+		return dataTypesWithArray;
+	}
+
+	private Optional<BaseTypeArray> findArray() {
+		for (DataType dataType : this) {
+			Optional<BaseTypeArray> array = dataType.getBaseType().getArray();
+			if (array.isPresent()) {
+				return array;
+			}
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public String toString() {
+		TitleBuilder reply = new TitleBuilder();
+		reply.setSeperator(".");
+		for (DataType dataType : this) {
+			if (!dataType.getBaseType().isStruct()) {
+				reply.append(dataType.getName());
+			}
+		}
+		return reply.toString();
+	}
+
+	/**
+	 * @return Gets the minimum value in an array of one of the {@link DataType}s or
+	 *         returns 0 if there are no {@link DataType}s has an array
+	 */
+	public int getMin() {
+		Optional<BaseTypeArray> array = findArray();
+		if (array.isPresent()) {
+			return array.get().getMin();
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * @return Gets the maximum value in an array of one of the {@link DataType}s or
+	 *         returns 0 if there are no {@link DataType}s has an array
+	 */
+	public int getMax() {
+		Optional<BaseTypeArray> array = findArray();
+		if (array.isPresent()) {
+			return array.get().getMax();
+		} else {
+			return 0;
+		}
 	}
 
 }

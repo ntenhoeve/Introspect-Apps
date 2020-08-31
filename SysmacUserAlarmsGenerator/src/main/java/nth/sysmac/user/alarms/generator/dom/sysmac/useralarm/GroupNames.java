@@ -13,7 +13,7 @@ public class GroupNames extends ArrayList<String> {
 
 	public GroupNames(DataType root) {
 		List<DataType> children = root.getChildren();
-		List<String> childNames = getChildNamesContainingStructures(children);
+		List<String> childNames = getChildNamesContainingReferences(children);
 		for (String childName : childNames) {
 			groupNameStartsWithChildName(childName).ifPresent(groupName -> {
 				remove(groupName);
@@ -26,7 +26,7 @@ public class GroupNames extends ArrayList<String> {
 
 	}
 
-	private List<String> getChildNamesContainingStructures(List<DataType> children) {
+	private List<String> getChildNamesContainingReferences(List<DataType> children) {
 		List<String> childNames = children.stream().filter(c -> c.getBaseType().getReference().isPresent()).map(c -> c.getName())
 				.collect(Collectors.toList());
 		return childNames;
