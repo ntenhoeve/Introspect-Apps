@@ -4,16 +4,16 @@ import java.util.List;
 
 import nth.reflect.util.regex.Regex;
 import nth.reflect.util.regex.Repetition;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.tag.TagService;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.tag.component.ComponentCodes;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.TokenService;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodes;
 
 public class TextExpression {
 
 	private static final Regex REGEX_DOUBLE_WHITE_SPACES = new Regex().whiteSpace(Repetition.min(2));
-	private static final Regex REGEX_TAG = new Regex().literal("{").anyCharacter(Repetition.oneOrMoreTimes()).literal("}");
+	private static final Regex REGEX_TOKEN = new Regex().literal("{").anyCharacter(Repetition.oneOrMoreTimes()).literal("}");
 	private final String message;
 	private final ComponentCodes componentCodes;
-	private final TagService tagService;
+	private final TokenService tokenService;
 
 	/**
 	 * FIXME: either use arrayIndex or use {@link #nextComponentCodes()}
@@ -21,22 +21,22 @@ public class TextExpression {
 	 * @param arrayIndex
 	 */
 	public TextExpression(String expression, int arrayIndex) {
-		tagService = new TagService();
+		tokenService = new TokenService();
 		message = createMessage(expression, arrayIndex);
 		componentCodes = createComponentCodes(expression, arrayIndex);
 	}
 
 	private ComponentCodes createComponentCodes(String expression, int arrayIndex) {
-		ComponentCodes componentCodes = tagService.createComponentCodes(expression);
+		ComponentCodes componentCodes = tokenService.createComponentCodes(expression);
 		return componentCodes;
 	}
 
 	private String createMessage(String expression, int arrayIndex) {
-		String result = tagService.replaceArrayTags(expression, arrayIndex);
+		String result = tokenService.replaceArrayTokens(expression, arrayIndex);
 		
-		result = tagService.removeAllTagsFrom(expression);
+		result = tokenService.removeAllTokensFrom(expression);
 
-		verifyNoMoreTagsPresent(result);
+		verifyNoMoreTokensPresent(result);
 		
 		result = result.trim();
 
@@ -45,9 +45,9 @@ public class TextExpression {
 		return result;
 	}
 
-	private void verifyNoMoreTagsPresent(String expression) {
-		if (REGEX_TAG.hasMatchIn(expression)) {
-			throw new RuntimeException("Could not resolve tag(s): "+REGEX_TAG.findMatches(expression));
+	private void verifyNoMoreTokensPresent(String expression) {
+		if (REGEX_TOKEN.hasMatchIn(expression)) {
+			throw new RuntimeException("Could not resolve token(s): "+REGEX_TOKEN.findMatches(expression));
 		}
 	}
 

@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.XmlFile;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.EntityXmlFile;
+/**
+ * @deprecated, namespaces are inside {@link EntityXmlFile}
+ * @author nilsth
+ *
+ */
 
 public class NameSpaceXmlFiles extends ArrayList<NameSpaceXmlFile> {
 

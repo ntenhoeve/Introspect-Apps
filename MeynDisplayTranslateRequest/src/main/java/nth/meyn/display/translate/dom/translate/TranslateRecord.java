@@ -26,7 +26,7 @@ public class TranslateRecord {
 	private static final String NEW_LINE = "\n";
 	static final String ENGLISH = "English";
 	public static final Regex REGEX_NUMBERS_ONLY = new Regex().literal("-",
-			Repetition.minMax(0, 1)).decimal(Repetition.oneOrMoreTimes()); // "-{0,1}\\d+";
+			Repetition.minMax(0, 1)).digit(Repetition.oneOrMoreTimes()); // "-{0,1}\\d+";
 	private static final String PROPERTY = "Property";
 	private final List<String> values;
 

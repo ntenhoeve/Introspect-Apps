@@ -12,11 +12,11 @@ public class CustomerFolderFilter implements FileFilter {
 	private Regex regex;
 
 	public CustomerFolderFilter() {
-		regex=new Regex().beginOfLine().decimal(Repetition.times(4)).literal("-");
+		regex=new Regex().beginOfLine().digit(Repetition.times(4)).literal("-");
 	}
 	
 	public CustomerFolderFilter(String customerNumber) {
-		Regex fourDigits=new Regex().beginOfLine().decimal(Repetition.times(4));
+		Regex fourDigits=new Regex().beginOfLine().digit(Repetition.times(4));
 		if (customerNumber==null || customerNumber.length()<4 || !fourDigits.hasMatchIn(customerNumber)) {
 			throw new InvalidParameterException("Invalid CustomerNumber: "+customerNumber);
 		}

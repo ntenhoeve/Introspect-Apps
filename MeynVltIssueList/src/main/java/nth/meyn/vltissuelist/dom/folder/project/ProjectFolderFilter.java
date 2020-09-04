@@ -11,15 +11,15 @@ public class ProjectFolderFilter implements FileFilter {
 	private final Regex regex;
 
 	public ProjectFolderFilter() {
-		regex = new Regex().beginOfLine().decimal(Repetition.times(6)).whiteSpace(Repetition.zeroOrMoreTimes()).literal("-");
+		regex = new Regex().beginOfLine().digit(Repetition.times(6)).whiteSpace(Repetition.zeroOrMoreTimes()).literal("-");
 	}
 
 	public ProjectFolderFilter(String electricalSchematic) {
 		Regex electricalSchematicRegex = new Regex().ignoreCase().beginOfLine()
-				.decimal(Repetition.times(4))
+				.digit(Repetition.times(4))
 				.literal(".", Repetition.zeroOrOneTime())
 				.literal("DE", Repetition.zeroOrOneTime())
-				.decimal(Repetition.times(2));
+				.digit(Repetition.times(2));
 		if (electricalSchematic == null
 				|| !electricalSchematicRegex.hasMatchIn(electricalSchematic)) {
 			throw new IllegalArgumentException("Illegal electricSchematic nr: "+electricalSchematic);

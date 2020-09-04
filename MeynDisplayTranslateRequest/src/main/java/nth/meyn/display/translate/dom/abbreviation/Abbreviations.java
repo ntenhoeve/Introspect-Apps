@@ -17,12 +17,12 @@ public class Abbreviations {
 	private final Map<String, String> abbreviations;
 	private Regex REGEX_ABBREVIATION_CANDIDATE_INLINE = new Regex()
 			.whiteSpace(Repetition.oneOrMoreTimes().reluctant())
-			.letters(LetterTypes.UPPER_CASE, Repetition.minMax(2, 5))
+			.letter(LetterTypes.UPPER_CASE, Repetition.minMax(2, 5))
 			.literal(".", Repetition.minMax(0, 1).reluctant())
 			.whiteSpace(Repetition.oneOrMoreTimes().reluctant());
 	private final Regex REGEX_ABBREVIATION_CANDIDATE_SINGLE = new Regex()
 			.beginOfLine().whiteSpace(Repetition.zeroOrMoreTimes().reluctant())
-			.letters(Repetition.minMax(1, 3))
+			.letter(Repetition.minMax(1, 3))
 			.whiteSpace(Repetition.zeroOrMoreTimes().reluctant()).endOfLine();
 
 	public Abbreviations() {

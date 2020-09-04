@@ -3,7 +3,13 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.namespace;
 import org.w3c.dom.Node;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.XmlFile;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.EntityXmlFile;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.exception.XmlConversionException;
+/**
+ * @deprecated, namespaces are inside {@link EntityXmlFile}
+ * @author nilsth
+ *
+ */
 
 public class NameSpaceXmlFile extends XmlFile {
 

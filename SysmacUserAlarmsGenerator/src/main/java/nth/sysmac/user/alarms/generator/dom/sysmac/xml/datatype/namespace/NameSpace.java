@@ -6,10 +6,15 @@ import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.EntityXmlFile;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.exception.InvalidNodeNameException;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.exception.MissingAttributeException;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.exception.XmlConversionException;
-
+/**
+ * @deprecated, namespaces are inside {@link EntityXmlFile}
+ * @author nilsth
+ *
+ */
 public class NameSpace {
 
 	static final String ELEMENT_NAME = "DataTypesManifest";

@@ -12,7 +12,7 @@ public class PlcFolderFilter implements FileFilter {
 
 	public PlcFolderFilter() {
 		regex = new Regex().ignoreCase().beginOfLine().literals("a-z\\s", Repetition.minMax(2, 15))
-				.decimal(Repetition.times(2)).literal("-").literals("0-9a-z", Repetition.times(1));
+				.digit(Repetition.times(2)).literal("-").literals("0-9a-z", Repetition.times(1));
 	}
 
 	@Override

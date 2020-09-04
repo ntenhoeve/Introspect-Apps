@@ -16,7 +16,7 @@ public class PlcFolder {
 	
 	public PlcFolder(File plcFolder) {
 		this.plcFolder = plcFolder;
-		firstLettersRegex = new Regex().beginOfLine().letters(Repetition.oneOrMoreTimes());
+		firstLettersRegex = new Regex().beginOfLine().letter(Repetition.oneOrMoreTimes());
 	}
 
 	public String getName() {
