@@ -2,9 +2,8 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.comp
 
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.TokenDefinition;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.TokenParser;
 
-public interface SkipRuleToken extends TokenDefinition, TokenParser<List<SkipRule>> {
+public interface SkipRuleParser extends  TokenParser<List<SkipRule>> {
 
 }

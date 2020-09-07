@@ -26,11 +26,11 @@ class ComponentCodeWithBracketsTokenTest {
 	private static final String INVALID_COMPONENT_CODE1 = "{Z" + COMPONENT_CODE + "}";
 	private static final String INVALID_COMPONENT_CODE2 = "{U2}";
 
-	private static ComponentCodeWithBracketsToken token;
+	private static ComponentCodeWithBracketsParser token;
 
 	@BeforeAll
 	private static void setup() {
-		token = new ComponentCodeWithBracketsToken();
+		token = new ComponentCodeWithBracketsParser();
 	}
 
 	@Test
@@ -69,8 +69,8 @@ class ComponentCodeWithBracketsTokenTest {
 	}
 
 	@Test
-	void testGetRegex_givenCorrectTokenWithComponentCodeAndTwoSkipRulesAndInvalidSkipRule_mustNotFind() {
-		assertThat(token.getRegex().hasMatchIn(COMPONENT_CODE_WITH_2_SKIP_RULES_AND_INVALID_SKIP_RULE)).isFalse();
+	void testGetRegex_givenCorrectTokenWithComponentCodeAndTwoSkipRulesAndInvalidSkipRule_mustFind() {
+		assertThat(token.getRegex().hasMatchIn(COMPONENT_CODE_WITH_2_SKIP_RULES_AND_INVALID_SKIP_RULE)).isTrue();
 	}
 
 	@Test
@@ -119,7 +119,7 @@ class ComponentCodeWithBracketsTokenTest {
 
 	@Test
 	void testParse_givenCorrectTokenWithComponentCodeAndTwoSkipRulesAndInvalidSkipRule_mustThrowAnException() {
-		assertThatThrownBy(() -> token.parse(COMPONENT_CODE_WITH_2_SKIP_RULES_AND_INVALID_SKIP_RULE)).hasMessageContaining("bla");
+		assertThatThrownBy(() -> token.parse(COMPONENT_CODE_WITH_2_SKIP_RULES_AND_INVALID_SKIP_RULE)).hasMessageContaining("Invalid skip rule(s):  invalidSkipRule");
 	}
 
 

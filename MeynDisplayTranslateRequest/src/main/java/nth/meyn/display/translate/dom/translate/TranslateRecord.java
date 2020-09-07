@@ -25,8 +25,8 @@ public class TranslateRecord {
 	private static final int MAX_ALARM_TEXT_LENGTH = 80;
 	private static final String NEW_LINE = "\n";
 	static final String ENGLISH = "English";
-	public static final Regex REGEX_NUMBERS_ONLY = new Regex().literal("-",
-			Repetition.minMax(0, 1)).digit(Repetition.oneOrMoreTimes()); // "-{0,1}\\d+";
+	public static final Regex REGEX_NUMBERS_ONLY = new Regex().literal("-", Repetition.minMax(0, 1))
+			.digit(Repetition.oneOrMoreTimes()); // "-{0,1}\\d+";
 	private static final String PROPERTY = "Property";
 	private final List<String> values;
 
@@ -45,8 +45,7 @@ public class TranslateRecord {
 
 		if (englishText != null) {
 			englishText = englishText.trim();
-			translationTips = getTranslationTips(englishText, abbreviations,
-					componentCodes);
+			translationTips = getTranslationTips(englishText, abbreviations, componentCodes);
 			maxSize = getmaxSize(csvRecord);
 			if (abbreviations.isAbbreviation(englishText)) {
 				translationType = TranslationType.TRANSLATE_FROM_ENGLISH_ABBREVIATION;
@@ -57,12 +56,12 @@ public class TranslateRecord {
 				translationTips = "";
 			} else if (componentCodes.hasMatchIn(englishText)) {
 				int lastPos = componentCodes.findLastPos(englishText);
-				textToTranslate = englishText.substring(0,lastPos)+" ";
-				textToTranslate="";// translate agency wants this field empty, because their translate tool does not accept pre-filled values.
+				textToTranslate = englishText.substring(0, lastPos) + " ";
+				textToTranslate = "";// translate agency wants this field empty, because their translate tool does
+										// not accept pre-filled values.
 				translationType = TranslationType.TRANSLATE_AFTER_COMPONENT_CODES;
 			}
 		}
-
 
 		values.add(textToTranslate);
 		values.add(translationType.toString());
@@ -71,15 +70,14 @@ public class TranslateRecord {
 
 	}
 
-	private String getTranslationTips(String englishText,
-			Abbreviations abbreviations, ComponentCodes componentCodes) {
-		Map<Regex, String> regexTips = createRegexTips(abbreviations,
-				componentCodes);
+	private String getTranslationTips(String englishText, Abbreviations abbreviations, ComponentCodes componentCodes) {
+		Map<Regex, String> regexTips = createRegexTips(abbreviations, componentCodes);
 		Map<String, String> tips = new TreeMap<>();
 
 		for (Regex regex : regexTips.keySet()) {
 			if (regex.hasMatchIn(englishText)) {
-				String key = regex.findFirstMatchIn(englishText);
+				String key = regex.findFirstMatchIn(englishText).orElseThrow(() -> new RuntimeException(
+						"Could not find regex: " + regex.toString() + " in: " + englishText));
 				String value = regexTips.get(regex);
 				tips.put(key, value);
 			}
@@ -87,8 +85,7 @@ public class TranslateRecord {
 		return tips.toString().replaceAll("^\\{", "").replaceAll("\\}$", "");
 	}
 
-	private Map<Regex, String> createRegexTips(Abbreviations abbreviations,
-			ComponentCodes componentCodes) {
+	private Map<Regex, String> createRegexTips(Abbreviations abbreviations, ComponentCodes componentCodes) {
 		Map<Regex, String> regexTips = new HashMap<>();
 		regexTips.putAll(abbreviations.asRegexMap());
 		regexTips.putAll(componentCodes.asRegexMap());

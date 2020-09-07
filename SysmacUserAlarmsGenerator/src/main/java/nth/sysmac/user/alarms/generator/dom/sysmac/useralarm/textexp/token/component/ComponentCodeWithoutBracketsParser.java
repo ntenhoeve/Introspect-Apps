@@ -5,12 +5,50 @@ import java.util.List;
 
 import nth.reflect.util.regex.Regex;
 import nth.reflect.util.regex.Repetition;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.TokenDefinition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRuleTokens;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRuleParsers;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRules;
 
-public class ComponentCodeWithoutBracketsToken implements TokenDefinition, TokenParser<ComponentCode> {
+/**
+ * <h3>Component codes without curly brackets</h3>
+ * 
+ * A {@link ComponentCodeWithBrackets} is a {@link Token} containing a {@link ComponentCode}
+ * Optionally followed with curly brackets {} containing {@link SkipRules}. In example:
+ * <p>
+ * <table border="2">
+ * <tr>
+ * <th colspan=3>Data Type example:</th>
+ * </tr>
+ * <tr>
+ * <th align="left">Name</th>
+ * <th align="left">Base Type</th>
+ * <th align="left">Comment</th>
+ * </tr>
+ * <tr>
+ * <td>sEvent</td>
+ * <td>STRUCT</td>
+ * <td></td>
+ * </tr>
+ * <tr>
+ * <td>- AirPressure</td>
+ * <td>BOOL</td>
+ * <td>{110S3} Line tensioner out of position</td>
+ * </tr>
+ * <tr>
+ * <th colspan=3>Results in: 110S3 Line tensioner out of position</th>
+ * </tr>
+ * </table>
+ * 
+ * 
+ * TODO example {110S2 sc=u,110.4 sp=111} 110S2 110S6 110S8 112S2
+ * 
+ * <p>
+ * 
+ * @author nilsth
+ *
+ */
+public class ComponentCodeWithoutBracketsParser implements TokenParser<ComponentCode> {
 
 	public static final Regex REGEX_SPACE_SEPARATOR = new Regex().whiteSpace(Repetition.zeroOrOneTime());
 	public static final Regex REGEX_COMMA_SEPARATOR = new Regex().literal(",", Repetition.zeroOrOneTime());
@@ -44,7 +82,7 @@ public class ComponentCodeWithoutBracketsToken implements TokenDefinition, Token
 
 	private SkipRules getSkipRules(String token) {
 		String skipRulesString = REGEX_FIND_RULES.findFirstMatchIn(token).get();
-		SkipRules skipRules = SkipRuleTokens.parse(skipRulesString);
+		SkipRules skipRules = SkipRuleParsers.parse(skipRulesString);
 		return skipRules;
 	}
 

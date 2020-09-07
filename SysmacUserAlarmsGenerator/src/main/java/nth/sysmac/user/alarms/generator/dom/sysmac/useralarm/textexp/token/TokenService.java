@@ -5,8 +5,8 @@ import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.array.ArrayToken;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodeWithBracketsToken;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodeWithoutBracketsToken;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodeWithBracketsParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodeWithoutBracketsParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodes;
 
 public class TokenService {
@@ -30,11 +30,11 @@ public class TokenService {
 
 	private List<ComponentCode> findAllComponentCodesWithBrackets(String expression) {
 		List<ComponentCode> componentCodes = new ArrayList<>();
-		List<String> tokens = ComponentCodeWithBracketsToken.REGEX.findMatches(expression);
-		ComponentCodeWithBracketsToken componentCodeWithBracketsToken = new ComponentCodeWithBracketsToken();
+		List<String> tokens = ComponentCodeWithBracketsParser.REGEX.findMatches(expression);
+		ComponentCodeWithBracketsParser componentCodeWithBracketsParser = new ComponentCodeWithBracketsParser();
 		for (String token : tokens) {
 			System.out.println(expression + ":" + token);
-			ComponentCode componentCode = componentCodeWithBracketsToken.parse(token);
+			ComponentCode componentCode = componentCodeWithBracketsParser.parse(token);
 			componentCodes.add(componentCode);
 		}
 		return componentCodes;
@@ -42,11 +42,11 @@ public class TokenService {
 
 	private List<ComponentCode> findAllComponentCodesWithoutBrackets(String expression) {
 		List<ComponentCode> componentCodes = new ArrayList<>();
-		List<String> tokens = ComponentCodeWithoutBracketsToken.REGEX.findMatches(expression);
-		ComponentCodeWithoutBracketsToken componentCodeWithoutBracketsToken = new ComponentCodeWithoutBracketsToken();
+		List<String> tokens = ComponentCodeWithoutBracketsParser.REGEX.findMatches(expression);
+		ComponentCodeWithoutBracketsParser componentCodeWithoutBracketsParser = new ComponentCodeWithoutBracketsParser();
 		for (String token : tokens) {
 			System.out.println(expression + ":" + token);
-			ComponentCode componentCode = componentCodeWithoutBracketsToken.parse(token);
+			ComponentCode componentCode = componentCodeWithoutBracketsParser.parse(token);
 			componentCodes.add(componentCode);
 		}
 		return componentCodes;

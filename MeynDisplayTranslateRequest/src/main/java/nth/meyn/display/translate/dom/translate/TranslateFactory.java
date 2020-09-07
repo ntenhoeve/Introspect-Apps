@@ -29,7 +29,7 @@ public class TranslateFactory {
 
 	public static DownloadStream createTranslateRequest(TranslateInfo translateInfo)
 			throws URISyntaxException, IOException {
-		File sourceFile = translateInfo.getCxDesignerExportFile().getFile();
+		File sourceFile = new File(translateInfo.getCxDesignerExportFile().getFileName());
 		InputStreamReader reader = createReader(sourceFile);
 		skipFirstLine(reader);
 
@@ -56,7 +56,7 @@ public class TranslateFactory {
 
 	private static void writeFirstLines(PrintStream printStream, TranslateInfo translateInfo)
 			throws IOException, URISyntaxException {
-		File omronDisplayCvsFile = translateInfo.getCxDesignerExportFile().getFile();
+		File omronDisplayCvsFile = new File(translateInfo.getCxDesignerExportFile().getFileName());
 		String language = translateInfo.getTranslateToLanguage();
 		InputStreamReader reader = createReader(omronDisplayCvsFile);
 		char ch;

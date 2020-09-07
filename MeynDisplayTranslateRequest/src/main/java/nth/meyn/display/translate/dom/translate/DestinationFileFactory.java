@@ -12,7 +12,7 @@ public class DestinationFileFactory {
 	 * with help of the source file path
 	 */
 	public static File create(TranslateInfo translateInfo) {
-		File sourceFile = translateInfo.getCxDesignerExportFile().getFile();
+		File sourceFile = new File(translateInfo.getCxDesignerExportFile().getFileName());
 		String language=translateInfo.getTranslateToLanguage();
 		StringBuilder destinationPath = new StringBuilder();
 		Optional<String> customerAndPanelNr = getCustomerNumberAndPanelNr(sourceFile);

@@ -3,7 +3,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.comp
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.PageColumn;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRule;
 
-public class SkipUnEvenColumnRule implements SkipRule {
+public class SkipUnevenColumnRule extends SkipRule {
 
 	@Override
 	public boolean appliesTo(PageColumn pageColumn) {
@@ -16,6 +16,11 @@ public class SkipUnEvenColumnRule implements SkipRule {
 		int page = pageColumn.getPage();
 		int nextColumn = pageColumn.getColumn() + 1;
 		return new PageColumn(page, nextColumn);
+	}
+
+	@Override
+	protected Object[] getFieldValues() {
+		return new Object[0];
 	}
 
 }

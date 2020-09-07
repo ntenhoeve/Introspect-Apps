@@ -2,7 +2,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.comp
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.PageColumn;
 
-public class MaxColumnRule implements SkipRule {
+public class MaxColumnRule extends SkipRule {
 
 	@Override
 	public boolean appliesTo(PageColumn pageColumn) {
@@ -15,6 +15,11 @@ public class MaxColumnRule implements SkipRule {
 		int nextPage = pageColumn.getPage()+1;
 		PageColumn next = new PageColumn(nextPage, nextColumn);
 		return next;
+	}
+
+	@Override
+	protected Object[] getFieldValues() {
+		return new Object[0];
 	}
 
 }

@@ -5,6 +5,7 @@ import nth.reflect.util.regex.Repetition;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRules;
 
 /**
+ * <h3>Component Code</h3>
  * Almost all alarm messages start with one or component codes so that it can
  * easily be located in the electric schematic or in the field.<br>
  * The format of a component code is: 30M3, where:

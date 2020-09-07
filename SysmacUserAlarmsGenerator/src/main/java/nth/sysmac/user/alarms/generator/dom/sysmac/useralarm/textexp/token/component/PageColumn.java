@@ -1,5 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.MaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRules;
 
@@ -21,8 +22,12 @@ public class PageColumn {
 		this.column = column;
 	}
 
+	/**
+	 * we do not verify the max column number, that will be fixed by the {@link MaxColumnRule}
+	 * @param column
+	 */
 	private void verify(int column) {
-		if (column < COLUMN_MIN || column > COLUMN_MAX) {
+		if (column < COLUMN_MIN ) {
 			throw new RuntimeException("Column must be between 1-8, but was: " + column);
 		}
 	}
