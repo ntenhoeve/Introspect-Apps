@@ -3,24 +3,24 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token;
 /**
  * A lexical {@link Token} or simply {@link Token} is a string with an assigned
  * and thus identified meaning. It is structured as a pair consisting of a
- * {@link TokenDefinition} and an optional token value.
+ * {@link TokenRule} and an optional token value.
  * 
  * @author nilsth
  *
  */
 public class Token {
-	private final TokenDefinition tokenDefinition;
+	private final TokenRule rule;
 	private final String value;
 
-	public Token(TokenDefinition tokenDefinition, String value) {
+	public Token(TokenRule rule, String value) {
 		super();
-		this.tokenDefinition = tokenDefinition;
+		this.rule = rule;
 		this.value = value;
 
 	}
 
-	public TokenDefinition getTokenDefinition() {
-		return tokenDefinition;
+	public TokenRule getRule() {
+		return rule;
 	}
 
 	public String getValue() {
@@ -39,7 +39,7 @@ public class Token {
 		if (!this.getValue().equals(thatToken.getValue())) {
 			return false;
 		}
-		if (this.getTokenDefinition().getClass() != thatToken.getTokenDefinition().getClass()) {
+		if (this.getRule().getClass() != thatToken.getRule().getClass()) {
 			return false;
 		}
 		return true;
@@ -51,10 +51,10 @@ public class Token {
 	}
 
 	public String toShortString() {
-		if (tokenDefinition.hasValue()) {
+		if (rule.hasValue()) {
 			return "[" + value + "]";
 		} else {
-			return "{" + tokenDefinition.getClass().getSimpleName() + "}";
+			return "{" + rule.getClass().getSimpleName() + "}";
 		}
 	}
 	
@@ -62,8 +62,8 @@ public class Token {
 		StringBuilder reply=new StringBuilder();
 		reply.append(Token.class.getSimpleName());
 		reply.append(".");
-		reply.append(tokenDefinition.getClass().getSimpleName());
-		if (tokenDefinition.hasValue()) {
+		reply.append(rule.getClass().getSimpleName());
+		if (rule.hasValue()) {
 			reply.append(" = ");
 			reply.append(value);
 		} 

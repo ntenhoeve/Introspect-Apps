@@ -17,10 +17,10 @@ import nth.reflect.util.regex.Regex;
  */
 public class TokenParser {
 	private static final Rest REST = new Rest();
-	private final List<TokenDefinition> tokenDefintions;
+	private final List<TokenRule> tokenRules;
 
-	public TokenParser(List<TokenDefinition> tokenDefintions) {
-		this.tokenDefintions = tokenDefintions;
+	public TokenParser(List<TokenRule> tokenRules) {
+		this.tokenRules = tokenRules;
 	}
 
 	public List<Token> parse(String expression) {
@@ -47,14 +47,14 @@ public class TokenParser {
 	private Token findNext(String expression) {
 		int firstNextIndex = expression.length();
 
-		for (TokenDefinition tokenDefinition : tokenDefintions) {
-			Regex regex = tokenDefinition.getRegex();
+		for (TokenRule tokenRule : tokenRules) {
+			Regex regex = tokenRule.getRegex();
 			Matcher matcher = regex.toMatcher(expression);
 			if (matcher.find()) {
 				int foundIndex = matcher.start();
 				if (foundIndex == 0) {
 					String value = matcher.group();
-					Token token = new Token(tokenDefinition, value);
+					Token token = new Token(tokenRule, value);
 					return token;
 				} else if (foundIndex < firstNextIndex) {
 					firstNextIndex = foundIndex;

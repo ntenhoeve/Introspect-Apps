@@ -6,21 +6,21 @@ import com.google.common.base.Optional;
 
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Rest;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenDefinition;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.TokenDefinitions;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
 
 public class TokenNodePredicate implements Predicate<Node> {
 
-	private final TokenDefinition tokenDefinitionToFind;
+	private final TokenRule ruleToFind;
 	private final Optional<Regex> regex;
 
-	public TokenNodePredicate(TokenDefinition tokenDefinitionToFind, Optional<Regex> regex) {
-		this.tokenDefinitionToFind = tokenDefinitionToFind;
+	public TokenNodePredicate(TokenRule ruleToFind, Optional<Regex> regex) {
+		this.ruleToFind = ruleToFind;
 		this.regex = regex;
 	}
 
-	public TokenNodePredicate(TokenDefinition tokenDefinitionToFind) {
-		this(tokenDefinitionToFind, Optional.absent());
+	public TokenNodePredicate(TokenRule tokenRuleToFind) {
+		this(tokenRuleToFind, Optional.absent());
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class TokenNodePredicate implements Predicate<Node> {
 			return false;
 		}
 		TokenNode tokenNode = (TokenNode) node;
-		TokenDefinition tokenDefinition = tokenNode.getDefinition();
-		boolean identicalDataTypes = tokenDefinition.getClass() == tokenDefinitionToFind.getClass();
+		TokenRule tokenRule = tokenNode.getRule();
+		boolean identicalDataTypes = tokenRule.getClass() == ruleToFind.getClass();
 		if (!identicalDataTypes) {
 			return false;
 		}
@@ -44,15 +44,15 @@ public class TokenNodePredicate implements Predicate<Node> {
 	}
 
 	public static TokenNodePredicate openBrace() {
-		return new TokenNodePredicate(TokenDefinitions.OPEN_BRACE.get());
+		return new TokenNodePredicate(TokenRules.OPEN_BRACE.get());
 	}
 
 	public static TokenNodePredicate closeBrace() {
-		return new TokenNodePredicate(TokenDefinitions.CLOSE_BRACE.get());
+		return new TokenNodePredicate(TokenRules.CLOSE_BRACE.get());
 	}
 
 	public static TokenNodePredicate whiteSpace() {
-		return new TokenNodePredicate(TokenDefinitions.WHITESPACE.get());
+		return new TokenNodePredicate(TokenRules.WHITESPACE.get());
 	}
 
 	public static TokenNodePredicate rest(Regex regex) {

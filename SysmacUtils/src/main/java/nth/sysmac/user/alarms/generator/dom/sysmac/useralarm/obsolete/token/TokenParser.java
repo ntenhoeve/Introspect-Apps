@@ -9,7 +9,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token;
 public interface TokenParser<T> extends TokenDefinition {
 	
 	/**
-	 * This method may only be called when {@link TokenDefinition#getRegex()} matches!!!
+	 * This method may only be called when {@link TokenRule#getRegex()} matches!!!
 	 * @param token
 	 * @return
 	 */

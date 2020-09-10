@@ -6,7 +6,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Nod
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchPattern;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.WhiteSpace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.WhiteSpace;
 /**
  * @deprecated use {@link MatchPattern}
  * @author nilsth
@@ -54,7 +54,7 @@ public class ZeroOrMoreWhitespaceInbetween implements Predicate<MatchResult> {
 	private boolean otherThanWhiteSpace(Node child) {
 		if (child instanceof TokenNode) {
 			TokenNode tokenNode = (TokenNode) child;
-			return !(tokenNode.getDefinition() instanceof WhiteSpace);
+			return !(tokenNode.getRule() instanceof WhiteSpace);
 		} else {
 			return false;
 		}

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenDefinition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
 
 public class ExpressionAndNode {
 
@@ -20,9 +20,9 @@ public class ExpressionAndNode {
 		this.nodes = node;
 	}
 
-	public ExpressionAndNode(String expression, TokenDefinition tokenDefinition) {
+	public ExpressionAndNode(String expression, TokenRule tokenRule) {
 		this.expression=expression;
-		this.nodes=Arrays.asList(new TokenNode( tokenDefinition, expression));
+		this.nodes=Arrays.asList(new TokenNode( tokenRule, expression));
 	}
 
 	public ExpressionAndNode(String expression, Node... nodes) {

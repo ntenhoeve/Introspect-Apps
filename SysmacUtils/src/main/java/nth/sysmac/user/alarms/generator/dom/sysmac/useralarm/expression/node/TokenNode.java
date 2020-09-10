@@ -1,7 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenDefinition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
 
 /**
  * A wrapper of a {@link Token} so that it can be put in a {@link ParseTree}. It
@@ -20,12 +20,12 @@ public class TokenNode extends Node {
 		this.token = token;
 	}
 
-	public TokenNode(TokenDefinition tokenDefinition, String value) {
-		this(new Token(tokenDefinition, value));
+	public TokenNode(TokenRule tokenRule, String value) {
+		this(new Token(tokenRule, value));
 	}
 
-	public TokenDefinition getDefinition() {
-		return token.getTokenDefinition();
+	public TokenRule getRule() {
+		return token.getRule();
 	}
 
 	public Token getToken() {

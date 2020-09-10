@@ -6,7 +6,7 @@ import nth.reflect.util.regex.Regex;
  * @author nilsth
  *
  */
-public interface TokenDefinition {
+public interface TokenRule {
 	public Regex getRegex();
 
 	public boolean hasValue(); 

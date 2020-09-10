@@ -15,7 +15,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Nod
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ParseTree;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.TokenDefinitions;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
 class BraceReplacementTest {
@@ -23,7 +23,7 @@ class BraceReplacementTest {
 	@ParameterizedTest
 	@MethodSource
 	void test_givenValidExpression_returnValidParseTree(String expression, List<Node> expected) {
-		TokenParser tokenParser = new TokenParser(TokenDefinitions.all());
+		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		List<Token> tokens = tokenParser.parse(expression);
 		NodeParser nodeParser = new NodeParser(NodeReplacements.all());
 		ParseTree parseTree = nodeParser.parse(tokens);

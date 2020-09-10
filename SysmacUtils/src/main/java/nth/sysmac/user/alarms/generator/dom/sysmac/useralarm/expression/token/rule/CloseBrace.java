@@ -1,9 +1,9 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule;
 
 import nth.reflect.util.regex.Regex;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenDefinition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
 
-public class CloseBrace implements TokenDefinition {
+public class CloseBrace implements TokenRule {
 
 	private static final Regex REGEX = new Regex().literal("}");
 

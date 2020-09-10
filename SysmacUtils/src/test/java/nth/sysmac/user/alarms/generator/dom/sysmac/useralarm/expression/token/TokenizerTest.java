@@ -11,15 +11,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.CloseBrace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.Comma;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.Dash;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.Dot;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.Equal;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.OpenBrace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.TokenDefinitions;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.UnsignedInteger;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.WhiteSpace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.CloseBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Comma;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Dash;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Dot;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Equal;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.OpenBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.UnsignedInteger;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.WhiteSpace;
 
 class TokenizerTest {
 
@@ -47,7 +47,7 @@ class TokenizerTest {
 	@ParameterizedTest
 	@MethodSource
 	void testParse_givenOneValidTokenExpression_returnsCorrectToken(String expression, List<Token> tokens) {
-		tokenParser = new TokenParser(TokenDefinitions.all());
+		tokenParser = new TokenParser(TokenRules.all());
 		List<Token> actual = tokenParser.parse(expression);
 		assertThat(actual).containsAll(tokens);
 	}
@@ -58,7 +58,7 @@ class TokenizerTest {
 
 	@Test
 	void testParse_givenUndefinedTokenExpression_returnsRestToken() {
-		tokenParser = new TokenParser(TokenDefinitions.all());
+		tokenParser = new TokenParser(TokenRules.all());
 		List<Token> actual = tokenParser.parse(REST);
 		Token expected = new Token(new Rest(), REST);
 		assertThat(actual).containsExactly(expected);
@@ -66,7 +66,7 @@ class TokenizerTest {
 
 	@Test
 	void testParse_givenDashAndUndefinedTokenExpression_returnsDashAndRestToken() {
-		tokenParser = new TokenParser(TokenDefinitions.all());
+		tokenParser = new TokenParser(TokenRules.all());
 		List<Token> actual = tokenParser.parse(REST + DASH);
 		Token restToken = new Token(new Rest(), REST);
 		Token dashToken = new Token(new Dash(), DASH);
@@ -75,7 +75,7 @@ class TokenizerTest {
 
 	@Test
 	void testParse_givenUndefinedTokenAndDashExpression_returnsRestAndDashToken() {
-		tokenParser = new TokenParser(TokenDefinitions.all());
+		tokenParser = new TokenParser(TokenRules.all());
 		List<Token> actual = tokenParser.parse(DASH + REST);
 		Token dashToken = new Token(new Dash(), DASH);
 		Token restToken = new Token(new Rest(), REST);

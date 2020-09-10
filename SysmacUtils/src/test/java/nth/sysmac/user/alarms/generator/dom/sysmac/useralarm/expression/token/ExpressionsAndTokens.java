@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.params.provider.Arguments;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.impl.UnsignedInteger;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.UnsignedInteger;
 
-public class ExpressionsAndTokens extends HashMap<String, TokenDefinition> {
+public class ExpressionsAndTokens extends HashMap<String, TokenRule> {
 
 	private static final long serialVersionUID = 833513786634963660L;
-	private static final TokenDefinition REST_DEFINITION = new Rest();
+	private static final TokenRule REST_DEFINITION = new Rest();
 	private static final String REST = "Rest";
 
 	public Stream<Arguments> createTestArguments() {
@@ -35,8 +35,8 @@ public class ExpressionsAndTokens extends HashMap<String, TokenDefinition> {
 	private Map<String, List<Token>> createSingleTestValues() {
 		Map<String, List<Token>> singleTestValues = new HashMap<>();
 		for (String expression : keySet()) {
-			TokenDefinition tokenDefinition = get(expression);
-			Token token = new Token(tokenDefinition, expression);
+			TokenRule tokenRule = get(expression);
+			Token token = new Token(tokenRule, expression);
 			List<Token> tokens = Arrays.asList(token);
 			singleTestValues.put(expression, tokens);
 		}
@@ -53,10 +53,10 @@ public class ExpressionsAndTokens extends HashMap<String, TokenDefinition> {
 		combinedTokens.add(token);
 
 		for (String expression : keySet()) {
-			TokenDefinition tokenDefinition = get(expression);
-			if (!(tokenDefinition instanceof UnsignedInteger)) {
+			TokenRule tokenRule = get(expression);
+			if (!(tokenRule instanceof UnsignedInteger)) {
 				combinedExpressions.append(expression);
-				token = new Token(tokenDefinition, expression);
+				token = new Token(tokenRule, expression);
 				combinedTokens.add(token);
 				combinedTestValues.put(combinedExpressions.toString(), new ArrayList<>(combinedTokens));
 			}
