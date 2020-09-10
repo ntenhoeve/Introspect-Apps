@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.impl.NodeReplacements;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.NodeRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
@@ -13,7 +13,7 @@ class NodeParserTest {
 
 	@Test
 	void testParse() {
-		NodeParser nodeParser = new NodeParser(NodeReplacements.all());
+		NodeParser nodeParser = new NodeParser(NodeRules.all());
 
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		List<Token> tokens = tokenParser.parse(

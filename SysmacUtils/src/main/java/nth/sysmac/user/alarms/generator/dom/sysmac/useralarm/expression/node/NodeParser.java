@@ -8,17 +8,17 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.To
 /**
  * A {@link NodeParser} creates a {@link ParseTree} and then combines
  * {@link NodeChildren} by replacing them with other more detailed {@link Node}s
- * as is defined by {@link NodeReplacement}s.
+ * as is defined by {@link NodeRule}s.
  * 
  * @author nilsth
  *
  */
 public class NodeParser {
 
-	private final List<NodeReplacement<? extends Node>> nodeReplacements;
+	private final List<NodeRule<? extends Node>> nodeRules;
 
-	public NodeParser(List<NodeReplacement<? extends Node>> nodeReplacements) {
-		this.nodeReplacements = nodeReplacements;
+	public NodeParser(List<NodeRule<? extends Node>> nodeReplacements) {
+		this.nodeRules = nodeReplacements;
 	}
 
 	public ParseTree parse(List<Token> tokens) {
@@ -33,13 +33,13 @@ public class NodeParser {
 		NodeChildren nodeChildren = parseTree.getChildren();
 		boolean doneReplacement = false;
 		do {
-			for (NodeReplacement<? extends Node> nodeReplacement : nodeReplacements) {
+			for (NodeRule<? extends Node> nodeReplacement : nodeRules) {
 				doneReplacement = replaceAllInChildren(nodeChildren, nodeReplacement);
 			}
 		} while (doneReplacement);
 	}
 
-	private boolean replaceAllInChildren(NodeChildren nodeChildren, NodeReplacement<? extends Node> nodeReplacement) {
+	private boolean replaceAllInChildren(NodeChildren nodeChildren, NodeRule<? extends Node> nodeReplacement) {
 		boolean foundReplacement = false;
 		boolean doneReplacement = false;
 		do {
@@ -57,7 +57,7 @@ public class NodeParser {
 		return doneReplacement;
 	}
 
-	private boolean replaceAllInChildrenRecursively(NodeChildren nodeChildren, NodeReplacement<? extends Node> nodeReplacement) {
+	private boolean replaceAllInChildrenRecursively(NodeChildren nodeChildren, NodeRule<? extends Node> nodeReplacement) {
 		boolean doneReplacement = false;
 		for (Node child : nodeChildren) {
 			doneReplacement = replaceAllInChildren(child.getChildren(), nodeReplacement);

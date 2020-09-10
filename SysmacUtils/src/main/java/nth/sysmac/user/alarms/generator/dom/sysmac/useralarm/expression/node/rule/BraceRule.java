@@ -1,18 +1,18 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.impl;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule;
 
 
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeChildren;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeReplacement;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.ResultFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.distance.NodeDistance;
 
-public class BraceReplacement implements NodeReplacement<BraceNode> {
+public class BraceRule implements NodeRule<BraceNode> {
 
 	@Override
 	public MatchResult find(NodeChildren children) {

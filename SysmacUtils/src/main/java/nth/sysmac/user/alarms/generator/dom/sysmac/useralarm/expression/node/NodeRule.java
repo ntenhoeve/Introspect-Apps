@@ -12,7 +12,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
  *
  * @param <T>
  */
-public interface NodeReplacement<T extends Node> {
+public interface NodeRule<T extends Node> {
 
 	public MatchResult find(NodeChildren children);
 

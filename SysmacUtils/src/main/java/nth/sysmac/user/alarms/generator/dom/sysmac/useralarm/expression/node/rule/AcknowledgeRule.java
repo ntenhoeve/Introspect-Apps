@@ -1,16 +1,16 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.impl;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule;
 
 import java.util.function.Predicate;
 
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeChildren;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeReplacement;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
 
-public class AcknowledgeReplacement implements NodeReplacement<AcknowledgeNode> {
+public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 
 	@Override
 	public MatchResult find(NodeChildren children) {
