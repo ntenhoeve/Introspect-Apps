@@ -1,15 +1,11 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.testexpression;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.junit.jupiter.params.provider.Arguments;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRule;
 
@@ -28,87 +24,99 @@ public class SkipRuleTestExpressions {
 	}
 
 	public Map<String, List<SkipRule>> createExpressionsAndRules(StringConverters stringCoverters) {
-		
-		Map<String, List<SkipRule>> singleExpressionsAndRules = createSingleExpressionsAndRules(stringCoverters );
 
-		Map<String, List<SkipRule>> combinedExpressionsAndRules = createCombinedExpressionsAndRules(stringCoverters, singleExpressionsAndRules);
-		
-		Map<String, List<SkipRule>> allExpressionsAndRules=new HashMap<>();
+		Map<String, List<SkipRule>> singleExpressionsAndRules = createSingleExpressionsAndRules(stringCoverters);
+
+		Map<String, List<SkipRule>> combinedExpressionsAndRules = createCombinedExpressionsAndRules(stringCoverters);
+
+		Map<String, List<SkipRule>> allExpressionsAndRules = new HashMap<>();
 		allExpressionsAndRules.putAll(singleExpressionsAndRules);
 		allExpressionsAndRules.putAll(combinedExpressionsAndRules);
-		
+
 		return allExpressionsAndRules;
 	}
 
-	private Map<String, List<SkipRule>> createCombinedExpressionsAndRules(StringConverters stringConverters, Map<String, List<SkipRule>> singleExpressionsAndRules) {
-		HashMap<String, List<SkipRule>> expressionsAndRulesToCombine = createExpressionAndRulesToCombine(stringConverters, singleExpressionsAndRules);
-		
-		StringBuilder combinedExpression=new StringBuilder();
-		List<SkipRule> combinedRules=new ArrayList<>();
-		for (String expression : expressionsAndRulesToCombine.keySet()) {
-			if (combinedExpression.length()!=0) {
-				combinedExpression.append(" ");
-			}
-			combinedExpression.append(expression);
-			List<SkipRule> rules = expressionsAndRulesToCombine.get(expression);
-			combinedRules.addAll(rules);
-		}
-		
-		Map<String, List<SkipRule>> combinedExpressionsAndRules=new HashMap<>();
-		combinedExpressionsAndRules.put(combinedExpression.toString(), combinedRules);
-		
-		return combinedExpressionsAndRules;
-	}
+	private Map<String, List<SkipRule>> createCombinedExpressionsAndRules(StringConverters stringConverters) {
+		Map<String, List<SkipRule>> combinedExpressionsAndRules = new HashMap<>();
 
-	private HashMap<String, List<SkipRule>> createExpressionAndRulesToCombine(StringConverters stringConverters,
-			Map<String, List<SkipRule>> singleExpressionsAndRules) {
-		HashMap<String, List<SkipRule>> expressionsAndRulesToCombine = new HashMap<>();
-		expressionsAndRulesToCombine.putAll(singleExpressionsAndRules); 
-
-		if (StringConverters.VALID==stringConverters){
-			//remove uneven rules because having even and uneven rules is not allowed as valid rules
-			List<String> unevenRuleExpressions= expressionsAndRulesToCombine.keySet().stream().filter(
-					expression -> expressionsAndRulesToCombine.get(expression).get(0).getClass().getSimpleName().contains("Uneven"))
-					.collect(Collectors.toList());
-			for (String unevenRuleExpression : unevenRuleExpressions) {
-				expressionsAndRulesToCombine.remove(unevenRuleExpression);				
-			}
-		}
-		return expressionsAndRulesToCombine;
-	}
-
-	private Map<String, List<SkipRule>> createSingleExpressionsAndRules(StringConverters stringConverters) {
-		Map<String, List<SkipRule>> singleExpressionsAndRules=new HashMap<>();
+		List<String> values = createCombinedValues(stringConverters);
 
 		for (StringConverter ruleAbbreviationConverter : stringConverters.getAll()) {
 			for (StringConverter valueConverter : stringConverters.getAll()) {
-				Map<String, List<SkipRule>> expressionsAndRules = createExpressionsAndRules(ruleAbbreviationConverter,
-						valueConverter);
+				Map<String, List<SkipRule>> expressionsAndRules = createCombinedExpressionsAndRules(
+						ruleAbbreviationConverter, valueConverter, values);
+				combinedExpressionsAndRules.putAll(expressionsAndRules);
+			}
+		}
+		return combinedExpressionsAndRules;
+	}
+
+	private Map<String, List<SkipRule>> createCombinedExpressionsAndRules(StringConverter ruleAbbreviationConverter,
+			StringConverter valueConverter, List<String> values) {
+
+		String expression = createCombinedExpression(ruleAbbreviationConverter, valueConverter, values);
+		List<SkipRule> rules = values.stream().map(e -> valuesAndRules.get(e)).collect(Collectors.toList());
+		Map<String, List<SkipRule>> expressionsAndRules = new HashMap<>();
+		expressionsAndRules.put(expression, rules);
+
+		return expressionsAndRules;
+	}
+
+	private List<String> createCombinedValues(StringConverters stringConverters) {
+		List<String> values = valuesAndRules.keySet().stream().collect(Collectors.toList());
+		if (StringConverters.VALID == stringConverters) {
+			// remove uneven rules because having even and uneven rules is not allowed as
+			// valid rules
+			List<String> unevenValues = valuesAndRules.keySet().stream()
+					.filter(v -> valuesAndRules.get(v).getClass().getSimpleName().contains("Uneven"))
+					.collect(Collectors.toList());
+			values.removeAll(unevenValues);
+			return values;
+		} else {
+			return values;
+		}
+	}
+
+	private Map<String, List<SkipRule>> createSingleExpressionsAndRules(StringConverters stringConverters) {
+		Map<String, List<SkipRule>> singleExpressionsAndRules = new HashMap<>();
+
+		for (StringConverter ruleAbbreviationConverter : stringConverters.getAll()) {
+			for (StringConverter valueConverter : stringConverters.getAll()) {
+				Map<String, List<SkipRule>> expressionsAndRules = createSingleExpressionsAndRules(
+						ruleAbbreviationConverter, valueConverter);
 				singleExpressionsAndRules.putAll(expressionsAndRules);
 			}
 		}
 		return singleExpressionsAndRules;
 	}
 
-	private Map<String, List<SkipRule>> createExpressionsAndRules(StringConverter ruleAbbreviationConverter,
+	private Map<String, List<SkipRule>> createSingleExpressionsAndRules(StringConverter ruleAbbreviationConverter,
 			StringConverter valueConverter) {
 		Map<String, List<SkipRule>> expressionsAndRules = new HashMap<>();
 		for (String value : valuesAndRules.keySet()) {
-			String expression = createExpression(ruleAbbreviationConverter, valueConverter, value);
+			String expression = createSingleExpression(ruleAbbreviationConverter, valueConverter, value);
 			SkipRule rule = valuesAndRules.get(value);
 			List<SkipRule> rules = Arrays.asList(rule);
 			expressionsAndRules.put(expression, rules);
 		}
-
 		return expressionsAndRules;
 	}
 
-	private String createExpression(StringConverter ruleAbbreviationConverter, StringConverter valueConverter,
+	private String createSingleExpression(StringConverter ruleAbbreviationConverter, StringConverter valueConverter,
 			String value) {
 		StringBuilder expression = new StringBuilder();
 		expression.append(ruleAbbreviationConverter.convert(ruleAbbreviation));
 		expression.append("=");
 		expression.append(valueConverter.convert(value));
+		return expression.toString();
+	}
+
+	private String createCombinedExpression(StringConverter ruleAbbreviationConverter, StringConverter valueConverter,
+			List<String> values) {
+		StringBuilder expression = new StringBuilder();
+		expression.append(ruleAbbreviationConverter.convert(ruleAbbreviation));
+		expression.append("=");
+		expression.append(valueConverter.convert(String.join(",", values)));
 		return expression.toString();
 	}
 
@@ -131,6 +139,5 @@ public class SkipRuleTestExpressions {
 		Set<String> invalidExpressions = createInvalidExpressionsAndRules().keySet();
 		return invalidExpressions;
 	}
-
 
 }

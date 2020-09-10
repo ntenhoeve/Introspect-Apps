@@ -6,6 +6,7 @@ import java.util.List;
 
 import nth.reflect.util.regex.Regex;
 import nth.reflect.util.regex.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.DelegatingSkipRuleParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRuleParser;
 
@@ -24,28 +25,28 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.compo
  * <li>sc=e,5: skips even columns and column 5 (of all pages)</li>
  * <li>sc=2,4: skips column 2 and column 4 (of all pages)</li>
  * <li>sc=2-4,8: skips column 2-4 and column 8 (of all pages)</li>
- * <li>sc=e,3-7,30.2-31.5: skips even columns, columns 3-7, and column 2 of page 30 until column 5 of page 31</li>
+ * <li>sc=e,3-7,30.2-31.5: skips even columns, columns 3-7, and column 2 of page
+ * 30 until column 5 of page 31</li>
  * </ul>
  * 
  * @author nilsth
  *
  */
-public class SkipColumnParser implements SkipRuleParser {
+public class SkipColumnParsers extends DelegatingSkipRuleParser {
 
 	private static final String EQUALS = "=";
 	private static final String SKIP_COLUMN_ABBREVIATION = "sc";
-	private static final Regex REGEX_VALUE_EVEN = new Regex().ignoreCase().literal("e");
-	private static final Regex REGEX_VALUE_UNEVEN = new Regex().ignoreCase().literal("u");
-	private static final List<Regex> REGEX_VALUES = Arrays.asList(REGEX_VALUE_EVEN, REGEX_VALUE_UNEVEN);
-	private static final Regex REGEX = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes()).literal(SKIP_COLUMN_ABBREVIATION)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS).whiteSpace(Repetition.zeroOrMoreTimes())
-			.or(REGEX_VALUES);
-	private static final Regex REGEX_FIND_EVEN = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes()).literal(SKIP_COLUMN_ABBREVIATION)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS).whiteSpace(Repetition.zeroOrMoreTimes())
-			.append(REGEX_VALUE_EVEN);
-	private static final Regex REGEX_FIND_UNEVEN = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes()).literal(SKIP_COLUMN_ABBREVIATION)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS).whiteSpace(Repetition.zeroOrMoreTimes())
-			.append(REGEX_VALUE_UNEVEN);
+	private static final Regex REGEX = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes())
+			.literal(SKIP_COLUMN_ABBREVIATION).whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS)
+			.whiteSpace(Repetition.zeroOrMoreTimes()).group(new Regex().anyCharacter(Repetition.oneOrMoreTimes()));
+
+	@Override
+	protected List<SkipRuleParser> createSkipRuleParsers() {
+		List<SkipRuleParser> skipRuleParsers = new ArrayList<>();
+		skipRuleParsers.add(new SkipEvenColumnParser());
+		skipRuleParsers.add(new SkipUnevenColumnParser());
+		return skipRuleParsers;
+	}
 
 	@Override
 	public Regex getRegex() {
@@ -53,27 +54,32 @@ public class SkipColumnParser implements SkipRuleParser {
 	}
 
 	@Override
-	public List<SkipRule> parse(String token) {
-		
-		List<SkipRule> skipRules=new ArrayList<>();
-		if (REGEX_FIND_EVEN.hasMatchIn(token)) {
-			SkipEvenColumnRule skipEvenColumnRule = new SkipEvenColumnRule();
-			skipRules.add(skipEvenColumnRule);
-		} else if (REGEX_FIND_UNEVEN.hasMatchIn(token)) {
-			SkipUnevenColumnRule skipUnevenColumnRule = new SkipUnevenColumnRule();
-			skipRules.add(skipUnevenColumnRule);			
-		}
+	public List<SkipRule> parse(String expression) {
+
+		List<SkipRule> skipRules = super.parse(expression);
 
 		throwErrorWhenNoRulesAreFound(skipRules);
-		
+
 		throwErrorWhenHasEvenAndUnevenRule(skipRules);
-		
+
 		return skipRules;
 	}
 
+	@Override
+	protected List<String> split(String expression) {
+		List<String> groups = REGEX.findGroups(expression);
+		if (groups.size() == 2) {
+			String valuesExpression = groups.get(1);
+			List<String> expressions = Arrays.asList(valuesExpression.split(","));
+			return expressions;
+		} else {
+			throw new RuntimeException("No valid page skip rule values found in: " + expression);
+		}
+	}
+
 	private void throwErrorWhenHasEvenAndUnevenRule(List<SkipRule> skipRules) {
-		boolean hasSkipEvenRule = skipRules.stream().anyMatch(r->r instanceof SkipEvenColumnRule);
-		boolean hasSkipUnevenRules = skipRules.stream().anyMatch(r->r instanceof SkipUnevenColumnRule);
+		boolean hasSkipEvenRule = skipRules.stream().anyMatch(r -> r instanceof SkipEvenColumnRule);
+		boolean hasSkipUnevenRules = skipRules.stream().anyMatch(r -> r instanceof SkipUnevenColumnRule);
 
 		if (hasSkipEvenRule && hasSkipUnevenRules) {
 			throw new RuntimeException("Skip rules may not contain both a: " + SkipEvenColumnRule.class.getSimpleName()
@@ -87,5 +93,4 @@ public class SkipColumnParser implements SkipRuleParser {
 		}
 	}
 
-	
 }

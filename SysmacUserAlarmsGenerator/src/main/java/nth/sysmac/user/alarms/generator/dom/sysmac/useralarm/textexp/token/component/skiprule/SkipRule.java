@@ -6,6 +6,8 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.compo
 
 public abstract class SkipRule {
 
+	public static final String VALUE_SEPARATOR = ",";
+
 	public abstract boolean appliesTo(PageColumn pageColumn);
 
 	public abstract PageColumn getNext(PageColumn pageColumn);

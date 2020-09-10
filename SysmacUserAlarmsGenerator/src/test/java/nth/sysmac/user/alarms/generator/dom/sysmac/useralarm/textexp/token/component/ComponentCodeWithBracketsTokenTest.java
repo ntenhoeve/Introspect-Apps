@@ -119,7 +119,7 @@ class ComponentCodeWithBracketsTokenTest {
 
 	@Test
 	void testParse_givenCorrectTokenWithComponentCodeAndTwoSkipRulesAndInvalidSkipRule_mustThrowAnException() {
-		assertThatThrownBy(() -> token.parse(COMPONENT_CODE_WITH_2_SKIP_RULES_AND_INVALID_SKIP_RULE)).hasMessageContaining("Invalid skip rule(s):  invalidSkipRule");
+		assertThatThrownBy(() -> token.parse(COMPONENT_CODE_WITH_2_SKIP_RULES_AND_INVALID_SKIP_RULE)).hasMessageContaining("Invalid skip rule expression(s): ");
 	}
 
 

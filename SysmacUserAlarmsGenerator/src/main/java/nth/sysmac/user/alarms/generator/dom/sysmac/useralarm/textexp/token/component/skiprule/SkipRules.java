@@ -1,19 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule;
 
-/**
- * <h3>Skip Rules</h3>
- * The {@link SysmacUserAlarmsGenerator} will generate the component code's when
- * using arrays (e.g. when using an array of line drive's). In some cases you
- * need to specify how these component codes need to be generated. Often some
- * columns and or pages need to be skipped, e.g.: Variable Frequency Drives often skip on column.
- * <p>
- * {@insert SkipColumnParser}
- * <p>
- * {@insert SkipPageParser} 
- *  
- * @author nilsth
- *
- */
+
 
 import java.util.ArrayList;
 import java.util.Collections;

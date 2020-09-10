@@ -1,6 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.page;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.Map;
@@ -12,14 +13,14 @@ import org.junit.jupiter.api.Test;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.testexpression.SkipRuleTestExpressions;
 
-class SkipPageParserTest {
+class SkipPageParsersTest {
 
-	private static SkipPageParser skipPageParser;
+	private static SkipPageParsers skipPageParsers;
 	private static SkipRuleTestExpressions testExpressions;
 
 	@BeforeAll
 	static void beforeAll() {
-		skipPageParser = new SkipPageParser();
+		skipPageParsers = new SkipPageParsers();
 		testExpressions = createTestExpressions();
 	}
 
@@ -35,28 +36,28 @@ class SkipPageParserTest {
 	@Test
 	void testGetRegex_givenValidExpressions_allMatch() {
 		Set<String> validExpressions = testExpressions.createValidExpressions();
-		assertThat(validExpressions).allSatisfy(expression -> skipPageParser.getRegex().hasMatchIn(expression));
+		assertThat(validExpressions).allSatisfy(expression -> skipPageParsers.getRegex().hasMatchIn(expression));
 	}
 
 	@Test
 	void testGetRegex_givenInvalidExpressions_allNotMatch() {
 		Set<String> invalidExpressions = testExpressions.createInvalidExpressions();
-		assertThat(invalidExpressions).allSatisfy(expression -> skipPageParser.getRegex().hasMatchIn(expression));
+		assertThat(invalidExpressions).allSatisfy(expression -> skipPageParsers.getRegex().hasMatchIn(expression));
 	}
 
 	@Test
 	void testParse_givenValidExpressions_returnCorrectRule() {
 		Map<String, List<SkipRule>> validExpressionsAndRules = testExpressions.createValidExpressionsAndRules();
 		assertThat(validExpressionsAndRules)
-				.allSatisfy((expression, rules) -> skipPageParser.parse(expression).containsAll(rules));
+				.allSatisfy((expression, rules) -> skipPageParsers.parse(expression).containsAll(rules));
 	}
 
 	@Test
 	void testParse_givenInvalidExpressions_allThrowSomeError() {
 		Set<String> invalidExpressions = testExpressions.createInvalidExpressions();
-		for (String invalidExpression : invalidExpressions) {
-			assertThatThrownBy(() -> skipPageParser.parse(invalidExpression));
-		}
+		assertThat(invalidExpressions).allSatisfy(invalidExpression -> {
+			assertThatThrownBy(() -> skipPageParsers.parse(invalidExpression));
+		});
 	}
 
 }

@@ -1,13 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component;
 
-import java.util.List;
-
 import nth.reflect.util.regex.Regex;
-import nth.reflect.util.regex.Repetition;
-import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRuleParsers;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRules;
 
 /**
  * <h3>Component code references</h3>

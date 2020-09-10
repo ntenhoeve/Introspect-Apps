@@ -2,6 +2,7 @@ package nth.sysmac.user.alarms.generator;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.ComponentCodeWithoutBracketsParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRuleParsers;
 
 /**
  * {@link SysmacUserAlarmsGeneratorDocumentation} is generated using the {@link ReflectUtilMavenPlugIn}
@@ -16,7 +17,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.compo
  * <p>
  * {@insert ComponentCodeWithBracketsParser}
  * <p>
- * {@insert SkipRules}
+ * {@insert SkipRuleParsers}
  */
 
 public interface SysmacUserAlarmsGeneratorDocumentation {

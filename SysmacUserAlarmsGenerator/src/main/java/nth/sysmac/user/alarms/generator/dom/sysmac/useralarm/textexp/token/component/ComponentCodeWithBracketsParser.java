@@ -66,10 +66,13 @@ public class ComponentCodeWithBracketsParser implements TokenParser<ComponentCod
 			.append(REGEX_SUFFIX);
 	private static final Regex REGEX_FIND_RULES = new Regex().append(REGEX_PREFIX).append(ComponentCode.REGEX)
 			.group(REGEX_RULES).append(REGEX_SUFFIX);
+	private final SkipRuleParsers skipRuleParsers;
 
-	// TODO simplify rules: get everything between brackets and throw error if
-	// unparsable rules are found (also in junit test!)
-
+	public ComponentCodeWithBracketsParser() {
+		skipRuleParsers=new SkipRuleParsers();
+	}
+	
+	
 	@Override
 	public Regex getRegex() {
 		return REGEX;
@@ -81,16 +84,17 @@ public class ComponentCodeWithBracketsParser implements TokenParser<ComponentCod
 		char letter = getLetter(token);
 		int column = getColumn(token);
 
-		SkipRules skipRules = getSkipRules(token);
+		SkipRules skipRules = parseSkipRules(token);
 		ComponentCode componentCode = new ComponentCode(page, letter, column, skipRules);
 		return componentCode;
 	}
 
-	private SkipRules getSkipRules(String token) {
+	private SkipRules parseSkipRules(String token) {
 		List<String> groups = REGEX_FIND_RULES.findGroups(token);
 		if (groups.size() == 2) {
-			String skipRulesString = groups.get(1);
-			SkipRules skipRules = SkipRuleParsers.parse(skipRulesString);
+			String expression = groups.get(1);
+			SkipRules skipRules = new SkipRules( );
+			skipRules.addAll(skipRuleParsers.parse(expression));
 			return skipRules;
 		} else {
 			return new SkipRules();

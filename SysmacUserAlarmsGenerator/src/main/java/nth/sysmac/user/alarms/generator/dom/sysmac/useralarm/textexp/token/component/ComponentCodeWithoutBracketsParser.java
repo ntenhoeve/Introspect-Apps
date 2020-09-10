@@ -59,31 +59,38 @@ public class ComponentCodeWithoutBracketsParser implements TokenParser<Component
 			REGEX_DASH_SEPARATOR, REGEX_SLASH_SEPARATOR, REGEX_BACK_SLASH_SEPARATOR);
 	public static final Regex REGEX_SKIP_RULES = new Regex().literal("{").whiteSpace(Repetition.oneOrMoreTimes()).whiteSpace(Repetition.zeroOrOneTime()).literal("}");
 	public static final Regex REGEX = new Regex().ignoreCase() .append(ComponentCode.REGEX).noneCapturingGroup(REGEX_SKIP_RULES,Repetition.zeroOrOneTime()).or(REGEX_SEPARATORS);
-	private static final Regex REGEX_FIND_RULES =  new Regex().ignoreCase() .append(ComponentCode.REGEX).group(REGEX_SKIP_RULES,Repetition.zeroOrOneTime()).or(REGEX_SEPARATORS);;
+	private static final Regex REGEX_FIND_RULES =  new Regex().ignoreCase() .append(ComponentCode.REGEX).group(REGEX_SKIP_RULES,Repetition.zeroOrOneTime()).or(REGEX_SEPARATORS);
+	private final SkipRuleParsers skipRuleParsers;
 	
+	public ComponentCodeWithoutBracketsParser() {
+		skipRuleParsers = new SkipRuleParsers();
+	}
 
 	@Override
 	public Regex getRegex() {
 		return ComponentCode.REGEX;
 	}
 
-	/**
-	 * This method should only be called when {@link #REGEX} matches componentCode
-	 */
 	@Override
 	public ComponentCode parse(String token) {
 		int page = getPage(token);
 		char letter = getLetter(token);
 		int column = getColumn(token);
-		SkipRules rules = getSkipRules(token);
+		SkipRules rules = parseSkipRules(token);
 		ComponentCode componentCode = new ComponentCode(page, letter, column, rules);
 		return componentCode;
 	}
 
-	private SkipRules getSkipRules(String token) {
-		String skipRulesString = REGEX_FIND_RULES.findFirstMatchIn(token).get();
-		SkipRules skipRules = SkipRuleParsers.parse(skipRulesString);
-		return skipRules;
+	private SkipRules parseSkipRules(String token) {
+		List<String> groups = REGEX_FIND_RULES.findGroups(token);
+		if (groups.size() == 2) {
+			String expression = groups.get(1);
+			SkipRules skipRules = new SkipRules( );
+			skipRules.addAll(skipRuleParsers.parse(expression));
+			return skipRules;
+		} else {
+			return new SkipRules();
+		}
 	}
 
 	private int getPage(String token) {

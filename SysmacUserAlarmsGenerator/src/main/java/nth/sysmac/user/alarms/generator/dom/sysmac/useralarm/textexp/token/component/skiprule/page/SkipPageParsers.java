@@ -6,6 +6,7 @@ import java.util.List;
 
 import nth.reflect.util.regex.Regex;
 import nth.reflect.util.regex.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.DelegatingSkipRuleParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.SkipRuleParser;
 
@@ -22,28 +23,28 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.compo
  * <li>sp=e,21: skips even pages and page 21</li>
  * <li>sp=20,30: skips page 20 and page 30</li>
  * <li>sp=20-30,33: skips page 20-30 and page 33</li>
- * <li>sp=e,20-30,33,35: skips even pages, page 20-30 and page 33 and page 35</li>
+ * <li>sp=e,20-30,33,35: skips even pages, page 20-30 and page 33 and page
+ * 35</li>
  * </ul>
  * 
  * @author nilsth
  *
  */
-public class SkipPageParser implements SkipRuleParser {
+public class SkipPageParsers extends DelegatingSkipRuleParser {
 
 	private static final String EQUALS = "=";
 	private static final String SKIP_PAGE_ABBREVIATION = "sp";
-	private static final Regex REGEX_VALUE_EVEN = new Regex().ignoreCase().literal("e");
-	private static final Regex REGEX_VALUE_UNEVEN = new Regex().ignoreCase().literal("u");
-	private static final List<Regex> REGEX_VALUES = Arrays.asList(REGEX_VALUE_EVEN, REGEX_VALUE_UNEVEN);
 	private static final Regex REGEX = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes())
 			.literal(SKIP_PAGE_ABBREVIATION).whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).or(REGEX_VALUES);
-	private static final Regex REGEX_FIND_EVEN = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes())
-			.literal(SKIP_PAGE_ABBREVIATION).whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_VALUE_EVEN);
-	private static final Regex REGEX_FIND_UNEVEN = new Regex().ignoreCase().whiteSpace(Repetition.zeroOrMoreTimes())
-			.literal(SKIP_PAGE_ABBREVIATION).whiteSpace(Repetition.zeroOrMoreTimes()).literal(EQUALS)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_VALUE_UNEVEN);
+			.whiteSpace(Repetition.zeroOrMoreTimes()).group(new Regex().anyCharacter(Repetition.oneOrMoreTimes()));
+
+	@Override
+	protected List<SkipRuleParser> createSkipRuleParsers() {
+		List<SkipRuleParser> skipRuleParsers = new ArrayList<>();
+		skipRuleParsers.add(new SkipEvenPageParser());
+		skipRuleParsers.add(new SkipUnevenPageParser());
+		return skipRuleParsers;
+	}
 
 	@Override
 	public Regex getRegex() {
@@ -51,31 +52,26 @@ public class SkipPageParser implements SkipRuleParser {
 	}
 
 	@Override
-	public List<SkipRule> parse(String token) {
+	public List<SkipRule> parse(String expression) {
 
-		boolean hasSkipEvenRule = REGEX_FIND_EVEN.hasMatchIn(token);
-		boolean hasSkipUnevenRules = REGEX_FIND_UNEVEN.hasMatchIn(token);
-
-		List<SkipRule> skipRules = new ArrayList<>();
-
-		if (hasSkipEvenRule) {
-			SkipEvenPageRule skipEvenPageRule = new SkipEvenPageRule();
-			skipRules.add(skipEvenPageRule);
-		} else if (hasSkipUnevenRules) {
-			SkipUnevenPageRule skipUnevenPageRule = new SkipUnevenPageRule();
-			skipRules.add(skipUnevenPageRule);
-		}
-
-		throwErrorWhenHasEvenAndUnevenRule(skipRules);
+		List<SkipRule> skipRules = super.parse(expression);
 
 		throwErrorWhenNoRulesAreFound(skipRules);
+
+		throwErrorWhenHasEvenAndUnevenRule(skipRules);
 
 		return skipRules;
 	}
 
-	private void throwErrorWhenNoRulesAreFound(List<SkipRule> skipRules) {
-		if (skipRules.isEmpty()) {
-			throw new RuntimeException("No valid page skip rules found");
+	@Override
+	protected List<String> split(String expression) {
+		List<String> groups = REGEX.findGroups(expression);
+		if (groups.size() == 2) {
+			String valuesExpression = groups.get(1);
+			List<String> expressions = Arrays.asList(valuesExpression.split(","));
+			return expressions;
+		} else {
+			throw new RuntimeException("No valid page skip rule values found in: " + expression);
 		}
 	}
 
@@ -86,6 +82,12 @@ public class SkipPageParser implements SkipRuleParser {
 		if (hasSkipEvenRule && hasSkipUnevenRules) {
 			throw new RuntimeException("Skip rules may not contain both a: " + SkipEvenPageRule.class.getSimpleName()
 					+ " and a: " + SkipUnevenPageRule.class.getSimpleName() + " rule.");
+		}
+	}
+
+	private void throwErrorWhenNoRulesAreFound(List<SkipRule> skipRules) {
+		if (skipRules.isEmpty()) {
+			throw new RuntimeException("No valid page skip rules found");
 		}
 	}
 

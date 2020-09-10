@@ -1,49 +1,54 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
 
+import nth.reflect.util.regex.LetterTypes;
 import nth.reflect.util.regex.Regex;
 import nth.reflect.util.regex.Repetition;
 import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.column.SkipColumnParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.page.SkipPageParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.column.SkipColumnParsers;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.textexp.token.component.skiprule.page.SkipPageParsers;
+/**
+ * <h3>Skip Rules</h3>
+ * The {@link SysmacUserAlarmsGenerator} will generate the component code's when
+ * using arrays (e.g. when using an array of line drive's). In some cases you
+ * need to specify how these component codes need to be generated. Often some
+ * columns and or pages need to be skipped, e.g.: Variable Frequency Drives often skip on column.
+ * <p>
+ * {@insert SkipColumnParser}
+ * <p>
+ * {@insert SkipPageParser} 
+ *  
+ * @author nilsth
+ *
+ */
+public class SkipRuleParsers extends DelegatingSkipRuleParser{
 
-public class SkipRuleParsers {
-
-	public static List<SkipRuleParser> ALL;
-	public static List<Regex> ALL_REGEX;
-	private static Regex REGEX_WHITESPACE = new Regex().whiteSpace(Repetition.zeroOrMoreTimes());
-	static {
+	@Override
+	protected List<SkipRuleParser> createSkipRuleParsers() {
 		List<SkipRuleParser> skipRuleParsers = new ArrayList<>();
-		skipRuleParsers.add(new SkipColumnParser());
-		skipRuleParsers.add(new SkipPageParser());
-		ALL = Collections.unmodifiableList(skipRuleParsers);
-		ALL_REGEX = ALL.stream().map(r -> r.getRegex()).collect(Collectors.toUnmodifiableList());
+		skipRuleParsers.add(new SkipColumnParsers());
+		skipRuleParsers.add(new SkipPageParsers());
+		return skipRuleParsers;
 	}
 
-	public static SkipRules parse(String skipRulesString) {
-		SkipRules result = new SkipRules();
-		for (SkipRuleParser token : ALL) {
-			Regex regex = token.getRegex();
-			List<String> rules = regex.findMatches(skipRulesString);
-			for (String rule : rules) {
-				List<SkipRule> newRules = token.parse(rule);
-				result.addAll(newRules);
-			}
-			skipRulesString = regex.removeAllFrom(skipRulesString);
-		}
-		if (containsInvalidRules(skipRulesString)) {
-			throw new RuntimeException("Invalid skip rule(s): " + skipRulesString);
-		}
-		return result;
+	@Override
+	public Regex getRegex() {
+		return null;
 	}
 
-	private static boolean containsInvalidRules(String skipRulesString) {
-		boolean containsUnparsedText = REGEX_WHITESPACE.removeAllFrom(skipRulesString).length() > 0;
-		return containsUnparsedText;
+	@Override
+	protected List<String> split(String expression) {
+		Regex REGEX_SPLIT=new Regex().ignoreCase().literal("s").literals("cp").whiteSpace(Repetition.zeroOrMoreTimes()).literal("=").whiteSpace(Repetition.zeroOrMoreTimes());
+		Matcher matcher = REGEX_SPLIT.toMatcher(expression);
+		 while (matcher.find()) {
+		        System.out.print("Start index: " + matcher.start());
+		        System.out.print(" End index: " + matcher.end());
+		        System.out.println(" Found: " + matcher.group());
+		    }
+		
 	}
 
 }
