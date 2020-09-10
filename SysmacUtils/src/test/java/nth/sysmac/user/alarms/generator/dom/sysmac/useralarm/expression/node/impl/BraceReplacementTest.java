@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeChildren;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ParseTree;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.NodeRules;
@@ -28,7 +27,7 @@ class BraceReplacementTest {
 		List<Token> tokens = tokenParser.parse(expression);
 		NodeParser nodeParser = new NodeParser(NodeRules.all());
 		ParseTree parseTree = nodeParser.parse(tokens);
-		NodeChildren actual = parseTree.getChildren();
+		List<Node> actual = parseTree.getChildren();
 		assertThat(actual).containsAll(expected);
 	}
 

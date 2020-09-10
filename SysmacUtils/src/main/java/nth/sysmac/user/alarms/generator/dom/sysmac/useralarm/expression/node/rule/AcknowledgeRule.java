@@ -1,10 +1,10 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeChildren;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
@@ -13,7 +13,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
 public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 
 	@Override
-	public MatchResult find(NodeChildren children) {
+	public MatchResult find(List<Node> children) {
 		Predicate<Node> predicate = createPredicate();
 		NodeMatcher nodeMatcher=new NodeMatcher();
 		MatchResult matchResult=nodeMatcher.find(children, predicate);
@@ -38,7 +38,7 @@ public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 		return false;
 	}
 
-	private boolean containingOnlyAckOrWhiteSpaces(NodeChildren children) {
+	private boolean containingOnlyAckOrWhiteSpaces(List<Node> children) {
 		boolean foundAckText = false;
 		for (Node child : children) {
 			boolean isWhiteSpace = TokenNodePredicate.whiteSpace().test(child);

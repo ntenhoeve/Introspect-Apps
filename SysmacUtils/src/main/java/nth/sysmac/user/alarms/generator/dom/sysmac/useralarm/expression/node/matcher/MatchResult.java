@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeChildren;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.distance.NodeDistance;
 
 public class MatchResult {
 
-	public static final MatchResult EMPTY = new MatchResult(new NodeChildren(), new ArrayList<>());
+	public static final MatchResult EMPTY = new MatchResult(new ArrayList<>(), new ArrayList<>());
 	private final List<Integer> foundIndexes;
 	private final List<Node> children;
 
@@ -23,7 +22,7 @@ public class MatchResult {
 		MatchResult matchResult = new MatchResult(children, foundIndexes);
 		boolean nodeDistanceOk = nodeDistance.isCorrectFor(matchResult);
 		if (!nodeDistanceOk) {
-			children = new NodeChildren();
+			children = new ArrayList<>();
 			foundIndexes = new ArrayList<>();
 		}
 		this.children = children;

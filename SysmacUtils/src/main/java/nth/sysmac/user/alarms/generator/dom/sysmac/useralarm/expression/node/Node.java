@@ -16,7 +16,7 @@ public abstract class Node {
 	private static final String NEW_LINE = "\n";
 	private static final String REGEX_NEW_LINE = "\\n";
 	private static final String INDENT = "  ";
-	private final NodeChildren nodeChildren;
+	private final List<Node> children;
 	private final String name;
 
 	public Node() {
@@ -24,12 +24,12 @@ public abstract class Node {
 	}
 
 	public Node(List<Node> children) {
-		this.nodeChildren = new NodeChildren(children);
+		this.children = children;
 		this.name = getClass().getSimpleName();
 	}
 
 	public Node(String name) {
-		this.nodeChildren = new NodeChildren();
+		this.children = new ArrayList<>();
 		this.name = name;
 	}
 
@@ -37,8 +37,8 @@ public abstract class Node {
 		return name;
 	}
 
-	public NodeChildren getChildren() {
-		return nodeChildren;
+	public List<Node> getChildren() {
+		return children;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public abstract class Node {
 		if (!this.getName().equals(thatNode.getName())) {
 			return false;
 		}
-		boolean equalChildren = nodeChildren.equals(thatNode.getChildren());
+		boolean equalChildren = children.equals(thatNode.getChildren());
 		return equalChildren;
 	}
 
@@ -64,7 +64,7 @@ public abstract class Node {
 		reply.append(name);
 		reply.append(NEW_LINE);
 
-		for (Node child : nodeChildren) {
+		for (Node child : children) {
 			String[] childStrings = child.toString().split(REGEX_NEW_LINE);
 			for (String childString : childStrings) {
 				reply.append(INDENT);

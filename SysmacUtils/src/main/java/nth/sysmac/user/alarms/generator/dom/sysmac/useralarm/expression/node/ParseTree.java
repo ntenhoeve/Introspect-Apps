@@ -25,10 +25,10 @@ public class ParseTree extends Node{
 	
 	public ParseTree(List<Token> tokens) {
 		super(ParseTree.class.getSimpleName());
-		NodeChildren nodeChildren = getChildren();
+		List<Node> children = getChildren();
 		for (Token token : tokens) {
 			TokenNode tokenNode=new TokenNode(token);
-			nodeChildren.add(tokenNode);
+			children.add(tokenNode);
 		}
 	}
 }

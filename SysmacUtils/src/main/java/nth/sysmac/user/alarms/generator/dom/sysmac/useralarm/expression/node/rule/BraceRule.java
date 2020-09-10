@@ -4,7 +4,6 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ru
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeChildren;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
@@ -15,7 +14,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
 public class BraceRule implements NodeRule<BraceNode> {
 
 	@Override
-	public MatchResult find(NodeChildren children) {
+	public MatchResult find(List<Node> children) {
 		NodeMatcher nodeMatcher=new NodeMatcher();
 		MatchResult matchResult=nodeMatcher.find(children, NodeDistance.ZERO_OR_MORE_INBETWEEN, TokenNodePredicate.openBrace(),TokenNodePredicate.closeBrace());
 		return matchResult;
