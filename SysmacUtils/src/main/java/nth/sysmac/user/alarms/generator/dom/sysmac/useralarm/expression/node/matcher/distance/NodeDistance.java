@@ -2,8 +2,8 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ma
 
 import java.util.function.Predicate;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchPattern;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResultOld;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
 
 /**
  * @deprecated use {@link MatchPattern}
@@ -15,13 +15,13 @@ public enum NodeDistance {
 	ZERO_OR_MORE_WHITESPACE_INBETWEEN(new ZeroOrMoreWhitespaceInbetween()),
 	ZERO_OR_MORE_INBETWEEN(new ZeroOrMoreNodesInbetween());
 
-	private final Predicate<MatchResult> predicate;
+	private final Predicate<MatchResultOld> predicate;
 
-	NodeDistance(Predicate<MatchResult> predicate) {
+	NodeDistance(Predicate<MatchResultOld> predicate) {
 		this.predicate = predicate;
 	}
 
-	public boolean isCorrectFor(MatchResult matchResult) {
-		return predicate.test(matchResult);
+	public boolean isCorrectFor(MatchResultOld matchResultOld) {
+		return predicate.test(matchResultOld);
 	}
 }

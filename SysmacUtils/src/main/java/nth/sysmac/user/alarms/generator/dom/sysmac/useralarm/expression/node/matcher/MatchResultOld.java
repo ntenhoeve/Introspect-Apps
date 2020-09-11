@@ -6,21 +6,27 @@ import java.util.stream.Collectors;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.distance.NodeDistance;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
 
-public class MatchResult {
+/**
+ * @deprecated use {@link MatchResult}
+ * @author nilsth
+ *
+ */
+public class MatchResultOld {
 
-	public static final MatchResult EMPTY = new MatchResult(new ArrayList<>(), new ArrayList<>());
+	public static final MatchResultOld EMPTY = new MatchResultOld(new ArrayList<>(), new ArrayList<>());
 	private final List<Integer> foundIndexes;
 	private final List<Node> children;
 
-	public MatchResult(List<Node> children, List<Integer> foundIndexes) {
+	public MatchResultOld(List<Node> children, List<Integer> foundIndexes) {
 		this.children = children;
 		this.foundIndexes = foundIndexes.stream().collect(Collectors.toUnmodifiableList());
 	}
 
-	public MatchResult(List<Node> children, List<Integer> foundIndexes, NodeDistance nodeDistance) {
-		MatchResult matchResult = new MatchResult(children, foundIndexes);
-		boolean nodeDistanceOk = nodeDistance.isCorrectFor(matchResult);
+	public MatchResultOld(List<Node> children, List<Integer> foundIndexes, NodeDistance nodeDistance) {
+		MatchResultOld matchResultOld = new MatchResultOld(children, foundIndexes);
+		boolean nodeDistanceOk = nodeDistance.isCorrectFor(matchResultOld);
 		if (!nodeDistanceOk) {
 			children = new ArrayList<>();
 			foundIndexes = new ArrayList<>();

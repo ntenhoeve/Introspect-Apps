@@ -2,6 +2,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ma
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
 
 /**
  * @deprecated use {@link MatchPattern}

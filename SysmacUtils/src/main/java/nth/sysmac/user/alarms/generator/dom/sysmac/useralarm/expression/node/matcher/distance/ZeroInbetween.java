@@ -2,23 +2,23 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ma
 
 import java.util.function.Predicate;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchPattern;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResultOld;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
 
 /**
  * @deprecated use {@link MatchPattern}
  * @author nilsth
  *
  */
-public class ZeroInbetween implements Predicate<MatchResult> {
+public class ZeroInbetween implements Predicate<MatchResultOld> {
 
 	@Override
-	public boolean test(MatchResult matchResult) {
-		if (!matchResult.found()) {
+	public boolean test(MatchResultOld matchResultOld) {
+		if (!matchResultOld.found()) {
 			return false;
 		}
 		Integer previousIndex=null;
-		for (Integer foundIndex : matchResult.getFoundIndexes()) {
+		for (Integer foundIndex : matchResultOld.getFoundIndexes()) {
 			if (previousIndex==null) {
 				previousIndex=foundIndex;
 			} else if (foundIndex==previousIndex+1) {

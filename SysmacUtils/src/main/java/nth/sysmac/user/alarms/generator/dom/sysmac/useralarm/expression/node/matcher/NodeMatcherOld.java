@@ -8,39 +8,44 @@ import java.util.function.Predicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.distance.NodeDistance;
 
-public class NodeMatcher {
+/**
+ * @deprecated use {@link NodeMatcher}
+ * @author nilsth
+ *
+ */
+public class NodeMatcherOld {
 	
-	public MatchResult find(List<Node> children, Predicate<Node> predicate) {
+	public MatchResultOld find(List<Node> children, Predicate<Node> predicate) {
 		return find(children, predicate, 0);
 	}
 
-	public MatchResult find(List<Node> children, Predicate<Node> predicate, int startIndex) {
+	public MatchResultOld find(List<Node> children, Predicate<Node> predicate, int startIndex) {
 		for (int index = startIndex; index < children.size(); index++) {
 			Node child = children.get(index);
 			if (predicate.test(child)) {
-				return new MatchResult(children, Arrays.asList(index));
+				return new MatchResultOld(children, Arrays.asList(index));
 			}
 		}
-		return MatchResult.EMPTY;
+		return MatchResultOld.EMPTY;
 	}
 
 	@SafeVarargs
-	public final MatchResult find(List<Node> children, NodeDistance nodeDistance, Predicate<Node>... predicates) {
+	public final MatchResultOld find(List<Node> children, NodeDistance nodeDistance, Predicate<Node>... predicates) {
 		int startIndex = 0;
 		List<Integer> foundIndexes = new ArrayList<>();
 		for (int predicateIndex = 0; predicateIndex < predicates.length; predicateIndex++) {
 			Predicate<Node> predicate = predicates[predicateIndex];
-			MatchResult matchResult = find(children, predicate, startIndex);
-			if (!matchResult.found()) {
-				return MatchResult.EMPTY;
+			MatchResultOld matchResultOld = find(children, predicate, startIndex);
+			if (!matchResultOld.found()) {
+				return MatchResultOld.EMPTY;
 			}
 
-			int foundIndex = matchResult.getFoundIndexes().get(0);
+			int foundIndex = matchResultOld.getFoundIndexes().get(0);
 			foundIndexes.add(foundIndex);
 			startIndex = foundIndex + 1;
 		}
 
-		return new MatchResult(children, foundIndexes, nodeDistance);
+		return new MatchResultOld(children, foundIndexes, nodeDistance);
 	}
 	
 
