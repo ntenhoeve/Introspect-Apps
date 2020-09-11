@@ -7,17 +7,17 @@ import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResultOld;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcherOld;
 
 public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 
 	@Override
-	public MatchResult find(List<Node> children) {
+	public MatchResultOld find(List<Node> children) {
 		Predicate<Node> predicate = createPredicate();
-		NodeMatcher nodeMatcher=new NodeMatcher();
-		MatchResult matchResult=nodeMatcher.find(children, predicate);
-		return matchResult;
+		NodeMatcherOld nodeMatcherOld=new NodeMatcherOld();
+		MatchResultOld matchResultOld=nodeMatcherOld.find(children, predicate);
+		return matchResultOld;
 	}
 
 	private Predicate<Node> createPredicate() {
@@ -58,7 +58,7 @@ public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 	}
 
 	@Override
-	public AcknowledgeNode createReplacement(MatchResult matchResult) {
+	public AcknowledgeNode createReplacement(MatchResultOld matchResultOld) {
 		return new AcknowledgeNode();
 	}
 }

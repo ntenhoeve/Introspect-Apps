@@ -10,44 +10,55 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Nod
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
 
-public class ExpressionAndNode {
+public class ExpressionAndNodes {
 
 	private final String expression;
-	private final List<Node> nodes;
+	private final List<TokenNode> tokenNodes;
+	private final List<Node> parsedNodes;
 
-	public ExpressionAndNode(String expression, List<Node> node) {
+	public ExpressionAndNodes(String expression, List<TokenNode> tokenNodes, List<Node> parsedNodes) {
 		this.expression = expression;
-		this.nodes = node;
+		this.tokenNodes= tokenNodes;
+		this.parsedNodes = parsedNodes;
 	}
 
-	public ExpressionAndNode(String expression, TokenRule tokenRule) {
+	public ExpressionAndNodes(String expression, TokenRule tokenRule) {
 		this.expression=expression;
-		this.nodes=Arrays.asList(new TokenNode( tokenRule, expression));
+		this.tokenNodes=Arrays.asList(new TokenNode( tokenRule, expression));
+		this.parsedNodes=new ArrayList<>();
 	}
 
-	public ExpressionAndNode(String expression, Node... nodes) {
-		this.expression=expression;
-		this.nodes=Arrays.asList(nodes);
-	}
+//	public ExpressionAndNodes(String expression, Node... parsedNodes) {
+//		this.expression=expression;
+//		this.tokenNodes=new ArrayList<>();
+//		this.parsedNodes=Arrays.asList(parsedNodes);
+//	}
 
 	public String expression() {
 		return expression;
 	}
 
-	public List<Node> nodes() {
-		return nodes;
+	public List<Node> parcedNodes() {
+		return parsedNodes;
+	}
+	public List<TokenNode> tokenNodes() {
+		return tokenNodes;
 	}
 	
-	public ExpressionAndNode append(ExpressionAndNode appendix) {
+	public ExpressionAndNodes append(ExpressionAndNodes appendix) {
 		String newExpression = expression+appendix.expression();
-		List<Node> newNodes = new ArrayList<>();
-		newNodes.addAll(nodes);
-		newNodes.addAll(appendix.nodes);
-		return new ExpressionAndNode(newExpression, newNodes);
+		List<TokenNode> newTokenNodes = new ArrayList<>();
+		newTokenNodes.addAll(tokenNodes);
+		newTokenNodes.addAll(appendix.tokenNodes);
+		List<Node> newParcedNodes = new ArrayList<>();
+		newParcedNodes.addAll(tokenNodes);
+		newParcedNodes.addAll(appendix.tokenNodes);
+
+		return new ExpressionAndNodes(newExpression, newTokenNodes, newParcedNodes);
 	}
 
 	public Arguments arguments() {
-		return Arguments.of(expression,nodes);
+		return Arguments.of(expression,tokenNodes);
 	}
 
 

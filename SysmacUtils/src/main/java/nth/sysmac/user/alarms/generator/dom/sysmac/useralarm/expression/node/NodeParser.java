@@ -2,7 +2,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
 
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResult;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResultOld;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
 
 /**
@@ -44,11 +44,11 @@ public class NodeParser {
 		boolean doneReplacement = false;
 		do {
 			foundReplacement = false;
-			MatchResult matchResult = nodeReplacement.find(children);
-			if (matchResult.found()) {
+			MatchResultOld matchResultOld = nodeReplacement.find(children);
+			if (matchResultOld.found()) {
 				foundReplacement = true;
-				Node replacementNode = nodeReplacement.createReplacement(matchResult);
-				matchResult.replaceFoundNodesWith(replacementNode);
+				Node replacementNode = nodeReplacement.createReplacement(matchResultOld);
+				matchResultOld.replaceFoundNodesWith(replacementNode);
 				doneReplacement = true;
 			}
 		} while (foundReplacement);
