@@ -2,7 +2,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
 
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResultOld;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
 
 /**
@@ -39,21 +39,21 @@ public class NodeParser {
 		} while (doneReplacement);
 	}
 
-	private boolean replaceAllInChildren(List<Node> children, NodeRule<? extends Node> nodeReplacement) {
+	private boolean replaceAllInChildren(List<Node> children, NodeRule<? extends Node> nodeRule) {
 		boolean foundReplacement = false;
 		boolean doneReplacement = false;
 		do {
 			foundReplacement = false;
-			MatchResultOld matchResultOld = nodeReplacement.find(children);
-			if (matchResultOld.found()) {
+			MatchResult matchResult = nodeRule.find(children);
+			if (matchResult.hasResults()) {
 				foundReplacement = true;
-				Node replacementNode = nodeReplacement.createReplacement(matchResultOld);
-				matchResultOld.replaceFoundNodesWith(replacementNode);
+				Node replacementNode = nodeRule.createReplacement(matchResult);
+				matchResult.replaceFoundNodesWith(replacementNode);
 				doneReplacement = true;
 			}
 		} while (foundReplacement);
 
-		doneReplacement = doneReplacement || replaceAllInChildrenRecursively(children, nodeReplacement);
+		doneReplacement = doneReplacement || replaceAllInChildrenRecursively(children, nodeRule);
 		return doneReplacement;
 	}
 

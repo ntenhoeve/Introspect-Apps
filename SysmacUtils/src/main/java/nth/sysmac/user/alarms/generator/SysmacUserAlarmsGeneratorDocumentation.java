@@ -1,9 +1,5 @@
 package nth.sysmac.user.alarms.generator;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.Token;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithoutBracketsParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.SkipRuleParsers;
-
 /**
  * {@link SysmacUserAlarmsGeneratorDocumentation} is generated using the {@link ReflectUtilMavenPlugIn}
  * 

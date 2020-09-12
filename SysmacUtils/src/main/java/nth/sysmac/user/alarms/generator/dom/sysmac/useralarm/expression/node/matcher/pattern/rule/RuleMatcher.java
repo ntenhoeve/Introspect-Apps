@@ -35,7 +35,11 @@ public class RuleMatcher {
 	}
 
 	private Optional<NodeRule> processNotFound(Node node, Optional<Node> nextNode) {
-		if (canOrMustGoToNextRule(node, nextNode)) {
+		if(hasNoMoreRules()) {
+			return Optional.absent();
+		}
+		boolean canGoToNextRule = getCurrentRepetitionCounter().canGoToNextRule();
+		if (canGoToNextRule) {
 			ruleIndex++;
 			
 			// try and match the following rules (recursively) 
@@ -63,7 +67,7 @@ public class RuleMatcher {
 	}
 
 	private boolean canOrMustGoToNextRule(Node node, Optional<Node> nextNode) {
-		if (noMoreRules()) {
+		if (hasNoMoreRules()) {
 			return false;
 		}
 		boolean nextNodeMatchesNextRule = nextNodeMatchesNextRule(nextNode);
@@ -75,7 +79,7 @@ public class RuleMatcher {
 	}
 
 	private boolean matchesCurrentRule(Node node) {
-		if (noMoreRules()) {
+		if (hasNoMoreRules()) {
 			return false;
 		}
 		NodeRule currentRule = rules.get(ruleIndex);
@@ -83,12 +87,12 @@ public class RuleMatcher {
 		return matchesCurrentRule;
 	}
 
-	private boolean noMoreRules() {
+	private boolean hasNoMoreRules() {
 		return ruleIndex >= rules.size();
 	}
 
 	private boolean nextNodeMatchesNextRule(Optional<Node> nextNode) {
-		if (thereIsNoNextRule() || !nextNode.isPresent()) {
+		if (hasNoNextRule() || !nextNode.isPresent()) {
 			return false;
 		}
 		NodeRule nextRule = rules.get(ruleIndex + 1);
@@ -96,16 +100,16 @@ public class RuleMatcher {
 		return matchesNextRule;
 	}
 
-	private boolean thereIsNoNextRule() {
+	private boolean hasNoNextRule() {
 		return ruleIndex + 1 >= rules.size();
 	}
 
 	public boolean allRulesOk() {
-		return noMoreRules();
+		return hasNoMoreRules();
 	}
 
 	public boolean lastRuleOk() {
-		return lastRepetitionCounter().canGoToNextRule() && thereIsNoNextRule();
+		return lastRepetitionCounter().canGoToNextRule() && hasNoNextRule();
 	}
 
 	private RepetitionCounter lastRepetitionCounter() {

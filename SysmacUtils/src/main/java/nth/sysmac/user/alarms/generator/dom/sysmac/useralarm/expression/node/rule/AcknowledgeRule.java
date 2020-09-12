@@ -1,26 +1,40 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.MatchResultOld;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcherOld;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
 
 public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 
+	private static final Regex REGEX_ACK_TEXT = new Regex().ignoreCase().beginOfLine().literal("ack").endOfLine();
+
 	@Override
-	public MatchResultOld find(List<Node> children) {
-		Predicate<Node> predicate = createPredicate();
-		NodeMatcherOld nodeMatcherOld=new NodeMatcherOld();
-		MatchResultOld matchResultOld=nodeMatcherOld.find(children, predicate);
-		return matchResultOld;
+	public MatchResult find(List<Node> children) {
+		
+		Optional<Node> found=children.stream().filter(c-> c instanceof BraceNode).findAny() ;
+		if (found.isPresent() && found.get().getChildren().size()==1 && found.get().getChildren().get(0).toString().toLowerCase().contains("ack")) {
+			System.out.println();
+		}
+		
+		Predicate<Node> braceNodeWithAckTextPredicate = createBraceNodeWithAckTextPredicate();
+		MatchPattern pattern = new MatchPattern()//
+				.node(braceNodeWithAckTextPredicate);
+
+		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
+		MatchResult matchResult = nodeMatcher.match(children);
+		return matchResult;
 	}
 
-	private Predicate<Node> createPredicate() {
+	private Predicate<Node> createBraceNodeWithAckTextPredicate() {
 		return new Predicate<Node>() {
 			@Override
 			public boolean test(Node node) {
@@ -39,26 +53,21 @@ public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 	}
 
 	private boolean containingOnlyAckOrWhiteSpaces(List<Node> children) {
-		boolean foundAckText = false;
-		for (Node child : children) {
-			boolean isWhiteSpace = TokenNodePredicate.whiteSpace().test(child);
-			boolean isRest = TokenNodePredicate.rest(new Regex().ignoreCase().beginOfLine().literal("ack").endOfLine())
-					.test(child);
-			if (isRest) {
-				if (foundAckText) {
-					// multiple ack's
-					return false;
-				}
-				foundAckText = true;
-			} else if (!isWhiteSpace) {
-				return false;
-			}
-		}
-		return true;
+		MatchPattern pattern = new MatchPattern()//
+				.firstMatchMustBeFirstNode() //
+				.node(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
+				.node(TokenNodePredicate.rest(REGEX_ACK_TEXT))//
+				.node(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
+				.lastMatchMustBeLastNode();
+
+		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
+		MatchResult matchResult = nodeMatcher.match(children);
+		boolean matches = matchResult.hasResults();
+		return matches;
 	}
 
 	@Override
-	public AcknowledgeNode createReplacement(MatchResultOld matchResultOld) {
+	public AcknowledgeNode createReplacement(MatchResult matchResult) {
 		return new AcknowledgeNode();
 	}
 }

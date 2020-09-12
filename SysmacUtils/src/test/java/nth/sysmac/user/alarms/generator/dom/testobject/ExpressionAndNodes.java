@@ -51,14 +51,14 @@ public class ExpressionAndNodes {
 		newTokenNodes.addAll(tokenNodes);
 		newTokenNodes.addAll(appendix.tokenNodes);
 		List<Node> newParcedNodes = new ArrayList<>();
-		newParcedNodes.addAll(tokenNodes);
-		newParcedNodes.addAll(appendix.tokenNodes);
+		newParcedNodes.addAll(parsedNodes);
+		newParcedNodes.addAll(appendix.parsedNodes);
 
 		return new ExpressionAndNodes(newExpression, newTokenNodes, newParcedNodes);
 	}
 
 	public Arguments arguments() {
-		return Arguments.of(expression,tokenNodes);
+		return Arguments.of(expression,parsedNodes);
 	}
 
 

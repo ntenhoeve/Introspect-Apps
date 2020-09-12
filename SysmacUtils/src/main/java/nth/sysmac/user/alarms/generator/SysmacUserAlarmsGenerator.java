@@ -10,7 +10,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.OmronBaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGenerationService;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroup;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypeService;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.Entity;

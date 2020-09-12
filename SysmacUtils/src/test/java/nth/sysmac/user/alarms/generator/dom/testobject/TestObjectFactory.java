@@ -43,8 +43,8 @@ public class TestObjectFactory {
 		tokenNodes.addAll(tokenNodeRest().tokenNodes());
 		tokenNodes.addAll(tokenNodeCloseBrace().tokenNodes());
 
-		List<Node> parsedNodes = new ArrayList<>();
-		parsedNodes.add(new BraceNode(tokenNodeRest().parcedNodes()));
+		List<Node> restNode=new ArrayList<>(tokenNodeRest().tokenNodes());
+		List<Node> parsedNodes = Arrays.asList(new BraceNode(restNode));
 
 		return new ExpressionAndNodes(expression, tokenNodes, parsedNodes);
 	}
