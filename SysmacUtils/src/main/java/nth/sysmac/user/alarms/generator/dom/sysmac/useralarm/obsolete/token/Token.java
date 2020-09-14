@@ -1,5 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
+
 /**
  * <h3>Tokens</h3>
  * A {@link Token} is a sequence characters with an assigned and thus identified

@@ -3,7 +3,8 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
 
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
 
 /**
  * Defines what {@link Node} children need to be replaced
@@ -17,12 +18,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
 public interface NodeRule<T extends Node> {
 
 	/**
-	 * @deprecated change to public MatchPattern getMatchPattern();
-	 * @param children
-	 * @return
+	 * @deprecated TODO: replace with  {@link Rules} getRules()
 	 */
-	public MatchResult find(List<Node> children);
+	public Results find(List<Node> nodes);
 
-	public T createReplacement(MatchResult matchResultOld);
+	/**
+	 * @deprecated TODO: replace with  {@link Rules} getRules()
+	 */
+
+	public T createReplacement(Results results);
 
 }

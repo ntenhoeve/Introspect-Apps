@@ -25,7 +25,7 @@ public class ExpressionAndNodes {
 	public ExpressionAndNodes(String expression, TokenRule tokenRule) {
 		this.expression=expression;
 		this.tokenNodes=Arrays.asList(new TokenNode( tokenRule, expression));
-		this.parsedNodes=new ArrayList<>();
+		this.parsedNodes=new ArrayList<>(tokenNodes);
 	}
 
 //	public ExpressionAndNodes(String expression, Node... parsedNodes) {
@@ -44,6 +44,7 @@ public class ExpressionAndNodes {
 	public List<TokenNode> tokenNodes() {
 		return tokenNodes;
 	}
+	
 	
 	public ExpressionAndNodes append(ExpressionAndNodes appendix) {
 		String newExpression = expression+appendix.expression();

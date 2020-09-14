@@ -2,11 +2,8 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.com
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
-import nth.reflect.util.regex.LetterTypes;
 import nth.reflect.util.regex.Regex;
-import nth.reflect.util.regex.Repetition;
 import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.column.SkipColumnParsers;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.page.SkipPageParsers;

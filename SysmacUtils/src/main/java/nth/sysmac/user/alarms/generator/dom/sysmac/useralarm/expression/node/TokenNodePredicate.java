@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import com.google.common.base.Optional;
 
+import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Rest;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
@@ -11,11 +12,11 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.ru
 
 public class TokenNodePredicate implements Predicate<Node> {
 
-	private final TokenRule ruleToFind;
+	private final TokenRule tokenRuleToFind;
 	private final Optional<Regex> regex;
 
 	public TokenNodePredicate(TokenRule ruleToFind, Optional<Regex> regex) {
-		this.ruleToFind = ruleToFind;
+		this.tokenRuleToFind = ruleToFind;
 		this.regex = regex;
 	}
 
@@ -30,7 +31,7 @@ public class TokenNodePredicate implements Predicate<Node> {
 		}
 		TokenNode tokenNode = (TokenNode) node;
 		TokenRule tokenRule = tokenNode.getRule();
-		boolean identicalDataTypes = tokenRule.getClass() == ruleToFind.getClass();
+		boolean identicalDataTypes = tokenRule.getClass() == tokenRuleToFind.getClass();
 		if (!identicalDataTypes) {
 			return false;
 		}
@@ -58,5 +59,15 @@ public class TokenNodePredicate implements Predicate<Node> {
 	public static TokenNodePredicate rest(Regex regex) {
 		return new TokenNodePredicate(new Rest(), Optional.of(regex));
 	}
-
+	
+	@Override
+	public String toString() {
+		TitleBuilder title = new TitleBuilder();
+		title.append(TokenNodePredicate.class.getSimpleName());
+		title.append(" tokenRuleToFind=", tokenRuleToFind.getClass().getSimpleName());
+		if (regex.isPresent()) {
+			title.append(", regex=", regex.get());
+		}
+		return title.toString();
+	}
 }

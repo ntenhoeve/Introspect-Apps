@@ -4,57 +4,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.Necessity;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.GroupNameResultFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.RequiredGroupResultFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.ResultFilter;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rule;
 
-public class MatchResult {
+public class Results {
 
 	private static final RequiredGroupResultFilter RESULT_FILTER = new RequiredGroupResultFilter();
-	public static final MatchResult NOT_FOUND = new MatchResult(new ArrayList<>());
-	private final List<ResultGroup> resultGroups;
-	private final List<Node> children;
+	public static final Results NOT_FOUND = new Results(new ArrayList<>());
+	private final List<Result> results;
+	private final List<Node> nodes;
 
-	public MatchResult(List<Node> children) {
-		this.children = children;
-		resultGroups = new ArrayList<>();
+	public Results(List<Node> nodes) {
+		this.nodes = nodes;
+		results = new ArrayList<>();
 	}
 
 	public boolean hasResults() {
-		return !resultGroups.isEmpty();
+		return !results.isEmpty();
 	}
 
-	public void addResult(NodeRule nodeRule, int index) {
+	public void add(Rule rule, int index) {
 		if (!hasResults()) {
-			createAndAddNewGroup(index, nodeRule);
+			createAndAddNewResult(index, rule);
 		} else {
-			String name = nodeRule.getGroup().getName();
-			ResultGroup resultGroup = getLastResultGroup();
-			if (name.equals(resultGroup.getName())) {
-				resultGroup.setLast(index);
+			Result lastResult = getLastResult();
+			if (rule==lastResult.getRule()) {
+				lastResult.setLast(index);
 			} else {
-				createAndAddNewGroup(index, nodeRule);
+				createAndAddNewResult(index, rule);
 			}
 		}
 	}
 
-	private void createAndAddNewGroup(int index, NodeRule nodeRule) {
-		String name = nodeRule.getGroup().getName();
-		Necessity nesessity = nodeRule.getGroup().getNecessity();
-		ResultGroup newResultGroup = new ResultGroup(name, nesessity, index);
-		resultGroups.add(newResultGroup);
-	}
-
-
-	private ResultGroup getLastResultGroup() {
-		return resultGroups.get(resultGroups.size() - 1);
+	private void createAndAddNewResult(int index, Rule rule) {
+		Result newResult = new Result(rule, index);
+		results.add(newResult);
 	}
 
 	public int getFirst(ResultFilter resultFilter) {
 		throwErrorWhenNothingWasFound();
-		int first = resultFilter.getFirst(resultGroups);
+		int first = resultFilter.getFirst(results);
 		return first;
 	}
 
@@ -66,7 +57,7 @@ public class MatchResult {
 
 	public int getLast(ResultFilter resultFilter) {
 		throwErrorWhenNothingWasFound();
-		int last = resultFilter.getLast(resultGroups);
+		int last = resultFilter.getLast(results);
 		return last;
 	}
 
@@ -75,21 +66,21 @@ public class MatchResult {
 		int lastIndex = getLast(RESULT_FILTER);
 
 		for (int index = firstIndex; index <= lastIndex; index++) {
-			children.remove(firstIndex);
+			nodes.remove(firstIndex);
 		}
 		int replacementIndex = firstIndex;
-		children.add(replacementIndex, replacementNode);
+		nodes.add(replacementIndex, replacementNode);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder reply = new StringBuilder();
-		reply.append(MatchResult.class.getSimpleName());
+		reply.append(Results.class.getSimpleName());
 		if (hasResults()) {
 			reply.append("\n");
-			for (ResultGroup resultGroup : resultGroups) {
-				reply.append("  " + resultGroup + "\n");
-				String name = resultGroup.getName();
+			for (Result result : results) {
+				reply.append("  " + result + "\n");
+				String name = result.getGroupName();
 				GroupNameResultFilter groupNameResultFilter = new GroupNameResultFilter(name);
 				List<Node> groupChildren = getChildren(groupNameResultFilter);
 				for (Node child : groupChildren) {
@@ -104,8 +95,30 @@ public class MatchResult {
 	}
 
 	public List<Node> getChildren(ResultFilter resultFilter) {
-		List<Node> found = resultFilter.getChildren(resultGroups, children);
+		List<Node> found = resultFilter.getChildren(results, nodes);
 		return found;
+	}
+
+	public Result getLastResult() {
+		throwErrorWhenNothingWasFound();
+		return results.get(results.size()-1);
+	}
+
+	public int getLastNodeIndex() {
+		if (!hasResults()) {
+			return 0;
+		} 
+		int lastNodeIndex=getLastResult().getLast();
+		return lastNodeIndex;
+	}
+
+	public int getNumberOfMatches(Rule ruleToFind) {
+		int numberOfMatches=(int) results.stream().filter(r-> r.getRule()==ruleToFind).count();
+		return numberOfMatches;
+	}
+
+	public List<Node> getNodes() {
+		return nodes;
 	}
 
 }

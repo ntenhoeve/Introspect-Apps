@@ -18,7 +18,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.To
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
-class AcknowledgeReplacementTest {
+class AcknowledgeRuleTest {
 
 	@ParameterizedTest
 	@MethodSource
@@ -28,11 +28,12 @@ class AcknowledgeReplacementTest {
 		NodeParser nodeParser = new NodeParser(NodeRules.all());
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getChildren();
-		assertThat(actual).containsAll(expected);
+		assertThat(actual).containsExactlyElementsOf(expected);
 	}
 
 	private static Stream<Arguments> test_givenValidExpression_returnValidParseTree() {
-		return Stream.of(TestObjectFactory.acknowledgeNode("{ack}").arguments(),
+		return Stream.of(
+				TestObjectFactory.acknowledgeNode("{ack}").arguments(),
 				TestObjectFactory.acknowledgeNode("{ACK}").arguments(),
 				TestObjectFactory.acknowledgeNode("{ ack }").arguments(),
 				TestObjectFactory.acknowledgeNode("{ ACK }").arguments(),

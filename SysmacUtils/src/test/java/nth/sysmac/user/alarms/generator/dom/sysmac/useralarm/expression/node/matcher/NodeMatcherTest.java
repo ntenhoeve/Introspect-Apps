@@ -15,11 +15,11 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Nod
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule.Repetition;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.NoResultsFoundException;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.RequiredGroupResultFilter;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
 class NodeMatcherTest {
@@ -31,14 +31,14 @@ class NodeMatcherTest {
 	@ParameterizedTest
 	@MethodSource
 	void testMatch_givenPattern_mustFindCorrectNodes(List<Node> nodesToMatch, List<Node> extectedNodesToFind) {
-		MatchPattern pattern = new MatchPattern()//
+		Rules rules = new Rules()//
 				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
 				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
 				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace());
 
-		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
-		MatchResult matchResult = nodeMatcher.match(nodesToMatch);
-		assertThat(matchResult.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
+		NodeMatcher nodeMatcher = new NodeMatcher(rules);
+		Results results = nodeMatcher.match(nodesToMatch);
+		assertThat(results.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
 	}
 
 	static Stream<Arguments> testMatch_givenPattern_mustFindCorrectNodes() {
@@ -54,15 +54,15 @@ class NodeMatcherTest {
 	@MethodSource
 	void testMatch_givenPatternFirstMatchMustBeFirstNode_mustFindCorrectNodes(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
-		MatchPattern pattern = new MatchPattern()//
+		Rules rules = new Rules()//
 				.firstMatchMustBeFirstNode()//
 				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
 				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
 				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace());
 
-		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
-		MatchResult matchResult = nodeMatcher.match(nodesToMatch);
-		assertThat(matchResult.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
+		NodeMatcher nodeMatcher = new NodeMatcher(rules);
+		Results results = nodeMatcher.match(nodesToMatch);
+		assertThat(results.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
 	}
 
 	static Stream<Arguments> testMatch_givenPatternFirstMatchMustBeFirstNode_mustFindCorrectNodes() {
@@ -76,15 +76,15 @@ class NodeMatcherTest {
 	@MethodSource
 	void testMatch_givenPatternFirstMatchMustBeFirstNode_mustThrowError(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
-		MatchPattern pattern = new MatchPattern()//
+		Rules rules = new Rules()//
 				.firstMatchMustBeFirstNode()//
 				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
 				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
 				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace());
 
-		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
-		MatchResult matchResult = nodeMatcher.match(nodesToMatch);
-		assertThatThrownBy(() -> matchResult.getChildren(new RequiredGroupResultFilter()))
+		NodeMatcher nodeMatcher = new NodeMatcher(rules);
+		Results results = nodeMatcher.match(nodesToMatch);
+		assertThatThrownBy(() -> results.getChildren(new RequiredGroupResultFilter()))
 				.hasMessageContaining(NoResultsFoundException.MESSAGE);
 	}
 
@@ -98,15 +98,15 @@ class NodeMatcherTest {
 	@MethodSource
 	void testMatch_givenPatternLastMatchMustBeLastNode_mustFindCorrectNodes(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
-		MatchPattern pattern = new MatchPattern()//
+		Rules rules = new Rules()//
 				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
 				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
 				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace())//
 				.lastMatchMustBeLastNode();
 
-		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
-		MatchResult matchResult = nodeMatcher.match(nodesToMatch);
-		assertThat(matchResult.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
+		NodeMatcher nodeMatcher = new NodeMatcher(rules);
+		Results results = nodeMatcher.match(nodesToMatch);
+		assertThat(results.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
 	}
 
 	static Stream<Arguments> testMatch_givenPatternLastMatchMustBeLastNode_mustFindCorrectNodes() {
@@ -118,21 +118,20 @@ class NodeMatcherTest {
 
 	@ParameterizedTest
 	@MethodSource
-	void testMatch_givenPatternLastMatchMustBeLastNode_mustThrowError(List<Node> nodesToMatch,
+	void testMatch_givenPatternLastMatchMustBeLastNode_hasNoResults(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
-		MatchPattern pattern = new MatchPattern()//
+		Rules rules = new Rules()//
 				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
 				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
 				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace())//
 				.lastMatchMustBeLastNode();
 
-		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
-		MatchResult matchResult = nodeMatcher.match(nodesToMatch);
-		assertThatThrownBy(() -> matchResult.getChildren(new RequiredGroupResultFilter()))
-				.hasMessageContaining(NoResultsFoundException.MESSAGE);
+		NodeMatcher nodeMatcher = new NodeMatcher(rules);
+		Results results = nodeMatcher.match(nodesToMatch);
+		assertThat(results.hasResults()).isFalse();
 	}
 
-	static Stream<Arguments> testMatch_givenPatternLastMatchMustBeLastNode_mustThrowError() {
+	static Stream<Arguments> testMatch_givenPatternLastMatchMustBeLastNode_hasNoResults() {
 		return Stream
 				.of(Arguments.of(TestObjectFactory.braceNode().append(TestObjectFactory.tokenNodeRest()).tokenNodes(),
 						new ArrayList<TokenNode>()));

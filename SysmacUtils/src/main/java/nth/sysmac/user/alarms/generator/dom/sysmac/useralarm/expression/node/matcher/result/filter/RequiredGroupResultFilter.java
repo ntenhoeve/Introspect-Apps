@@ -2,47 +2,46 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ma
 
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.Necessity;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.NoResultsFoundException;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.ResultGroup;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Result;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Necessity;
 
 public class RequiredGroupResultFilter extends ResultFilter {
 
 	@Override
-	public int getFirst(List<ResultGroup> resultGroups) {
-		throwErrorWhenNoResultsAreFound(resultGroups);
-		ResultGroup firstResultGroup = findFirstResultGroup(resultGroups);
+	public int getFirst(List<Result> results) {
+		throwErrorWhenNoResultsAreFound(results);
+		Result firstResultGroup = findFirstResultGroup(results);
 		int first=firstResultGroup.getFirst();
 		return first;
 	}
 
-	private ResultGroup findFirstResultGroup(List<ResultGroup> resultGroups) {
-		for (ResultGroup resultGroup : resultGroups) {
-			if ( resultGroup.getNesessity()==Necessity.REQUIRED) {
-				return resultGroup;
+	private Result findFirstResultGroup(List<Result> results) {
+		for (Result result : results) {
+			if ( result.getNesessity()==Necessity.REQUIRED) {
+				return result;
 			}
 		}
 		throw new RuntimeException("Could not find a required group.");
 	}
 
 	@Override
-	public int getLast(List<ResultGroup> resultGroups) {
-		throwErrorWhenNoResultsAreFound(resultGroups);
-		ResultGroup lastResultGroup = findLastResultGroup(resultGroups);
+	public int getLast(List<Result> results) {
+		throwErrorWhenNoResultsAreFound(results);
+		Result lastResultGroup = findLastResultGroup(results);
 		int last=lastResultGroup.getLast();
 		return last;
 	}
 
-	private ResultGroup findLastResultGroup(List<ResultGroup> resultGroups) {
+	private Result findLastResultGroup(List<Result> results) {
 		boolean foundFirst=false;
-		for (ResultGroup resultGroup : resultGroups) {
-			if ( resultGroup.getNesessity()==Necessity.REQUIRED) {
+		for (Result result : results) {
+			if ( result.getNesessity()==Necessity.REQUIRED) {
 				foundFirst=true;
 			} else if (foundFirst) {
-				return resultGroup;
+				return result;
 			}
 		}
-		return resultGroups.get(resultGroups.size()-1);
+		return results.get(results.size()-1);
 	}
 
 }

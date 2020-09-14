@@ -45,16 +45,19 @@ import nth.reflect.util.regex.Regex;
  * </tr>
  */
 public enum Priority {
-	CRITICAL(1, "A critical problem that stops the system, e.g Line drive trip, Ethercat error, Emergency stop"),
-	HIGH(3, "When immediate action is required by an operator, e.g. a a hot electric motor, a tripped knife motor"),
-	MEDIUM(5, "When rapid action is required by an operator, e.g. a low temperature"),
-	LOW(7, "When no urgent action is required by an operator, e.g. a tripped plucker motor"),
-	INFO(9, "All events that are not an error, e.g. when a stop button is pressed");
+	FATAL("F",1,"A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop"),
+	CRITICAL("C",2, "A critical problem that stops the system but can be restarted, e.g. a motor overheating"),
+	HIGH("H",3, "When immediate action is required by an operator, e.g. a a hot electric motor, a tripped knife motor"),
+	MEDIUM_HIGHT("MH",4, ""),
+	MEDIUM("M",5, "When rapid action is required by an operator, e.g. a low temperature"),
+	MEDIUM_LOW("ML",6, ""),
+	LOW("L",7, "When no urgent action is required by an operator, e.g. a tripped plucker motor"),
+	INFO("I",9, "All events that are not an error, e.g. when a stop button is pressed");
 
 	private final int level;
 	private final String description;
 
-	Priority(int level, String description) {
+	Priority(String abreviation, int level, String description) {
 		this.level = level;
 		this.description = description;
 	}

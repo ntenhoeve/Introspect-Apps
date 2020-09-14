@@ -1,8 +1,10 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule;
+
+import nth.reflect.fw.generic.util.TitleBuilder;
 
 public class Repetition {
 	private final int min;
-	private final int max;
+	final int max;
 
 	public Repetition(int min, int max) {
 		super();
@@ -30,4 +32,14 @@ public class Repetition {
 		return new Repetition(1, Integer.MAX_VALUE);
 	}
 
+	@Override
+	public String toString() {
+		TitleBuilder title=new TitleBuilder();
+		title.append(Repetition.class.getSimpleName());
+		title.append(" min=",min);
+		title.append(", max=",max);
+		return title.toString();
+	}
+
+		
 }

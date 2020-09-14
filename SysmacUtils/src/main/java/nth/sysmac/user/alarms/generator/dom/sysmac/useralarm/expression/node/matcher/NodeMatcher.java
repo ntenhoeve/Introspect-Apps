@@ -5,86 +5,178 @@ import java.util.List;
 import com.google.common.base.Optional;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.FirstMatchRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.LastMatchRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule.NodeRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule.RuleMatcher;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.AllResultsFilter;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.FirstMatchRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.LastMatchRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
 
 public class NodeMatcher {
 
-	private final MatchPattern pattern;
+	private static final AllResultsFilter ALL_RESULT_FILTER = new AllResultsFilter();
+	private final Rules rules;
 
-	public NodeMatcher(MatchPattern pattern) {
-		this.pattern = pattern;
+	public NodeMatcher(Rules rules) {
+		this.rules = rules;
 	}
 
-	public MatchResult match(List<Node> children) {
-		if (firstMatchMustBeFirstNode()) {
-			MatchResult matchResult = matchFromFirstChild(children);
-			return matchResult;
+	public Results match(List<Node> nodes) {
+		if (firstMatchCanBeAnyNode()) {
+			Results results = matchFromAnyChild(nodes);
+			return results;
 		} else {
-			MatchResult matchResult = matchFromAnyChild(children);
-			return matchResult;
+			Results results = matchFromFirstChild(nodes);
+			return results;
 		}
 	}
 
-	private MatchResult matchFromAnyChild(List<Node> children) {
-		for (int startIndex = 0; startIndex < children.size(); startIndex++) {
-			MatchResult matchResult = match(children, startIndex);
-			if (matchResult.hasResults()) {
-				return matchResult;
+	private Results matchFromAnyChild(List<Node> nodes) {
+		for (int nodeStartIndex = 0; nodeStartIndex < nodes.size(); nodeStartIndex++) {
+			Results results = match(nodes, nodeStartIndex);
+			if (results.hasResults()) {
+				return results;
 			}
 		}
-		return MatchResult.NOT_FOUND;
+		return Results.NOT_FOUND;
 	}
 
-	private MatchResult matchFromFirstChild(List<Node> children) {
+	private Results matchFromFirstChild(List<Node> nodes) {
 		int startIndex = 0;
-		MatchResult matchResult = match(children, startIndex);
-		return matchResult;
+		Results results = match(nodes, startIndex);
+		return results;
 	}
 
-	private MatchResult match(List<Node> children, int startIndex) {
-		RuleMatcher ruleMatcher = new RuleMatcher(pattern);
-		MatchResult matchResult = new MatchResult(children);
+	private Results match(List<Node> nodes, int nodeStartIndex) {
+		Results results = new Results(nodes);
+		int ruleIndex = 0;
 
-		for (int index = startIndex; index < children.size(); index++) {
-			Node child = children.get(index);
-			Optional<Node> nextChild = getNextChild(children, index);
-			Optional<NodeRule> matchingRule = ruleMatcher.match(child, nextChild);
-			if (matchingRule.isPresent()) {
-				matchResult.addResult(matchingRule.get(), index);
+		for (int nodeIndex = nodeStartIndex; nodeIndex < nodes.size(); nodeIndex++) {
+			Node node = nodes.get(nodeIndex);
+			Optional<Rule> foundRule = findMatchingRule(node, ruleIndex, results);
+			if (foundRule.isPresent()) {
+				Rule rule = foundRule.get();
+				results.add(rule, nodeIndex);
+				ruleIndex = rules.indexOf(rule);
+
+//				if (done(ruleIndex, results)) {
+//					if (firstAndLastRulesAreOk(results)) {
+//						return results;
+//					} else {
+//						return Results.NOT_FOUND;
+//					}
+//				}
 			} else {
-				return MatchResult.NOT_FOUND;
-			}
-			if (ruleMatcher.allRulesOk() && !lastMatchMustBeLastNode()) {
-				return matchResult;
+				// found first mismatch but this is ok if we where done anyway
+				return getValidatedResults(results);
 			}
 		}
+		// done matching. did we match all?
+		return getValidatedResults(results);
+	}
 
-		if (ruleMatcher.lastRuleOk()) {
-			return matchResult;
+	private Results getValidatedResults(Results results) {
+		if (done(results)) {
+			if (firstAndLastRulesAreOk(results)) {
+				return results;
+			} else {
+				return Results.NOT_FOUND;
+			}
 		} else {
-			return MatchResult.NOT_FOUND;
+			return Results.NOT_FOUND;
 		}
 	}
 
-	private Optional<Node> getNextChild(List<Node> children, int index) {
-		if (index +1 < children.size()) {
-			return Optional.of(children.get(index + 1));
+	private boolean firstAndLastRulesAreOk(Results results) {
+		int firstFoundNodeIndex = results.getFirst(ALL_RESULT_FILTER);
+		boolean firstFoundNodeIsFirst = firstFoundNodeIndex == 0;
+		boolean firstRuleOk = firstMatchCanBeAnyNode() || firstFoundNodeIsFirst;
+		
+		int lastFoundNodeIndex = results.getLastResult().getLast();
+		int lastNodeIndex = results.getNodes().size()-1;
+		boolean lastFoundNodeisLast=lastFoundNodeIndex == lastNodeIndex;
+		boolean lastRuleOk = lastMatchCanBeAnyNode() ||lastFoundNodeisLast  ;
+
+		return firstRuleOk && lastRuleOk;
+	}
+
+	private boolean lastMatchCanBeAnyNode() {
+		return rules.getLastMatchRule() == LastMatchRule.CAN_BE_ANY_NODE;
+	}
+
+	private boolean firstMatchCanBeAnyNode() {
+		return rules.getFirstMatchRule() == FirstMatchRule.CAN_BE_ANY_NODE;
+	}
+
+	private boolean done(Results results) {
+		if (!results.hasResults()) {
+			return false;
+		}
+		int ruleIndex = rules.indexOf(results.getLastResult().getRule());
+		if (passedAllRules(ruleIndex)) {
+			return true;
+		}
+		if (remainingRulesCanGoToNext(ruleIndex + 1, results)) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean remainingRulesCanGoToNext(int ruleIndex, Results results) {
+		if (ruleIndex >= rules.size()) {
+			// is last rule so remaining rules can go to next
+			return true;
+		}
+		Rule rule = rules.get(ruleIndex);
+		boolean canGoToNext = rule.canGoToNext(results);
+		if (canGoToNext) {
+			// recursive call for the remaining node rules;
+			boolean remainingRulesCanGoToNext = remainingRulesCanGoToNext(ruleIndex + 1, results);
+			return remainingRulesCanGoToNext;
+		}
+		return false;
+	}
+
+	private boolean passedAllRules(int ruleIndex) {
+		boolean passedAllRules = ruleIndex >= rules.size();
+		return passedAllRules;
+	}
+
+	private Optional<Rule> findMatchingRule(Node node, int startRuleIndex, Results results) {
+		int ruleCurrentIndex = findRuleThatMustMatch(startRuleIndex, results);
+
+		Optional<Rule> found = findMatchingRule(node, startRuleIndex, ruleCurrentIndex, results);
+
+		return found;
+	}
+
+	private Optional<Rule> findMatchingRule(Node node, int ruleStartIndex, int ruleCurrentIndex, Results results) {
+		Rule rule = rules.get(ruleCurrentIndex);
+		if (rule.getPredicate().test(node)) {
+			return Optional.of(rule);
 		} else {
-			return Optional.absent();
+			if (ruleCurrentIndex - 1 < ruleStartIndex) {
+				// nothing found if we are back where we started
+				return Optional.absent();
+			} else {
+				// try to find a matching rule in the previous rules (recursively)
+				return findMatchingRule(node, ruleStartIndex, ruleCurrentIndex - 1, results);
+			}
 		}
 	}
 
-	private boolean firstMatchMustBeFirstNode() {
-		return pattern.getFirstMatchRule() == FirstMatchRule.MUST_BE_FIRST_NODE;
-	}
-
-	private boolean lastMatchMustBeLastNode() {
-		return pattern.getLastMatchRule() == LastMatchRule.MUST_BE_LAST_NODE;
+	private int findRuleThatMustMatch(int ruleIndex, Results results) {
+		if (ruleIndex >= rules.size()) {
+			return rules.size() - 1;
+		}
+		Rule rule = rules.get(ruleIndex);
+		if (rule.mustGoToNext(results) || rule.canGoToNext(results)) {
+			// recursive call
+			int findNextRuleIndexToMatch = findRuleThatMustMatch(ruleIndex + 1, results);
+			return findNextRuleIndexToMatch;
+		} else {
+			return ruleIndex;
+		}
 	}
 
 }

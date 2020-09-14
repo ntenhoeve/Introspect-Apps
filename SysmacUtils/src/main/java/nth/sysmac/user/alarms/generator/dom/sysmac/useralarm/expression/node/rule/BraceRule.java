@@ -7,10 +7,10 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Nod
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.MatchPattern;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.pattern.rule.Repetition;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.GroupNameResultFilter;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
 
 public class BraceRule implements NodeRule<BraceNode> {
 
@@ -19,8 +19,8 @@ public class BraceRule implements NodeRule<BraceNode> {
 	private static final String BETWEEN_BRACES = "betweenBraces";
 
 	@Override
-	public MatchResult find(List<Node> children) {
-		MatchPattern pattern = new MatchPattern()//
+	public Results find(List<Node> nodes) {
+		Rules rules = new Rules()//
 				.newGroup(OPEN_BRACE)//
 				.node(TokenNodePredicate.openBrace())//
 				.newGroup(BETWEEN_BRACES)//
@@ -28,15 +28,15 @@ public class BraceRule implements NodeRule<BraceNode> {
 				.newGroup(CLOSE_BRACE)//
 				.node(TokenNodePredicate.closeBrace());
 
-		NodeMatcher nodeMatcher = new NodeMatcher(pattern);
-		MatchResult matchResult = nodeMatcher.match(children);
-		return matchResult;
+		NodeMatcher nodeMatcher = new NodeMatcher(rules);
+		Results results = nodeMatcher.match(nodes);
+		return results;
 	}
 
 	@Override
-	public BraceNode createReplacement(MatchResult matchResult) {
+	public BraceNode createReplacement(Results results) {
 		GroupNameResultFilter groupNameFilter = new GroupNameResultFilter(BETWEEN_BRACES);
-		List<Node> childrenBetweenBrackets = matchResult.getChildren(groupNameFilter);
+		List<Node> childrenBetweenBrackets = results.getChildren(groupNameFilter);
 		BraceNode braceNode = new BraceNode(childrenBetweenBrackets);
 		return braceNode;
 	}
