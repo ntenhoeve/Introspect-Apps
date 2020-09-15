@@ -1,25 +1,39 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResults;
 
+/**
+ * {@link MatchRules} is a fluent interface for defining a {@link List} of
+ * {@link MatchRule}s for a {@link NodeMatcher}. It is much like (heavily
+ * inspired) a regular expression. A {@link MatchRule} contains information such
+ * as {@link #predicate} to match nodes, {@link #repetition} to indicate how
+ * many times the rule should match the nodes and a {@link #parent} so that the
+ * a part of the {@link MatchResults} can be filtered to get specific
+ * {@link Node}s
+ * 
+ * @author nilsth
+ *
+ */
 public class MatchRule {
 	private final Predicate<Node> predicate;
 	private final Repetition repetition;
-	private  Optional<MatchRules> parent;
+	private Optional<MatchRules> parent;
 
 	public MatchRule(Predicate<Node> predicate, Repetition repetition) {
 		this.parent = Optional.empty();
 		this.predicate = predicate;
 		this.repetition = repetition;
 	}
-	
+
 	public MatchRule(MatchRules parent, Predicate<Node> predicate, Repetition repetition) {
-		this.parent =Optional.of(parent);
+		this.parent = Optional.of(parent);
 		this.predicate = predicate;
 		this.repetition = repetition;
 	}
@@ -35,9 +49,9 @@ public class MatchRule {
 	public Optional<MatchRules> getParent() {
 		return parent;
 	}
-	
+
 	public void setParent(MatchRules parent) {
-		this.parent=Optional.of(parent);
+		this.parent = Optional.of(parent);
 	}
 
 	public boolean isValid(Node child) {
@@ -68,7 +82,5 @@ public class MatchRule {
 		boolean canGoToNextPattern = numberOfMatches >= repetition.getMin();
 		return canGoToNextPattern;
 	}
-
-	
 
 }
