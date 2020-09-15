@@ -11,15 +11,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.CloseBrace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Comma;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Dash;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Dot;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Equal;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.OpenBrace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.UnsignedInteger;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.WhiteSpace;
+import nth.reflect.util.parser.token.parser.Rest;
+import nth.reflect.util.parser.token.parser.Token;
+import nth.reflect.util.parser.token.parser.TokenParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Comma;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dash;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dot;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.OpenBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.UnsignedInteger;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.WhiteSpace;
 
 class TokenizerTest {
 

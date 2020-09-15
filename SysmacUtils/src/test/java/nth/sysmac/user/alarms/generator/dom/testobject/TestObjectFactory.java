@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate.TokenNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.AcknowledgeNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.BraceNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Rest;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.CloseBrace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.OpenBrace;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.WhiteSpace;
+import nth.reflect.util.parser.node.Node;
+import nth.reflect.util.parser.node.TokenNode;
+import nth.reflect.util.parser.token.parser.Rest;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.AcknowledgeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.BraceNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.OpenBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.WhiteSpace;
 
 public class TestObjectFactory {
 

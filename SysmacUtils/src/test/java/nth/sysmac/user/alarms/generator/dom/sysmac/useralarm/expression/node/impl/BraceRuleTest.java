@@ -10,14 +10,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParserRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ParseTree;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.BraceRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
+import nth.reflect.util.parser.node.Node;
+import nth.reflect.util.parser.node.NodeParser;
+import nth.reflect.util.parser.node.NodeParserRule;
+import nth.reflect.util.parser.node.ParseTree;
+import nth.reflect.util.parser.token.parser.Token;
+import nth.reflect.util.parser.token.parser.TokenParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.BraceRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
 class BraceRuleTest {

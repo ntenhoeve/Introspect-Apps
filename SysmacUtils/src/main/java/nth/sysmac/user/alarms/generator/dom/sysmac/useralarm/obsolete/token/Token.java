@@ -1,6 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
+import nth.reflect.util.parser.token.parser.TokenRule;
 
 /**
  * <h3>Tokens</h3>

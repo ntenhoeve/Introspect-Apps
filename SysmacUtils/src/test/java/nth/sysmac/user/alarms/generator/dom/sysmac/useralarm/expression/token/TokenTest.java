@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.Dash;
+import nth.reflect.util.parser.token.parser.Rest;
+import nth.reflect.util.parser.token.parser.Token;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dash;
 
 class TokenTest {
 

@@ -9,7 +9,10 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.params.provider.Arguments;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.UnsignedInteger;
+import nth.reflect.util.parser.token.parser.Rest;
+import nth.reflect.util.parser.token.parser.Token;
+import nth.reflect.util.parser.token.parser.TokenRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.UnsignedInteger;
 
 public class ExpressionsAndTokens extends HashMap<String, TokenRule> {
 

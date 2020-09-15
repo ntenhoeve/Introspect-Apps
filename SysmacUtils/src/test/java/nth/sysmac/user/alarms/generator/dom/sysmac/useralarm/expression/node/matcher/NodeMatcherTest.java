@@ -10,13 +10,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate.AnyNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate.TokenNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResults;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.MatchRules;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Repetition;
+import nth.reflect.util.parser.node.Node;
+import nth.reflect.util.parser.node.TokenNode;
+import nth.reflect.util.parser.node.matcher.NodeMatcher;
+import nth.reflect.util.parser.node.matcher.predicate.AnyNodePredicate;
+import nth.reflect.util.parser.node.matcher.result.MatchResults;
+import nth.reflect.util.parser.node.matcher.rule.MatchRules;
+import nth.reflect.util.parser.node.matcher.rule.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
 class NodeMatcherTest {

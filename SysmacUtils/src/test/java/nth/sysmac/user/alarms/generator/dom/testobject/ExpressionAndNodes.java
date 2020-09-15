@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.junit.jupiter.params.provider.Arguments;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
+import nth.reflect.util.parser.node.Node;
+import nth.reflect.util.parser.node.TokenNode;
+import nth.reflect.util.parser.token.parser.TokenRule;
 
 public class ExpressionAndNodes {
 
