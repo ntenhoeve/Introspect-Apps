@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate;
 
 import java.util.function.Predicate;
 
@@ -6,6 +6,8 @@ import com.google.common.base.Optional;
 
 import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.reflect.util.regex.Regex;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Rest;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;

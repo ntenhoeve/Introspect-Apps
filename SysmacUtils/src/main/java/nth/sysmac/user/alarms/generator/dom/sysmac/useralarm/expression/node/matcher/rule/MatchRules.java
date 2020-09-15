@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 
-public class Rules extends ArrayList<Rule> {
+public class MatchRules extends ArrayList<MatchRule> {
 
 	private static final long serialVersionUID = -1539398207124002219L;
 	private FirstMatchRule firstMatchRule;
 	private LastMatchRule lastMatchRule;
-	private Optional<Rules> stopMatchingAfter;
+	private Optional<MatchRules> stopMatchingAfter;
 
-	public Rules() {
+	public MatchRules() {
 		this.firstMatchRule = FirstMatchRule.CAN_BE_ANY_NODE;
 		this.lastMatchRule = LastMatchRule.CAN_BE_ANY_NODE;
 		this.stopMatchingAfter=Optional.empty();
@@ -28,53 +28,53 @@ public class Rules extends ArrayList<Rule> {
 	}
 
 
-	public Rules firstMatchMustBeFirstNode() {
+	public MatchRules firstMatchMustBeFirstNode() {
 		firstMatchRule = FirstMatchRule.MUST_BE_FIRST_NODE;
 		return this;
 	}
 
-	public Rules firstMatchCanBeAnyNode() {
+	public MatchRules firstMatchCanBeAnyNode() {
 		firstMatchRule = FirstMatchRule.CAN_BE_ANY_NODE;
 		return this;
 	}
 
-	public Rules lastMatchMustBeLastNode() {
+	public MatchRules lastMatchMustBeLastNode() {
 		lastMatchRule = LastMatchRule.MUST_BE_LAST_NODE;
 		return this;
 	}
 
-	public Rules lastMatchCanBeAnyNode() {
+	public MatchRules lastMatchCanBeAnyNode() {
 		lastMatchRule = LastMatchRule.CAN_BE_ANY_NODE;
 		return this;
 	}
 
 
-	public Rules add(Predicate<Node> predicate) {
-		Rule rule = new Rule(this, predicate, Repetition.oneTime());
-		add(rule);
+	public MatchRules add(Predicate<Node> predicate) {
+		MatchRule matchRule = new MatchRule(this, predicate, Repetition.oneTime());
+		add(matchRule);
 		return this;
 	}
 
-	public Rules add(Predicate<Node> predicate, Repetition repetition) {
-		Rule rule = new Rule(this, predicate, repetition);
-		add(rule);
+	public MatchRules add(Predicate<Node> predicate, Repetition repetition) {
+		MatchRule matchRule = new MatchRule(this, predicate, repetition);
+		add(matchRule);
 		return this;
 	}
 
-	public Rules add(Rules rules) {
-		for (Rule rule : rules) {
-			rule.setParent(rules);
+	public MatchRules add(MatchRules matchRules) {
+		for (MatchRule matchRule : matchRules) {
+			matchRule.setParent(matchRules);
 		}
-		addAll(rules);
+		addAll(matchRules);
 		return this;
 	}
 	
-	public Rules stopMatchingAfter(Rules stopMatchingAfterRules) {
+	public MatchRules stopMatchingAfter(MatchRules stopMatchingAfterRules) {
 		stopMatchingAfter=Optional.of(stopMatchingAfterRules);
 		return this;
 	}
 
-	public Optional<Rules> getStopMatchingAfter() {
+	public Optional<MatchRules> getStopMatchingAfter() {
 		return stopMatchingAfter;
 	}
 

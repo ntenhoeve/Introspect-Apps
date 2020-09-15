@@ -4,29 +4,30 @@ import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParserRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate.AnyNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate.TokenNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResults;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.RulesResultFilter;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.MatchRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Repetition;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.CloseBrace;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.OpenBrace;
 
 public class BraceRule implements NodeParserRule {
 
-	private static final Rules OPEN_BRACE_RULE = new Rules().add(TokenNodePredicate.openBrace());
-	private static final Rules BETWEEN_BRACES_RULE = new Rules().add(NodePredicate.any(), Repetition.zeroOrMore());
-	private static final Rules CLOSE_BRACE_RULE = new Rules().add(TokenNodePredicate.closeBrace());
+	private static final AnyNodePredicate ANY_NODE_PREDICATE = new AnyNodePredicate();
+	private static final MatchRules OPEN_BRACE_RULE = new MatchRules().add(TokenNodePredicate.openBrace());
+	private static final MatchRules BETWEEN_BRACES_RULE = new MatchRules().add(ANY_NODE_PREDICATE, Repetition.zeroOrMore());
+	private static final MatchRules CLOSE_BRACE_RULE = new MatchRules().add(TokenNodePredicate.closeBrace());
 
 	@Override
-	public Rules getMatchRules() {
-		Rules rules = new Rules()//
+	public MatchRules getMatchRules() {
+		MatchRules matchRules = new MatchRules()//
 				.add(OPEN_BRACE_RULE)//
 				.add(BETWEEN_BRACES_RULE)//
 				.add(CLOSE_BRACE_RULE);
-		return rules;
+		return matchRules;
 	}
 
 	/**
@@ -35,10 +36,10 @@ public class BraceRule implements NodeParserRule {
 	 * {@link TokenNode}s of type {@link OpenBrace} and {@link CloseBrace}
 	 */
 	@Override
-	public void removeOrReplace(Results results) {
+	public void removeOrReplace(MatchResults matchResults) {
 		RulesResultFilter filter = new RulesResultFilter(BETWEEN_BRACES_RULE);
-		List<Node> nodesBetweenBrackets = results.getNodes(filter);
+		List<Node> nodesBetweenBrackets = matchResults.getNodes(filter);
 		BraceNode braceNode = new BraceNode(nodesBetweenBrackets);
-		results.replaceMatchingNodesWith(braceNode);
+		matchResults.replaceMatchingNodesWith(braceNode);
 	}
 }

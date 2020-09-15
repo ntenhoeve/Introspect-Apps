@@ -6,7 +6,7 @@ import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.AcknowledgeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.BraceNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Rest;

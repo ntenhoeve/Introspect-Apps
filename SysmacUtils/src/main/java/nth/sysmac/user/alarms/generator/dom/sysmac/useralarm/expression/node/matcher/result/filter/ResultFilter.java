@@ -5,18 +5,18 @@ import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.NoResultsFoundException;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Result;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResult;
 
 public abstract class ResultFilter {
 
-	public abstract int getFirstNodeIndex(List<Result> results);
+	public abstract int getFirstNodeIndex(List<MatchResult> matchResults);
 
-	public abstract int getLastNodeIndex(List<Result> results);
+	public abstract int getLastNodeIndex(List<MatchResult> matchResults);
 
-	public List<Node> getChildren(List<Result> results, List<Node> children) {
-		throwErrorWhenNoResultsAreFound(results);
-		int first = getFirstNodeIndex(results);
-		int last = getLastNodeIndex(results);
+	public List<Node> getChildren(List<MatchResult> matchResults, List<Node> children) {
+		throwErrorWhenNoResultsAreFound(matchResults);
+		int first = getFirstNodeIndex(matchResults);
+		int last = getLastNodeIndex(matchResults);
 		List<Node> found = new ArrayList<>();
 		for (int index = first; index <= last; index++) {
 			Node child = children.get(index);
@@ -25,8 +25,8 @@ public abstract class ResultFilter {
 		return found;
 	}
 
-	public void throwErrorWhenNoResultsAreFound(List<Result> results) {
-		if (results.isEmpty()) {
+	public void throwErrorWhenNoResultsAreFound(List<MatchResult> matchResults) {
+		if (matchResults.isEmpty()) {
 			throw new NoResultsFoundException();
 		}
 	}

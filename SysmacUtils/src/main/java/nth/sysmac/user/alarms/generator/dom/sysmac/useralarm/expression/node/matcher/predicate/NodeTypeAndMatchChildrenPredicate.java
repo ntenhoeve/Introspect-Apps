@@ -1,18 +1,18 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.predicate;
 
 import java.util.function.Predicate;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResults;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.MatchRules;
 
 public class NodeTypeAndMatchChildrenPredicate implements Predicate<Node> {
 
 	private final Class<? extends Node> nodeType;
-	private final Rules childMatchRules;
+	private final MatchRules childMatchRules;
 
-	public NodeTypeAndMatchChildrenPredicate(Class<? extends Node> nodeType, Rules childMatchRules) {
+	public NodeTypeAndMatchChildrenPredicate(Class<? extends Node> nodeType, MatchRules childMatchRules) {
 		this.nodeType = nodeType;
 		this.childMatchRules = childMatchRules;
 	}
@@ -28,8 +28,8 @@ public class NodeTypeAndMatchChildrenPredicate implements Predicate<Node> {
 
 	private boolean childrenMatch(Node node) {
 		NodeMatcher nodeMatcher = new NodeMatcher(childMatchRules);
-		Results results = nodeMatcher.match(node.getChildren());
-		boolean matches = results.hasResults();
+		MatchResults matchResults = nodeMatcher.match(node.getChildren());
+		boolean matches = matchResults.hasResults();
 		return matches;
 	}
 

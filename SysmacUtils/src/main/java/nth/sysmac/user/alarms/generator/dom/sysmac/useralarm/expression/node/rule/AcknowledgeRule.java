@@ -2,17 +2,17 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ru
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParserRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResults;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.MatchRules;
 
 public class AcknowledgeRule implements NodeParserRule {
 
 	private static final AcknowledgePredicate ACKNOWLEDGE_PREDICATE = new AcknowledgePredicate();
 
 	@Override
-	public Rules getMatchRules() {
-		Rules rules = new Rules().add(ACKNOWLEDGE_PREDICATE);
-		return rules;
+	public MatchRules getMatchRules() {
+		MatchRules matchRules = new MatchRules().add(ACKNOWLEDGE_PREDICATE);
+		return matchRules;
 	}
 
 	/**
@@ -20,8 +20,8 @@ public class AcknowledgeRule implements NodeParserRule {
 	 * {@link AcknowledgeNode}
 	 */
 	@Override
-	public void removeOrReplace(Results results) {
+	public void removeOrReplace(MatchResults matchResults) {
 		AcknowledgeNode acknowledgeNode = new AcknowledgeNode();
-		results.replaceMatchingNodesWith(acknowledgeNode);
+		matchResults.replaceMatchingNodesWith(acknowledgeNode);
 	}
 }

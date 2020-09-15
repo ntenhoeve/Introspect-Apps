@@ -36,7 +36,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.comp
  * <td>{110S3} Line tensioner out of position</td>
  * </tr>
  * <tr>
- * <th colspan=3>Results in: 110S3 Line tensioner out of position</th>
+ * <th colspan=3>MatchResults in: 110S3 Line tensioner out of position</th>
  * </tr>
  * </table>
  * 

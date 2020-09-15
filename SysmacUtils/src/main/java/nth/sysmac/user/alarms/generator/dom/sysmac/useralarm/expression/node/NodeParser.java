@@ -3,14 +3,14 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.NodeMatcher;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.MatchResults;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.MatchRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
 
 /**
  * A {@link NodeParser} creates a {@link ParseTree} and then combines
  * {@link Node} children by replacing them with other more detailed
- * {@link Node}s as is defined by {@link Rule}s.
+ * {@link Node}s as is defined by {@link NodeParserRule}s.
  * 
  * @author nilsth
  *
@@ -46,9 +46,9 @@ public class NodeParser {
 		boolean doneReplacement = false;
 		do {
 			foundReplacement = false;
-			Rules matchRules = nodeParserRule.getMatchRules();
+			MatchRules matchRules = nodeParserRule.getMatchRules();
 			NodeMatcher nodeMatcher=new NodeMatcher(matchRules);
-			Results matchResults = nodeMatcher.match(nodes);
+			MatchResults matchResults = nodeMatcher.match(nodes);
 			if (matchResults.hasResults()) {
 				foundReplacement = true;
 				nodeParserRule.removeOrReplace(matchResults);

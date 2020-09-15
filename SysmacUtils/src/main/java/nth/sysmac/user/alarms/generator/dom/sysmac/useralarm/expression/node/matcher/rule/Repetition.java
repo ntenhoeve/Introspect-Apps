@@ -2,6 +2,12 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ma
 
 import nth.reflect.fw.generic.util.TitleBuilder;
 
+/**
+ * This is a property type used by {@link MatchRule}
+ * 
+ * @author nilsth
+ *
+ */
 public class Repetition {
 	private final int min;
 	final int max;
@@ -34,12 +40,11 @@ public class Repetition {
 
 	@Override
 	public String toString() {
-		TitleBuilder title=new TitleBuilder();
+		TitleBuilder title = new TitleBuilder();
 		title.append(Repetition.class.getSimpleName());
-		title.append(" min=",min);
-		title.append(", max=",max);
+		title.append(" min=", min);
+		title.append(", max=", max);
 		return title.toString();
 	}
 
-		
 }

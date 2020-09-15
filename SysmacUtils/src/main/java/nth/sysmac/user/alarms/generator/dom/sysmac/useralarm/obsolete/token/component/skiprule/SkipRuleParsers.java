@@ -8,7 +8,7 @@ import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.column.SkipColumnParsers;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.page.SkipPageParsers;
 /**
- * <h3>Skip Rules</h3>
+ * <h3>Skip MatchRules</h3>
  * The {@link SysmacUserAlarmsGenerator} will generate the component code's when
  * using arrays (e.g. when using an array of line drive's). In some cases you
  * need to specify how these component codes need to be generated. Often some
