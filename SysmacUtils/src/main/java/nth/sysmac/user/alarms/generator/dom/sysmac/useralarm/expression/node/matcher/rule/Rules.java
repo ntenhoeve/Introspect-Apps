@@ -1,6 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
@@ -10,10 +11,12 @@ public class Rules extends ArrayList<Rule> {
 	private static final long serialVersionUID = -1539398207124002219L;
 	private FirstMatchRule firstMatchRule;
 	private LastMatchRule lastMatchRule;
+	private Optional<Rules> stopMatchingAfter;
 
 	public Rules() {
 		this.firstMatchRule = FirstMatchRule.CAN_BE_ANY_NODE;
 		this.lastMatchRule = LastMatchRule.CAN_BE_ANY_NODE;
+		this.stopMatchingAfter=Optional.empty();
 	}
 
 	public FirstMatchRule getFirstMatchRule() {
@@ -64,6 +67,15 @@ public class Rules extends ArrayList<Rule> {
 		}
 		addAll(rules);
 		return this;
+	}
+	
+	public Rules stopMatchingAfter(Rules stopMatchingAfterRules) {
+		stopMatchingAfter=Optional.of(stopMatchingAfterRules);
+		return this;
+	}
+
+	public Optional<Rules> getStopMatchingAfter() {
+		return stopMatchingAfter;
 	}
 
 

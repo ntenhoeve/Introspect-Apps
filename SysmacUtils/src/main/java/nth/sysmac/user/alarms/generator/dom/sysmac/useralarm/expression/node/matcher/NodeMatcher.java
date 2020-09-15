@@ -1,5 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Optional;
@@ -47,23 +48,17 @@ public class NodeMatcher {
 
 	private Results match(List<Node> nodes, int nodeStartIndex) {
 		Results results = new Results(nodes);
+		List<Node> reducedNodes = reduceNodesWhenThereAreStopMatchingAfterRules(nodes);
+
 		int ruleIndex = 0;
 
-		for (int nodeIndex = nodeStartIndex; nodeIndex < nodes.size(); nodeIndex++) {
-			Node node = nodes.get(nodeIndex);
+		for (int nodeIndex = nodeStartIndex; nodeIndex < reducedNodes.size(); nodeIndex++) {
+			Node node = reducedNodes.get(nodeIndex);
 			Optional<Rule> foundRule = findMatchingRule(node, ruleIndex, results);
 			if (foundRule.isPresent()) {
 				Rule rule = foundRule.get();
 				results.add(rule, nodeIndex);
 				ruleIndex = rules.indexOf(rule);
-
-//				if (done(ruleIndex, results)) {
-//					if (firstAndLastRulesAreOk(results)) {
-//						return results;
-//					} else {
-//						return Results.NOT_FOUND;
-//					}
-//				}
 			} else {
 				// found first mismatch but this is ok if we where done anyway
 				return getValidatedResults(results);
@@ -71,6 +66,23 @@ public class NodeMatcher {
 		}
 		// done matching. did we match all?
 		return getValidatedResults(results);
+	}
+
+	private List<Node> reduceNodesWhenThereAreStopMatchingAfterRules(List<Node> nodes) {
+		if (rules.getStopMatchingAfter().isPresent()) {
+			Rules stopMatchingAfterRules = rules.getStopMatchingAfter().get();
+			NodeMatcher nodeMatcher= new NodeMatcher(stopMatchingAfterRules);
+			Results results = nodeMatcher.match(nodes);
+			if (results.hasResults()) {
+				List<Node> reducedNodes = new ArrayList<>();
+				int stopIndex = results.getFirstNodeIndex();
+				for (int i=0;i<=stopIndex;i++) {
+					reducedNodes.add(nodes.get(i));
+				}
+				return reducedNodes;
+			}
+		}
+		return nodes;
 	}
 
 	private Results getValidatedResults(Results results) {
@@ -89,11 +101,11 @@ public class NodeMatcher {
 		int firstFoundNodeIndex = results.getFirstNodeIndex();
 		boolean firstFoundNodeIsFirst = firstFoundNodeIndex == 0;
 		boolean firstRuleOk = firstMatchCanBeAnyNode() || firstFoundNodeIsFirst;
-		
+
 		int lastFoundNodeIndex = results.getLastResult().getLastNodeIndex();
-		int lastNodeIndex = results.getNodes().size()-1;
-		boolean lastFoundNodeisLast=lastFoundNodeIndex == lastNodeIndex;
-		boolean lastRuleOk = lastMatchCanBeAnyNode() ||lastFoundNodeisLast  ;
+		int lastNodeIndex = results.getNodes().size() - 1;
+		boolean lastFoundNodeisLast = lastFoundNodeIndex == lastNodeIndex;
+		boolean lastRuleOk = lastMatchCanBeAnyNode() || lastFoundNodeisLast;
 
 		return firstRuleOk && lastRuleOk;
 	}
