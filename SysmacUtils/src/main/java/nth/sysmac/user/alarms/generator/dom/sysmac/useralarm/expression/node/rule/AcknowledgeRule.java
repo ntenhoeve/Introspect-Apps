@@ -27,7 +27,7 @@ public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 		
 		Predicate<Node> braceNodeWithAckTextPredicate = createBraceNodeWithAckTextPredicate();
 		Rules rules = new Rules()//
-				.node(braceNodeWithAckTextPredicate);
+				.add(braceNodeWithAckTextPredicate);
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);
 		Results results = nodeMatcher.match(nodes);
@@ -51,9 +51,9 @@ public class AcknowledgeRule implements NodeRule<AcknowledgeNode> {
 	private boolean childrenMatch(List<Node> children) {
 		Rules rules = new Rules()//
 				.firstMatchMustBeFirstNode() //
-				.node(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
-				.node(TokenNodePredicate.rest(REGEX_ACK_TEXT))//
-				.node(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
+				.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
+				.add(TokenNodePredicate.rest(REGEX_ACK_TEXT))//
+				.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
 				.lastMatchMustBeLastNode();
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);

@@ -1,39 +1,30 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result;
 
 import nth.reflect.fw.generic.util.TitleBuilder;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Necessity;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rule;
 
 public class Result {
 
-	private final int first;
-	private int index;
+	private final int firstNodeIndex;
+	private int lastNodeIndex;
 	private final Rule rule;
 
 	public Result(Rule rule, int index) {
 		this.rule = rule;
-		this.first = index;
-		this.index = index;
+		this.firstNodeIndex = index;
+		this.lastNodeIndex = index;
 	}
 
-	public String getGroupName() {
-		return rule.getGroup().getName();
+	public int getFirstNodeIndex() {
+		return firstNodeIndex;
 	}
 
-	public int getFirst() {
-		return first;
+	public int getLastNodeIndex() {
+		return lastNodeIndex;
 	}
 
-	public int getLast() {
-		return index;
-	}
-
-	public void setLast(int last) {
-		this.index = last;
-	}
-
-	public Necessity getNesessity() {
-		return rule.getGroup().getNecessity();
+	public void setLastNodeIndex(int last) {
+		this.lastNodeIndex = last;
 	}
 
 	public Rule getRule() {
@@ -43,7 +34,10 @@ public class Result {
 	@Override
 	public String toString() {
 		TitleBuilder title = new TitleBuilder().setSeperator(", ");
-		title.append(" groupName: ", getGroupName()).append(" nesessity: ", getNesessity())  .append(", first: ", first).append(", last: ", index);
+		if (rule.getParent().isPresent()) {
+			title.append(" parentId=", rule.getParent().get().hashCode());	
+		}
+		title.append(" rule=",rule) .append(", firstNodeIndex: ", firstNodeIndex).append(", last: ", lastNodeIndex);
 		return title.toString();
 	}
 }

@@ -9,14 +9,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
 
 public abstract class ResultFilter {
 
-	public abstract int getFirst(List<Result> results);
+	public abstract int getFirstNodeIndex(List<Result> results);
 
-	public abstract int getLast(List<Result> results);
+	public abstract int getLastNodeIndex(List<Result> results);
 
 	public List<Node> getChildren(List<Result> results, List<Node> children) {
 		throwErrorWhenNoResultsAreFound(results);
-		int first = getFirst(results);
-		int last = getLast(results);
+		int first = getFirstNodeIndex(results);
+		int last = getLastNodeIndex(results);
 		List<Node> found = new ArrayList<>();
 		for (int index = first; index <= last; index++) {
 			Node child = children.get(index);

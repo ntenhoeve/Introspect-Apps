@@ -17,28 +17,28 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Tok
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.NoResultsFoundException;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.RequiredGroupResultFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Repetition;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
 class NodeMatcherTest {
 
-	private static final String CLOSE_BRACE = "closeBrace";
-	private static final String OPEN_BRACE = "openBrace";
-	private static final String BETWEEN_BRACES = "betweenBraces";
+	private static final Rules OPEN_BRACE_RULE = new Rules().add(TokenNodePredicate.openBrace());
+	private static final Rules BETWEEN_BRACES_RULE = new Rules().add(NodePredicate.any(), Repetition.zeroOrMore());
+	private static final Rules CLOSE_BRACE_RULE = new Rules().add(TokenNodePredicate.closeBrace());
+
 
 	@ParameterizedTest
 	@MethodSource
 	void testMatch_givenPattern_mustFindCorrectNodes(List<Node> nodesToMatch, List<Node> extectedNodesToFind) {
-		Rules rules = new Rules()//
-				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
-				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
-				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace());
+			Rules rules = new Rules()//
+					.add(OPEN_BRACE_RULE)//
+					.add(BETWEEN_BRACES_RULE)//
+					.add(CLOSE_BRACE_RULE);
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);
 		Results results = nodeMatcher.match(nodesToMatch);
-		assertThat(results.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
+		assertThat(results.getNodes()).containsAll(extectedNodesToFind);
 	}
 
 	static Stream<Arguments> testMatch_givenPattern_mustFindCorrectNodes() {
@@ -56,13 +56,13 @@ class NodeMatcherTest {
 			List<Node> extectedNodesToFind) {
 		Rules rules = new Rules()//
 				.firstMatchMustBeFirstNode()//
-				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
-				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
-				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace());
+				.add(OPEN_BRACE_RULE)//
+				.add(BETWEEN_BRACES_RULE)//
+				.add(CLOSE_BRACE_RULE);
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);
 		Results results = nodeMatcher.match(nodesToMatch);
-		assertThat(results.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
+		assertThat(results.getNodes()).containsAll(extectedNodesToFind);
 	}
 
 	static Stream<Arguments> testMatch_givenPatternFirstMatchMustBeFirstNode_mustFindCorrectNodes() {
@@ -74,21 +74,20 @@ class NodeMatcherTest {
 
 	@ParameterizedTest
 	@MethodSource
-	void testMatch_givenPatternFirstMatchMustBeFirstNode_mustThrowError(List<Node> nodesToMatch,
+	void testMatch_givenPatternFirstMatchMustBeFirstNode_hasNoResults(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
 		Rules rules = new Rules()//
 				.firstMatchMustBeFirstNode()//
-				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
-				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
-				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace());
+				.add(OPEN_BRACE_RULE)//
+				.add(BETWEEN_BRACES_RULE)//
+				.add(CLOSE_BRACE_RULE);
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);
 		Results results = nodeMatcher.match(nodesToMatch);
-		assertThatThrownBy(() -> results.getChildren(new RequiredGroupResultFilter()))
-				.hasMessageContaining(NoResultsFoundException.MESSAGE);
+		assertThat(results.hasResults()).isFalse();
 	}
 
-	static Stream<Arguments> testMatch_givenPatternFirstMatchMustBeFirstNode_mustThrowError() {
+	static Stream<Arguments> testMatch_givenPatternFirstMatchMustBeFirstNode_hasNoResults() {
 		return Stream
 				.of(Arguments.of(TestObjectFactory.tokenNodeRest().append(TestObjectFactory.braceNode()).tokenNodes(),
 						new ArrayList<TokenNode>()));
@@ -99,14 +98,14 @@ class NodeMatcherTest {
 	void testMatch_givenPatternLastMatchMustBeLastNode_mustFindCorrectNodes(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
 		Rules rules = new Rules()//
-				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
-				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
-				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace())//
+				.add(OPEN_BRACE_RULE)//
+				.add(BETWEEN_BRACES_RULE)//
+				.add(CLOSE_BRACE_RULE)//
 				.lastMatchMustBeLastNode();
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);
 		Results results = nodeMatcher.match(nodesToMatch);
-		assertThat(results.getChildren(new RequiredGroupResultFilter())).containsAll(extectedNodesToFind);
+		assertThat(results.getNodes()).containsAll(extectedNodesToFind);
 	}
 
 	static Stream<Arguments> testMatch_givenPatternLastMatchMustBeLastNode_mustFindCorrectNodes() {
@@ -121,9 +120,9 @@ class NodeMatcherTest {
 	void testMatch_givenPatternLastMatchMustBeLastNode_hasNoResults(List<Node> nodesToMatch,
 			List<Node> extectedNodesToFind) {
 		Rules rules = new Rules()//
-				.newGroup(OPEN_BRACE).node(TokenNodePredicate.openBrace())//
-				.newGroup(BETWEEN_BRACES).node(NodePredicate.any(), Repetition.zeroOrMore())//
-				.newGroup(CLOSE_BRACE).node(TokenNodePredicate.closeBrace())//
+				.add(OPEN_BRACE_RULE)//
+				.add(BETWEEN_BRACES_RULE)//
+				.add(CLOSE_BRACE_RULE)//
 				.lastMatchMustBeLastNode();
 
 		NodeMatcher nodeMatcher = new NodeMatcher(rules);

@@ -23,7 +23,7 @@ public interface NodeRule<T extends Node> {
 	public Results find(List<Node> nodes);
 
 	/**
-	 * @deprecated TODO: replace with  {@link Rules} getRules()
+	 * @deprecated TODO: replace with  void removeOrReplaceSearchResult
 	 */
 
 	public T createReplacement(Results results);

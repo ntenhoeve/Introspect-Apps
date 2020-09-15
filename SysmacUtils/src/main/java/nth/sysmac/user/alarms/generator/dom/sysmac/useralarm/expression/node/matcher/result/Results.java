@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.GroupNameResultFilter;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.RequiredGroupResultFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.ResultFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rule;
 
 public class Results {
 
-	private static final RequiredGroupResultFilter RESULT_FILTER = new RequiredGroupResultFilter();
 	public static final Results NOT_FOUND = new Results(new ArrayList<>());
 	private final List<Result> results;
 	private final List<Node> nodes;
@@ -31,7 +28,7 @@ public class Results {
 		} else {
 			Result lastResult = getLastResult();
 			if (rule==lastResult.getRule()) {
-				lastResult.setLast(index);
+				lastResult.setLastNodeIndex(index);
 			} else {
 				createAndAddNewResult(index, rule);
 			}
@@ -43,9 +40,9 @@ public class Results {
 		results.add(newResult);
 	}
 
-	public int getFirst(ResultFilter resultFilter) {
+	public int getFirstNodeIdex(ResultFilter resultFilter) {
 		throwErrorWhenNothingWasFound();
-		int first = resultFilter.getFirst(results);
+		int first = resultFilter.getFirstNodeIndex(results);
 		return first;
 	}
 
@@ -55,15 +52,15 @@ public class Results {
 		}
 	}
 
-	public int getLast(ResultFilter resultFilter) {
+	public int getLastNodeIndex(ResultFilter resultFilter) {
 		throwErrorWhenNothingWasFound();
-		int last = resultFilter.getLast(results);
+		int last = resultFilter.getLastNodeIndex(results);
 		return last;
 	}
 
 	public void replaceFoundNodesWith(Node replacementNode) {
-		int firstIndex = getFirst(RESULT_FILTER);
-		int lastIndex = getLast(RESULT_FILTER);
+		int firstIndex = getFirstNodeIndex();
+		int lastIndex = getLastNodeIndex();
 
 		for (int index = firstIndex; index <= lastIndex; index++) {
 			nodes.remove(firstIndex);
@@ -80,12 +77,6 @@ public class Results {
 			reply.append("\n");
 			for (Result result : results) {
 				reply.append("  " + result + "\n");
-				String name = result.getGroupName();
-				GroupNameResultFilter groupNameResultFilter = new GroupNameResultFilter(name);
-				List<Node> groupChildren = getChildren(groupNameResultFilter);
-				for (Node child : groupChildren) {
-					reply.append("    " + child);
-				}
 			}
 
 		} else {
@@ -94,7 +85,7 @@ public class Results {
 		return reply.toString();
 	}
 
-	public List<Node> getChildren(ResultFilter resultFilter) {
+	public List<Node> getNodes(ResultFilter resultFilter) {
 		List<Node> found = resultFilter.getChildren(results, nodes);
 		return found;
 	}
@@ -104,11 +95,20 @@ public class Results {
 		return results.get(results.size()-1);
 	}
 
+	public Result getFirstResult() {
+		throwErrorWhenNothingWasFound();
+		return results.get(0);
+	}
+	
+	public int getFirstNodeIndex() {
+		throwErrorWhenNothingWasFound(); 
+		int lastNodeIndex=getFirstResult().getFirstNodeIndex();
+		return lastNodeIndex;
+	}
+	
 	public int getLastNodeIndex() {
-		if (!hasResults()) {
-			return 0;
-		} 
-		int lastNodeIndex=getLastResult().getLast();
+		throwErrorWhenNothingWasFound(); 
+		int lastNodeIndex=getLastResult().getLastNodeIndex();
 		return lastNodeIndex;
 	}
 

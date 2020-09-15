@@ -6,7 +6,6 @@ import com.google.common.base.Optional;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.Results;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.result.filter.AllResultsFilter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.FirstMatchRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.LastMatchRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher.rule.Rule;
@@ -14,7 +13,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
 
 public class NodeMatcher {
 
-	private static final AllResultsFilter ALL_RESULT_FILTER = new AllResultsFilter();
 	private final Rules rules;
 
 	public NodeMatcher(Rules rules) {
@@ -88,11 +86,11 @@ public class NodeMatcher {
 	}
 
 	private boolean firstAndLastRulesAreOk(Results results) {
-		int firstFoundNodeIndex = results.getFirst(ALL_RESULT_FILTER);
+		int firstFoundNodeIndex = results.getFirstNodeIndex();
 		boolean firstFoundNodeIsFirst = firstFoundNodeIndex == 0;
 		boolean firstRuleOk = firstMatchCanBeAnyNode() || firstFoundNodeIsFirst;
 		
-		int lastFoundNodeIndex = results.getLastResult().getLast();
+		int lastFoundNodeIndex = results.getLastResult().getLastNodeIndex();
 		int lastNodeIndex = results.getNodes().size()-1;
 		boolean lastFoundNodeisLast=lastFoundNodeIndex == lastNodeIndex;
 		boolean lastRuleOk = lastMatchCanBeAnyNode() ||lastFoundNodeisLast  ;
