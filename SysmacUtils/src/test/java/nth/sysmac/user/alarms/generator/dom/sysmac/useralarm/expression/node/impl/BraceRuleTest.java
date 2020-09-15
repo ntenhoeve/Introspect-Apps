@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParserRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ParseTree;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
@@ -27,9 +27,9 @@ class BraceRuleTest {
 	void test_givenValidExpression_returnValidParseTree(String expression, List<Node> expected) {
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		List<Token> tokens = tokenParser.parse(expression);
-		List<NodeRule<? extends Node>> rules = new ArrayList<>();
-		rules.add(new BraceRule());
-		NodeParser nodeParser = new NodeParser(rules);
+		List<NodeParserRule> nodeParserRules = new ArrayList<>();
+		nodeParserRules.add(new BraceRule());
+		NodeParser nodeParser = new NodeParser(nodeParserRules);
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getChildren();
 		assertThat(actual).containsExactlyElementsOf(expected);

@@ -8,24 +8,16 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.mat
 
 /**
  * Defines what {@link Node} children need to be replaced
- * ({@link #find(List)} method) and creates a replacement Node
- * ({@link #createReplacement(MatchResultOld)} method)
+ * ({@link #getRules(List)} method) and creates a replacement Node
+ * ({@link #removeOrReplace(MatchResultOld)} method)
  * 
  * @author nilsth
  *
  * @param <T>
  */
-public interface NodeRule<T extends Node> {
+public interface NodeParserRule {
 
-	/**
-	 * @deprecated TODO: replace with  {@link Rules} getRules()
-	 */
-	public Results find(List<Node> nodes);
+	public Rules getMatchRules();
 
-	/**
-	 * @deprecated TODO: replace with  void removeOrReplaceSearchResult
-	 */
-
-	public T createReplacement(Results results);
-
+	public void removeOrReplace(Results results);
 }

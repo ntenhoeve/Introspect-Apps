@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.NodeParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.ParseTree;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.NodeRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.rule.NodeParserRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.TokenParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.token.rule.TokenRules;
@@ -25,7 +25,7 @@ class AcknowledgeRuleTest {
 	void test_givenValidExpression_returnValidParseTree(String expression, List<Node> expected) {
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		List<Token> tokens = tokenParser.parse(expression);
-		NodeParser nodeParser = new NodeParser(NodeRules.all());
+		NodeParser nodeParser = new NodeParser(NodeParserRules.all());
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getChildren();
 		assertThat(actual).containsExactlyElementsOf(expected);

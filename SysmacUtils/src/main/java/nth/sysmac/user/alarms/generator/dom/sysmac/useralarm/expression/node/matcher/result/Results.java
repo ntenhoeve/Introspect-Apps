@@ -58,7 +58,7 @@ public class Results {
 		return last;
 	}
 
-	public void replaceFoundNodesWith(Node replacementNode) {
+	public void replaceMatchingNodesWith(Node replacementNode) {
 		int firstIndex = getFirstNodeIndex();
 		int lastIndex = getLastNodeIndex();
 

@@ -1,6 +1,3 @@
-//rules.stopMatchingAfter()
-//NodeRule replace find with  {@link Rules} getRules()
-//NodeRule replace createReplacement with  void removeOrReplaceSearchResult
 //	
 //E.g.
 //
