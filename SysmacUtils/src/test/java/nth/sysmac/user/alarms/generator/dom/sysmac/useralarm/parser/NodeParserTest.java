@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.matcher;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.matcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -9,7 +9,9 @@ import nth.reflect.util.parser.node.NodeParserRule;
 public enum NodeParserRules {
 
 	BRACE(new BraceRule()),
-	ACKNOWLEDGE(new AcknowledgeRule());
+	ACKNOWLEDGE(new AcknowledgeRule()),
+	//TODO COUNTER(new CounterRule());
+	DETAILS(new DetailsRule());
 
 	private final NodeParserRule nodeParserRule;
 

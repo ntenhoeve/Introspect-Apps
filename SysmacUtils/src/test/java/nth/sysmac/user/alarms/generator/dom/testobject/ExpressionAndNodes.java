@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.TokenNode;
 import nth.reflect.util.parser.token.parser.TokenRule;
+import nth.reflect.util.random.Random;
 
 public class ExpressionAndNodes {
 
@@ -24,8 +25,10 @@ public class ExpressionAndNodes {
 
 	public ExpressionAndNodes(String expression, TokenRule tokenRule) {
 		this.expression=expression;
-		this.tokenNodes=Arrays.asList(new TokenNode( tokenRule, expression));
-		this.parsedNodes=new ArrayList<>(tokenNodes);
+		TokenNode tokenNode = new TokenNode( tokenRule, expression);
+		this.tokenNodes=Arrays.asList(tokenNode);
+		this.parsedNodes=new ArrayList<>();
+		parsedNodes.add(tokenNode);
 	}
 
 //	public ExpressionAndNodes(String expression, Node... parsedNodes) {
@@ -58,6 +61,15 @@ public class ExpressionAndNodes {
 		return new ExpressionAndNodes(newExpression, newTokenNodes, newParcedNodes);
 	}
 
+	public ExpressionAndNodes repeatRandomly(int min, int max) {
+		ExpressionAndNodes result=new ExpressionAndNodes("", new ArrayList<>(), new ArrayList<>());
+		Integer repetition = Random.integer().forRange(min, max).generate();
+		for (int i=0;i<repetition;i++) {
+			result=result.append(this);
+		}
+		return result;
+	}
+	
 	public Arguments arguments() {
 		return Arguments.of(expression,parsedNodes);
 	}

@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.expression.node.impl;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,6 @@ import nth.reflect.util.parser.node.NodeParserRule;
 import nth.reflect.util.parser.node.ParseTree;
 import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
@@ -47,9 +46,9 @@ class BraceRuleTest {
 						.append(TestObjectFactory.tokenNodeRest()).arguments(),
 				TestObjectFactory.braceNode(//
 						TestObjectFactory.tokenNodeOpenBrace()//
-								.append(TestObjectFactory.tokenNodewhiteSpace())//
+								.append(TestObjectFactory.tokenNodeWhiteSpace())//
 								.append(TestObjectFactory.tokenNodeRest("Ack"))//
-								.append(TestObjectFactory.tokenNodewhiteSpace())//
+								.append(TestObjectFactory.tokenNodeWhiteSpace())//
 								.append(TestObjectFactory.tokenNodeCloseBrace())//
 								)
 						.arguments());

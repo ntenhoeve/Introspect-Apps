@@ -38,7 +38,7 @@ public class BraceRule implements NodeParserRule {
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
 		RulesResultFilter filter = new RulesResultFilter(BETWEEN_BRACES_RULE);
-		List<Node> nodesBetweenBrackets = matchResults.getNodes(filter);
+		List<Node> nodesBetweenBrackets = matchResults.getFoundNodes(filter);
 		BraceNode braceNode = new BraceNode(nodesBetweenBrackets);
 		matchResults.replaceMatchingNodesWith(braceNode);
 	}
