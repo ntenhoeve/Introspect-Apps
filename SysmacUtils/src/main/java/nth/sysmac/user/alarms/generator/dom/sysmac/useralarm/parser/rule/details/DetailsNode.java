@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details;
 
 import java.util.List;
 
@@ -7,7 +7,11 @@ import nth.reflect.util.parser.node.text.NodesToTextConverter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 
 /**
- * Represent {@link UserAlarm} details information
+ * You can add details to an {@link UserAlarm} to provide extra information on
+ * how to solve an alarm. Details are added by adding the following text to the
+ * {@link UserAlarm} message:
+ * <p>
+ * {d=<description>} where <description> is replaced with your text.
  * 
  * @author nilsth
  *

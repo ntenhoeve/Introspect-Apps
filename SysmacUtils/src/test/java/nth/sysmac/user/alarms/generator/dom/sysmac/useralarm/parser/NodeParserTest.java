@@ -19,7 +19,7 @@ class NodeParserTest {
 
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		List<Token> tokens = tokenParser.parse(
-				"30M5 Scalder 1 pump {U} missing phase {ack}{p=critical}{d=Check motor wiring from inverter to motor.}");
+				"30M5 Scalder 1 pump {U} missing phase {ack}{p=c}{d=Check motor wiring from inverter to motor.}");
 
 		ParseTree parseTree = nodeParser.parse(tokens);
 		System.out.println(parseTree);

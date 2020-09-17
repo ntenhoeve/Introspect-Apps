@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge;
 
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.NodeParserRule;
@@ -16,7 +16,7 @@ public class AcknowledgeRule implements NodeParserRule {
 	}
 
 	/**
-	 * Replaces a {@link Node} that matches a {@link AcknowledgePredicate} with a
+	 * Replaces a {@link Node} that matches a {@link PriorityPredicate} with a
 	 * {@link AcknowledgeNode}
 	 */
 	@Override

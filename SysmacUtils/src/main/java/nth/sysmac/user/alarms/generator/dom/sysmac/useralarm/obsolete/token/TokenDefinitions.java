@@ -10,7 +10,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.arra
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithBracketsParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithoutBracketsParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.detail.DetailsToken;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.priority.PriorityToken;
 
 public class TokenDefinitions {
 	public final static Collection<TokenDefinition> ALL;
@@ -22,7 +21,7 @@ public class TokenDefinitions {
 		definitions.add(new AcknowledgeToken());
 		definitions.add(new DetailsToken());
 		definitions.add(new ArrayToken());
-		definitions.add(new PriorityToken());
+//		definitions.add(new PriorityToken());
 		ALL=Collections.unmodifiableCollection(definitions);
 	}
 

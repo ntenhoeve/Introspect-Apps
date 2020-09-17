@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,6 +16,7 @@ import nth.reflect.util.parser.node.NodeParserRule;
 import nth.reflect.util.parser.node.ParseTree;
 import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 

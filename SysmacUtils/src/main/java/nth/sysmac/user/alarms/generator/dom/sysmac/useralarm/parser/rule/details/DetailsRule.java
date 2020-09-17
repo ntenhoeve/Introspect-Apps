@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -24,7 +24,7 @@ public class DetailsRule implements NodeParserRule {
 
 	/**
 	 * Replaces {@link TokenNode}s that match {@link #getMatchRules()} and replaces
-	 * them with a {@link DetailsNode} containing the {@link TokenNode}s that match {@link DetailsPredicate#ATTRIBUTE_VALUE_RULES}
+	 * them with a {@link DetailsNode} containing the {@link TokenNode}s that match {@link PriorityPredicate#ATTRIBUTE_VALUE_RULES}
 	 */
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {

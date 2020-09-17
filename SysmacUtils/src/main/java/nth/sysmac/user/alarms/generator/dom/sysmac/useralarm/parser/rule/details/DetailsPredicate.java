@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details;
 
 import java.util.function.Predicate;
 
@@ -7,6 +7,7 @@ import nth.reflect.util.parser.node.matcher.predicate.NodeTypeAndMatchChildrenPr
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.reflect.util.parser.node.matcher.rule.Repetition;
 import nth.reflect.util.regex.Regex;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 
 /**

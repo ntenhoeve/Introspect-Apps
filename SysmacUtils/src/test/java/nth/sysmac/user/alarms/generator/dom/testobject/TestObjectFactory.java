@@ -8,10 +8,12 @@ import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.TokenNode;
 import nth.reflect.util.parser.token.parser.Rest;
 import nth.reflect.util.random.Random;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.AcknowledgeNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.BraceNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.DetailsNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.OpenBrace;
@@ -42,8 +44,7 @@ public class TestObjectFactory {
 		return new ExpressionAndNodes(" ", new WhiteSpace());
 	}
 
-
-	private static ExpressionAndNodes tokenNodeEqual() {
+	public static ExpressionAndNodes tokenNodeEqual() {
 		return new ExpressionAndNodes("=", new Equal());
 	}
 
@@ -94,20 +95,46 @@ public class TestObjectFactory {
 		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedNodes);
 	}
 
-	public static ExpressionAndNodes detailsNode(ExpressionAndNodes  details) {
-		String d=Random.character().forCharacters("dD").generate().toString();
+	public static ExpressionAndNodes detailsNode() {
+		ExpressionAndNodes details = TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 3)//
+				.append(TestObjectFactory.tokenNodeRest())//
+				.append(TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 2));
+		return detailsNode(details);
+	}
+
+	public static ExpressionAndNodes detailsNode(ExpressionAndNodes details) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-				.append(tokenNodeRest(d))//
+				.append(tokenNodeRest(Random.letterCase("d").generate()))//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-		.append(tokenNodeEqual())//
-		.append(details)//
-		.append(tokenNodeCloseBrace());
+				.append(tokenNodeEqual())//
+				.append(details)//
+				.append(tokenNodeCloseBrace());
 
-		List<Node> children=new ArrayList<>(details.tokenNodes());
+		List<Node> children = new ArrayList<>(details.tokenNodes());
 		List<Node> parsedNodes = Arrays.asList(new DetailsNode(children));
 
 		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedNodes);
 	}
 
+	public static ExpressionAndNodes priorityNode(Priority priority) {
+		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
+				.append(tokenNodeRest(Random.letterCase("p").generate()))//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
+				.append(tokenNodeEqual())//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
+				.append(tokenNodeRest(Random.letterCase(priority.getAbbreviation()).generate()))//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
+				.append(tokenNodeCloseBrace());
+
+		List<Node> parsedNodes = Arrays.asList(new PriorityNode(priority));
+
+		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedNodes);
+	}
+
+	public static ExpressionAndNodes priorityNode() {
+		Priority randomPriority = (Priority) Random.fromEnum(Priority.class).generate();
+		return priorityNode(randomPriority);
+	}
 }

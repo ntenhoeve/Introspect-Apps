@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge;
 
 import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;

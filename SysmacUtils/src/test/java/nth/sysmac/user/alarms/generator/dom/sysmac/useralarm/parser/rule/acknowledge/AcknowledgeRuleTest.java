@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,6 +12,7 @@ import nth.reflect.util.parser.node.NodeParser;
 import nth.reflect.util.parser.node.ParseTree;
 import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.NodeParserRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.ExpressionAndNodes;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
@@ -31,8 +32,6 @@ class AcknowledgeRuleTest {
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getChildren();
 		List<Node> parsedNodes = expressionAndNodes.parcedNodes();
-		System.out.println(expressionAndNodes.expression());
-		System.out.println(expressionAndNodes.parcedNodes());
 		assertThat(actual).containsExactlyElementsOf(parsedNodes);
 	}
 
