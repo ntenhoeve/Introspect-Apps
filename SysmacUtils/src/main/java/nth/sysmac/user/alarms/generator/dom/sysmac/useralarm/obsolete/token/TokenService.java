@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.array.ArrayToken;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithBracketsParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithoutBracketsParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodes;
 
 public class TokenService {
 
@@ -19,38 +15,38 @@ public class TokenService {
 		return result;
 	}
 
-	public ComponentCodes createComponentCodes(String expression) {
-		List<ComponentCode> componentCodesWithoutBrackets = findAllComponentCodesWithoutBrackets(expression);
-		List<ComponentCode> componentCodesWithBrackets = findAllComponentCodesWithBrackets(expression);
-		List<Character> componentCodeReferences = findAllComponentCodeReferenses(expression);
-		ComponentCodes componentCodes = new ComponentCodes(componentCodesWithoutBrackets, componentCodesWithBrackets,
-				componentCodeReferences);
-		return componentCodes;
-	}
+//	public ComponentCodes createComponentCodes(String expression) {
+//		List<ComponentCodeNode> componentCodesWithoutBrackets = findAllComponentCodesWithoutBrackets(expression);
+//		List<ComponentCodeNode> componentCodesWithBrackets = findAllComponentCodesWithBrackets(expression);
+//		List<Character> componentCodeReferences = findAllComponentCodeReferenses(expression);
+//		ComponentCodes componentCodes = new ComponentCodes(componentCodesWithoutBrackets, componentCodesWithBrackets,
+//				componentCodeReferences);
+//		return componentCodes;
+//	}
 
-	private List<ComponentCode> findAllComponentCodesWithBrackets(String expression) {
-		List<ComponentCode> componentCodes = new ArrayList<>();
-		List<String> tokens = ComponentCodeWithBracketsParser.REGEX.findMatches(expression);
-		ComponentCodeWithBracketsParser componentCodeWithBracketsParser = new ComponentCodeWithBracketsParser();
-		for (String token : tokens) {
-			System.out.println(expression + ":" + token);
-			ComponentCode componentCode = componentCodeWithBracketsParser.parse(token);
-			componentCodes.add(componentCode);
-		}
-		return componentCodes;
-	}
+//	private List<ComponentCodeNode> findAllComponentCodesWithBrackets(String expression) {
+//		List<ComponentCodeNode> componentCodeNodes = new ArrayList<>();
+//		List<String> tokens = ComponentCodeWithBracketsParser.REGEX.findMatches(expression);
+//		ComponentCodeWithBracketsParser componentCodeWithBracketsParser = new ComponentCodeWithBracketsParser();
+//		for (String token : tokens) {
+//			System.out.println(expression + ":" + token);
+//			ComponentCodeNode componentCodeNode = componentCodeWithBracketsParser.parse(token);
+//			componentCodeNodes.add(componentCodeNode);
+//		}
+//		return componentCodeNodes;
+//	}
 
-	private List<ComponentCode> findAllComponentCodesWithoutBrackets(String expression) {
-		List<ComponentCode> componentCodes = new ArrayList<>();
-		List<String> tokens = ComponentCodeWithoutBracketsParser.REGEX.findMatches(expression);
-		ComponentCodeWithoutBracketsParser componentCodeWithoutBracketsParser = new ComponentCodeWithoutBracketsParser();
-		for (String token : tokens) {
-			System.out.println(expression + ":" + token);
-			ComponentCode componentCode = componentCodeWithoutBracketsParser.parse(token);
-			componentCodes.add(componentCode);
-		}
-		return componentCodes;
-	}
+//	private List<ComponentCodeNode> findAllComponentCodesWithoutBrackets(String expression) {
+//		List<ComponentCodeNode> componentCodeNodes = new ArrayList<>();
+//		List<String> tokens = ComponentCodeWithoutBracketsParser.REGEX.findMatches(expression);
+//		ComponentCodeWithoutBracketsParser componentCodeWithoutBracketsParser = new ComponentCodeWithoutBracketsParser();
+//		for (String token : tokens) {
+//			System.out.println(expression + ":" + token);
+//			ComponentCodeNode componentCodeNode = componentCodeWithoutBracketsParser.parse(token);
+//			componentCodeNodes.add(componentCodeNode);
+//		}
+//		return componentCodeNodes;
+//	}
 
 	private List<Character> findAllComponentCodeReferenses(String expression) {
 		return new ArrayList<>();

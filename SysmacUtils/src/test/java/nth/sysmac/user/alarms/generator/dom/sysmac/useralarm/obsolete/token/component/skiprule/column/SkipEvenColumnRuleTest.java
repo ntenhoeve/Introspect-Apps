@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
 class SkipEvenColumnRuleTest {
 
@@ -22,20 +22,21 @@ class SkipEvenColumnRuleTest {
 
 	@Test
 	void testAppliesTo_givenEvenColumnNumber_mustReturnTrue() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, EVEN_COLUMN);
-		assertThat(skipEvenColumnRule.appliesTo(componentCode)).isTrue();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, EVEN_COLUMN);
+		assertThat(skipEvenColumnRule.appliesTo(componentCodeNode)).isTrue();
 	}
 
 	@Test
 	void testAppliesTo_givenUnEvenColumnNumber_mustReturnTrue() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, UNEVEN_COLUMN);
-		assertThat(skipEvenColumnRule.appliesTo(componentCode)).isFalse();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, UNEVEN_COLUMN);
+		assertThat(skipEvenColumnRule.appliesTo(componentCodeNode)).isFalse();
 	}
 
 	@Test
 	void testGetNext_givenEvenColumnNumber_mustReturnNextColumnOnSamePage() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, EVEN_COLUMN);
-		assertThat(skipEvenColumnRule.getNext(componentCode)).hasFieldOrPropertyWithValue("page", PAGE)
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, EVEN_COLUMN);
+		skipEvenColumnRule.goToNext(componentCodeNode);
+		assertThat(componentCodeNode).hasFieldOrPropertyWithValue("page", PAGE)
 				.hasFieldOrPropertyWithValue("column", EVEN_COLUMN + 1);
 
 	}

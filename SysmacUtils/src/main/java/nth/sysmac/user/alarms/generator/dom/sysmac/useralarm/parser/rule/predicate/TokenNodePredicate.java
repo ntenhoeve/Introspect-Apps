@@ -12,6 +12,7 @@ import nth.reflect.util.parser.token.parser.TokenRule;
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.UnsignedInteger;
 
 public class TokenNodePredicate implements Predicate<Node> {
 
@@ -63,6 +64,10 @@ public class TokenNodePredicate implements Predicate<Node> {
 		return new TokenNodePredicate(new Rest(), Optional.of(regex));
 	}
 
+	public static Predicate<Node> unsignedInteger() {
+		return new TokenNodePredicate(new UnsignedInteger());
+	}
+	
 	public static Predicate<Node> equals() {
 		return new TokenNodePredicate(new Equal());
 	}
@@ -79,6 +84,7 @@ public class TokenNodePredicate implements Predicate<Node> {
 		}
 		return title.toString();
 	}
+
 
 
 }

@@ -2,6 +2,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.com
 
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.TokenParser;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
 /**
  * <h3>Component code references</h3>
@@ -42,7 +43,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.Toke
  * @author nilsth
  *
  */
-public class ComponentCodeReferenceParser implements TokenParser<ComponentCode> {
+public class ComponentCodeReferenceParser implements TokenParser<ComponentCodeNode> {
 
 	public static final Regex REGEX = new Regex();
 
@@ -52,7 +53,7 @@ public class ComponentCodeReferenceParser implements TokenParser<ComponentCode> 
 	}
 
 	@Override
-	public ComponentCode parse(String token) {
+	public ComponentCodeNode parse(String token) {
 		return null;
 	}
 

@@ -16,8 +16,6 @@ public class TokenDefinitions {
 
 	static {
 		List<TokenDefinition> definitions=new ArrayList<>();
-		definitions.add(new ComponentCodeWithoutBracketsParser());
-		definitions.add(new ComponentCodeWithBracketsParser());
 		definitions.add(new AcknowledgeToken());
 		definitions.add(new DetailsToken());
 		definitions.add(new ArrayToken());

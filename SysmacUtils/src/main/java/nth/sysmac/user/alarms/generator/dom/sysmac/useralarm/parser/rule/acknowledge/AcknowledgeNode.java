@@ -4,7 +4,7 @@ import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 
 /**
- * Represents if a {@link UserAlarm} needs to be acknowledged
+ * Represents if a {@link UserAlarm} needs to be acknowledged. 
  * @author nilsth
  *
  */

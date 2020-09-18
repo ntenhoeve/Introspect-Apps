@@ -8,8 +8,10 @@ import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.TokenNode;
 import nth.reflect.util.parser.token.parser.Rest;
 import nth.reflect.util.random.Random;
+import nth.reflect.util.random.generator.text.CharacterSet;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
@@ -17,6 +19,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priorit
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.OpenBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.UnsignedInteger;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.WhiteSpace;
 
 public class TestObjectFactory {
@@ -46,6 +49,11 @@ public class TestObjectFactory {
 
 	public static ExpressionAndNodes tokenNodeEqual() {
 		return new ExpressionAndNodes("=", new Equal());
+	}
+
+	private static ExpressionAndNodes tokenNodeUnsignedInteger(int value) {
+		String expression = Integer.toString(value);
+		return new ExpressionAndNodes(expression, new UnsignedInteger());
 	}
 
 	// ====== PARCED NODES
@@ -136,5 +144,19 @@ public class TestObjectFactory {
 	public static ExpressionAndNodes priorityNode() {
 		Priority randomPriority = (Priority) Random.fromEnum(Priority.class).generate();
 		return priorityNode(randomPriority);
+	}
+
+	public static ExpressionAndNodes componentCodeNode() {
+		int page = Random.integer().forRange(1, 9999).generate();
+		char letter = Random.character().forCharacters(CharacterSet.LETTERS).generate();
+		int colomn = Random.integer().forRange(1, 8).generate();
+
+		ExpressionAndNodes expressionAndNodes = tokenNodeUnsignedInteger(page)//
+				.append(tokenNodeRest(Character.toString(letter)))//
+				.append(tokenNodeUnsignedInteger(colomn));
+
+		List<Node> parsedNodes = Arrays.asList(new ComponentCodeNode(page, letter, colomn));
+
+		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedNodes);
 	}
 }

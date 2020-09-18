@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
 class SkipUnevenColumnRuleTest {
 
@@ -22,21 +22,22 @@ class SkipUnevenColumnRuleTest {
 
 	@Test
 	void testAppliesTo_givenUnEvenColumnNumber_mustReturnTrue() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, UNEVEN_COLUMN);
-		assertThat(skipUnevenColumnRule.appliesTo(componentCode)).isTrue();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, UNEVEN_COLUMN);
+		assertThat(skipUnevenColumnRule.appliesTo(componentCodeNode)).isTrue();
 	}
 
 	@Test
 	void testAppliesTo_givenEvenColumnNumber_mustReturnTrue() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, EVEN_COLUMN);
-		assertThat(skipUnevenColumnRule.appliesTo(componentCode)).isFalse();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, EVEN_COLUMN);
+		assertThat(skipUnevenColumnRule.appliesTo(componentCodeNode)).isFalse();
 	}
 
 	@Test
 	void testGetNext_givenUnEvenColumnNumber_mustReturnNextColumnOnSamePage() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, UNEVEN_COLUMN);
-		assertThat(skipUnevenColumnRule.getNext(componentCode)).hasFieldOrPropertyWithValue("page", PAGE)
-				.hasFieldOrPropertyWithValue("column", UNEVEN_COLUMN + 1);
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, UNEVEN_COLUMN);
+		skipUnevenColumnRule.goToNext(componentCodeNode);
+		assertThat(componentCodeNode).hasFieldOrPropertyWithValue("page", PAGE).hasFieldOrPropertyWithValue("column",
+				UNEVEN_COLUMN + 1);
 
 	}
 }

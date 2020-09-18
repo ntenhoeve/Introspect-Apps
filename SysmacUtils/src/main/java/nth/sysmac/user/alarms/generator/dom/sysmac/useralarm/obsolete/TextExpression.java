@@ -27,8 +27,9 @@ public class TextExpression {
 	}
 
 	private ComponentCodes createComponentCodes(String expression, int arrayIndex) {
-		ComponentCodes componentCodes = tokenService.createComponentCodes(expression);
-		return componentCodes;
+//		ComponentCodes componentCodes = tokenService.createComponentCodes(expression);
+//		return componentCodes;
+		return null;
 	}
 
 	private String createMessage(String expression, int arrayIndex) {

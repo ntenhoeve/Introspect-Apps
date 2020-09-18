@@ -5,15 +5,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+
 public class ComponentCodes {
 
-	private final List<ComponentCode> componentCodesWithoutBrackets;
-	private final List<ComponentCode> componentCodesWithBrackets;
-	private final List<ComponentCode> allComponentCodes;
+	private final List<ComponentCodeNode> componentCodesWithoutBrackets;
+	private final List<ComponentCodeNode> componentCodesWithBrackets;
+	private final List<ComponentCodeNode> allComponentCodes;
 	private final List<Character> componentCodeReferences;
 
-	public ComponentCodes(List<ComponentCode> componentCodesWithoutBrackets,
-			List<ComponentCode> componentCodesWithBrackets, List<Character> componentCodeReferences) {
+	public ComponentCodes(List<ComponentCodeNode> componentCodesWithoutBrackets,
+			List<ComponentCodeNode> componentCodesWithBrackets, List<Character> componentCodeReferences) {
 		this.componentCodesWithoutBrackets = componentCodesWithoutBrackets;
 		this.componentCodesWithBrackets = componentCodesWithBrackets;
 		allComponentCodes=new ArrayList<>();
@@ -25,11 +27,11 @@ public class ComponentCodes {
 	public List<String> findVisible() {
 		List<String> visibleComponentCodes = new ArrayList<>();
 		List<String> componentCodesWithoutBrackets = this.componentCodesWithoutBrackets.stream()
-				.map(ComponentCode::toString).collect(Collectors.toList());
+				.map(ComponentCodeNode::toString).collect(Collectors.toList());
 		visibleComponentCodes.addAll(componentCodesWithoutBrackets);
 
 		for (Character reference : componentCodeReferences) {
-			Optional<ComponentCode> result = componentCodesWithBrackets.stream().filter(c-> reference.equals(c.getLetter())).findAny();
+			Optional<ComponentCodeNode> result = componentCodesWithBrackets.stream().filter(c-> reference.equals(c.getLetter())).findAny();
 			if (result.isPresent()) {
 				String foundComponentCode = result.get().toString();
 				visibleComponentCodes.add(foundComponentCode);

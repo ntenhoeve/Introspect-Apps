@@ -1,21 +1,22 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.page;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.PageColumn;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.SkipRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRule;
 
 public class SkipUnevenPageRule extends SkipRule {
 
 	@Override
-	public boolean appliesTo(PageColumn pageColumn) {
-		boolean isEven = pageColumn.getPage() % 2 == 0;
+	public boolean appliesTo(ComponentCodeNode componentCodeNode) {
+		boolean isEven = componentCodeNode.getPage() % 2 == 0;
 		return !isEven;
 	}
 
 	@Override
-	public PageColumn getNext(PageColumn pageColumn) {
-		int page = pageColumn.getPage() + 1;
+	public void goToNext(ComponentCodeNode componentCodeNode) {
 		int nextColumn = 1;
-		return new PageColumn(page, nextColumn);
+		componentCodeNode.setColumn(nextColumn);
+		int nextpage = componentCodeNode.getPage() + 1;
+		componentCodeNode.setPage(nextpage);
 	}
 
 	@Override

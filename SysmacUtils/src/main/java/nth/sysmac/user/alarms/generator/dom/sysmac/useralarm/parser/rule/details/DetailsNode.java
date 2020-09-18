@@ -7,11 +7,7 @@ import nth.reflect.util.parser.node.text.NodesToTextConverter;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 
 /**
- * You can add details to an {@link UserAlarm} to provide extra information on
- * how to solve an alarm. Details are added by adding the following text to the
- * {@link UserAlarm} message:
- * <p>
- * {d=<description>} where <description> is replaced with your text.
+ * Represents {@link UserAlarm} detais, see {@link DetailsRule}
  * 
  * @author nilsth
  *

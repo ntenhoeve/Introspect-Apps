@@ -11,7 +11,25 @@ import nth.reflect.util.parser.node.matcher.result.MatchResults;
 import nth.reflect.util.parser.node.matcher.result.filter.RulesResultFilter;
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.reflect.util.parser.node.text.NodesToTextConverter;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 
+/**
+ * <h2>Priority</h2>
+ * 
+ * You can set the priority of a {@link UserAlarm} by adding the following text
+ * to the {@link DataType} comment:
+ * <p>
+ * {p=&lt;priority abbreviation&gt;} where &lt;priority abbreviation&gt; is
+ * replaced with one of the following abbreviation:
+ * <p>
+ * {@insert Priority}
+ * <p>
+ * The {@link UserAlarm} will get {@link Priority#MEDIUM} by default.
+ * 
+ * @author nilsth
+ *
+ */
 public class PriorityRule implements NodeParserRule {
 
 	private static final Predicate<Node> DETAILS_PREDICATE = new PriorityPredicate();

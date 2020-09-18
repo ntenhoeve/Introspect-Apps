@@ -5,7 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.MaxColumnRule;
 
 class MaxColumnRuleTest {
 
@@ -24,34 +25,36 @@ class MaxColumnRuleTest {
 
 	@Test
 	void testAppliesTo_givenEvenColumn8_mustReturnFalse() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, CULUMN_8);
-		assertThat(skipMaxColumnRule.appliesTo(componentCode)).isFalse();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, CULUMN_8);
+		assertThat(skipMaxColumnRule.appliesTo(componentCodeNode)).isFalse();
 	}
 	
 	@Test
 	void testAppliesTo_givenEvenColumn9_mustReturnTrue() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, CULUMN_9);
-		assertThat(skipMaxColumnRule.appliesTo(componentCode)).isTrue();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, CULUMN_9);
+		assertThat(skipMaxColumnRule.appliesTo(componentCodeNode)).isTrue();
 	}
 	
 	@Test
 	void testAppliesTo_givenEvenColumn1000_mustReturnNextPageFirstColumn() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, CULUMN_1000);
-		assertThat(skipMaxColumnRule.appliesTo(componentCode)).isTrue();
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, CULUMN_1000);
+		assertThat(skipMaxColumnRule.appliesTo(componentCodeNode)).isTrue();
 	}
 
 	
 	@Test
 	void testGetNext_givenEvenColumn9_mustReturnNextPageFirstColumn() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, CULUMN_9);
-		assertThat(skipMaxColumnRule.getNext(componentCode)).hasFieldOrPropertyWithValue("page", PAGE+1)
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, CULUMN_9);
+		skipMaxColumnRule.goToNext(componentCodeNode);
+		assertThat(componentCodeNode).hasFieldOrPropertyWithValue("page", PAGE+1)
 		.hasFieldOrPropertyWithValue("column", FIRST_COLUMN);
 	}
 	
 	@Test
 	void testGetNext_givenEvenColumn1000_mustReturnNextPageFirstColumn() {
-		ComponentCode componentCode = new ComponentCode(PAGE, LETTER, CULUMN_1000);
-		assertThat(skipMaxColumnRule.getNext(componentCode)).hasFieldOrPropertyWithValue("page", PAGE+1)
+		ComponentCodeNode componentCodeNode = new ComponentCodeNode(PAGE, LETTER, CULUMN_1000);
+		skipMaxColumnRule.goToNext(componentCodeNode);
+		assertThat(componentCodeNode).hasFieldOrPropertyWithValue("page", PAGE+1)
 		.hasFieldOrPropertyWithValue("column", FIRST_COLUMN);
 	}
 

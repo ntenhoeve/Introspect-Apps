@@ -2,18 +2,25 @@ package nth.sysmac.user.alarms.generator;
 
 /**
  * {@link SysmacUserAlarmsGeneratorDocumentation} is generated using the {@link ReflectUtilMavenPlugIn}
- * 
+ * <p>
  * {@insert SysmacUserAlarmsGenerator}
  * <p>
- * {@insert Token}
+ * {@insert ComponentCodeRule}
  * <p>
- * {@insert ComponentCode}
+ * {@insert PriorityRule}
  * <p>
- * {@insert ComponentCodeWithoutBracketsParser}
+ * {@insert DetailsRule}
  * <p>
- * {@insert ComponentCodeWithBracketsParser}
+ * {@insert ComponentCodeRule}
  * <p>
- * {@insert SkipRuleParsers}
+ * {@insert ComponentCodeVisibleRule}
+ * <p>
+ * {@insert ComponentCodeHiddenRule}
+ * <p>
+ * {@insert ComponentCodeReferenceRule}
+ * <p>
+ * {@insert SkipRuleRule}
+ * 
  */
 
 public interface SysmacUserAlarmsGeneratorDocumentation {

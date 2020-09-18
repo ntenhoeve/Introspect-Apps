@@ -1,6 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 

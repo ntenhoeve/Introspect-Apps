@@ -3,7 +3,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.com
 import java.util.Arrays;
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.SkipRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRule;
 
 public enum StringConverters {
 

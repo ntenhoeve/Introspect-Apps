@@ -1,13 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component;
 
-import java.util.List;
-
-import nth.reflect.util.regex.Regex;
-import nth.reflect.util.regex.Repetition;
 import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.SkipRuleParsers;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.skiprule.SkipRules;
 
 /**
  * <h3>Component codes with curly brackets</h3>
@@ -48,75 +41,75 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.comp
  * @author nilsth
  *
  */
-public class ComponentCodeWithBracketsParser implements TokenParser<ComponentCode> {
-
-	private static final Regex REGEX_PREFIX = new Regex().literal("{").whiteSpace(Repetition.zeroOrMoreTimes());
-	private static final Regex REGEX_SUFFIX = new Regex().whiteSpace(Repetition.zeroOrMoreTimes()).literal("}");
-	private static final Regex REGEX_RULES = new Regex().anyCharacter(Repetition.zeroOrMoreTimes().reluctant());
-	public static final Regex REGEX = new Regex().ignoreCase().append(REGEX_PREFIX).append(ComponentCode.REGEX)
-			.whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES).append(REGEX_SUFFIX);
-	private static final Regex REGEX_FIND_PAGE = new Regex().ignoreCase().append(REGEX_PREFIX)
-			.append(ComponentCode.REGEX_FIND_PAGE).whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES)
-			.append(REGEX_SUFFIX);
-	private static final Regex REGEX_FIND_LETTER = new Regex().ignoreCase().append(REGEX_PREFIX)
-			.append(ComponentCode.REGEX_FIND_LETTER).whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES)
-			.append(REGEX_SUFFIX);
-	private static final Regex REGEX_FIND_COLUMN = new Regex().ignoreCase().append(REGEX_PREFIX)
-			.append(ComponentCode.REGEX_FIND_COLUMN).whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES)
-			.append(REGEX_SUFFIX);
-	private static final Regex REGEX_FIND_RULES = new Regex().append(REGEX_PREFIX).append(ComponentCode.REGEX)
-			.group(REGEX_RULES).append(REGEX_SUFFIX);
-	private final SkipRuleParsers skipRuleParsers;
-
-	public ComponentCodeWithBracketsParser() {
-		skipRuleParsers=new SkipRuleParsers();
-	}
-	
-	
-	@Override
-	public Regex getRegex() {
-		return REGEX;
-	}
-
-	@Override
-	public ComponentCode parse(String token) {
-		int page = getPage(token);
-		char letter = getLetter(token);
-		int column = getColumn(token);
-
-		SkipRules skipRules = parseSkipRules(token);
-		ComponentCode componentCode = new ComponentCode(page, letter, column, skipRules);
-		return componentCode;
-	}
-
-	private SkipRules parseSkipRules(String token) {
-		List<String> groups = REGEX_FIND_RULES.findGroups(token);
-		if (groups.size() == 2) {
-			String expression = groups.get(1);
-			SkipRules skipRules = new SkipRules( );
-			skipRules.addAll(skipRuleParsers.parse(expression));
-			return skipRules;
-		} else {
-			return new SkipRules();
-		}
-	}
-
-	private int getPage(String token) {
-		String value = REGEX_FIND_PAGE.findGroups(token).get(1);
-		int page = Integer.valueOf(value);
-		return page;
-	}
-
-	private char getLetter(String token) {
-		String value = REGEX_FIND_LETTER.findGroups(token).get(1);
-		char ch = value.charAt(0);
-		return ch;
-	}
-
-	private int getColumn(String token) {
-		String value = REGEX_FIND_COLUMN.findGroups(token).get(1);
-		int column = Integer.valueOf(value);
-		return column;
-	}
+public class ComponentCodeWithBracketsParser{ //implements TokenParser<ComponentCodeNode> {
+//
+//	private static final Regex REGEX_PREFIX = new Regex().literal("{").whiteSpace(Repetition.zeroOrMoreTimes());
+//	private static final Regex REGEX_SUFFIX = new Regex().whiteSpace(Repetition.zeroOrMoreTimes()).literal("}");
+//	private static final Regex REGEX_RULES = new Regex().anyCharacter(Repetition.zeroOrMoreTimes().reluctant());
+//	public static final Regex REGEX = new Regex().ignoreCase().append(REGEX_PREFIX).append(ComponentCodeNode.REGEX)
+//			.whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES).append(REGEX_SUFFIX);
+//	private static final Regex REGEX_FIND_PAGE = new Regex().ignoreCase().append(REGEX_PREFIX)
+//			.append(ComponentCodeNode.REGEX_FIND_PAGE).whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES)
+//			.append(REGEX_SUFFIX);
+//	private static final Regex REGEX_FIND_LETTER = new Regex().ignoreCase().append(REGEX_PREFIX)
+//			.append(ComponentCodeNode.REGEX_FIND_LETTER).whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES)
+//			.append(REGEX_SUFFIX);
+//	private static final Regex REGEX_FIND_COLUMN = new Regex().ignoreCase().append(REGEX_PREFIX)
+//			.append(ComponentCodeNode.REGEX_FIND_COLUMN).whiteSpace(Repetition.zeroOrMoreTimes()).append(REGEX_RULES)
+//			.append(REGEX_SUFFIX);
+//	private static final Regex REGEX_FIND_RULES = new Regex().append(REGEX_PREFIX).append(ComponentCodeNode.REGEX)
+//			.group(REGEX_RULES).append(REGEX_SUFFIX);
+//	private final SkipRuleParsers skipRuleParsers;
+//
+//	public ComponentCodeWithBracketsParser() {
+//		skipRuleParsers=new SkipRuleParsers();
+//	}
+//	
+//	
+//	@Override
+//	public Regex getRegex() {
+//		return REGEX;
+//	}
+//
+//	@Override
+//	public ComponentCodeNode parse(String token) {
+//		int page = getPage(token);
+//		char letter = getLetter(token);
+//		int column = getColumn(token);
+//
+//		SkipRules skipRules = parseSkipRules(token);
+//		ComponentCodeNode componentCodeNode = new ComponentCodeNode(page, letter, column, skipRules);
+//		return componentCodeNode;
+//	}
+//
+//	private SkipRules parseSkipRules(String token) {
+//		List<String> groups = REGEX_FIND_RULES.findGroups(token);
+//		if (groups.size() == 2) {
+//			String expression = groups.get(1);
+//			SkipRules skipRules = new SkipRules( );
+//			skipRules.addAll(skipRuleParsers.parse(expression));
+//			return skipRules;
+//		} else {
+//			return new SkipRules();
+//		}
+//	}
+//
+//	private int getPage(String token) {
+//		String value = REGEX_FIND_PAGE.findGroups(token).get(1);
+//		int page = Integer.valueOf(value);
+//		return page;
+//	}
+//
+//	private char getLetter(String token) {
+//		String value = REGEX_FIND_LETTER.findGroups(token).get(1);
+//		char ch = value.charAt(0);
+//		return ch;
+//	}
+//
+//	private int getColumn(String token) {
+//		String value = REGEX_FIND_COLUMN.findGroups(token).get(1);
+//		int column = Integer.valueOf(value);
+//		return column;
+//	}
 
 }
