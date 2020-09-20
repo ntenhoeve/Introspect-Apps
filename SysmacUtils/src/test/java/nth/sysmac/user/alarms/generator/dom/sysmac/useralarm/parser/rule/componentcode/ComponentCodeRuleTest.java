@@ -32,8 +32,6 @@ class ComponentCodeRuleTest {
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getChildren();
 		List<Node> parcedNodes = expressionAndNodes.parcedNodes();
-		System.out.println(expression);
-		System.out.println(parcedNodes);
 		assertThat(actual).containsExactlyElementsOf(parcedNodes);
 	}
 

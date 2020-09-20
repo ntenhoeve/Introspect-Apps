@@ -44,9 +44,9 @@ public class SkipColumnParsers {//extends DelegatingSkipRuleParser {
 //	}
 //
 //	@Override
-//	public List<SkipRule> parse(String expression) {
+//	public List<ComponentCodeSkipRule> parse(String expression) {
 //
-//		List<SkipRule> skipRules = super.parse(expression);
+//		List<ComponentCodeSkipRule> skipRules = super.parse(expression);
 //
 //		throwErrorWhenNoRulesAreFound(skipRules);
 //
@@ -67,7 +67,7 @@ public class SkipColumnParsers {//extends DelegatingSkipRuleParser {
 //		}
 //	}
 //
-//	private void throwErrorWhenHasEvenAndUnevenRule(List<SkipRule> skipRules) {
+//	private void throwErrorWhenHasEvenAndUnevenRule(List<ComponentCodeSkipRule> skipRules) {
 //		boolean hasSkipEvenRule = skipRules.stream().anyMatch(r -> r instanceof SkipEvenColumnRule);
 //		boolean hasSkipUnevenRules = skipRules.stream().anyMatch(r -> r instanceof SkipUnevenColumnRule);
 //
@@ -77,7 +77,7 @@ public class SkipColumnParsers {//extends DelegatingSkipRuleParser {
 //		}
 //	}
 //
-//	private void throwErrorWhenNoRulesAreFound(List<SkipRule> skipRules) {
+//	private void throwErrorWhenNoRulesAreFound(List<ComponentCodeSkipRule> skipRules) {
 //		if (skipRules.isEmpty()) {
 //			throw new RuntimeException("No valid page skip rules found");
 //		}

@@ -7,43 +7,43 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRule;
 
 public class SkipRuleTestExpressions {
 
 	private final String ruleAbbreviation;
-	private final HashMap<String, SkipRule> valuesAndRules;
+	private final HashMap<String, ComponentCodeSkipRule> valuesAndRules;
 
 	public SkipRuleTestExpressions(String ruleAbbreviation) {
 		this.ruleAbbreviation = ruleAbbreviation;
 		this.valuesAndRules = new HashMap<>();
 	}
 
-	public void add(String value, SkipRule skipRule) {
-		valuesAndRules.put(value, skipRule);
+	public void add(String value, ComponentCodeSkipRule componentCodeSkipRule) {
+		valuesAndRules.put(value, componentCodeSkipRule);
 	}
 
-	public Map<String, List<SkipRule>> createExpressionsAndRules(StringConverters stringCoverters) {
+	public Map<String, List<ComponentCodeSkipRule>> createExpressionsAndRules(StringConverters stringCoverters) {
 
-		Map<String, List<SkipRule>> singleExpressionsAndRules = createSingleExpressionsAndRules(stringCoverters);
+		Map<String, List<ComponentCodeSkipRule>> singleExpressionsAndRules = createSingleExpressionsAndRules(stringCoverters);
 
-		Map<String, List<SkipRule>> combinedExpressionsAndRules = createCombinedExpressionsAndRules(stringCoverters);
+		Map<String, List<ComponentCodeSkipRule>> combinedExpressionsAndRules = createCombinedExpressionsAndRules(stringCoverters);
 
-		Map<String, List<SkipRule>> allExpressionsAndRules = new HashMap<>();
+		Map<String, List<ComponentCodeSkipRule>> allExpressionsAndRules = new HashMap<>();
 		allExpressionsAndRules.putAll(singleExpressionsAndRules);
 		allExpressionsAndRules.putAll(combinedExpressionsAndRules);
 
 		return allExpressionsAndRules;
 	}
 
-	private Map<String, List<SkipRule>> createCombinedExpressionsAndRules(StringConverters stringConverters) {
-		Map<String, List<SkipRule>> combinedExpressionsAndRules = new HashMap<>();
+	private Map<String, List<ComponentCodeSkipRule>> createCombinedExpressionsAndRules(StringConverters stringConverters) {
+		Map<String, List<ComponentCodeSkipRule>> combinedExpressionsAndRules = new HashMap<>();
 
 		List<String> values = createCombinedValues(stringConverters);
 
 		for (StringConverter ruleAbbreviationConverter : stringConverters.getAll()) {
 			for (StringConverter valueConverter : stringConverters.getAll()) {
-				Map<String, List<SkipRule>> expressionsAndRules = createCombinedExpressionsAndRules(
+				Map<String, List<ComponentCodeSkipRule>> expressionsAndRules = createCombinedExpressionsAndRules(
 						ruleAbbreviationConverter, valueConverter, values);
 				combinedExpressionsAndRules.putAll(expressionsAndRules);
 			}
@@ -51,12 +51,12 @@ public class SkipRuleTestExpressions {
 		return combinedExpressionsAndRules;
 	}
 
-	private Map<String, List<SkipRule>> createCombinedExpressionsAndRules(StringConverter ruleAbbreviationConverter,
+	private Map<String, List<ComponentCodeSkipRule>> createCombinedExpressionsAndRules(StringConverter ruleAbbreviationConverter,
 			StringConverter valueConverter, List<String> values) {
 
 		String expression = createCombinedExpression(ruleAbbreviationConverter, valueConverter, values);
-		List<SkipRule> rules = values.stream().map(e -> valuesAndRules.get(e)).collect(Collectors.toList());
-		Map<String, List<SkipRule>> expressionsAndRules = new HashMap<>();
+		List<ComponentCodeSkipRule> rules = values.stream().map(e -> valuesAndRules.get(e)).collect(Collectors.toList());
+		Map<String, List<ComponentCodeSkipRule>> expressionsAndRules = new HashMap<>();
 		expressionsAndRules.put(expression, rules);
 
 		return expressionsAndRules;
@@ -77,12 +77,12 @@ public class SkipRuleTestExpressions {
 		}
 	}
 
-	private Map<String, List<SkipRule>> createSingleExpressionsAndRules(StringConverters stringConverters) {
-		Map<String, List<SkipRule>> singleExpressionsAndRules = new HashMap<>();
+	private Map<String, List<ComponentCodeSkipRule>> createSingleExpressionsAndRules(StringConverters stringConverters) {
+		Map<String, List<ComponentCodeSkipRule>> singleExpressionsAndRules = new HashMap<>();
 
 		for (StringConverter ruleAbbreviationConverter : stringConverters.getAll()) {
 			for (StringConverter valueConverter : stringConverters.getAll()) {
-				Map<String, List<SkipRule>> expressionsAndRules = createSingleExpressionsAndRules(
+				Map<String, List<ComponentCodeSkipRule>> expressionsAndRules = createSingleExpressionsAndRules(
 						ruleAbbreviationConverter, valueConverter);
 				singleExpressionsAndRules.putAll(expressionsAndRules);
 			}
@@ -90,13 +90,13 @@ public class SkipRuleTestExpressions {
 		return singleExpressionsAndRules;
 	}
 
-	private Map<String, List<SkipRule>> createSingleExpressionsAndRules(StringConverter ruleAbbreviationConverter,
+	private Map<String, List<ComponentCodeSkipRule>> createSingleExpressionsAndRules(StringConverter ruleAbbreviationConverter,
 			StringConverter valueConverter) {
-		Map<String, List<SkipRule>> expressionsAndRules = new HashMap<>();
+		Map<String, List<ComponentCodeSkipRule>> expressionsAndRules = new HashMap<>();
 		for (String value : valuesAndRules.keySet()) {
 			String expression = createSingleExpression(ruleAbbreviationConverter, valueConverter, value);
-			SkipRule rule = valuesAndRules.get(value);
-			List<SkipRule> rules = Arrays.asList(rule);
+			ComponentCodeSkipRule rule = valuesAndRules.get(value);
+			List<ComponentCodeSkipRule> rules = Arrays.asList(rule);
 			expressionsAndRules.put(expression, rules);
 		}
 		return expressionsAndRules;
@@ -120,13 +120,13 @@ public class SkipRuleTestExpressions {
 		return expression.toString();
 	}
 
-	public Map<String, List<SkipRule>> createValidExpressionsAndRules() {
-		Map<String, List<SkipRule>> expressionsAndRules = createExpressionsAndRules(StringConverters.VALID);
+	public Map<String, List<ComponentCodeSkipRule>> createValidExpressionsAndRules() {
+		Map<String, List<ComponentCodeSkipRule>> expressionsAndRules = createExpressionsAndRules(StringConverters.VALID);
 		return expressionsAndRules;
 	}
 
-	public Map<String, List<SkipRule>> createInvalidExpressionsAndRules() {
-		Map<String, List<SkipRule>> expressionsAndRules = createExpressionsAndRules(StringConverters.INVALID);
+	public Map<String, List<ComponentCodeSkipRule>> createInvalidExpressionsAndRules() {
+		Map<String, List<ComponentCodeSkipRule>> expressionsAndRules = createExpressionsAndRules(StringConverters.INVALID);
 		return expressionsAndRules;
 	}
 

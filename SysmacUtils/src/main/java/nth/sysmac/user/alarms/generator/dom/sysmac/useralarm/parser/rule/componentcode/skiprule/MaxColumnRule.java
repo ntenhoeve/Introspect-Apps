@@ -2,7 +2,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
-public class MaxColumnRule extends SkipRule {
+public class MaxColumnRule extends ComponentCodeSkipRule {
 
 	@Override
 	public boolean appliesTo(ComponentCodeNode componentCodeNode) {

@@ -27,4 +27,10 @@ public class PriorityNode extends Node {
 		return equals;
 	}
 
+	@Override
+	public String toString() {
+		return PriorityNode.class.getSimpleName()+" priority="+priority;
+	}
+
+	
 }

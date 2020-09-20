@@ -12,6 +12,7 @@ import nth.reflect.util.random.generator.text.CharacterSet;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.column.SkipColumnAttributeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
@@ -158,5 +159,26 @@ public class TestObjectFactory {
 		List<Node> parsedNodes = Arrays.asList(new ComponentCodeNode(page, letter, colomn));
 
 		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedNodes);
+	}
+
+	public static ExpressionAndNodes skipColumnAttribute() {
+		ExpressionAndNodes attributeName = tokenNodeWhiteSpace().repeatRandomly(0, 3)//
+				.append(tokenNodeRest(Random.letterCase("sc").generate()))//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3));
+		ExpressionAndNodes equal = tokenNodeEqual();
+		ExpressionAndNodes attributeValue = tokenNodeWhiteSpace().repeatRandomly(0, 3)//
+				.append(tokenNodeUnsignedInteger(3))//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3));
+
+		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
+				.append(attributeName)//
+				.append(equal)//
+				.append(attributeValue)//
+				.append(tokenNodeCloseBrace());
+
+		List<Node> parsedChildren = Arrays.asList(new SkipColumnAttributeNode(attributeValue.parcedNodes()));
+		List<Node> parsedBraceNode = Arrays.asList(new BraceNode(parsedChildren));
+		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedBraceNode);
+
 	}
 }

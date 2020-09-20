@@ -2,13 +2,13 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.com
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.Token;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRulesNode;
 
 /**
  * <h3>Component codes without curly brackets</h3>
  * 
  * A {@link ComponentCodeWithBrackets} is a {@link Token} containing a {@link ComponentCodeNode}
- * Optionally followed with curly brackets {} containing {@link SkipRules}. In example:
+ * Optionally followed with curly brackets {} containing {@link ComponentCodeSkipRulesNode}. In example:
  * <p>
  * <table border="2">
  * <tr>
@@ -70,20 +70,20 @@ public class ComponentCodeWithoutBracketsParser {//implements TokenParser<Compon
 //		int page = getPage(token);
 //		char letter = getLetter(token);
 //		int column = getColumn(token);
-//		SkipRules rules = parseSkipRules(token);
+//		ComponentCodeSkipRulesNode rules = parseSkipRules(token);
 //		ComponentCodeNode componentCodeNode = new ComponentCodeNode(page, letter, column, rules);
 //		return componentCodeNode;
 //	}
 //
-//	private SkipRules parseSkipRules(String token) {
+//	private ComponentCodeSkipRulesNode parseSkipRules(String token) {
 //		List<String> groups = REGEX_FIND_RULES.findGroups(token);
 //		if (groups.size() == 2) {
 //			String expression = groups.get(1);
-//			SkipRules skipRules = new SkipRules( );
+//			ComponentCodeSkipRulesNode skipRules = new ComponentCodeSkipRulesNode( );
 //			skipRules.addAll(skipRuleParsers.parse(expression));
 //			return skipRules;
 //		} else {
-//			return new SkipRules();
+//			return new ComponentCodeSkipRulesNode();
 //		}
 //	}
 //

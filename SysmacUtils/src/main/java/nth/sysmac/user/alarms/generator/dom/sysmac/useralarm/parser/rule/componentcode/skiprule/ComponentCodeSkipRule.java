@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
-public abstract class SkipRule {
+public abstract class ComponentCodeSkipRule {
 
 	public static final String VALUE_SEPARATOR = ",";
 

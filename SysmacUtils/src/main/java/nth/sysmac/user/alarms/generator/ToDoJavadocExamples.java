@@ -1,8 +1,12 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule;
+package nth.sysmac.user.alarms.generator;
 
 /**
  * 
  * TODO create junit tests token parser
+ * 
+ * JavaDoc's that refer to junit test classes doc for examples
+ * 
+ * Javadoc is generated from test object, containing a simplified datatype and expected result
  * 
  * Component code examples<br>
  * <br>
@@ -20,6 +24,6 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
  * @author nilsth
  *
  */
-public class ToDo {
+public class ToDoJavadocExamples {
 
 }

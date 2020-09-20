@@ -2,8 +2,8 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
 
 import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.MaxColumnRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRulesNode;
 
 /**
  * Represents a Component Code, see {@link ComponentCodeRule}.
@@ -18,20 +18,20 @@ public class ComponentCodeNode extends Node {
 	private int page;
 	private final Character letter;
 	private int column;
-	private final SkipRules skipRules;
+	private final ComponentCodeSkipRulesNode componentCodeSkipRulesNode;
 
-	public ComponentCodeNode(int page, char letter, int column, SkipRules skipRules) {
+	public ComponentCodeNode(int page, char letter, int column, ComponentCodeSkipRulesNode componentCodeSkipRulesNode) {
 		verifyPage(page);
 		this.page = page;
 		verifyLetter(letter);
 		this.letter = Character.toUpperCase(letter);
 		verifyColumn(column);
 		this.column = column;
-		this.skipRules = skipRules;
+		this.componentCodeSkipRulesNode = componentCodeSkipRulesNode;
 	}
 
 	public ComponentCodeNode(int page, char letter, int column) {
-		this(page, letter, column, new SkipRules());
+		this(page, letter, column, new ComponentCodeSkipRulesNode());
 	}
 
 	/**
@@ -61,14 +61,14 @@ public class ComponentCodeNode extends Node {
 	public void goToNext() {
 		int nextColumn = column + 1;
 		int nextPage = page;
-		ComponentCodeNode next = new ComponentCodeNode(nextPage, letter, nextColumn, skipRules);
+		ComponentCodeNode next = new ComponentCodeNode(nextPage, letter, nextColumn, componentCodeSkipRulesNode);
 
 		boolean skipped;
 		do {
 			skipped = false;
-			for (SkipRule skipRule : skipRules) {
-				if (skipRule.appliesTo(next)) {
-					skipRule.goToNext(next);
+			for (ComponentCodeSkipRule componentCodeSkipRule : componentCodeSkipRulesNode) {
+				if (componentCodeSkipRule.appliesTo(next)) {
+					componentCodeSkipRule.goToNext(next);
 					skipped = true;
 				}
 			}
@@ -95,18 +95,18 @@ public class ComponentCodeNode extends Node {
 		this.column = column;
 	}
 
-	public SkipRules getSkipRules() {
-		return skipRules;
+	public ComponentCodeSkipRulesNode getSkipRules() {
+		return componentCodeSkipRulesNode;
 	}
 
 	public ComponentCodeNode getDerivedComponentCode(char letter) {
-		ComponentCodeNode derivedComponentCode = new ComponentCodeNode(page, letter, column, skipRules);
+		ComponentCodeNode derivedComponentCode = new ComponentCodeNode(page, letter, column, componentCodeSkipRulesNode);
 		return derivedComponentCode;
 	}
 
 	@Override
 	public String toString() {
-		return "" + page + letter + column;
+		return ComponentCodeNode.class.getSimpleName()+" code=" + page + letter + column;
 	}
 
 	@Override

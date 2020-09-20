@@ -8,6 +8,7 @@ import nth.reflect.util.parser.node.NodeParserRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.column.SkipColumnAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityRule;
 
@@ -18,7 +19,8 @@ public enum NodeParserRules {
 	ACKNOWLEDGE(new AcknowledgeRule()),
 	PRIORITY(new PriorityRule()),
 	//TODO COUNTER(new CounterRule());
-	DETAILS(new DetailsRule());
+	DETAILS(new DetailsRule()),
+	SKIP_COLUMN_ATTRIBUTE(new SkipColumnAttributeRule());
 
 	private final NodeParserRule nodeParserRule;
 

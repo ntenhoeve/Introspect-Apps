@@ -3,7 +3,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.com
 import java.util.Arrays;
 import java.util.List;
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.SkipRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRule;
 
 public enum StringConverters {
 
@@ -20,7 +20,7 @@ public enum StringConverters {
 	}
 
 	/**
-	 * {@link StringConverter}s that return (part of) a valid {@link SkipRule}
+	 * {@link StringConverter}s that return (part of) a valid {@link ComponentCodeSkipRule}
 	 * expression
 	 */
 	static List<StringConverter> createValidConverters() {
@@ -29,7 +29,7 @@ public enum StringConverters {
 	}
 
 	/**
-	 * {@link StringConverter}s that return (part of) a Invalid {@link SkipRule}
+	 * {@link StringConverter}s that return (part of) a Invalid {@link ComponentCodeSkipRule}
 	 * expression
 	 */
 	static List<StringConverter> createInvalidConverters() {

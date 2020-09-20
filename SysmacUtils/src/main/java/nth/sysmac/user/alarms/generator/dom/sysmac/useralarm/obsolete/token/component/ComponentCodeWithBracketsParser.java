@@ -77,20 +77,20 @@ public class ComponentCodeWithBracketsParser{ //implements TokenParser<Component
 //		char letter = getLetter(token);
 //		int column = getColumn(token);
 //
-//		SkipRules skipRules = parseSkipRules(token);
+//		ComponentCodeSkipRulesNode skipRules = parseSkipRules(token);
 //		ComponentCodeNode componentCodeNode = new ComponentCodeNode(page, letter, column, skipRules);
 //		return componentCodeNode;
 //	}
 //
-//	private SkipRules parseSkipRules(String token) {
+//	private ComponentCodeSkipRulesNode parseSkipRules(String token) {
 //		List<String> groups = REGEX_FIND_RULES.findGroups(token);
 //		if (groups.size() == 2) {
 //			String expression = groups.get(1);
-//			SkipRules skipRules = new SkipRules( );
+//			ComponentCodeSkipRulesNode skipRules = new ComponentCodeSkipRulesNode( );
 //			skipRules.addAll(skipRuleParsers.parse(expression));
 //			return skipRules;
 //		} else {
-//			return new SkipRules();
+//			return new ComponentCodeSkipRulesNode();
 //		}
 //	}
 //
