@@ -30,7 +30,7 @@ class BraceRuleTest {
 		nodeParserRules.add(new BraceRule());
 		NodeParser nodeParser = new NodeParser(nodeParserRules);
 		ParseTree parseTree = nodeParser.parse(tokens);
-		List<Node> actual = parseTree.getChildren();
+		List<Node> actual = parseTree.getNodes();
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
 

@@ -20,6 +20,6 @@ public class DetailsNode extends Node {
 
 	@Override
 	public String toString() {
-		return DetailsNode.class.getSimpleName()+" details="+NodesToTextConverter.convert(getChildren());
+		return DetailsNode.class.getSimpleName()+" details="+NodesToTextConverter.convert(getNodes());
 	}
 }

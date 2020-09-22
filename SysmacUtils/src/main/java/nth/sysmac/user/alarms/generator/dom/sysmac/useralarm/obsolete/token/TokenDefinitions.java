@@ -7,8 +7,6 @@ import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.ack.AcknowledgeToken;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.array.ArrayToken;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithBracketsParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.component.ComponentCodeWithoutBracketsParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.token.detail.DetailsToken;
 
 public class TokenDefinitions {

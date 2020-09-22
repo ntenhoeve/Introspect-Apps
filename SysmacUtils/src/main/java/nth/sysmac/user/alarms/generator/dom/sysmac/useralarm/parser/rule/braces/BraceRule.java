@@ -40,6 +40,6 @@ public class BraceRule implements NodeParserRule {
 		RulesResultFilter filter = new RulesResultFilter(BETWEEN_BRACES_RULE);
 		List<Node> nodesBetweenBrackets = matchResults.getFoundNodes(filter);
 		BraceNode braceNode = new BraceNode(nodesBetweenBrackets);
-		matchResults.replaceMatchingNodesWith(braceNode);
+		matchResults.replaceFoundNodesWith(braceNode);
 	}
 }

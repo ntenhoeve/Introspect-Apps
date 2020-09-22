@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import nth.reflect.util.parser.node.NodeParserRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.column.SkipColumnAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityRule;
 
@@ -19,8 +19,12 @@ public enum NodeParserRules {
 	ACKNOWLEDGE(new AcknowledgeRule()),
 	PRIORITY(new PriorityRule()),
 	//TODO COUNTER(new CounterRule());
-	DETAILS(new DetailsRule()),
-	SKIP_COLUMN_ATTRIBUTE(new SkipColumnAttributeRule());
+	DETAILS(new DetailsRule()),//
+	BRACED_ATTRIBUTE_RULE(new BracedAttributeRule());//
+	//TODO SKIP RULES
+	//TODO COMPONENT_CODE_FIXED
+	//TODO COMPONENT_CODE_HIDDEN
+	//TODO COMPONENT_CODE_REFERENCE
 
 	private final NodeParserRule nodeParserRule;
 

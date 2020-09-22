@@ -57,11 +57,11 @@ public class ComponentCodeRule implements NodeParserRule {
 		Character componentLetter = getComponentLetter(matchResults);
 		int columnNumber = getColumnNumber(matchResults);
 		ComponentCodeNode componentCodeNode = new ComponentCodeNode(pageNumber, componentLetter, columnNumber);
-		matchResults.replaceMatchingNodesWith(componentCodeNode);
+		matchResults.replaceFoundNodesWith(componentCodeNode);
 	}
 
 	private int getColumnNumber(MatchResults matchResults) {
-		 List<Node> nodes = matchResults.getFoundNodes(COLUMN_NUMBER_RULES);
+		List<Node> nodes = matchResults.getFoundNodes(COLUMN_NUMBER_RULES);
 		 String numberAsString=NodesToTextConverter.convert(nodes);
 		 Integer columnNumber=Integer.valueOf(numberAsString);
 		return columnNumber;
@@ -69,7 +69,7 @@ public class ComponentCodeRule implements NodeParserRule {
 	}
 
 	private Character getComponentLetter(MatchResults matchResults) {
-		 List<Node> nodes = matchResults.getFoundNodes(COMPONENT_LETTER);
+		List<Node> nodes = matchResults.getFoundNodes(COMPONENT_LETTER);
 		 String letter=NodesToTextConverter.convert(nodes);
 		 Character componentLetter=letter.trim().toLowerCase().charAt(0);
 		return componentLetter;
@@ -77,7 +77,7 @@ public class ComponentCodeRule implements NodeParserRule {
 	}
 
 	private int getPageNumber(MatchResults matchResults) {
-		 List<Node> nodes = matchResults.getFoundNodes(PAGE_NUMBER_RULES);
+		List<Node> nodes = matchResults.getFoundNodes(PAGE_NUMBER_RULES);
 		 String numberAsString=NodesToTextConverter.convert(nodes);
 		 Integer pageNumber=Integer.valueOf(numberAsString);
 		return pageNumber;

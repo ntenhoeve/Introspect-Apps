@@ -1,9 +1,9 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode;
 
 import nth.reflect.util.parser.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.MaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRulesNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.MaxColumnRule;
 
 /**
  * Represents a Component Code, see {@link ComponentCodeRule}.

@@ -11,6 +11,7 @@ import nth.reflect.util.parser.node.matcher.result.MatchResults;
 import nth.reflect.util.parser.node.matcher.result.filter.RulesResultFilter;
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityPredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 
 /**
@@ -41,12 +42,12 @@ public class DetailsRule implements NodeParserRule {
 	 */
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
-		List<Node> braceNodeChildren = matchResults.getFoundNodes().get(0).getChildren();
+		List<Node> braceNodeChildren = matchResults.getFoundNodes().get(0).getNodes();
 		NodeMatcher nodeMatcher = new NodeMatcher(DetailsPredicate.CHILD_MATCH_RULES);
 		MatchResults detailsMatchResults = nodeMatcher.match(braceNodeChildren);
 		RulesResultFilter filter = new RulesResultFilter(DetailsPredicate.ATTRIBUTE_VALUE_RULES);
 		List<Node> detailsChildren = detailsMatchResults.getFoundNodes(filter);
 		DetailsNode detailsNode = new DetailsNode(detailsChildren);
-		matchResults.replaceMatchingNodesWith(detailsNode);
+		matchResults.replaceFoundNodesWith(detailsNode);
 	}
 }

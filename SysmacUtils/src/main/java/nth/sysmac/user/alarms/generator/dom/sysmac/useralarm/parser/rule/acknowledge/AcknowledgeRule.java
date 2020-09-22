@@ -38,6 +38,6 @@ public class AcknowledgeRule implements NodeParserRule {
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
 		AcknowledgeNode acknowledgeNode = new AcknowledgeNode();
-		matchResults.replaceMatchingNodesWith(acknowledgeNode);
+		matchResults.replaceFoundNodesWith(acknowledgeNode);
 	}
 }

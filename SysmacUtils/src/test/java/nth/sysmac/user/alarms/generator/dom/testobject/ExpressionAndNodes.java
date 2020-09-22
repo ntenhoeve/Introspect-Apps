@@ -17,6 +17,13 @@ public class ExpressionAndNodes {
 	private final List<TokenNode> tokenNodes;
 	private final List<Node> parsedNodes;
 
+	public ExpressionAndNodes() {
+		this.expression = "";
+		this.tokenNodes= new ArrayList<>();
+		this.parsedNodes = new ArrayList<>();
+	}
+
+	
 	public ExpressionAndNodes(String expression, List<TokenNode> tokenNodes, List<Node> parsedNodes) {
 		this.expression = expression;
 		this.tokenNodes= tokenNodes;

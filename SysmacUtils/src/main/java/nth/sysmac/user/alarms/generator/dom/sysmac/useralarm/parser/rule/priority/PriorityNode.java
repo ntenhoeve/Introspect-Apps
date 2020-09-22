@@ -1,7 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority;
 
 import nth.reflect.util.parser.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 
 
 public class PriorityNode extends Node {

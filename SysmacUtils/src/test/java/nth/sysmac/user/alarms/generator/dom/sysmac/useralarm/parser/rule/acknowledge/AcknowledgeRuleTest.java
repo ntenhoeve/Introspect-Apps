@@ -30,7 +30,7 @@ class AcknowledgeRuleTest {
 		List<Token> tokens = tokenParser.parse(expression);
 		NodeParser nodeParser = new NodeParser(NodeParserRules.all());
 		ParseTree parseTree = nodeParser.parse(tokens);
-		List<Node> actual = parseTree.getChildren();
+		List<Node> actual = parseTree.getNodes();
 		List<Node> parsedNodes = expressionAndNodes.parcedNodes();
 		assertThat(actual).containsExactlyElementsOf(parsedNodes);
 	}

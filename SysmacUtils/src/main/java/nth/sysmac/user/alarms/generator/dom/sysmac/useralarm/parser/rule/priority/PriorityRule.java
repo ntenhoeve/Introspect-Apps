@@ -49,7 +49,7 @@ public class PriorityRule implements NodeParserRule {
 	public void removeOrReplace(MatchResults matchResults) {
 		Priority priority = createAttribute(matchResults);
 		PriorityNode priorityNode=new PriorityNode(priority);
-		matchResults.replaceMatchingNodesWith(priorityNode);
+		matchResults.replaceFoundNodesWith(priorityNode);
 	}
 
 	private Priority createAttribute(MatchResults matchResults) {
@@ -60,7 +60,7 @@ public class PriorityRule implements NodeParserRule {
 	}
 
 	private List<Node> getAttributeValues(MatchResults matchResults) {
-		List<Node> braceNodeChildren = matchResults.getFoundNodes().get(0).getChildren();
+		List<Node> braceNodeChildren = matchResults.getFoundNodes().get(0).getNodes();
 		NodeMatcher nodeMatcher=new NodeMatcher(PriorityPredicate.CHILD_MATCH_RULES);
 		MatchResults priorityMatchResults= nodeMatcher.match(braceNodeChildren);
 		RulesResultFilter filter = new RulesResultFilter(PriorityPredicate.ATTRIBUTE_VALUE_RULES);
