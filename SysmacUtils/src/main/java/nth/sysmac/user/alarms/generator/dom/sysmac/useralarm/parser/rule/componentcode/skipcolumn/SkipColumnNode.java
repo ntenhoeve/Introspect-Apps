@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn;
 
 
 
@@ -7,26 +7,28 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class ComponentCodeSkipRulesNode implements Iterable<ComponentCodeSkipRule> {
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
-	private final List<ComponentCodeSkipRule> componentCodeSkipRules;
+public class SkipColumnNode implements Iterable<SkipColumn> {
 
-	public ComponentCodeSkipRulesNode() {
-		componentCodeSkipRules = new ArrayList<>();
-		componentCodeSkipRules.add(new MaxColumnRule());
+	private final List<SkipColumn> skipColumns;
+
+	public SkipColumnNode() {
+		skipColumns = new ArrayList<>();
+		skipColumns.add(new SkipMaxColumn());
 	}
 
-	public void add(ComponentCodeSkipRule componentCodeSkipRule) {
-		componentCodeSkipRules.add(componentCodeSkipRule);
+	public void add(SkipColumn skipColumn) {
+		skipColumns.add(skipColumn);
 	}
 
-	public void addAll(List<ComponentCodeSkipRule> rules) {
-		componentCodeSkipRules.addAll(rules);
+	public void addAll(List<SkipColumn> rules) {
+		skipColumns.addAll(rules);
 	}
 
 	@Override
-	public Iterator<ComponentCodeSkipRule> iterator() {
-		return Collections.unmodifiableList(componentCodeSkipRules).iterator();
+	public Iterator<SkipColumn> iterator() {
+		return Collections.unmodifiableList(skipColumns).iterator();
 	}
 
 }

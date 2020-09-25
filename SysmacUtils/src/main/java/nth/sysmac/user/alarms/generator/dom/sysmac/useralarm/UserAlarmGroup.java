@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import nth.reflect.fw.generic.util.TitleBuilder;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.TextExpression;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypePath;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
@@ -53,16 +52,12 @@ public class UserAlarmGroup {
 		dataTypePath.verifyOnlyOneArray();
 
 		List<UserAlarm> userAlarms = new ArrayList<>();
-		int min = dataTypePath.getMin();
-		int max = dataTypePath.getMax();
-		for (int i = min; i <= max; i++) {
-			String varExpr = dataTypePath.getVariableExpression(eventVariable, i);
-			String textExprString = dataTypePath.getTextExpression();
-			 TextExpression textExpr = new TextExpression(textExprString, i);
-			UserAlarm userAlarm = new UserAlarm(groupName, varExpr, textExpr);
+		DataTypePathConverter dataTypePathConverter= new DataTypePathConverter(eventVariable, dataTypePath);
+		do {
+			UserAlarm userAlarm = new UserAlarm(groupName, dataTypePathConverter);
 			userAlarms.add(userAlarm);
-			textExpr.nextComponentCodes();
-		}
+			dataTypePathConverter.next();
+		} while (dataTypePathConverter.hasNext());
 		return userAlarms;
 	}
 

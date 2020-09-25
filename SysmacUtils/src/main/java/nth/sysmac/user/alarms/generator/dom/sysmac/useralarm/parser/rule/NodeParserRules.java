@@ -9,18 +9,20 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowl
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityRule;
 
 public enum NodeParserRules {
 
-	BRACE(new BraceRule()),
-	COMPONENT_CODE(new ComponentCodeRule()),
-	ACKNOWLEDGE(new AcknowledgeRule()),
-	PRIORITY(new PriorityRule()),
+	BRACE(new BraceRule())
+	,COMPONENT_CODE(new ComponentCodeRule())
+	,ACKNOWLEDGE(new AcknowledgeRule())
+	,PRIORITY(new PriorityRule())
 	//TODO COUNTER(new CounterRule());
-	DETAILS(new DetailsRule()),//
-	BRACED_ATTRIBUTE_RULE(new BracedAttributeRule());//
+	,DETAILS(new DetailsRule())
+	,BRACED_ATTRIBUTE_RULE(new BracedAttributeRule())
+	,SKIP_EVEN_COLUMN_RULE(new SkipEvenColumnRule());
 	//TODO SKIP RULES
 	//TODO COMPONENT_CODE_FIXED
 	//TODO COMPONENT_CODE_HIDDEN

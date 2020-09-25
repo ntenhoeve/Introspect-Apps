@@ -100,7 +100,7 @@ public class DataTypePath extends ArrayList<DataType> {
 	 * @return Gets the minimum value in an array of one of the {@link DataType}s or
 	 *         returns 0 if there are no {@link DataType}s has an array
 	 */
-	public int getMin() {
+	public int getArrayMin() {
 		Optional<BaseTypeArray> array = findArray();
 		if (array.isPresent()) {
 			return array.get().getMin();
@@ -113,7 +113,7 @@ public class DataTypePath extends ArrayList<DataType> {
 	 * @return Gets the maximum value in an array of one of the {@link DataType}s or
 	 *         returns 0 if there are no {@link DataType}s has an array
 	 */
-	public int getMax() {
+	public int getArrayMax() {
 		Optional<BaseTypeArray> array = findArray();
 		if (array.isPresent()) {
 			return array.get().getMax();

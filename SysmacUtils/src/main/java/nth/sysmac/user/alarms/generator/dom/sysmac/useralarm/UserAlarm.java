@@ -1,7 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm;
 
 import nth.reflect.fw.generic.util.TitleBuilder;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.obsolete.TextExpression;
 
 public class UserAlarm {
 	private static final String SEPERATOR = ", ";
@@ -18,10 +17,13 @@ public class UserAlarm {
 	private String page;
 	private String details;
 	
-	public UserAlarm(String groupName, String varExpr, TextExpression textExpression) {
+	public UserAlarm(String groupName, DataTypePathConverter dataTypePathConverter) {
 		groupName1=groupName;
-		expression=varExpr;
-		message=textExpression.getMessage();
+		expression=dataTypePathConverter.getExpression();
+		message=dataTypePathConverter.getMessage();
+		priority=dataTypePathConverter.getPriority();
+		acknowledge=dataTypePathConverter.getAcknowlegde();
+		details=dataTypePathConverter.getDetails();
 	}
 
 

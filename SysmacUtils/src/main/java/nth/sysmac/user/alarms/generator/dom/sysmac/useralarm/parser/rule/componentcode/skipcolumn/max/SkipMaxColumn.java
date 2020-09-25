@@ -1,8 +1,9 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumn;
 
-public class MaxColumnRule extends ComponentCodeSkipRule {
+public class SkipMaxColumn extends SkipColumn {
 
 	@Override
 	public boolean appliesTo(ComponentCodeNode componentCodeNode) {

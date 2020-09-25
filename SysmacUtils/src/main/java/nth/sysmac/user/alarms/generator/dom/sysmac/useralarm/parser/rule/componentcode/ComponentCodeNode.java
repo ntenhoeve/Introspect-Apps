@@ -1,9 +1,9 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode;
 
 import nth.reflect.util.parser.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.ComponentCodeSkipRulesNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule.MaxColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumn;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
 /**
  * Represents a Component Code, see {@link ComponentCodeRule}.
@@ -18,25 +18,25 @@ public class ComponentCodeNode extends Node {
 	private int page;
 	private final Character letter;
 	private int column;
-	private final ComponentCodeSkipRulesNode componentCodeSkipRulesNode;
+	private final SkipColumnNode skipColumnNode;
 
-	public ComponentCodeNode(int page, char letter, int column, ComponentCodeSkipRulesNode componentCodeSkipRulesNode) {
+	public ComponentCodeNode(int page, char letter, int column, SkipColumnNode skipColumnNode) {
 		verifyPage(page);
 		this.page = page;
 		verifyLetter(letter);
 		this.letter = Character.toUpperCase(letter);
 		verifyColumn(column);
 		this.column = column;
-		this.componentCodeSkipRulesNode = componentCodeSkipRulesNode;
+		this.skipColumnNode = skipColumnNode;
 	}
 
 	public ComponentCodeNode(int page, char letter, int column) {
-		this(page, letter, column, new ComponentCodeSkipRulesNode());
+		this(page, letter, column, new SkipColumnNode());
 	}
 
 	/**
 	 * we do not verify the max column number, that will be fixed by the
-	 * {@link MaxColumnRule}
+	 * {@link SkipMaxColumn}
 	 * 
 	 * @param column
 	 */
@@ -61,14 +61,14 @@ public class ComponentCodeNode extends Node {
 	public void goToNext() {
 		int nextColumn = column + 1;
 		int nextPage = page;
-		ComponentCodeNode next = new ComponentCodeNode(nextPage, letter, nextColumn, componentCodeSkipRulesNode);
+		ComponentCodeNode next = new ComponentCodeNode(nextPage, letter, nextColumn, skipColumnNode);
 
 		boolean skipped;
 		do {
 			skipped = false;
-			for (ComponentCodeSkipRule componentCodeSkipRule : componentCodeSkipRulesNode) {
-				if (componentCodeSkipRule.appliesTo(next)) {
-					componentCodeSkipRule.goToNext(next);
+			for (SkipColumn skipColumn : skipColumnNode) {
+				if (skipColumn.appliesTo(next)) {
+					skipColumn.goToNext(next);
 					skipped = true;
 				}
 			}
@@ -95,12 +95,12 @@ public class ComponentCodeNode extends Node {
 		this.column = column;
 	}
 
-	public ComponentCodeSkipRulesNode getSkipRules() {
-		return componentCodeSkipRulesNode;
+	public SkipColumnNode getSkipRules() {
+		return skipColumnNode;
 	}
 
 	public ComponentCodeNode getDerivedComponentCode(char letter) {
-		ComponentCodeNode derivedComponentCode = new ComponentCodeNode(page, letter, column, componentCodeSkipRulesNode);
+		ComponentCodeNode derivedComponentCode = new ComponentCodeNode(page, letter, column, skipColumnNode);
 		return derivedComponentCode;
 	}
 

@@ -9,11 +9,13 @@ import nth.reflect.util.parser.node.NodeParserRule;
 import nth.reflect.util.parser.node.TokenNode;
 import nth.reflect.util.parser.node.matcher.NodeMatcher;
 import nth.reflect.util.parser.node.matcher.predicate.AnyNodePredicate;
+import nth.reflect.util.parser.node.matcher.predicate.NodeTypeAndMatchChildrenPredicate;
 import nth.reflect.util.parser.node.matcher.predicate.NodeTypePredicate;
 import nth.reflect.util.parser.node.matcher.result.MatchResults;
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.reflect.util.parser.node.matcher.rule.Repetition;
 import nth.reflect.util.regex.Regex;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 
 /**
@@ -26,7 +28,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  */
 public class BracedAttributeRule implements NodeParserRule {
 
-	private static final NodeTypePredicate BRACE_NODE_PREDICATE=new NodeTypePredicate(BraceNode.class);
 	private static final Regex ATTRIBUTE_NAMES_REGEX = createAttributeNamesRegex();
 	private static final MatchRules ATTRIBUTE_NAME_RULES = new MatchRules()//
 			.add(TokenNodePredicate.rest(ATTRIBUTE_NAMES_REGEX));
@@ -37,21 +38,26 @@ public class BracedAttributeRule implements NodeParserRule {
 			.add(new AnyNodePredicate(), Repetition.oneOrMore());
 
 	private static final MatchRules ATTRIBUTE_RULES = new MatchRules()//
-			.addParentPath(BRACE_NODE_PREDICATE)//
 			.add(ATTRIBUTE_NAME_RULES)//
 			.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
 			.add(EQUAL_RULES)//
 			.add(ATTRIBUTE_VALUE_RULES);
 
+	private static final Predicate<Node> PREDICATE = new NodeTypeAndMatchChildrenPredicate(BraceNode.class,
+			ATTRIBUTE_RULES);
+	
+	private static final MatchRules MATCH_RULES = new MatchRules()//
+			.add(PREDICATE);
+
 	@Override
 	public MatchRules getMatchRules() {
-		return ATTRIBUTE_RULES;
+		return MATCH_RULES;
 	}
 
 	private static Regex createAttributeNamesRegex() {
 		List<Regex> attributeNameRegexes = new ArrayList<>();
 		for (BracedAttributeName name : BracedAttributeName.values()) {
-			Regex attributeNameRegex = new Regex().ignoreCase().literal(name.getAbbreviation());
+			Regex attributeNameRegex = new Regex().ignoreCase().beginOfLine().literal(name.getAbbreviation()).endOfLine();
 			attributeNameRegexes.add(attributeNameRegex);
 		}
 		Regex attributeNamesRegex = new Regex().or(attributeNameRegexes);
@@ -60,10 +66,19 @@ public class BracedAttributeRule implements NodeParserRule {
 
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
+		int braceNodeIndex = matchResults.getFirstNodeIndex();
+		Node braceNode=matchResults.getNodes().get(braceNodeIndex);
+		replaceInBraceNode(braceNode);
+	}
+
+	private void replaceInBraceNode(Node braceNode) {
+		List<Node> nodes = braceNode.getNodes();
+		NodeMatcher nodeMatcher=new NodeMatcher(ATTRIBUTE_RULES);
+		MatchResults matchResults=nodeMatcher.match(nodes);
 		BracedAttributeName attributeName = getAttributeName(matchResults);
 		List<Node> attributeValues = getAttributeValues(matchResults);
 		BracedAttributeNode attributeNode = new BracedAttributeNode(attributeName, attributeValues);
-		List<Node> braceNodeChildren=matchResults.getNodes();
+		List<Node> braceNodeChildren = braceNode.getNodes();
 		replace(braceNodeChildren, attributeValues, attributeNode);
 	}
 
@@ -76,7 +91,6 @@ public class BracedAttributeRule implements NodeParserRule {
 
 	private void replace(List<Node> braceNodeChildren, List<Node> attributeValues, BracedAttributeNode attributeNode) {
 		MatchRules matchRules = new MatchRules()//
-				.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
 				.add(ATTRIBUTE_NAME_RULES)//
 				.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
 				.add(EQUAL_RULES);
@@ -117,7 +131,5 @@ public class BracedAttributeRule implements NodeParserRule {
 			return attributeValues;
 		}
 	}
-
-	
 
 }

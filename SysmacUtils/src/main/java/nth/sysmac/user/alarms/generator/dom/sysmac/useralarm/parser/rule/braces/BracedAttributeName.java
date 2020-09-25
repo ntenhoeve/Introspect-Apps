@@ -13,12 +13,12 @@ public enum BracedAttributeName {
 		return abbreviation;
 	}
 
-	static BracedAttributeName getForAbbreviation(String abbreviation) {
+	static BracedAttributeName getForAbbreviation(String abbreviationToFind) {
 		for (BracedAttributeName name : values()) {
-			if (name.getAbbreviation().equals(abbreviation.toLowerCase()))
+			if (name.getAbbreviation().equals(abbreviationToFind.toLowerCase()))
 				return name;
 		}
-		throw new RuntimeException("Could not find attribute abbreviation: " + abbreviation);
+		throw new RuntimeException(abbreviationToFind+" is not a valid attribute abreviation");
 	}
 
 }

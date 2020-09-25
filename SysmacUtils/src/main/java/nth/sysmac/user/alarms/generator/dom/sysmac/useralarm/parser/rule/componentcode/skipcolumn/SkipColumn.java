@@ -1,7 +1,8 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skiprule;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn;
 
 import java.util.Arrays;
 
+import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
 /**
@@ -28,7 +29,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
  *
  *
  */
-public abstract class ComponentCodeSkipRule {
+public abstract class SkipColumn extends Node{
 
 	public static final String VALUE_SEPARATOR = ",";
 
@@ -47,9 +48,10 @@ public abstract class ComponentCodeSkipRule {
 		// type check and cast
 		if (!(getClass()==other.getClass()))
 			return false;
+		SkipColumn otherCodeSkipRule=(SkipColumn) other;
 		
 		Object[] thisFieldValues=getFieldValues();
-		Object[] otherFieldValues=getFieldValues();
+		Object[] otherFieldValues=otherCodeSkipRule.getFieldValues();
 		
 		boolean deepEquals = Arrays.deepEquals(thisFieldValues, otherFieldValues);
 		return deepEquals;
