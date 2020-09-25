@@ -16,6 +16,8 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
@@ -239,6 +241,15 @@ public class TestObjectFactory {
 		return surroundWithRandomWhiteSpace(attribute);
 	}
 
+	
+	public static ExpressionAndNodes skipUnevenColumnAttributeValue() {
+		String evenAbbreviation = Random.letterCase(SkipUnevenColumnRule.UNEVEN_ABBREVIATION).generate();
+		ExpressionAndNodes expressionAndNodes = tokenNodeRest(evenAbbreviation);
+		List<Node> parcedNodes = Arrays.asList(new SkipUnevenColumnNode());
+		ExpressionAndNodes attribute = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		return surroundWithRandomWhiteSpace(attribute);
+	}
+
 	public static ExpressionAndNodes attributeValueWithOtherRandomValues(ExpressionAndNodes attributeValueToBeSurrounded) {
 		List<ExpressionAndNodes> attributeValues=new ArrayList<>();
 		int n=Random.integer().forRange(0, 2).generate();
@@ -252,6 +263,7 @@ public class TestObjectFactory {
 		}
 		return seperatedByTokenNodeCommas(attributeValues);
 	}
+
 
 	
 

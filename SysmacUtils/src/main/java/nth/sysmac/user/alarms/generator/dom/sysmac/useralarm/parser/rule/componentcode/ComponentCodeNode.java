@@ -1,8 +1,8 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode;
 
 import nth.reflect.util.parser.node.Node;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumn;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumns;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
 /**
@@ -18,20 +18,20 @@ public class ComponentCodeNode extends Node {
 	private int page;
 	private final Character letter;
 	private int column;
-	private final SkipColumnNode skipColumnNode;
+	private final SkipColumns skipColumns;
 
-	public ComponentCodeNode(int page, char letter, int column, SkipColumnNode skipColumnNode) {
+	public ComponentCodeNode(int page, char letter, int column, SkipColumns skipColumns) {
 		verifyPage(page);
 		this.page = page;
 		verifyLetter(letter);
 		this.letter = Character.toUpperCase(letter);
 		verifyColumn(column);
 		this.column = column;
-		this.skipColumnNode = skipColumnNode;
+		this.skipColumns = skipColumns;
 	}
 
 	public ComponentCodeNode(int page, char letter, int column) {
-		this(page, letter, column, new SkipColumnNode());
+		this(page, letter, column, new SkipColumns());
 	}
 
 	/**
@@ -61,14 +61,14 @@ public class ComponentCodeNode extends Node {
 	public void goToNext() {
 		int nextColumn = column + 1;
 		int nextPage = page;
-		ComponentCodeNode next = new ComponentCodeNode(nextPage, letter, nextColumn, skipColumnNode);
+		ComponentCodeNode next = new ComponentCodeNode(nextPage, letter, nextColumn, skipColumns);
 
 		boolean skipped;
 		do {
 			skipped = false;
-			for (SkipColumn skipColumn : skipColumnNode) {
-				if (skipColumn.appliesTo(next)) {
-					skipColumn.goToNext(next);
+			for (SkipColumnNode skipColumnNode : skipColumns) {
+				if (skipColumnNode.appliesTo(next)) {
+					skipColumnNode.goToNext(next);
 					skipped = true;
 				}
 			}
@@ -95,12 +95,12 @@ public class ComponentCodeNode extends Node {
 		this.column = column;
 	}
 
-	public SkipColumnNode getSkipRules() {
-		return skipColumnNode;
+	public SkipColumns getSkipRules() {
+		return skipColumns;
 	}
 
 	public ComponentCodeNode getDerivedComponentCode(char letter) {
-		ComponentCodeNode derivedComponentCode = new ComponentCodeNode(page, letter, column, skipColumnNode);
+		ComponentCodeNode derivedComponentCode = new ComponentCodeNode(page, letter, column, skipColumns);
 		return derivedComponentCode;
 	}
 

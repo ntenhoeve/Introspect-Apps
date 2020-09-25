@@ -1,6 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 

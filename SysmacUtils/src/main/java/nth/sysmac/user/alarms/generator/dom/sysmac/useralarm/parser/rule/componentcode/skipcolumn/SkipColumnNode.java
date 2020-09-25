@@ -1,34 +1,63 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn;
 
+import java.util.Arrays;
 
+import nth.reflect.util.parser.node.Node;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+/**
+ * 
+ * <h3>Skipping component numbers when using arrays:</h3>
+ * <ul>
+ * <li>s=e: skips even columns (of all pages)</li>
+ * <li>s=u: skips un-even columns (of all pages)</li>
+ * <li>s=2: skips column 2 (of all pages)</li>
+ * <li>s=3-5: skips columns 3 until 5 (of all pages)</li>
+ * <li>s=30.2: skips column 2 of page 30</li>
+ * <li>s=30.2-31.5: skips column 2 of page 30 until column 5 of page 31</li>
+ * </ul>
+ * You can combine the rules above by separating them with a comma, e.g.:
+ * <ul>
+ * <li>s=e,5: skips even columns and column 5 (of all pages)</li>
+ * <li>s=2,4: skips column 2 and column 4 (of all pages)</li>
+ * <li>s=2-4,8: skips column 2-4 and column 8 (of all pages)</li>
+ * <li>s=e,3-7,30.2-31.5: skips even columns, columns 3-7, and column 2 of page
+ * 30 until column 5 of page 31</li>
+ * </ul>
+ * 
+ * @author nilsth
+ *
+ *
+ */
+public abstract class SkipColumnNode extends Node{
 
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
+	public static final String VALUE_SEPARATOR = ",";
 
-public class SkipColumnNode implements Iterable<SkipColumn> {
+	public abstract boolean appliesTo(ComponentCodeNode next);
 
-	private final List<SkipColumn> skipColumns;
-
-	public SkipColumnNode() {
-		skipColumns = new ArrayList<>();
-		skipColumns.add(new SkipMaxColumn());
-	}
-
-	public void add(SkipColumn skipColumn) {
-		skipColumns.add(skipColumn);
-	}
-
-	public void addAll(List<SkipColumn> rules) {
-		skipColumns.addAll(rules);
-	}
+	public abstract void goToNext(ComponentCodeNode next);
 
 	@Override
-	public Iterator<SkipColumn> iterator() {
-		return Collections.unmodifiableList(skipColumns).iterator();
+	public boolean equals(Object other) {
+		// self check
+		if (this == other)
+			return true;
+		// null check
+		if (other == null)
+			return false;
+		// type check and cast
+		if (!(getClass()==other.getClass()))
+			return false;
+		SkipColumnNode otherCodeSkipRule=(SkipColumnNode) other;
+		
+		Object[] thisFieldValues=getFieldValues();
+		Object[] otherFieldValues=otherCodeSkipRule.getFieldValues();
+		
+		boolean deepEquals = Arrays.deepEquals(thisFieldValues, otherFieldValues);
+		return deepEquals;
 	}
+
+	protected abstract Object[] getFieldValues();
+	
 
 }

@@ -29,10 +29,14 @@ public class RandomTokenNode extends ExpressionAndNodes {
 		switch (i) {
 		case 0:
 			return TestObjectFactory.tokenNodeEqual();
-		case 1:
-			return TestObjectFactory.tokenNodeRandomRest().append(TestObjectFactory.tokenNodeWhiteSpace());
-		case 2:
-			return TestObjectFactory.tokenNodeRandomUnsignedInteger().append(TestObjectFactory.tokenNodeWhiteSpace());
+		case 1://surrounded by whitespace to make sure we are not sticking to other nodes
+			return TestObjectFactory.tokenNodeWhiteSpace()//
+					.append(TestObjectFactory.tokenNodeRandomRest())//
+					.append(TestObjectFactory.tokenNodeWhiteSpace());
+		case 2://surrounded by whitespace to make sure we are not sticking to other nodes
+			return TestObjectFactory.tokenNodeWhiteSpace()//
+					.append(TestObjectFactory.tokenNodeRandomUnsignedInteger())//
+					.append(TestObjectFactory.tokenNodeWhiteSpace());
 		case 3:
 			return TestObjectFactory.tokenNodeDot();
 		default:
