@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.params.provider.Arguments;
-
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.TokenNode;
 import nth.reflect.util.parser.token.parser.TokenRule;
@@ -38,11 +36,17 @@ public class ExpressionAndNodes {
 		parsedNodes.add(tokenNode);
 	}
 
-//	public ExpressionAndNodes(String expression, Node... parsedNodes) {
-//		this.expression=expression;
-//		this.tokenNodes=new ArrayList<>();
-//		this.parsedNodes=Arrays.asList(parsedNodes);
-//	}
+
+	/**
+	 * creates a copy
+	 * @param expressionAndNodes
+	 */
+	public ExpressionAndNodes(ExpressionAndNodes expressionAndNodes) {
+		this.expression=expressionAndNodes.expression;
+		this.tokenNodes=new ArrayList<>(expressionAndNodes.tokenNodes);
+		this.parsedNodes=new ArrayList<>(expressionAndNodes.parsedNodes);
+	}
+
 
 	public String expression() {
 		return expression;
@@ -69,7 +73,7 @@ public class ExpressionAndNodes {
 	}
 
 	public ExpressionAndNodes repeatRandomly(int min, int max) {
-		ExpressionAndNodes result=new ExpressionAndNodes("", new ArrayList<>(), new ArrayList<>());
+		ExpressionAndNodes result=new ExpressionAndNodes();
 		Integer repetition = Random.integer().forRange(min, max).generate();
 		for (int i=0;i<repetition;i++) {
 			result=result.append(this);
@@ -77,9 +81,6 @@ public class ExpressionAndNodes {
 		return result;
 	}
 	
-	public Arguments arguments() {
-		return Arguments.of(expression,parsedNodes);
-	}
-
+	
 
 }

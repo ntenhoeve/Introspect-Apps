@@ -22,9 +22,9 @@ class ComponentCodeRuleTest {
 	@RepeatedTest(30)
 	@MethodSource
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes expressionAndNodes = TestObjectFactory.tokenNodeRest().repeatRandomly(0, 2)//
+		ExpressionAndNodes expressionAndNodes = TestObjectFactory.tokenNodeRandomRest().repeatRandomly(0, 2)//
 				.append(TestObjectFactory.componentCodeNode())//
-				.append(TestObjectFactory.tokenNodeRest().repeatRandomly(0, 2));
+				.append(TestObjectFactory.tokenNodeRandomRest().repeatRandomly(0, 2));
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		String expression=expressionAndNodes.expression();
 		List<Token> tokens = tokenParser.parse(expression);

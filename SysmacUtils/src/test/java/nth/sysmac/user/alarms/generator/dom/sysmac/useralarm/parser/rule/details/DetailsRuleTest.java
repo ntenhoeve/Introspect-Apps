@@ -22,9 +22,9 @@ class DetailsRuleTest {
 	@RepeatedTest(30)
 	@MethodSource
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes expressionAndNodes = TestObjectFactory.tokenNodeRest().repeatRandomly(0, 2)//
+		ExpressionAndNodes expressionAndNodes = TestObjectFactory.tokenNodeRandomRest().repeatRandomly(0, 2)//
 				.append(TestObjectFactory.detailsNode())//
-				.append(TestObjectFactory.tokenNodeRest().repeatRandomly(0, 2));
+				.append(TestObjectFactory.tokenNodeRandomRest().repeatRandomly(0, 2));
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		String expression=expressionAndNodes.expression();
 		List<Token> tokens = tokenParser.parse(expression);
@@ -32,7 +32,7 @@ class DetailsRuleTest {
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getNodes();
 		List<Node> parcedNodes = expressionAndNodes.parcedNodes();
-		assertThat(actual).containsExactlyElementsOf(parcedNodes);
+		assertThat(actual).as("expression=%s", expression).containsExactlyElementsOf(parcedNodes);
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import nth.reflect.util.parser.node.Node;
-import nth.reflect.util.parser.node.TokenNode;
 import nth.reflect.util.parser.token.parser.Rest;
 import nth.reflect.util.random.Random;
 import nth.reflect.util.random.generator.text.CharacterSet;
@@ -15,11 +14,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Comma;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dot;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.OpenBrace;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.UnsignedInteger;
@@ -27,15 +29,23 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.WhiteSpa
 
 public class TestObjectFactory {
 
-	private static final String REST = "Rest";
-
 	// ====== TOKEN NODES
-	public static ExpressionAndNodes tokenNodeRest() {
-		return tokenNodeRest(REST);
+
+	public static ExpressionAndNodes tokenNodeRandomRest() {
+		String expression = Random.string().forCharSet(CharacterSet.letters(LetterCase.UPPER_AND_LOWER)).generate();
+		return tokenNodeRest(expression);
 	}
 
 	public static ExpressionAndNodes tokenNodeRest(String expression) {
 		return new ExpressionAndNodes(expression, new Rest());
+	}
+
+	static ExpressionAndNodes tokenNodeDot() {
+		return new ExpressionAndNodes(".", new Dot());
+	}
+
+	static ExpressionAndNodes tokenNodeComma() {
+		return new ExpressionAndNodes(",", new Comma());
 	}
 
 	public static ExpressionAndNodes tokenNodeOpenBrace() {
@@ -59,41 +69,65 @@ public class TestObjectFactory {
 		return new ExpressionAndNodes(expression, new UnsignedInteger());
 	}
 
-	// ====== PARCED NODES
-	public static ExpressionAndNodes braceNode() {
-		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace().append(tokenNodeRest())
-				.append(tokenNodeCloseBrace());
-		return braceNode(expressionAndNodes);
+	static ExpressionAndNodes tokenNodeRandomUnsignedInteger() {
+		int i = Random.integer().forRange(0, 999).generate();
+		return tokenNodeUnsignedInteger(i);
 	}
 
-	public static ExpressionAndNodes braceNode(ExpressionAndNodes expressionAndNodesWithBraces) {
-		String expression = expressionAndNodesWithBraces.expression();
-		List<TokenNode> tokenNodes = expressionAndNodesWithBraces.tokenNodes();
-		List<Node> childNodes = new ArrayList<>(expressionAndNodesWithBraces.parcedNodes());
-		if (childNodes.size() > 0 && new TokenNodePredicate(new OpenBrace()).test(childNodes.get(0))) {
-			childNodes.remove(0);
+	// === COMBINED ===
+	public static ExpressionAndNodes tokenNodeRandom() {
+		return new RandomTokenNode();
+	}
+
+	public static ExpressionAndNodes surroundWithRandomWhiteSpace(ExpressionAndNodes toBeSurrounded) {
+		return tokenNodeWhiteSpace().repeatRandomly(0, 2)//
+				.append(toBeSurrounded)//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 2));
+	}
+
+	public static ExpressionAndNodes precedingWithRandomTokens(ExpressionAndNodes expressionAndNodes) {
+		return tokenNodeRandom().repeatRandomly(0, 2)//
+				.append(expressionAndNodes);
+	}
+	
+	public static ExpressionAndNodes followedWithRandomTokens(ExpressionAndNodes expressionAndNodes) {
+		return  expressionAndNodes//
+				.append(tokenNodeRandom().repeatRandomly(0, 2));
+	}
+	
+	public static ExpressionAndNodes surroundWithRandomTokens(ExpressionAndNodes toBeSurrounded) {
+		return tokenNodeRandom().repeatRandomly(0, 2)//
+				.append(toBeSurrounded)//
+				.append(tokenNodeRandom().repeatRandomly(0, 2));
+	}
+
+	public static ExpressionAndNodes seperatedByTokenNodeCommas(List<ExpressionAndNodes> allExpressionAndNodes) {
+		ExpressionAndNodes result = new ExpressionAndNodes();
+		for (ExpressionAndNodes expressionAndNodes : allExpressionAndNodes) {
+			if (!result.expression().isEmpty()) {
+				result=result.append(tokenNodeComma());
+			}
+			result=result.append(expressionAndNodes);
 		}
-		if (childNodes.size() > 0
-				&& new TokenNodePredicate(new CloseBrace()).test(childNodes.get(childNodes.size() - 1))) {
-			childNodes.remove(childNodes.size() - 1);
-		}
-		List<Node> parsedNodes = Arrays.asList(new BraceNode(childNodes));
-		return new ExpressionAndNodes(expression, tokenNodes, parsedNodes);
+		return result;
+	}
+
+	// ====== PARCED NODES
+	public static ExpressionAndNodes braceNode() {
+		return braceNode(tokenNodeRandomRest().repeatRandomly(1, 2));
+	}
+
+	public static ExpressionAndNodes braceNode(ExpressionAndNodes children) {
+		ExpressionAndNodes allNodes = tokenNodeOpenBrace()//
+				.append(children)//
+				.append(tokenNodeCloseBrace());
+
+		List<Node> parsedNodes = Arrays.asList(new BraceNode(children.parcedNodes()));
+		return new ExpressionAndNodes(allNodes.expression(), allNodes.tokenNodes(), parsedNodes);
 	}
 
 	public static ExpressionAndNodes acknowledgeNode() {
-		String ack;
-		int capitalCase = Random.integer().forRange(0, 2).generate();
-		switch (capitalCase) {
-		case 0:
-			ack = "ack";
-			break;
-		case 1:
-			ack = "Ack";
-		default:
-			ack = "ACK";
-			break;
-		}
+		String ack = Random.letterCase("ack").generate();
 
 		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
@@ -108,8 +142,7 @@ public class TestObjectFactory {
 
 	public static ExpressionAndNodes detailsNode() {
 		ExpressionAndNodes details = TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 3)//
-				.append(TestObjectFactory.tokenNodeRest())//
-				.append(TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 2));
+				.append(TestObjectFactory.tokenNodeRandom().repeatRandomly(1, 5));
 		return detailsNode(details);
 	}
 
@@ -163,36 +196,63 @@ public class TestObjectFactory {
 		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parsedNodes);
 	}
 
-	
-
-	public static ExpressionAndNodes attribute() {
-		BracedAttributeName name= (BracedAttributeName) Random.fromEnum(BracedAttributeName.class).generate();
+	public static ExpressionAndNodes bracedAttribute(BracedAttributeName name, ExpressionAndNodes values) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeRest(name.getAbbreviation())//
-		.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-		.append(tokenNodeEqual());
-		
-		ExpressionAndNodes values=new ExpressionAndNodes();
-		CharacterSet lettersAndNumbers = CharacterSet.letters(LetterCase.UPPER_AND_LOWER);//.withNumbers();
-		Integer nrOfValues = Random.integer().forRange(1, 5).generate();
-		for (int i=0;i<nrOfValues;i++) {
-			ExpressionAndNodes tokenNodeRest = tokenNodeRest(Random.string().forCharSet(lettersAndNumbers).generate());
-			values=values.append(tokenNodeRest);
-			values=values.append(tokenNodeWhiteSpace().repeatRandomly(1, 3));
-		}
-		expressionAndNodes=expressionAndNodes.append(values);
-		
-		List<Node> parcedNodes=Arrays.asList(new BracedAttributeNode(name, values.parcedNodes()));
-		
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
+				.append(tokenNodeEqual());
+		expressionAndNodes = expressionAndNodes.append(values);
+
+		List<Node> parcedNodes = Arrays.asList(new BracedAttributeNode(name, values.parcedNodes()));
+
 		return new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
 	}
 
+	public static ExpressionAndNodes bracedAttributeWithRandomValues(BracedAttributeName name) {
+		ExpressionAndNodes randomValues = tokenNodeRandom().repeatRandomly(1, 5);
+		return bracedAttribute(name, randomValues);
+	}
+
+	public static ExpressionAndNodes bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName name,
+			ExpressionAndNodes valuesToBeSurrounded) {
+		ExpressionAndNodes values = tokenNodeRandom().repeatRandomly(0, 2)//
+				.append(valuesToBeSurrounded)//
+				.append(tokenNodeRandom().repeatRandomly(0, 2));
+
+		return bracedAttribute(name, values);
+	}
+
 	public static ExpressionAndNodes braceNodeWithAttributes(List<ExpressionAndNodes> attributes) {
-		ExpressionAndNodes expressionAndNodesWithBraces= tokenNodeOpenBrace();
+		ExpressionAndNodes expressionAndNodesWithBraces = tokenNodeOpenBrace();
 		for (ExpressionAndNodes attribute : attributes) {
-			expressionAndNodesWithBraces=expressionAndNodesWithBraces.append(attribute);
+			expressionAndNodesWithBraces = expressionAndNodesWithBraces.append(attribute);
 		}
-		expressionAndNodesWithBraces=expressionAndNodesWithBraces.append(tokenNodeCloseBrace());
+		expressionAndNodesWithBraces = expressionAndNodesWithBraces.append(tokenNodeCloseBrace());
 		ExpressionAndNodes braceNode = braceNode(expressionAndNodesWithBraces);
 		return braceNode;
 	}
+
+	public static ExpressionAndNodes skipEvenColumnAttributeValue() {
+		String evenAbbreviation = Random.letterCase(SkipEvenColumnRule.EVEN_ABBREVIATION).generate();
+		ExpressionAndNodes expressionAndNodes = tokenNodeRest(evenAbbreviation);
+		List<Node> parcedNodes = Arrays.asList(new SkipEvenColumnNode());
+		ExpressionAndNodes attribute = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		return surroundWithRandomWhiteSpace(attribute);
+	}
+
+	public static ExpressionAndNodes attributeValueWithOtherRandomValues(ExpressionAndNodes attributeValueToBeSurrounded) {
+		List<ExpressionAndNodes> attributeValues=new ArrayList<>();
+		int n=Random.integer().forRange(0, 2).generate();
+		for (int i=0; i<n;i++) {
+			attributeValues.add(tokenNodeRandom());
+		}
+		attributeValues.add(attributeValueToBeSurrounded);
+		n=Random.integer().forRange(0, 2).generate();
+		for (int i=0; i<n;i++) {
+			attributeValues.add(tokenNodeRandom());
+		}
+		return seperatedByTokenNodeCommas(attributeValues);
+	}
+
+	
+
 }

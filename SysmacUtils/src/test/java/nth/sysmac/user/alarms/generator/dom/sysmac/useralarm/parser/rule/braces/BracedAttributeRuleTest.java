@@ -22,9 +22,14 @@ import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 class BracedAttributeRuleTest {
 
 	@RepeatedTest(30)
-	@MethodSource
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes expressionAndNodes = createExpressionAndNodes();
+		
+		
+		ExpressionAndNodes attribute = TestObjectFactory.bracedAttributeWithRandomValues(BracedAttributeName.SKIP);
+		//TODO test with multiple attributes
+		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
+		ExpressionAndNodes expressionAndNodes = TestObjectFactory.surroundWithRandomTokens(braced);
+
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
 		String expression=expressionAndNodes.expression();
 		List<Token> tokens = tokenParser.parse(expression);
@@ -33,7 +38,7 @@ class BracedAttributeRuleTest {
 		ParseTree parseTree = nodeParser.parse(tokens);
 		List<Node> actual = parseTree.getNodes();
 		List<Node> parcedNodes = expressionAndNodes.parcedNodes();
-		assertThat(actual).containsExactlyElementsOf(parcedNodes);
+		assertThat(actual).as("expression=%s",expression) .containsExactlyElementsOf(parcedNodes);
 	}
 
 	private List<NodeParserRule> createNodeRules() {
@@ -43,24 +48,4 @@ class BracedAttributeRuleTest {
 		return rules;
 	}
 
-
-	private ExpressionAndNodes createExpressionAndNodes() {
-		List<ExpressionAndNodes> attributes = createAttributes();
-		ExpressionAndNodes expressionAndNodes = TestObjectFactory.tokenNodeRest().repeatRandomly(0, 2)//
-				.append(TestObjectFactory.braceNodeWithAttributes(attributes))//
-				.append(TestObjectFactory.tokenNodeRest().repeatRandomly(0, 2));
-		return expressionAndNodes;
-	}
-
-	private List<ExpressionAndNodes> createAttributes() {
-		List<ExpressionAndNodes> attributes=new ArrayList<>();
-		ExpressionAndNodes firstAttribute=TestObjectFactory.attribute();
-		attributes.add(firstAttribute);
-		int nrOtherAttributes=Random.integer().forRange(0, 3).generate();
-		for(int i=0;i<nrOtherAttributes;i++) {
-			ExpressionAndNodes otherAttribute=TestObjectFactory.attribute();
-			attributes.add(otherAttribute);
-		}
-		return attributes;
-	}
 }
