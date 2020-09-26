@@ -7,15 +7,21 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 
+/**
+ * s=u: skips uneven columns (of all pages)
+ * 
+ * @see SkipColumnRule
+ * @author nilsth
+ */
 public class SkipUnevenColumnRule extends SkipColumnRule {
 
 	public static final String UNEVEN_ABBREVIATION = "u";
 
-	private static final Regex SKIP_UNEVEN_COLUMN_REGEX = new Regex().ignoreCase().beginOfLine().literal(UNEVEN_ABBREVIATION).endOfLine();
+	private static final Regex SKIP_UNEVEN_COLUMN_REGEX = new Regex().ignoreCase().beginOfLine()
+			.literal(UNEVEN_ABBREVIATION).endOfLine();
 
 	private static final MatchRules SKIP_UNEVEN_COLUMN_ATTRIBUTE_VALUE_RULES = new MatchRules()//
 			.add(TokenNodePredicate.rest(SKIP_UNEVEN_COLUMN_REGEX));
-
 
 	public SkipUnevenColumnRule() {
 		super(SKIP_UNEVEN_COLUMN_ATTRIBUTE_VALUE_RULES);

@@ -31,4 +31,5 @@ public enum TokenRules {
 		return Arrays.asList(values()).stream().map(TokenRules::get).collect(Collectors.toUnmodifiableList());
 	}
 
+
 }

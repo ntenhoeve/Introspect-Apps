@@ -2,7 +2,11 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
-
+/**
+ * See {@link SkipEvenColumnRule}
+ * @author nilsth
+ *
+ */
 public class SkipEvenColumnNode extends SkipColumnNode {
 
 	@Override

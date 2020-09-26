@@ -14,6 +14,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipColumnRangeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnNode;
@@ -215,12 +216,11 @@ public class TestObjectFactory {
 	}
 
 	public static ExpressionAndNodes bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName name,
-			ExpressionAndNodes valuesToBeSurrounded) {
-		ExpressionAndNodes values = tokenNodeRandom().repeatRandomly(0, 2)//
-				.append(valuesToBeSurrounded)//
-				.append(tokenNodeRandom().repeatRandomly(0, 2));
+			ExpressionAndNodes attributeValueToBeSurrounded) {
+		
+		ExpressionAndNodes attributeValues = TestObjectFactory.attributeValueWithOtherRandomValues(attributeValueToBeSurrounded);
 
-		return bracedAttribute(name, values);
+		return bracedAttribute(name, attributeValues);
 	}
 
 	public static ExpressionAndNodes braceNodeWithAttributes(List<ExpressionAndNodes> attributes) {
@@ -250,19 +250,33 @@ public class TestObjectFactory {
 		return surroundWithRandomWhiteSpace(attribute);
 	}
 
+	public static ExpressionAndNodes skipSingleColumnAttributeValue(int columnNumber) {
+		ExpressionAndNodes expressionAndNodes = tokenNodeUnsignedInteger(columnNumber);
+		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(columnNumber,columnNumber));
+		ExpressionAndNodes attributeValue = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		return surroundWithRandomWhiteSpace(attributeValue);
+	}
+
+	public static ExpressionAndNodes skipSingleRandomColumnAttributeValue() {
+		int columnNumber = Random.integer().forRange(1, 7).generate();
+		return skipSingleColumnAttributeValue(columnNumber);
+	}
+
 	public static ExpressionAndNodes attributeValueWithOtherRandomValues(ExpressionAndNodes attributeValueToBeSurrounded) {
 		List<ExpressionAndNodes> attributeValues=new ArrayList<>();
 		int n=Random.integer().forRange(0, 2).generate();
 		for (int i=0; i<n;i++) {
-			attributeValues.add(tokenNodeRandom());
+			attributeValues.add(tokenNodeRandomRest());
 		}
 		attributeValues.add(attributeValueToBeSurrounded);
 		n=Random.integer().forRange(0, 2).generate();
 		for (int i=0; i<n;i++) {
-			attributeValues.add(tokenNodeRandom());
+			attributeValues.add(tokenNodeRandomRest());
 		}
 		return seperatedByTokenNodeCommas(attributeValues);
 	}
+
+
 
 
 	
