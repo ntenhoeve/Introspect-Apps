@@ -24,6 +24,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priorit
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Comma;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dash;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dot;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.OpenBrace;
@@ -45,6 +46,10 @@ public class TestObjectFactory {
 
 	static ExpressionAndNodes tokenNodeDot() {
 		return new ExpressionAndNodes(".", new Dot());
+	}
+	
+	static ExpressionAndNodes tokenNodeDash() {
+		return new ExpressionAndNodes("-", new Dash());
 	}
 
 	static ExpressionAndNodes tokenNodeComma() {
@@ -250,6 +255,21 @@ public class TestObjectFactory {
 		return surroundWithRandomWhiteSpace(attribute);
 	}
 
+	public static ExpressionAndNodes skipMaxColumnAttributeValue(int columnNumber) {
+		ExpressionAndNodes expressionAndNodes = tokenNodeDash()//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 2))//
+				.append(tokenNodeUnsignedInteger(columnNumber));
+		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(1,columnNumber));
+		ExpressionAndNodes attributeValue = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		return surroundWithRandomWhiteSpace(attributeValue);
+	}
+
+	public static ExpressionAndNodes skipRandomMaxColumnAttributeValue() {
+		int columnNumber = Random.integer().forRange(2, 7).generate();
+		return skipMaxColumnAttributeValue(columnNumber);
+	}
+	
+
 	public static ExpressionAndNodes skipSingleColumnAttributeValue(int columnNumber) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeUnsignedInteger(columnNumber);
 		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(columnNumber,columnNumber));
@@ -258,7 +278,7 @@ public class TestObjectFactory {
 	}
 
 	public static ExpressionAndNodes skipSingleRandomColumnAttributeValue() {
-		int columnNumber = Random.integer().forRange(1, 7).generate();
+		int columnNumber = Random.integer().forRange(2, 7).generate();
 		return skipSingleColumnAttributeValue(columnNumber);
 	}
 
@@ -275,6 +295,7 @@ public class TestObjectFactory {
 		}
 		return seperatedByTokenNodeCommas(attributeValues);
 	}
+
 
 
 

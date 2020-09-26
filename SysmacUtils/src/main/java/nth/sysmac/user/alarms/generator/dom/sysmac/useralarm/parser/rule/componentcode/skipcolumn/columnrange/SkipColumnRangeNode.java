@@ -9,8 +9,22 @@ public class SkipColumnRangeNode extends SkipColumnNode {
 	private final int maxColumn;
 
 	public SkipColumnRangeNode(int minColumn, int maxColumn) {
+		validateMinColumn(minColumn);
 		this.minColumn = minColumn;
+		validateMaxColumn(maxColumn);
 		this.maxColumn = maxColumn;
+	}
+
+	private void validateMaxColumn(int maxColumn) {
+		if (maxColumn<2 || maxColumn>8) {
+			throw new RuntimeException("The maximum column number must be between 2 and 8, and can not be: "+maxColumn);
+		}
+	}
+
+	private void validateMinColumn(int minColumn) {
+		if (minColumn<1 || minColumn>7) {
+			throw new RuntimeException("The minimum column number must be between 1 and 7, and can not be: "+minColumn);
+		}
 	}
 
 	@Override

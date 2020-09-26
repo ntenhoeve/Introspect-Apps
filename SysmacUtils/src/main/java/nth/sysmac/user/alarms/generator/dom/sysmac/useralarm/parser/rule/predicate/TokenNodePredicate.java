@@ -61,6 +61,10 @@ public class TokenNodePredicate implements Predicate<Node> {
 		return new TokenNodePredicate(TokenRules.WHITESPACE.get());
 	}
 
+	public static Predicate<Node> dash() {
+		return new TokenNodePredicate(TokenRules.DASH.get());
+	}
+
 	public static TokenNodePredicate rest(Regex regex) {
 		return new TokenNodePredicate(new Rest(), Optional.of(regex));
 	}
@@ -68,7 +72,7 @@ public class TokenNodePredicate implements Predicate<Node> {
 	public static Predicate<Node> unsignedInteger() {
 		return new TokenNodePredicate(new UnsignedInteger());
 	}
-	
+
 	public static Predicate<Node> equals() {
 		return new TokenNodePredicate(new Equal());
 	}
@@ -77,8 +81,6 @@ public class TokenNodePredicate implements Predicate<Node> {
 		return new TokenNodePredicate(new Comma());
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		TitleBuilder title = new TitleBuilder();
@@ -89,8 +91,5 @@ public class TokenNodePredicate implements Predicate<Node> {
 		}
 		return title.toString();
 	}
-
-
-
 
 }
