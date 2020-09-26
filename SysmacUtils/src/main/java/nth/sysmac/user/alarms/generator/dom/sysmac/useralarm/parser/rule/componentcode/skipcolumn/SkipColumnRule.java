@@ -12,6 +12,7 @@ import nth.reflect.util.parser.node.matcher.rule.Repetition;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMaxColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMinMaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipSingleColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnRule;
@@ -24,7 +25,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <li>{@link SkipUnevenColumnRule}</li>
  * <li>{@link SkipSingleColumnRule}</li>
  * <li>{@link SkipMaxColumnRule}</li>
- * <li>s=3-5: skips columns 3 until 5 (of all pages)</li>
+ * <li>{@link SkipMinMaxColumnRule}</li>
  * <li>s=30.2: skips column 2 of page 30</li>
  * <li>s=-30.2: skips all columns up and including column 2 of page 30</li>
  * <li>s=30.2-31.5: skips column 2 of page 30 until column 5 of page 31</li>

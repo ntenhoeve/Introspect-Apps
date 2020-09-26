@@ -13,17 +13,27 @@ public class SkipColumnRangeNode extends SkipColumnNode {
 		this.minColumn = minColumn;
 		validateMaxColumn(maxColumn);
 		this.maxColumn = maxColumn;
+		validateMinIsSmallerOrEqualThanMaxColumn(minColumn, maxColumn);
+	}
+
+	private void validateMinIsSmallerOrEqualThanMaxColumn(int minColumn, int maxColumn) {
+		if (minColumn > maxColumn) {
+			throw new RuntimeException(
+					"The minimum column number must be smaller or equal than the maximum column number.");
+		}
 	}
 
 	private void validateMaxColumn(int maxColumn) {
-		if (maxColumn<2 || maxColumn>8) {
-			throw new RuntimeException("The maximum column number must be between 2 and 8, and can not be: "+maxColumn);
+		if (maxColumn < 2 || maxColumn > 8) {
+			throw new RuntimeException(
+					"The maximum column number must be between 2 and 8, and can not be: " + maxColumn);
 		}
 	}
 
 	private void validateMinColumn(int minColumn) {
-		if (minColumn<1 || minColumn>7) {
-			throw new RuntimeException("The minimum column number must be between 1 and 7, and can not be: "+minColumn);
+		if (minColumn < 1 || minColumn > 7) {
+			throw new RuntimeException(
+					"The minimum column number must be between 1 and 7, and can not be: " + minColumn);
 		}
 	}
 
@@ -44,10 +54,10 @@ public class SkipColumnRangeNode extends SkipColumnNode {
 	protected Object[] getFieldValues() {
 		return new Integer[] { minColumn, maxColumn };
 	}
-	
+
 	@Override
 	public String toString() {
-		TitleBuilder titleBuilder=new TitleBuilder();
+		TitleBuilder titleBuilder = new TitleBuilder();
 		titleBuilder.append(SkipColumnRangeNode.class.getSimpleName());
 		titleBuilder.append(" minColumn", minColumn);
 		titleBuilder.append(", maxColumn", maxColumn);

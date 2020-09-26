@@ -20,13 +20,13 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRul
 import nth.sysmac.user.alarms.generator.dom.testobject.ExpressionAndNodes;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
-class SkipMaxColumnRuleTest {
+class SkipMinMaxColumnRuleTest {
 
 	private static final int PAGE_NUMBER = 31;
 
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipRandomMaxColumnAttributeValue();
+		ExpressionAndNodes attributeValue = TestObjectFactory.skipRandomMinMaxColumnAttributeValue();
 		ExpressionAndNodes attribute = TestObjectFactory
 				.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
@@ -43,17 +43,8 @@ class SkipMaxColumnRuleTest {
 	}
 
 	@Test
-	void testAppliesTo_givenSkipColumn3_givenComponentCodeWithColumn2_returnTrue() {
-		String expression = createSkipMaxColumnAttributeExpression(3);
-		ComponentCodeNode componentCode = new ComponentCodeNode(PAGE_NUMBER, 'U', 2);
-		SkipColumnRangeNode skipColumnRangeNode = parseSkipColumnRangeNode(expression);
-
-		assertThat(skipColumnRangeNode.appliesTo(componentCode)).isTrue();
-	}
-
-	@Test
 	void testAppliesTo_givenSkipColumn3_givenComponentCodeWithColumn3_returnTrue() {
-		String expression = createSkipMaxColumnAttributeExpression(3);
+		String expression = createSkipMinMaxColumnAttributeExpression(3,4);
 		ComponentCodeNode componentCode = new ComponentCodeNode(PAGE_NUMBER, 'U', 3);
 		SkipColumnRangeNode skipColumnRangeNode = parseSkipColumnRangeNode(expression);
 
@@ -61,23 +52,43 @@ class SkipMaxColumnRuleTest {
 	}
 
 	@Test
-	void testAppliesTo_givenSkipColumn3_givenComponentCodeWithColumn4_returnFalse() {
-		String expression = createSkipMaxColumnAttributeExpression(3);
+	void testAppliesTo_givenSkipColumn3and4_givenComponentCodeWithColumn4_returnTrue() {
+		String expression = createSkipMinMaxColumnAttributeExpression(3,4);
 		ComponentCodeNode componentCode = new ComponentCodeNode(PAGE_NUMBER, 'U', 4);
 		SkipColumnRangeNode skipColumnRangeNode = parseSkipColumnRangeNode(expression);
 
-		assertThat(skipColumnRangeNode.appliesTo(componentCode)).isFalse();
+		assertThat(skipColumnRangeNode.appliesTo(componentCode)).isTrue();
 	}
 
 	@Test
-	void testGoToNext_givenSkipColumn3_givenComponentCodeWithColumn3_returnColumn4() {
-		String expression = createSkipMaxColumnAttributeExpression(3);
+	void testAppliesTo_givenSkipColumn3and4_givenComponentCodeWithColumn5_returnTrue() {
+		String expression = createSkipMinMaxColumnAttributeExpression(3,4);
+		ComponentCodeNode componentCode = new ComponentCodeNode(PAGE_NUMBER, 'U', 4);
+		SkipColumnRangeNode skipColumnRangeNode = parseSkipColumnRangeNode(expression);
+
+		assertThat(skipColumnRangeNode.appliesTo(componentCode)).isTrue();
+	}
+
+	@Test
+	void testGoToNext_givenSkipColumn3and4_givenComponentCodeWithColumn3_returnColumn5() {
+		String expression = createSkipMinMaxColumnAttributeExpression(3,4);
 		ComponentCodeNode componentCode = new ComponentCodeNode(PAGE_NUMBER, 'U', 3);
 		SkipColumnRangeNode skipColumnRangeNode = parseSkipColumnRangeNode(expression);
 		skipColumnRangeNode.goToNext(componentCode);
 
 		assertThat(componentCode)//
-				.hasFieldOrPropertyWithValue("page", PAGE_NUMBER).hasFieldOrPropertyWithValue("column", 4);
+				.hasFieldOrPropertyWithValue("page", PAGE_NUMBER).hasFieldOrPropertyWithValue("column", 5);
+	}
+
+	@Test
+	void testGoToNext_givenSkipColumn3and4_givenComponentCodeWithColumn4_returnColumn5() {
+		String expression = createSkipMinMaxColumnAttributeExpression(3,4);
+		ComponentCodeNode componentCode = new ComponentCodeNode(PAGE_NUMBER, 'U', 4);
+		SkipColumnRangeNode skipColumnRangeNode = parseSkipColumnRangeNode(expression);
+		skipColumnRangeNode.goToNext(componentCode);
+
+		assertThat(componentCode)//
+				.hasFieldOrPropertyWithValue("page", PAGE_NUMBER).hasFieldOrPropertyWithValue("column", 5);
 	}
 
 	private SkipColumnRangeNode parseSkipColumnRangeNode(String expression) {
@@ -92,11 +103,12 @@ class SkipMaxColumnRuleTest {
 		return skipColumnRangeNode;
 	}
 
-	private String createSkipMaxColumnAttributeExpression(int columnNumber) {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipMaxColumnAttributeValue(columnNumber);
+	private String createSkipMinMaxColumnAttributeExpression(int minColumn, int maxColumn) {
+		ExpressionAndNodes attributeValue = TestObjectFactory.skipMinMaxColumnAttributeValue(minColumn, maxColumn);
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttribute(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.braceNode(attribute);
 		return expressionAndNodes.expression();
 	}
+
 
 }

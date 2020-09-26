@@ -10,6 +10,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMaxColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMinMaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipSingleColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnRule;
@@ -27,6 +28,7 @@ public enum NodeParserRules {
 	,BRACED_ATTRIBUTE_RULE(new BracedAttributeRule())
 	,SKIP_EVEN_COLUMN_RULE(new SkipEvenColumnRule())
 	,SKIP_UNEVEN_COLUMN_RULE(new SkipUnevenColumnRule())
+	,SKIP_MIN_MAX_COLUMN_RULE(new SkipMinMaxColumnRule())
 	,SKIP_MAX_COLUMN_RULE(new SkipMaxColumnRule())
 	,SKIP_SINGLE_COLUMN_RULE(new SkipSingleColumnRule())
 	;

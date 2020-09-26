@@ -47,7 +47,7 @@ public class TestObjectFactory {
 	static ExpressionAndNodes tokenNodeDot() {
 		return new ExpressionAndNodes(".", new Dot());
 	}
-	
+
 	static ExpressionAndNodes tokenNodeDash() {
 		return new ExpressionAndNodes("-", new Dash());
 	}
@@ -97,12 +97,12 @@ public class TestObjectFactory {
 		return tokenNodeRandom().repeatRandomly(0, 2)//
 				.append(expressionAndNodes);
 	}
-	
+
 	public static ExpressionAndNodes followedWithRandomTokens(ExpressionAndNodes expressionAndNodes) {
-		return  expressionAndNodes//
+		return expressionAndNodes//
 				.append(tokenNodeRandom().repeatRandomly(0, 2));
 	}
-	
+
 	public static ExpressionAndNodes surroundWithRandomTokens(ExpressionAndNodes toBeSurrounded) {
 		return tokenNodeRandom().repeatRandomly(0, 2)//
 				.append(toBeSurrounded)//
@@ -113,9 +113,9 @@ public class TestObjectFactory {
 		ExpressionAndNodes result = new ExpressionAndNodes();
 		for (ExpressionAndNodes expressionAndNodes : allExpressionAndNodes) {
 			if (!result.expression().isEmpty()) {
-				result=result.append(tokenNodeComma());
+				result = result.append(tokenNodeComma());
 			}
-			result=result.append(expressionAndNodes);
+			result = result.append(expressionAndNodes);
 		}
 		return result;
 	}
@@ -222,8 +222,9 @@ public class TestObjectFactory {
 
 	public static ExpressionAndNodes bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName name,
 			ExpressionAndNodes attributeValueToBeSurrounded) {
-		
-		ExpressionAndNodes attributeValues = TestObjectFactory.attributeValueWithOtherRandomValues(attributeValueToBeSurrounded);
+
+		ExpressionAndNodes attributeValues = TestObjectFactory
+				.attributeValueWithOtherRandomValues(attributeValueToBeSurrounded);
 
 		return bracedAttribute(name, attributeValues);
 	}
@@ -242,16 +243,17 @@ public class TestObjectFactory {
 		String evenAbbreviation = Random.letterCase(SkipEvenColumnRule.EVEN_ABBREVIATION).generate();
 		ExpressionAndNodes expressionAndNodes = tokenNodeRest(evenAbbreviation);
 		List<Node> parcedNodes = Arrays.asList(new SkipEvenColumnNode());
-		ExpressionAndNodes attribute = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		ExpressionAndNodes attribute = new ExpressionAndNodes(expressionAndNodes.expression(),
+				expressionAndNodes.tokenNodes(), parcedNodes);
 		return surroundWithRandomWhiteSpace(attribute);
 	}
 
-	
 	public static ExpressionAndNodes skipUnevenColumnAttributeValue() {
 		String evenAbbreviation = Random.letterCase(SkipUnevenColumnRule.UNEVEN_ABBREVIATION).generate();
 		ExpressionAndNodes expressionAndNodes = tokenNodeRest(evenAbbreviation);
 		List<Node> parcedNodes = Arrays.asList(new SkipUnevenColumnNode());
-		ExpressionAndNodes attribute = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		ExpressionAndNodes attribute = new ExpressionAndNodes(expressionAndNodes.expression(),
+				expressionAndNodes.tokenNodes(), parcedNodes);
 		return surroundWithRandomWhiteSpace(attribute);
 	}
 
@@ -259,21 +261,40 @@ public class TestObjectFactory {
 		ExpressionAndNodes expressionAndNodes = tokenNodeDash()//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 2))//
 				.append(tokenNodeUnsignedInteger(columnNumber));
-		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(1,columnNumber));
+		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(1, columnNumber));
+		ExpressionAndNodes attributeValue = new ExpressionAndNodes(expressionAndNodes.expression(),
+				expressionAndNodes.tokenNodes(), parcedNodes);
+		return surroundWithRandomWhiteSpace(attributeValue);
+	}
+
+	public static ExpressionAndNodes skipMinMaxColumnAttributeValue(int minColumn, int maxColumn) {
+		ExpressionAndNodes expressionAndNodes = tokenNodeUnsignedInteger(minColumn)//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 2))//
+				.append(tokenNodeDash())//
+				.append(tokenNodeWhiteSpace().repeatRandomly(0, 2))//
+				.append(tokenNodeUnsignedInteger(maxColumn))//
+				;
+		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(minColumn,maxColumn));
 		ExpressionAndNodes attributeValue = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
 		return surroundWithRandomWhiteSpace(attributeValue);
+	}
+
+	public static ExpressionAndNodes skipRandomMinMaxColumnAttributeValue() {
+		int minColumn = Random.integer().forRange(2, 7).generate();
+		int maxColumn = Random.integer().forRange(minColumn, 8).generate();
+		return skipMinMaxColumnAttributeValue(minColumn, maxColumn);
 	}
 
 	public static ExpressionAndNodes skipRandomMaxColumnAttributeValue() {
 		int columnNumber = Random.integer().forRange(2, 7).generate();
 		return skipMaxColumnAttributeValue(columnNumber);
 	}
-	
 
 	public static ExpressionAndNodes skipSingleColumnAttributeValue(int columnNumber) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeUnsignedInteger(columnNumber);
-		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(columnNumber,columnNumber));
-		ExpressionAndNodes attributeValue = new ExpressionAndNodes(expressionAndNodes.expression(), expressionAndNodes.tokenNodes(), parcedNodes);
+		List<Node> parcedNodes = Arrays.asList(new SkipColumnRangeNode(columnNumber, columnNumber));
+		ExpressionAndNodes attributeValue = new ExpressionAndNodes(expressionAndNodes.expression(),
+				expressionAndNodes.tokenNodes(), parcedNodes);
 		return surroundWithRandomWhiteSpace(attributeValue);
 	}
 
@@ -282,24 +303,20 @@ public class TestObjectFactory {
 		return skipSingleColumnAttributeValue(columnNumber);
 	}
 
-	public static ExpressionAndNodes attributeValueWithOtherRandomValues(ExpressionAndNodes attributeValueToBeSurrounded) {
-		List<ExpressionAndNodes> attributeValues=new ArrayList<>();
-		int n=Random.integer().forRange(0, 2).generate();
-		for (int i=0; i<n;i++) {
+	public static ExpressionAndNodes attributeValueWithOtherRandomValues(
+			ExpressionAndNodes attributeValueToBeSurrounded) {
+		List<ExpressionAndNodes> attributeValues = new ArrayList<>();
+		int n = Random.integer().forRange(0, 2).generate();
+		for (int i = 0; i < n; i++) {
 			attributeValues.add(tokenNodeRandomRest());
 		}
 		attributeValues.add(attributeValueToBeSurrounded);
-		n=Random.integer().forRange(0, 2).generate();
-		for (int i=0; i<n;i++) {
+		n = Random.integer().forRange(0, 2).generate();
+		for (int i = 0; i < n; i++) {
 			attributeValues.add(tokenNodeRandomRest());
 		}
 		return seperatedByTokenNodeCommas(attributeValues);
 	}
 
-
-
-
-
-	
 
 }
