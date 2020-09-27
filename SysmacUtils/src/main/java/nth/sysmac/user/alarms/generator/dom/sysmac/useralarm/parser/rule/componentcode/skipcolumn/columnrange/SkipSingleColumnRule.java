@@ -11,7 +11,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 /**
  * s=2: skips column 2 (of all pages)
- * @see SkipColumnRule
+ * @see SkipPageColumnRule
  * @author nilsth
  *
  */

@@ -13,6 +13,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMinMaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipSingleColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipMaxPageColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipMinMaxPageColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipSinglePageColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityRule;
@@ -28,12 +31,13 @@ public enum NodeParserRules {
 	,BRACED_ATTRIBUTE_RULE(new BracedAttributeRule())
 	,SKIP_EVEN_COLUMN_RULE(new SkipEvenColumnRule())
 	,SKIP_UNEVEN_COLUMN_RULE(new SkipUnevenColumnRule())
+	,SKIP_MIN_MAX_PAGE_COLUMN_RULE(new SkipMinMaxPageColumnRule())
+	,SKIP_MAX_PAGE_COLUMN_RULE(new SkipMaxPageColumnRule())
+	,SKIP_SINGLE_PAGE_COLUMN_RULE(new SkipSinglePageColumnRule())
 	,SKIP_MIN_MAX_COLUMN_RULE(new SkipMinMaxColumnRule())
 	,SKIP_MAX_COLUMN_RULE(new SkipMaxColumnRule())
 	,SKIP_SINGLE_COLUMN_RULE(new SkipSingleColumnRule())
 	;
-	
-	//TODO SKIP RULES
 	//TODO COMPONENT_CODE_FIXED
 	//TODO COMPONENT_CODE_HIDDEN
 	//TODO COMPONENT_CODE_REFERENCE

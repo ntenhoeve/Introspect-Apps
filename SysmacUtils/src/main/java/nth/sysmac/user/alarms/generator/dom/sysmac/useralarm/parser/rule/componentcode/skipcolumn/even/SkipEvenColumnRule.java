@@ -11,7 +11,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * s=e: skips even columns (of all pages)
  * 
  * @author nilsth
- * @see SkipColumnRule
+ * @see SkipPageColumnRule
  */
 public class SkipEvenColumnRule extends SkipColumnRule {
 

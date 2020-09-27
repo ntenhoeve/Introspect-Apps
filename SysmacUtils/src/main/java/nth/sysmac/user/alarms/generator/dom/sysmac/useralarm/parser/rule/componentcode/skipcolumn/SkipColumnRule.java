@@ -11,10 +11,10 @@ import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.reflect.util.parser.node.matcher.rule.Repetition;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributePredicate;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMaxColumnRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMinMaxColumnRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipSingleColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.even.SkipEvenColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipMaxPageColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipMinMaxPageColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipSinglePageColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 /**
@@ -26,9 +26,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <li>{@link SkipSingleColumnRule}</li>
  * <li>{@link SkipMaxColumnRule}</li>
  * <li>{@link SkipMinMaxColumnRule}</li>
- * <li>s=30.2: skips column 2 of page 30</li>
- * <li>s=-30.2: skips all columns up and including column 2 of page 30</li>
- * <li>s=30.2-31.5: skips column 2 of page 30 until column 5 of page 31</li>
+ * <li>{@link SkipSinglePageColumnRule}</li>
+ * <li>{@link SkipMaxPageColumnRule}</li>
+ * <li>{@link SkipMinMaxPageColumnRule}</li>
  * </ul>
  * You can combine the rules above by separating them with a comma, e.g.:
  * <ul>

@@ -11,6 +11,7 @@ import nth.reflect.util.parser.token.parser.Rest;
 import nth.reflect.util.parser.token.parser.TokenRule;
 import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Comma;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dot;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Equal;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.UnsignedInteger;
@@ -81,6 +82,11 @@ public class TokenNodePredicate implements Predicate<Node> {
 		return new TokenNodePredicate(new Comma());
 	}
 
+	public static Predicate<Node> dot() {
+		return new TokenNodePredicate(new Dot());
+	}
+
+	
 	@Override
 	public String toString() {
 		TitleBuilder title = new TitleBuilder();
@@ -91,5 +97,6 @@ public class TokenNodePredicate implements Predicate<Node> {
 		}
 		return title.toString();
 	}
+
 
 }

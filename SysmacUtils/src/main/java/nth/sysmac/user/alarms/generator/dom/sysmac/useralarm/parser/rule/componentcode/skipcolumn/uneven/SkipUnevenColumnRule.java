@@ -10,7 +10,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
 /**
  * s=u: skips uneven columns (of all pages)
  * 
- * @see SkipColumnRule
+ * @see SkipPageColumnRule
  * @author nilsth
  */
 public class SkipUnevenColumnRule extends SkipColumnRule {
