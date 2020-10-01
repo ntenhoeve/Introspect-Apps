@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.NodeParser;
@@ -19,16 +20,17 @@ import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 class VisibleComponentCodeRuleTest {
 
 	@RepeatedTest(30)
-	void test() {
+	void test_given_validExpression_resultsInValidParseTree() {
 		ExpressionAndNodes visibleComponentCode = new VisibleComponentCodeTestFactory().create();
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.surroundWithRandomTokens(visibleComponentCode);
 		String expression = expressionAndNodes.expression();
-		System.out.println(expression);
 		ParseTree parseTree = parse(expression);
 		List<Node> actual = parseTree.getNodes();
 		List<Node> parcedNodes = expressionAndNodes.parcedNodes();
 		assertThat(actual).as("expression=%s", expression).containsExactlyElementsOf(parcedNodes);
 	}
+	
+
 
 	private ParseTree parse(String expression) {
 		TokenParser tokenParser = new TokenParser(TokenRules.all());
@@ -37,5 +39,7 @@ class VisibleComponentCodeRuleTest {
 		ParseTree parseTree = nodeParser.parse(tokens);
 		return parseTree;
 	}
+
+	
 
 }

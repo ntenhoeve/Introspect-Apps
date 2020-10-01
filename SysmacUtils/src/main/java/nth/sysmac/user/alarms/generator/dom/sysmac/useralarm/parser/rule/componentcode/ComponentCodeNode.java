@@ -105,7 +105,7 @@ public class ComponentCodeNode extends Node {
 
 	@Override
 	public String toString() {
-		return ComponentCodeNode.class.getSimpleName()+" code=" + page + letter + column;
+		return this.getClass().getSimpleName()+" code=" + page + letter + column;
 	}
 
 	@Override

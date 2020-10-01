@@ -13,6 +13,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRul
 
 class NodeParserTest {
 
+	/**
+	 * @deprecated to be replaced by DataTypePathConverterTest
+	 */
 	@Test
 	void testParse() {
 		NodeParser nodeParser = new NodeParser(NodeParserRules.all());
@@ -23,6 +26,8 @@ class NodeParserTest {
 
 		ParseTree parseTree = nodeParser.parse(tokens);
 		System.out.println(parseTree);
+		
+		
 	}
 
 }

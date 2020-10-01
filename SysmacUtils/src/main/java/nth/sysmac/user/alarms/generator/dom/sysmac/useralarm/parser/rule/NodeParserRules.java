@@ -38,9 +38,10 @@ public enum NodeParserRules {
 	,SKIP_MIN_MAX_COLUMN_RULE(new SkipMinMaxColumnRule())
 	,SKIP_MAX_COLUMN_RULE(new SkipMaxColumnRule())
 	,SKIP_SINGLE_COLUMN_RULE(new SkipSingleColumnRule())
+	//TODO HIDDEN_COMPONENT_CODE
 	,VISIBLE_COMPONENT_CODE(new VisibleComponentCodeRule())
 	;
-	//TODO HIDDEN_COMPONENT_CODE_HIDDEN
+	
 	//TODO COMPONENT_CODE_REFERENCE
 
 	private final NodeParserRule nodeParserRule;
