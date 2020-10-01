@@ -25,7 +25,7 @@ class SkipMaxPagePageColumnRuleTest {
 
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipRandomMaxPageColumnAttributeValue();
+		ExpressionAndNodes attributeValue = new SkipMaxPageColumnTestAttributeFactory().create();
 		ExpressionAndNodes attribute = TestObjectFactory
 				.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
@@ -114,7 +114,7 @@ class SkipMaxPagePageColumnRuleTest {
 	}
 
 	private String createSkipMaxPageColumnAttributeExpression(int page, int column) {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipMaxPageColumnAttributeValue(page, column);
+		ExpressionAndNodes attributeValue = new SkipMaxPageColumnTestAttributeFactory().create(page, column);
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttribute(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.braceNode(attribute);
 		return expressionAndNodes.expression();

@@ -26,7 +26,7 @@ class SkipSinglePageColumnRuleTest {
 
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipSingleRandomColumnAttributeValue();
+		ExpressionAndNodes attributeValue =new  SkipSinglePageColumnTestAttributeFactory().create();
 		ExpressionAndNodes attribute = TestObjectFactory
 				.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
@@ -93,7 +93,7 @@ class SkipSinglePageColumnRuleTest {
 	}
 
 	private String createSkipSinglePageColumnAttributeExpression(int page,int column) {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipSinglePageColumnAttributeValue(page, column);
+		ExpressionAndNodes attributeValue = new SkipSinglePageColumnTestAttributeFactory().create(page, column);
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttribute(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.braceNode(attribute);
 		return expressionAndNodes.expression();

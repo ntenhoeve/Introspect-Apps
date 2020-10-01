@@ -26,7 +26,7 @@ class SkipSingleColumnRuleTest {
 
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipSingleRandomColumnAttributeValue();
+		ExpressionAndNodes attributeValue = new SkipSingleColumnTestAttributeFactory().create();
 		ExpressionAndNodes attribute = TestObjectFactory
 				.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
@@ -93,7 +93,7 @@ class SkipSingleColumnRuleTest {
 	}
 
 	private String createSkipSingleColumnAttributeExpression(int columnNumber) {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipSingleColumnAttributeValue(columnNumber);
+		ExpressionAndNodes attributeValue = new SkipSingleColumnTestAttributeFactory().create(columnNumber);
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttribute(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.braceNode(attribute);
 		return expressionAndNodes.expression();

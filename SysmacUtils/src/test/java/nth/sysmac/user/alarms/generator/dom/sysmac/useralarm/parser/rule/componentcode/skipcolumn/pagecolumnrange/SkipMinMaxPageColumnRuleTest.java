@@ -20,11 +20,11 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRul
 import nth.sysmac.user.alarms.generator.dom.testobject.ExpressionAndNodes;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 
-class SkipMinMaxPagePageColumnRuleTest {
+class SkipMinMaxPageColumnRuleTest {
 
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipRandomMinMaxPageColumnAttributeValue();
+		ExpressionAndNodes attributeValue = new SkipMinMaxPageColumnTestAttributeFactory().create();
 		ExpressionAndNodes attribute = TestObjectFactory
 				.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
@@ -151,7 +151,7 @@ class SkipMinMaxPagePageColumnRuleTest {
 
 	private String createSkipMinMaxPageColumnAttributeExpression(int minPage, int minColumn, int maxPage,
 			int maxColumn) {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipMinMaxPageColumnAttributeValue(minPage, minColumn,
+		ExpressionAndNodes attributeValue = new SkipMinMaxPageColumnTestAttributeFactory().create(minPage, minColumn,
 				maxPage, maxColumn);
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttribute(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.braceNode(attribute);

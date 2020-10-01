@@ -6,8 +6,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
 /**
- * Represents a Component Code, see {@link ComponentCodeRule}.
- * 
+ * @see {@link ComponentCodeRule}.
  * @author nilsth
  *
  */

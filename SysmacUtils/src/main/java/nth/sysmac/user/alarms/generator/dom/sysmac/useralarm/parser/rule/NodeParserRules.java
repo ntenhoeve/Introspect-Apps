@@ -9,6 +9,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowl
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.VisibleComponentCodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMinMaxColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipSingleColumnRule;
@@ -37,9 +38,9 @@ public enum NodeParserRules {
 	,SKIP_MIN_MAX_COLUMN_RULE(new SkipMinMaxColumnRule())
 	,SKIP_MAX_COLUMN_RULE(new SkipMaxColumnRule())
 	,SKIP_SINGLE_COLUMN_RULE(new SkipSingleColumnRule())
+	,VISIBLE_COMPONENT_CODE(new VisibleComponentCodeRule())
 	;
-	//TODO COMPONENT_CODE_FIXED
-	//TODO COMPONENT_CODE_HIDDEN
+	//TODO HIDDEN_COMPONENT_CODE_HIDDEN
 	//TODO COMPONENT_CODE_REFERENCE
 
 	private final NodeParserRule nodeParserRule;

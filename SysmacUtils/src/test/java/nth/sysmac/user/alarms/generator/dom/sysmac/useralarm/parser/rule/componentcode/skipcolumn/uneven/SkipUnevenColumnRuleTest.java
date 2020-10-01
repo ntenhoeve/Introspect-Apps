@@ -13,6 +13,7 @@ import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.NodeParserRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnTestAttributeFactory;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.ExpressionAndNodes;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
@@ -22,7 +23,7 @@ class SkipUnevenColumnRuleTest {
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
 		
-		ExpressionAndNodes attribute = TestObjectFactory.skipUnevenColumnAttributeValue();
+		ExpressionAndNodes attribute = new SkipColumnTestAttributeFactory().createUnevenAttributeValue();
 		ExpressionAndNodes attributes = TestObjectFactory.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attribute);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attributes);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.surroundWithRandomTokens(braced);

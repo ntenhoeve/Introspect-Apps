@@ -26,7 +26,7 @@ class SkipMinMaxColumnRuleTest {
 
 	@RepeatedTest(30)
 	void test_givenValidExpression_returnValidParseTree() {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipRandomMinMaxColumnAttributeValue();
+		ExpressionAndNodes attributeValue = new SkipMinMaxColumnTestAttributeFactory().create();
 		ExpressionAndNodes attribute = TestObjectFactory
 				.bracedAttributeWithValueSurroundedByRandomValues(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
@@ -104,7 +104,7 @@ class SkipMinMaxColumnRuleTest {
 	}
 
 	private String createSkipMinMaxColumnAttributeExpression(int minColumn, int maxColumn) {
-		ExpressionAndNodes attributeValue = TestObjectFactory.skipMinMaxColumnAttributeValue(minColumn, maxColumn);
+		ExpressionAndNodes attributeValue = new SkipMinMaxColumnTestAttributeFactory().create(minColumn, maxColumn);
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttribute(BracedAttributeName.SKIP, attributeValue);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.braceNode(attribute);
 		return expressionAndNodes.expression();
