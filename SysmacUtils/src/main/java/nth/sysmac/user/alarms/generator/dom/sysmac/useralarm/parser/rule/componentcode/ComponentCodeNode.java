@@ -3,7 +3,6 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
 import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumns;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
 /**
  * @see {@link ComponentCodeRule}.

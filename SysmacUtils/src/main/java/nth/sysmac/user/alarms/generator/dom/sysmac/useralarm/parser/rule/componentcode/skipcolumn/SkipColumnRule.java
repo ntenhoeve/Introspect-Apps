@@ -76,7 +76,7 @@ public abstract class SkipColumnRule implements NodeParserRule {
 
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
-		int bracedAttributeIndex = matchResults.getFirstNodeIndex();
+		int bracedAttributeIndex = matchResults.getFirstResult().getNodeIndex();
 		Node bracedAttribute = matchResults.getNodes().get(bracedAttributeIndex);
 		replaceInBracedAttribute(bracedAttribute);
 	}

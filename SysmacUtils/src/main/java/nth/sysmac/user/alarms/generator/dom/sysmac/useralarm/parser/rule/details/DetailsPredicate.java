@@ -30,7 +30,7 @@ public class DetailsPredicate extends NodeTypeAndMatchChildrenPredicate {
 	private static final MatchRules EQUALS_RULES = new MatchRules()//
 			.add(TokenNodePredicate.equals());
 	public static final MatchRules ATTRIBUTE_VALUE_RULES = new MatchRules()//
-			.add(new AnyNodePredicate(), Repetition.oneOrMore())//
+			.add(new AnyNodePredicate(), Repetition.zeroOrMore())//
 			.lastMatchMustBeLastNode();
 	public static final MatchRules CHILD_MATCH_RULES = new MatchRules()//
 			.add(ATTRIBUTE_NAME_RULES)//

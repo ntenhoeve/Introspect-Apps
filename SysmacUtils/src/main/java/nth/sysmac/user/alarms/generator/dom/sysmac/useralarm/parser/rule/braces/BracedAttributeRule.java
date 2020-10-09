@@ -33,7 +33,7 @@ public class BracedAttributeRule implements NodeParserRule {
 	private static final MatchRules EQUAL_RULES = new MatchRules().add(TokenNodePredicate.equals());
 
 	private static final MatchRules ATTRIBUTE_VALUE_RULES = new MatchRules()//
-			.add(new AnyNodePredicate(), Repetition.oneOrMore());
+			.add(new AnyNodePredicate(), Repetition.onceOrMore());
 
 	private static final MatchRules ATTRIBUTE_RULES = new MatchRules()//
 			.add(ATTRIBUTE_NAME_RULES)//
@@ -64,7 +64,7 @@ public class BracedAttributeRule implements NodeParserRule {
 
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
-		int braceNodeIndex = matchResults.getFirstNodeIndex();
+		int braceNodeIndex = matchResults.getFirstResult().getNodeIndex();
 		Node braceNode=matchResults.getNodes().get(braceNodeIndex);
 		replaceInBraceNode(braceNode);
 	}
@@ -121,7 +121,7 @@ public class BracedAttributeRule implements NodeParserRule {
 		NodeMatcher otherAttributeMatcher = new NodeMatcher(ATTRIBUTE_RULES);
 		MatchResults otherAttributeResults = otherAttributeMatcher.match(attributeValuesWithOtherAttributes);
 		if (otherAttributeResults.hasResults()) {
-			int firstOtherAttributeIndex = otherAttributeResults.getFirstNodeIndex();
+			int firstOtherAttributeIndex = otherAttributeResults.getFirstResult().getNodeIndex();
 			List<Node> attributeValues = attributeValuesWithOtherAttributes.subList(0, firstOtherAttributeIndex);
 			return attributeValues;
 		} else {

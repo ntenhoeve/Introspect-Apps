@@ -26,7 +26,12 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * You can put one or more component code's in the comment of a data type. These
  * will all be collected by the {@link SysmacUserAlarmsGenerator} and be put in
- * the beginning of the alarm message. In example:
+ * the beginning of the alarm message.
+ * <p>
+ * If you need to add multiple component codes you might want to consider using
+ * HiddenComponentCode's and ComponentCodeReferences (see next chapters)
+ * <p>
+ * Examples of VisibleComponentCode's:
  * <p>
  * TODO examples from text code
  * <p>
@@ -57,8 +62,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * </tr>
  * </table>
  * 
- * TODO example where component code is defined in middle but ends up in the beginning
- * 
+ * TODO example where component code is defined in middle but ends up in the
+ * beginning
+ * <p>
  * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
  * 
  * <p>
@@ -70,12 +76,13 @@ public class VisibleComponentCodeRule implements NodeParserRule {
 	private static final String SKIP_ATTRIBUTE_EXAMPLE = "{s=e,3-5,100.1}";
 	private static final Predicate<Node> WHITESPACE_PREDICATE = TokenNodePredicate.whiteSpace();
 	private static final Predicate<Node> COMMA_PREDICATE = TokenNodePredicate.comma();
-	private static final TokenNodePredicate WHITE_SPACE_PREDICATE = TokenNodePredicate.whiteSpace();
-	private static final NodeExactTypePredicate COMPONENT_CODE_PREDICATE = new NodeExactTypePredicate(ComponentCodeNode.class);
+	private static final NodeExactTypePredicate COMPONENT_CODE_PREDICATE = new NodeExactTypePredicate(
+			ComponentCodeNode.class);
 	private static final MatchRules COMPONENT_CODE_RULES = new MatchRules().add(COMPONENT_CODE_PREDICATE);
-	private static final Predicate<Node> SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE = new NodeTypePredicate(SkipColumnNode.class);
-	private static final MatchRules SKIP_COLUMN_ATTRIBUTE_VALUE_RULES = new MatchRules().add(SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE,
-			Repetition.zeroOrMore());
+	private static final Predicate<Node> SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE = new NodeTypePredicate(
+			SkipColumnNode.class);
+	private static final MatchRules SKIP_COLUMN_ATTRIBUTE_VALUE_RULES = new MatchRules()
+			.add(SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE, Repetition.zeroOrMore());
 	private static final BracedAttributePredicate BRACED_NODE_ATTRIBUTE_PREDICATE = new BracedAttributePredicate(
 			BracedAttributeName.SKIP, SKIP_COLUMN_ATTRIBUTE_VALUE_RULES);
 	private static final MatchRules BRACE_NODE_ATTRIBUTE_RULES = new MatchRules().add(BRACED_NODE_ATTRIBUTE_PREDICATE);
@@ -83,7 +90,7 @@ public class VisibleComponentCodeRule implements NodeParserRule {
 			BraceNode.class, BRACE_NODE_ATTRIBUTE_RULES);
 	private static final MatchRules MATCH_RULES = new MatchRules()//
 			.add(COMPONENT_CODE_RULES)//
-			.add(WHITE_SPACE_PREDICATE, Repetition.zeroOrMore())//
+			.add(WHITESPACE_PREDICATE, Repetition.zeroOrMore())//
 			.add(BRACE_PREDICATE, Repetition.zeroOrOnce());
 
 	@Override
@@ -134,9 +141,8 @@ public class VisibleComponentCodeRule implements NodeParserRule {
 		List<SkipColumnNode> skipColumnNodes = (List<SkipColumnNode>) ((Object) nodes.stream()
 				.filter(n -> SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE.test(n)).collect(Collectors.toList()));
 
-		List<Node> illegalNodes = nodes.stream()
-				.filter(n -> !SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE.test(n) && !WHITESPACE_PREDICATE.test(n) && !COMMA_PREDICATE.test(n))
-				.collect(Collectors.toList());
+		List<Node> illegalNodes = nodes.stream().filter(n -> !SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE.test(n)
+				&& !WHITESPACE_PREDICATE.test(n) && !COMMA_PREDICATE.test(n)).collect(Collectors.toList());
 		if (!illegalNodes.isEmpty()) {
 			throw new RuntimeException("Expecting component code skip information, e.g. " + SKIP_ATTRIBUTE_EXAMPLE
 					+ " but found illegal characters:" + illegalNodes);

@@ -2,7 +2,6 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import nth.reflect.util.parser.node.NodeParserRule;
 import nth.reflect.util.parser.node.ParseTree;
 import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.NodeParserRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 import nth.sysmac.user.alarms.generator.dom.testobject.ExpressionAndNodes;
 import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;

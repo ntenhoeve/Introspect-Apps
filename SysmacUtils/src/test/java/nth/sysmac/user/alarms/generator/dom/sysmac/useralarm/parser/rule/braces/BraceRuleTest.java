@@ -20,7 +20,7 @@ import nth.sysmac.user.alarms.generator.dom.testobject.TestObjectFactory;
 class BraceRuleTest {
 
 	@RepeatedTest(15)
-	void test_givenAckNodeSurroundedWithRandomNodes_returnValidParseTree() {
+	void test_givenBracedNodeWithRandomChildrenSurroundedWithRandomNodes_returnValidParseTree() {
 		ExpressionAndNodes children = TestObjectFactory.tokenNodeRandom().repeatRandomly(1, 5);
 		ExpressionAndNodes braceNode=TestObjectFactory.braceNode(children);
 		ExpressionAndNodes surroundedWithRandomNodes = TestObjectFactory.surroundWithRandomTokens(braceNode);

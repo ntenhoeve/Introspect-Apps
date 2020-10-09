@@ -18,14 +18,6 @@ public class DetailsNode extends Node {
 		super(children);
 	}
 
-	@Override
-		public boolean equals(Object that) {
-			boolean equals = super.equals(that);
-			if (!equals) {
-				System.out.println("juk");
-			}
-			return equals;
-		}
 	
 	@Override
 	public String toString() {
