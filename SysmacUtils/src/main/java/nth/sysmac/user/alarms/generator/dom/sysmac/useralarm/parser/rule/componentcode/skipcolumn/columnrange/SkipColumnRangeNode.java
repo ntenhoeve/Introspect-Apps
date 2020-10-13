@@ -4,7 +4,7 @@ import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 
-public class SkipColumnRangeNode extends SkipColumnNode {
+public class SkipColumnRangeNode extends SkipColumnNode<SkipColumnRangeNode> {
 	private final int minColumn;
 	private final int maxColumn;
 
@@ -24,16 +24,16 @@ public class SkipColumnRangeNode extends SkipColumnNode {
 	}
 
 	private void validateMaxColumn(int maxColumn) {
-		if (maxColumn < 2 || maxColumn > 8) {
+		if (maxColumn < 1 || maxColumn > 8) {
 			throw new RuntimeException(
-					"The maximum column number must be between 2 and 8, and can not be: " + maxColumn);
+					"The maximum column number must be between 1 and 8, and can not be: " + maxColumn);
 		}
 	}
 
 	private void validateMinColumn(int minColumn) {
-		if (minColumn < 1 || minColumn > 7) {
+		if (minColumn < 1 || minColumn > 8) {
 			throw new RuntimeException(
-					"The minimum column number must be between 1 and 7, and can not be: " + minColumn);
+					"The minimum column number must be between 1 and 8, and can not be: " + minColumn);
 		}
 	}
 
@@ -63,4 +63,5 @@ public class SkipColumnRangeNode extends SkipColumnNode {
 		titleBuilder.append(", maxColumn", maxColumn);
 		return titleBuilder.toString();
 	}
+
 }

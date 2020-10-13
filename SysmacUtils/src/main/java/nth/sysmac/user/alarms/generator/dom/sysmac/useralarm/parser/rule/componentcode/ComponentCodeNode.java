@@ -3,6 +3,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compon
 import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumns;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
 /**
  * @see {@link ComponentCodeRule}.
@@ -32,6 +33,11 @@ public class ComponentCodeNode extends Node {
 		this(page, letter, column, new SkipColumns());
 	}
 
+	public ComponentCodeNode(ComponentCodeNode componentCodeNode) {
+		this(componentCodeNode.getPage(), componentCodeNode.getLetter(), componentCodeNode.getColumn(),
+				componentCodeNode.getSkipRules());
+	}
+
 	/**
 	 * we do not verify the max column number, that will be fixed by the
 	 * {@link SkipMaxColumn}
@@ -56,6 +62,7 @@ public class ComponentCodeNode extends Node {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void goToNext() {
 		int nextColumn = column + 1;
 		int nextPage = page;
@@ -104,25 +111,25 @@ public class ComponentCodeNode extends Node {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+" code=" + page + letter + column;
+		return this.getClass().getSimpleName() + " code=" + page + letter + column;
 	}
 
 	@Override
 	public boolean equals(Object that) {
-		if (! super.equals(that)) {
+		if (!super.equals(that)) {
 			return false;
 		}
-		ComponentCodeNode thatComponentCodeNode=(ComponentCodeNode) that;
-		if (page!=thatComponentCodeNode.getPage()) {
+		ComponentCodeNode thatComponentCodeNode = (ComponentCodeNode) that;
+		if (page != thatComponentCodeNode.getPage()) {
 			return false;
 		}
-		if (letter!=thatComponentCodeNode.getLetter()) {
+		if (letter != thatComponentCodeNode.getLetter()) {
 			return false;
 		}
-		if (column!=thatComponentCodeNode.getColumn()) {
+		if (column != thatComponentCodeNode.getColumn()) {
 			return false;
 		}
 		return true;
-		//compare rules???
+		// compare rules???
 	}
 }

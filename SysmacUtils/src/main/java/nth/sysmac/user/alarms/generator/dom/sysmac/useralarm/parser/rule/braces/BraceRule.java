@@ -18,7 +18,7 @@ public class BraceRule implements NodeParserRule {
 
 	private static final AnyNodePredicate ANY_NODE_PREDICATE = new AnyNodePredicate();
 	private static final MatchRules OPEN_BRACE_RULE = new MatchRules().add(TokenNodePredicate.openBrace());
-	private static final MatchRules BETWEEN_BRACES_RULE = new MatchRules().add(ANY_NODE_PREDICATE, Repetition.zeroOrMore());
+	private static final MatchRules BETWEEN_BRACES_RULE = new MatchRules().add(ANY_NODE_PREDICATE, Repetition.zeroOrMore().reluctant());
 	private static final MatchRules CLOSE_BRACE_RULE = new MatchRules().add(TokenNodePredicate.closeBrace());
 
 	@Override

@@ -4,7 +4,7 @@ import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 
-public class SkipPageColumnRangeNode extends SkipColumnNode {
+public class SkipPageColumnRangeNode extends SkipColumnNode<SkipPageColumnRangeNode> {
 	private final int minPage;
 	private final int minColumn;
 	private final int maxPage;
@@ -81,4 +81,5 @@ public class SkipPageColumnRangeNode extends SkipColumnNode {
 		titleBuilder.append(", maxColumn", maxColumn);
 		return titleBuilder.toString();
 	}
+
 }

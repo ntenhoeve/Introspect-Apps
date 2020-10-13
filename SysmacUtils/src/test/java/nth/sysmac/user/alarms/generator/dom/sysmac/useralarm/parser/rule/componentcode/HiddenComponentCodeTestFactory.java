@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nth.reflect.util.parser.node.Node;
+import nth.reflect.util.random.Random;
+import nth.reflect.util.random.generator.text.CharacterSet;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnTestAttributeFactory;
@@ -17,7 +19,17 @@ public class HiddenComponentCodeTestFactory extends RandomExpressionAndNodesFact
 
 	@Override
 	public ExpressionAndNodes create() {
-		ExpressionAndNodes componentCode = TestObjectFactory.componentCodeNode();
+		char letter = Random.character().forCharacters(CharacterSet.LETTERS).generate();
+		return create(letter);
+	}
+	
+	public ExpressionAndNodes create(String possibleLetters) {
+		char letter = Random.character().forCharacters(possibleLetters).generate();
+		return create(letter);
+	}
+	
+	private ExpressionAndNodes create(char letter) {
+		ExpressionAndNodes componentCode = TestObjectFactory.componentCodeNode(letter);
 		List<ExpressionAndNodes> skipAttributeValues = new SkipColumnTestAttributeFactory().createList();
 		ExpressionAndNodes skipAttributeValuesWithCommas = TestObjectFactory
 				.seperatedByTokenNodeCommas(skipAttributeValues);
@@ -34,6 +46,8 @@ public class HiddenComponentCodeTestFactory extends RandomExpressionAndNodesFact
 		return new ExpressionAndNodes(hiddenComponentCode.expression(), hiddenComponentCode.tokenNodes(),
 				parsedNodes);
 	}
+	
+
 
 	private List<Node> createParcedNode(ExpressionAndNodes componentCode,
 			List<ExpressionAndNodes> skipAttributeValues) {
@@ -54,6 +68,7 @@ public class HiddenComponentCodeTestFactory extends RandomExpressionAndNodesFact
 			List<Node> nodes = skipAttributeValue.parcedNodes();
 			for (Node node : nodes) {
 				if (node instanceof SkipColumnRangeNode) {
+					@SuppressWarnings("rawtypes")
 					SkipColumnNode skipColumnNode = (SkipColumnNode) node;
 					skipColumns.add(skipColumnNode);
 				}
@@ -61,5 +76,6 @@ public class HiddenComponentCodeTestFactory extends RandomExpressionAndNodesFact
 		}
 		return skipColumns;
 	}
+
 
 }

@@ -53,6 +53,7 @@ public class VisibleComponentCodeTestFactory extends RandomExpressionAndNodesFac
 			List<Node> nodes = skipAttributeValue.parcedNodes();
 			for (Node node : nodes) {
 				if (node instanceof SkipColumnRangeNode) {
+					@SuppressWarnings("rawtypes")
 					SkipColumnNode skipColumnNode = (SkipColumnNode) node;
 					skipColumns.add(skipColumnNode);
 				}

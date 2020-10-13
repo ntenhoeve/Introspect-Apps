@@ -17,7 +17,7 @@ package nth.sysmac.user.alarms.generator;
  * <p>
  * {@insert ComponentCodeHiddenRule}
  * <p>
- * {@insert ComponentCodeReferenceRule}
+ * {@insert DerivedComponentCodeRule}
  * <p>
  * {@insert SkipPageColumnNode}
  * 

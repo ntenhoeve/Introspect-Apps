@@ -125,6 +125,7 @@ public class VisibleComponentCodeRule implements NodeParserRule {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private SkipColumns createSkipColumns(MatchResults matchResults) {
 		BraceNode braceNode = findBraceNode(matchResults);
 		BracedAttributeNode skipAttributeNode = findSkipAttribute(braceNode);
@@ -134,6 +135,7 @@ public class VisibleComponentCodeRule implements NodeParserRule {
 		return skipColumns;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private List<SkipColumnNode> findSkipColumnNodes(BracedAttributeNode skipAttributeNode) {
 		List<Node> nodes = skipAttributeNode.getNodes();
 

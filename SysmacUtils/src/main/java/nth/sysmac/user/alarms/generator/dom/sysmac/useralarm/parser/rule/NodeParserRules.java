@@ -9,6 +9,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowl
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.DerivedComponentCodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.HiddenComponentCodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.VisibleComponentCodeRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.columnrange.SkipMaxColumnRule;
@@ -29,6 +30,7 @@ public enum NodeParserRules {
 	,ACKNOWLEDGE(new AcknowledgeRule())
 	,PRIORITY(new PriorityRule())
 	//TODO COUNTER(new CounterRule());
+	//TODO ARRAY(new ArrayReferenceRule())
 	,DETAILS(new DetailsRule())
 	,BRACED_ATTRIBUTE_RULE(new BracedAttributeRule())
 	,SKIP_EVEN_COLUMN_RULE(new SkipEvenColumnRule())
@@ -41,6 +43,7 @@ public enum NodeParserRules {
 	,SKIP_SINGLE_COLUMN_RULE(new SkipSingleColumnRule())
 	,HIDDEN_COMPONENT_CODE(new HiddenComponentCodeRule())
 	,VISIBLE_COMPONENT_CODE(new VisibleComponentCodeRule())
+	,DERIVED_COMPONENT_CODE(new DerivedComponentCodeRule())
 	;
 	
 	//TODO COMPONENT_CODE_REFERENCE

@@ -7,7 +7,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
  * @author nilsth
  *
  */
-public class SkipEvenColumnNode extends SkipColumnNode {
+public class SkipEvenColumnNode extends SkipColumnNode<SkipEvenColumnNode> {
 
 	@Override
 	public boolean appliesTo(ComponentCodeNode componentCodeNode) {
@@ -25,7 +25,5 @@ public class SkipEvenColumnNode extends SkipColumnNode {
 	protected Object[] getFieldValues() {
 		return new Object[0];
 	}
-
-
 
 }

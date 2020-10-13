@@ -131,6 +131,7 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private SkipColumns createSkipColumns(MatchResults matchResults) {
 		BracedAttributeNode skipAttributeNode = findSkipAttribute(matchResults);
 		List<SkipColumnNode> skipColumnNodes = findSkipColumnNodes(skipAttributeNode);
@@ -139,6 +140,7 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 		return skipColumns;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private List<SkipColumnNode> findSkipColumnNodes(BracedAttributeNode skipAttributeNode) {
 		List<Node> nodes = skipAttributeNode.getNodes();
 

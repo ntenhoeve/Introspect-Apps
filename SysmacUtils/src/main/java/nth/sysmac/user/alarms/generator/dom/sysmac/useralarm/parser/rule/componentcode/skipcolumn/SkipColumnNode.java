@@ -6,7 +6,8 @@ import nth.reflect.util.parser.node.Node;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 
 
-public abstract class SkipColumnNode extends Node{
+@SuppressWarnings("rawtypes")
+public abstract class SkipColumnNode<T extends SkipColumnNode> extends Node{
 
 	public static final String VALUE_SEPARATOR = ",";
 

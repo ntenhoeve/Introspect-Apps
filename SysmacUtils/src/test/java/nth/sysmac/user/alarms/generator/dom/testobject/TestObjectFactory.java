@@ -186,8 +186,12 @@ public class TestObjectFactory {
 	}
 
 	public static ExpressionAndNodes componentCodeNode() {
-		int page = Random.integer().forRange(1, 9999).generate();
 		char letter = Random.character().forCharacters(CharacterSet.LETTERS).generate();
+		return componentCodeNode(letter);
+	}
+	
+	public static ExpressionAndNodes componentCodeNode(char letter) {
+		int page = Random.integer().forRange(1, 9999).generate();
 		int colomn = Random.integer().forRange(1, 8).generate();
 
 		ExpressionAndNodes expressionAndNodes = tokenNodeUnsignedInteger(page)//
