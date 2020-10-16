@@ -5,7 +5,7 @@ package nth.sysmac.user.alarms.generator;
  * <p>
  * {@insert SysmacUserAlarmsGenerator}
  * <p>
- * {@insert ComponentCodeRule}
+ * {@insert AcknowledgeRule}
  * <p>
  * {@insert PriorityRule}
  * <p>

@@ -46,7 +46,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  *
  *
  */
-@SuppressWarnings("rawtypes")
 public abstract class SkipColumnRule implements NodeParserRule {
 
 	private final MatchRules skipColumnAttributeValueRule;

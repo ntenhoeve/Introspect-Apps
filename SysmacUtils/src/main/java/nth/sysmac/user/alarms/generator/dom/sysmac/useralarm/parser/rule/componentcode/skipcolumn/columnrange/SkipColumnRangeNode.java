@@ -4,7 +4,7 @@ import nth.reflect.fw.generic.util.TitleBuilder;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 
-public class SkipColumnRangeNode extends SkipColumnNode<SkipColumnRangeNode> {
+public class SkipColumnRangeNode extends SkipColumnNode {
 	private final int minColumn;
 	private final int maxColumn;
 

@@ -62,7 +62,6 @@ public class ComponentCodeNode extends Node {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void goToNext() {
 		int nextColumn = column + 1;
 		int nextPage = page;

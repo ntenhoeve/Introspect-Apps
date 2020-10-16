@@ -9,7 +9,6 @@ import java.util.List;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.max.SkipMaxColumn;
 
-@SuppressWarnings("rawtypes")
 public class SkipColumns implements Iterable<SkipColumnNode> {
 
 	private final List<SkipColumnNode> skipColumnNodes;
