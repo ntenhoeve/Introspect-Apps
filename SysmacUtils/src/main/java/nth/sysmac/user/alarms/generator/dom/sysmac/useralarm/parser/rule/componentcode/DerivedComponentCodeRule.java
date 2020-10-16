@@ -80,7 +80,6 @@ public class DerivedComponentCodeRule implements NodeParserRule {
 
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
-		System.out.println("Found");
 		List<ComponentCodeNode> componentCodeNodes = getComponentCodes(matchResults);
 		BraceNode braceNode = getBraceNode(matchResults);
 		char letter = getLetter(braceNode);

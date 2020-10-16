@@ -31,42 +31,11 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * If you need to add multiple component codes you might want to consider using
  * HiddenComponentCode's and ComponentCodeReferences (see next chapters)
  * <p>
- * Examples of VisibleComponentCode's:
+ * {@insert VisbleComponentCodeSimpleExampleTest}
  * <p>
- * TODO examples from text code
- * <p>
- * 
- * 
- * 
- * <table border="2">
- * <tr>
- * <th colspan=3>Data Type example:</th>
- * </tr>
- * <tr>
- * <th align="left">Name</th>
- * <th align="left">Base Type</th>
- * <th align="left">Comment</th>
- * </tr>
- * <tr>
- * <td>sEvent</td>
- * <td>STRUCT</td>
- * <td></td>
- * </tr>
- * <tr>
- * <td>- AirPressure</td>
- * <td>BOOL</td>
- * <td>110S3 Line tensioner out of position</td>
- * </tr>
- * <tr>
- * <th colspan=3>MatchResults in: 110S3 Line tensioner out of position</th>
- * </tr>
- * </table>
- * 
- * TODO example where component code is defined in middle but ends up in the
- * beginning
+ * {@insert VisbleComponentCodeGroupExampleTest}
  * <p>
  * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
- * 
  * <p>
  * 
  * @author nilsth

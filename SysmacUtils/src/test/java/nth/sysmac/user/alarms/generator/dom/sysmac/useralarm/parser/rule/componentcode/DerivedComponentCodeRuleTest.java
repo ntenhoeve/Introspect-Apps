@@ -23,7 +23,6 @@ class DerivedComponentCodeRuleTest {
 		ExpressionAndNodes derivedComponentCode = new DerivedComponentCodeTestFactory().create();
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.surroundWithRandomTokens(derivedComponentCode);
 		String expression = expressionAndNodes.expression();
-		System.out.println(expression);
 		ParseTree parseTree= parse(expression);
 		List<Node> actual = parseTree.getNodes();
 		List<Node> parcedNodes = expressionAndNodes.parcedNodes();

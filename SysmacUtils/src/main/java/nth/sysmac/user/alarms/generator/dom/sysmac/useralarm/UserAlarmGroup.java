@@ -22,6 +22,11 @@ public class UserAlarmGroup {
 		userAlarms = createUserAlarms(eventVariable, dataTypePathsForGroup);
 	}
 
+	public UserAlarmGroup(String groupName, List<UserAlarm> userAlarms) {
+		this.groupName = groupName;
+		this.userAlarms = userAlarms;
+	}
+	
 	private List<DataTypePath> filter(List<DataTypePath> dataTypePaths) {
 		List<DataTypePath> dataTypePathsForGroup = dataTypePaths.stream()
 				.filter(d -> d.get(1).getName().startsWith(groupName)).collect(Collectors.toList());
@@ -67,6 +72,31 @@ public class UserAlarmGroup {
 
 	public List<UserAlarm> getUserAlarms() {
 		return userAlarms;
+	}
+
+	
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserAlarmGroup other = (UserAlarmGroup) obj;
+		if (groupName == null) {
+			if (other.groupName != null)
+				return false;
+		} else if (!groupName.equals(other.groupName))
+			return false;
+		if (userAlarms == null) {
+			if (other.userAlarms != null)
+				return false;
+		} else if (!userAlarms.equals(other.userAlarms))
+			return false;
+		return true;
 	}
 
 	@Override

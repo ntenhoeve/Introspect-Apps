@@ -1,5 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,31 +12,44 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypeService;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.VariableService;
 
-public class UserAlarmGenerationService {
+public class UserAlarmGroupFactory {
 
 	private static final String S_EVENT = "sEvent";
 	private final DataTypeService dataTypeService;
 	private final VariableService variableService;
 
-	public UserAlarmGenerationService() {
+	public UserAlarmGroupFactory() {
 		dataTypeService = new DataTypeService();
 		variableService = new VariableService();
 	}
 
-	public void generateUserAlarms(SysmacProject sysmacProject) {
+	public List<UserAlarmGroup> create(SysmacProject sysmacProject) {
 		List<DataType> dataTypes = dataTypeService.getDataTypes(sysmacProject);
 		Variable eventVariable = variableService.getGlobalHmiEventVariable(sysmacProject);
 		DataType eventDataType = findRootEventDataType(dataTypes);
+		
+		
+		return create(eventVariable, eventDataType);
+	}
+
+	public List<UserAlarmGroup> create(Variable eventVariable, DataType eventDataType) {
 		GroupNames groupNames = new GroupNames(eventDataType);
 		
 		List<DataTypePath> dataTypePaths = eventDataType
 				.findPaths(d -> d.isLeaf() && d.getBaseType().getOmronType().isPresent()
 						&& OmronBaseType.BOOL.equals(d.getBaseType().getOmronType().get())); 
 
+		List<UserAlarmGroup> userAlarmGroups = create(eventVariable, groupNames, dataTypePaths);
+		return userAlarmGroups;
+	}
+
+	private List<UserAlarmGroup> create(Variable eventVariable, GroupNames groupNames, List<DataTypePath> dataTypePaths) {
+		List<UserAlarmGroup> userAlarmGroups =new ArrayList<>();
 		for (String groupName : groupNames) {
-			UserAlarmGroup u = new UserAlarmGroup(groupName, eventVariable, dataTypePaths);
-			System.out.println(u);
+			UserAlarmGroup userAlarmGroup = new UserAlarmGroup(groupName, eventVariable, dataTypePaths);
+			userAlarmGroups.add(userAlarmGroup);
 		}
+		return userAlarmGroups;
 	}
 
 

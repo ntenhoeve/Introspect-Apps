@@ -13,7 +13,7 @@ package nth.sysmac.user.alarms.generator;
  * <p>
  * {@insert ComponentCodeRule}
  * <p>
- * {@insert ComponentCodeVisibleRule}
+ * {@insert VisibleComponentCodeRule}
  * <p>
  * {@insert ComponentCodeHiddenRule}
  * <p>

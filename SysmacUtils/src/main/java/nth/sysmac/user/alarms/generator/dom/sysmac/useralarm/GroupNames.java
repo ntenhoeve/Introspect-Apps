@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.OmronBaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 
 public class GroupNames extends ArrayList<String> {
@@ -13,6 +14,10 @@ public class GroupNames extends ArrayList<String> {
 
 	public GroupNames(DataType root) {
 		List<DataType> children = root.getChildren();
+		if (aRootChildIsAnEvent(children)) {
+			add("");
+		}
+		
 		List<String> childNames = getChildNamesContainingReferences(children);
 		for (String childName : childNames) {
 			groupNameStartsWithChildName(childName).ifPresent(groupName -> {
@@ -24,6 +29,10 @@ public class GroupNames extends ArrayList<String> {
 			}
 		}
 
+	}
+
+	private boolean aRootChildIsAnEvent(List<DataType> children) {
+		return children.stream().allMatch(c-> c.isLeaf() && c.getBaseType().getOmronType().equals(Optional.of(OmronBaseType.BOOL)));
 	}
 
 	private List<String> getChildNamesContainingReferences(List<DataType> children) {

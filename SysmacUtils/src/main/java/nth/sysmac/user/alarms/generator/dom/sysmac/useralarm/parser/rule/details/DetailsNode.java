@@ -21,6 +21,12 @@ public class DetailsNode extends Node {
 	
 	@Override
 	public String toString() {
-		return DetailsNode.class.getSimpleName()+" details="+NodesToTextConverter.convert(getNodes());
+		return DetailsNode.class.getSimpleName()+" details="+toText();
+	}
+
+
+	public String toText() {
+		String text = NodesToTextConverter.convert(getNodes()).trim();
+		return text;
 	}
 }

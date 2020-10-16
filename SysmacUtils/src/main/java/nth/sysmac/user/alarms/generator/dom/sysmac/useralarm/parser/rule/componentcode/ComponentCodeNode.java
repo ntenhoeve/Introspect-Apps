@@ -114,6 +114,10 @@ public class ComponentCodeNode extends Node {
 		return this.getClass().getSimpleName() + " code=" + page + letter + column;
 	}
 
+	public String toText() {
+		return ""+page + letter + column;
+	}
+	
 	@Override
 	public boolean equals(Object that) {
 		if (!super.equals(that)) {
