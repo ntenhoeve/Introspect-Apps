@@ -41,7 +41,7 @@ class PriorityRuleTest {
 	void test_givenInvalidExpression_throwsError() {
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.tokenNodeOpenBrace()//
 				.append(TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-				.append(TestObjectFactory.tokenNodeRest(Random.letterCase("p").generate()))//
+				.append(TestObjectFactory.tokenNodeRest(Random.letterCase(PriorityPredicate.PRIORITY_ABBREVIATION).generate()))//
 				.append(TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 3))//
 				.append(TestObjectFactory.tokenNodeEqual())//
 				.append(TestObjectFactory.tokenNodeWhiteSpace().repeatRandomly(0, 3))//

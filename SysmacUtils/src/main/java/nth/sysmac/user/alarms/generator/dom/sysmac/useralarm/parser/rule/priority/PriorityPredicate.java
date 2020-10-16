@@ -19,13 +19,15 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  */
 public class PriorityPredicate extends NodeTypeAndMatchChildrenPredicate {
 
-	private static final Regex REGEX_DETAILS_ABBREVIATION = new Regex().ignoreCase().beginOfLine().literal("p")
+	public static final String PRIORITY_ABBREVIATION = "prio";
+
+	public static final Regex REGEX_PRIORITY_ABBREVIATION = new Regex().ignoreCase().beginOfLine().literal(PRIORITY_ABBREVIATION)
 			.endOfLine();
 
 	private static final MatchRules ATTRIBUTE_NAME_RULES = new MatchRules()//
 			.firstMatchMustBeFirstNode() //
 			.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore())//
-			.add(TokenNodePredicate.rest(REGEX_DETAILS_ABBREVIATION))//
+			.add(TokenNodePredicate.rest(REGEX_PRIORITY_ABBREVIATION))//
 			.add(TokenNodePredicate.whiteSpace(), Repetition.zeroOrMore());
 	private static final MatchRules EQUALS_RULES = new MatchRules()//
 			.add(TokenNodePredicate.equals());

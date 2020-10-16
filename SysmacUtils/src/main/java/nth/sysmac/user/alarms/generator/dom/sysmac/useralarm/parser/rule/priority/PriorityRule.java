@@ -20,13 +20,15 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
  * You can set the priority of a {@link UserAlarm} by adding the following text
  * to the {@link DataType} comment:
  * <p>
- * {p=&lt;priority abbreviation&gt;} where &lt;priority abbreviation&gt; is
+ * {prio=&lt;priority abbreviation&gt;} where &lt;priority abbreviation&gt; is
  * replaced with one of the following abbreviation:
  * <p>
  * {@insert Priority}
  * <p>
  * The {@link UserAlarm} will get {@link Priority#MEDIUM} by default.
- * 
+ * <p>
+ * {@link PriorityRuleExampleTest}
+ * <p>
  * @author nilsth
  *
  */

@@ -17,6 +17,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityPredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.CloseBrace;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Comma;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.Dash;
@@ -167,7 +168,7 @@ public class TestObjectFactory {
 	public static ExpressionAndNodes priorityNode(Priority priority) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-				.append(tokenNodeRest(Random.letterCase("p").generate()))//
+				.append(tokenNodeRest(Random.letterCase(PriorityPredicate.PRIORITY_ABBREVIATION).generate()))//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
 				.append(tokenNodeEqual())//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
