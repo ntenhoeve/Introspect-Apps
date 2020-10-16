@@ -1,4 +1,4 @@
-package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority;
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,12 +11,13 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.OmronBaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroup;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroupFactory;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.ExampleTest;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
 /**
 *
-* <h3>Priority rule example</h3>
+* <h3>Acknowledge rule example</h3>
 * Note: the user needs to acknowledge the alarm when the DataType comment has the {ack} text
 * <table cellspacing="1" cellpadding="4" bgcolor="#000000">
 * <tr bgcolor="#ffffff">
@@ -91,7 +92,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
-public class PriorityRuleExampleTest extends ExampleTest {
+
+
+public class AcknowledgeRuleExampleTest extends ExampleTest {
 
 	private static final String TEMPERATURE_LOW_MSG = "Temperature too low";
 	private static final String TEMPERATURE_LOW_VAR = "temperatrueLow";
@@ -101,7 +104,7 @@ public class PriorityRuleExampleTest extends ExampleTest {
 	private static final String LEVEL_LOW_VAR = "levelLow";
 	private static final String ACK = "{ack}";
 
-	public PriorityRuleExampleTest() {
+	public AcknowledgeRuleExampleTest() {
 		setNote("Note: the user needs to acknowledge the alarm when the DataType comment has the {ack} text");
 		addGivenDataType(ExampleTest.NO_NAMESPACE, "sEvent", BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		
@@ -126,13 +129,13 @@ public class PriorityRuleExampleTest extends ExampleTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		PriorityRuleExampleTest v = new PriorityRuleExampleTest();
+		AcknowledgeRuleExampleTest v = new AcknowledgeRuleExampleTest();
 		System.out.println(v.toJavaDoc());
 	}
 
 	@Test
 	void testExample() {
-		ExampleTest exampleTest = new PriorityRuleExampleTest();
+		ExampleTest exampleTest = new AcknowledgeRuleExampleTest();
 		Variable eventVariable = new Variable();
 		eventVariable.setName(exampleTest.getVariableName());
 		DataType eventDataType = exampleTest.getEventDataType();

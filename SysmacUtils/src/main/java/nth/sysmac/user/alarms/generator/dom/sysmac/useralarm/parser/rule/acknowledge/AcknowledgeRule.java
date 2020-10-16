@@ -17,7 +17,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
  * {ack}
  * <p>
  * The {@link UserAlarm} won't need to be acknowledged when {ack} is not in the {@link UserAlarm} message.
- * 
+ * <p>
+ * {@insert AcknowledgeRuleExampleTest}
+ * <p>
  * @author nilsth
  *
  */
