@@ -28,6 +28,7 @@ public class ExampleTest {
 	public static final String NO_DETAILS = "";
 	public static final String NO_GROUP_NAME = "";
 	public static final boolean NO_ACKNOWLEDGE = false;
+	public static final boolean ACKNOWLEDGE=true;
 	public final List<DataType> dataTypes = new ArrayList<>();
 	public final List<UserAlarm> userAlarms = new ArrayList<>();
 	public final String variableName = "EventGlobal";
