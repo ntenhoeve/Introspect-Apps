@@ -24,14 +24,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * 
  * <h3>Skipping component numbers when using arrays:</h3>
  * <ul>
- * <li>{@link SkipEvenColumnRule}</li>
- * <li>{@link SkipUnevenColumnRule}</li>
- * <li>{@link SkipSingleColumnRule}</li>
- * <li>{@link SkipMaxColumnRule}</li>
- * <li>{@link SkipMinMaxColumnRule}</li>
- * <li>{@link SkipSinglePageColumnRule}</li>
- * <li>{@link SkipMaxPageColumnRule}</li>
- * <li>{@link SkipMinMaxPageColumnRule}</li>
+ * <li>{@insert SkipEvenColumnRule}</li>
+ * <li>{@insert SkipUnevenColumnRule}</li>
+ * <li>{@insert SkipSingleColumnRule}</li>
+ * <li>{@insert SkipMaxColumnRule}</li>
+ * <li>{@insert SkipMinMaxColumnRule}</li>
+ * <li>{@insert SkipSinglePageColumnRule}</li>
+ * <li>{@insert SkipMaxPageColumnRule}</li>
+ * <li>{@insert SkipMinMaxPageColumnRule}</li>
  * </ul>
  * You can combine the rules above by separating them with a comma, e.g.:
  * <ul>

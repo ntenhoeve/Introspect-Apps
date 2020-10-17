@@ -20,6 +20,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
  * following text to the {@link DataType} comment:
  * <p>
  * {d=&lt;description&gt;} where &lt;description&gt; is replaced with your text.
+ * <p>
+ * {insert DetailsRuleExampleTest}
+ * <p>
  * 
  * @author nilsth
  *

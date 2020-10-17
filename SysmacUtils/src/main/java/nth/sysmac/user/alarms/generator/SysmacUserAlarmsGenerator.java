@@ -73,7 +73,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.Entity;
  * all {@link UserAlarm} texts in the M$ Excel file are correct. Now the new
  * {@link UserAlarm}s can be inserted by importing the M$ Excel file.
  * <p>
- * {@insert PriorityRuleExampleTest}
+ * {@insert DetailsRuleExampleTest}
  * <p>
  * {@insert UserAlarmGroupExampleTest}
  * <p>

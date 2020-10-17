@@ -15,6 +15,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsPredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityPredicate;
@@ -153,7 +154,7 @@ public class TestObjectFactory {
 	public static ExpressionAndNodes detailsNode(ExpressionAndNodes details) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-				.append(tokenNodeRest(Random.letterCase("d").generate()))//
+				.append(tokenNodeRest(Random.letterCase(DetailsPredicate.DETAILS_ABBREVIATION).generate()))//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
 				.append(tokenNodeEqual())//
 				.append(details)//

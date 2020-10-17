@@ -19,7 +19,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  */
 public class DetailsPredicate extends NodeTypeAndMatchChildrenPredicate {
 
-	private static final Regex REGEX_DETAILS_ABBREVIATION = new Regex().ignoreCase().beginOfLine().literal("d")
+	public static final String DETAILS_ABBREVIATION = "desc";
+
+	private static final Regex REGEX_DETAILS_ABBREVIATION = new Regex().ignoreCase().beginOfLine().literal(DETAILS_ABBREVIATION)
 			.endOfLine();
 
 	private static final MatchRules ATTRIBUTE_NAME_RULES = new MatchRules()//
