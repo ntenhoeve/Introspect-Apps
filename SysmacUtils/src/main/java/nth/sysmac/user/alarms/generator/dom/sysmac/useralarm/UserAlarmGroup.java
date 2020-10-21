@@ -26,7 +26,7 @@ public class UserAlarmGroup {
 		this.groupName = groupName;
 		this.userAlarms = userAlarms;
 	}
-	
+
 	private List<DataTypePath> filter(List<DataTypePath> dataTypePaths) {
 		List<DataTypePath> dataTypePathsForGroup = dataTypePaths.stream()
 				.filter(d -> d.get(1).getName().startsWith(groupName)).collect(Collectors.toList());
@@ -57,12 +57,17 @@ public class UserAlarmGroup {
 		dataTypePath.verifyOnlyOneArray();
 
 		List<UserAlarm> userAlarms = new ArrayList<>();
-		DataTypePathConverter dataTypePathConverter= new DataTypePathConverter(eventVariable, dataTypePath);
-		do {
+		DataTypePathConverter dataTypePathConverter = new DataTypePathConverter(eventVariable, dataTypePath);
+		boolean done = false;
+		while (!done) {
 			UserAlarm userAlarm = new UserAlarm(groupName, dataTypePathConverter);
 			userAlarms.add(userAlarm);
-			dataTypePathConverter.next();
-		} while (dataTypePathConverter.hasNext());
+			if (dataTypePathConverter.canGoToNext()) {
+				dataTypePathConverter.goToNext();
+			} else {
+				done = true;
+			}
+		}
 		return userAlarms;
 	}
 
@@ -73,9 +78,6 @@ public class UserAlarmGroup {
 	public List<UserAlarm> getUserAlarms() {
 		return userAlarms;
 	}
-
-	
-	
 
 	@Override
 	public boolean equals(Object obj) {

@@ -31,15 +31,11 @@ public class DataTypePathConverter {
 
 	private final Variable eventVariable;
 	private final DataTypePath dataTypePath;
-	private int arrayIndex;
 	private final ParseTree parseTree;
-	private int arrayIndexMax;
 
 	public DataTypePathConverter(Variable eventVariable, DataTypePath dataTypePath) {
 		this.eventVariable = eventVariable;
 		this.dataTypePath = dataTypePath;
-		this.arrayIndex = dataTypePath.getArrayMin();
-		this.arrayIndexMax = dataTypePath.getArrayMax();
 		this.parseTree = parse(dataTypePath);
 	}
 
@@ -51,12 +47,18 @@ public class DataTypePathConverter {
 		return nodeParser.parse(tokens);
 	}
 
-	public void next() {
-		arrayIndex++;
+	
+	public void goToNext() {
+		//FIXME
+	}
+	
+	public boolean canGoToNext() {
+return false;
+//FIXME
 	}
 
 	public String getExpression() {
-		return dataTypePath.getVariableExpression(eventVariable, arrayIndex);
+		return dataTypePath.getVariableExpression(eventVariable);
 	}
 
 	public String getComponentCode() {
@@ -111,10 +113,6 @@ public class DataTypePathConverter {
 			return "";
 		}
 
-	}
-
-	public boolean hasNext() {
-		return arrayIndex <= arrayIndexMax;
 	}
 
 }
