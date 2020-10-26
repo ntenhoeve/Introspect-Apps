@@ -10,6 +10,8 @@ import nth.reflect.util.parser.node.ParseTree;
 import nth.reflect.util.parser.node.text.NodesToTextConverter;
 import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
+import nth.reflect.util.regex.Regex;
+import nth.reflect.util.regex.Repetition;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.NodeParserRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.DerivedComponentCodeNode;
@@ -79,7 +81,8 @@ return false;
 
 	public String getMessage() {
 		String message = NodesToTextConverter.convert(parseTree.getNodes()).trim();
-		String capitalizedMessage=StringUtil.firstCharToUpperCase(message);
+		String messageWithoutDoubleSpaces=message.replaceAll(new Regex().whiteSpace(Repetition.oneOrMoreTimes()).toString(), " ");
+		String capitalizedMessage=StringUtil.firstCharToUpperCase(messageWithoutDoubleSpaces);
 		return capitalizedMessage;
 	}
 

@@ -14,26 +14,22 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypeService;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.Entity;
 
-
-
 /**
  * <h1>{@link SysmacUserAlarmsGenerator}</h1>
- * <h2>Why</h2>
- * The {@link SysmacUserAlarmsGenerator} let's you update the HMI's
+ * <h2>Why</h2> The {@link SysmacUserAlarmsGenerator} let's you update the HMI's
  * {@link UserAlarm}s of an {@link SysmacProject}.
  * <p>
- * The goal is to always generate all the {@link UserAlarm}s, while not making any manual
- * changes afterwards so that:
+ * The goal is to always generate all the {@link UserAlarm}s, while not making
+ * any manual changes afterwards so that:
  * <ul>
  * <li>The {@link UserAlarm}s accurately match the PLC program (data types)</li>
  * <li>All {@link UserAlarm} texts are accurate and consistent</li>
  * <li>Creating or updating the {@link UserAlarm}s is less labor intensive</li>
  * </ul>
  * <p>
- * <h2>How</h2>
- * The {@link UserAlarm}s are generated from an exported {@link SysmacProject} file (*.scm).
- * So first step in creating or updating {@link UserAlarm}s is exporting the
- * latest {@link SysmacProject}.
+ * <h2>How</h2> The {@link UserAlarm}s are generated from an exported
+ * {@link SysmacProject} file (*.scm). So first step in creating or updating
+ * {@link UserAlarm}s is exporting the latest {@link SysmacProject}.
  * <p>
  * Then start the {@link SysmacUserAlarmsGenerator} and select the
  * {@link SysmacProject} file (*.scm).
@@ -84,16 +80,16 @@ public class SysmacUserAlarmsGenerator {
 //		File projectFile = Paths.get(
 //				"C:/Users/nilsth/Documents/My Work Documents/Omron Projects/SysmacAlarmListGenerator/7609DE17-WLD-000-001m2008131503.smc2")
 //				.toFile();
-		
-		
+
 		File projectFile = Paths.get(
-				"C:/Users/nilsth/Documents/My Work Documents/Omron Projects/SysmacAlarmListGenerator/7609DE19-WLD-000-001m2008281547.smc2")
+				"C:\\Users\\nilsth\\OneDrive - Meyn Food Processing Technology B.V\\Omron Projects\\SysmacAlarmListGenerator\\7609DE19-WLD-000-001m2008281547.smc2")
 				.toFile();
-		
+
 		SysmacProject sysmacProject = new SysmacProject(projectFile);
 //		printNameSpaces(sysmacProject);
 //		printDataTypes(sysmacProject);
 //		printEntities(sysmacProject);
+
 		UserAlarmGroupFactory userAlarmGroupFactory = new UserAlarmGroupFactory();
 		userAlarmGroupFactory.create(sysmacProject);
 
@@ -116,7 +112,10 @@ public class SysmacUserAlarmsGenerator {
 		DataTypeService dataTypeService = new DataTypeService();
 		List<DataType> dataTypes = dataTypeService.getDataTypes(sysmacProject);
 		for (DataType dataType : dataTypes) {
-			System.out.println(dataType);
+			if (dataType.getNameSpace() != null && dataType.getNameSpace().contains("Cm")) {
+				System.out.println(dataType);
+			}
+
 		}
 	}
 

@@ -26,9 +26,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * component code that is already defined in one (or more) data type comments
  * 
  * <p>
- * TODO explain component codes references may change the letter of a component:
- * e.g. 30M1 Pump motor {M} too warm {Q} protector becomes: 30M1 Pump motor too
- * warn 30Q1 Pump motor protector
+ * {@insert VisibleComponentCodeChangeLetterExampleTest}
  * <p>
  * TODO explain that component codes references make component codes between
  * curly brackets visible {30M1} Pump motor stop timeout {M} too warm {Q}
@@ -43,6 +41,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * TODO Visible component codes are no longer displayed when a component code
  * reference is used. e.g. 30M1 110S1 Height adjustment {s} disconnect switch =>
  * 110S1 Height adjustment disconnect switch
+ * <p>
+ * TODO {30U1}{110S3} Line drive and ... ..{U} and {S] = Line Drive, 30U1 Line
+ * drive trip and 110S3 Line drive motor switch<br>
  * 
  * @author nilsth
  *
@@ -64,7 +65,7 @@ public class DerivedComponentCodeRule implements NodeParserRule {
 
 	private static final NodeTypeAndMatchChildrenPredicate DERIVED_COMPONENT_CODE_PREDICATE = new NodeTypeAndMatchChildrenPredicate(
 			BraceNode.class, CHILDREN_RULES);
-	
+
 	private static final MatchRules MATCH_RULES = new MatchRules()//
 			.firstMatchMustBeFirstNode()//
 			.add(new AnyNodePredicate(), Repetition.zeroOrMore())//
@@ -76,7 +77,6 @@ public class DerivedComponentCodeRule implements NodeParserRule {
 	public MatchRules getMatchRules() {
 		return MATCH_RULES;
 	}
-
 
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
@@ -97,8 +97,9 @@ public class DerivedComponentCodeRule implements NodeParserRule {
 
 	private List<ComponentCodeNode> getComponentCodes(MatchResults matchResults) {
 		List<Node> nodes = matchResults.getNodes();
-		List<ComponentCodeNode> componentCodeNodes =  nodes.stream().filter(n-> n instanceof VisibleComponentCodeNode || n instanceof HiddenComponentCodeNode) .map(n -> (ComponentCodeNode) n)
-				.collect(Collectors.toList());
+		List<ComponentCodeNode> componentCodeNodes = nodes.stream()
+				.filter(n -> n instanceof VisibleComponentCodeNode || n instanceof HiddenComponentCodeNode)
+				.map(n -> (ComponentCodeNode) n).collect(Collectors.toList());
 		return componentCodeNodes;
 	}
 
