@@ -3,6 +3,7 @@ package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm;
 import java.util.List;
 import java.util.Optional;
 
+import nth.reflect.fw.generic.util.StringUtil;
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.NodeParser;
 import nth.reflect.util.parser.node.ParseTree;
@@ -77,7 +78,9 @@ return false;
 	}
 
 	public String getMessage() {
-		return NodesToTextConverter.convert(parseTree.getNodes()).trim();
+		String message = NodesToTextConverter.convert(parseTree.getNodes()).trim();
+		String capitalizedMessage=StringUtil.firstCharToUpperCase(message);
+		return capitalizedMessage;
 	}
 
 	public String getComponentCodeAndMessage() {

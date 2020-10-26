@@ -15,6 +15,7 @@ import nth.reflect.util.parser.node.matcher.result.MatchResults;
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.reflect.util.parser.node.matcher.rule.Repetition;
 import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeNode;
@@ -24,38 +25,19 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 
 /**
- * <h3>Visible component codes</h3>
+ * <h3>Hidden component codes</h3>
  * <p>
- * You can put one or more component code's in the comment of a data type. These will all
- * be collected by the {@link SysmacUserAlarmsGenerator} and be put in the
- * beginning of the alarm message. In example:
+ * Hidden component codes are like Visible component codes, but they stay hidden until they are referred to in derived component codes.
  * <p>
- * <table border="2">
- * <tr>
- * <th colspan=3>Data Type example:</th>
- * </tr>
- * <tr>
- * <th align="left">Name</th>
- * <th align="left">Base Type</th>
- * <th align="left">Comment</th>
- * </tr>
- * <tr>
- * <td>sEvent</td>
- * <td>STRUCT</td>
- * <td></td>
- * </tr>
- * <tr>
- * <td>- AirPressure</td>
- * <td>BOOL</td>
- * <td>{110S3} Line tensioner out of position</td>
- * </tr>
- * <tr>
- * <th colspan=3>MatchResults in: 110S3 Line tensioner out of position</th>
- * </tr>
- * </table>
- * 
- * 
- * TODO array example {110S2 sc=u,110.4 sp=111} 110S2 110S6 110S8 112S2
+ * Hidden component codes are preferred over visible component code's when you need to use multiple component codes. e.g. when an motor 30M1 branches of in all type of {@link UserAlarm}s that refer to other component codes like 50K1 and 110S1:
+ * <p>
+ * <p>
+ * The {@link SysmacUserAlarmsGenerator} will generate succeeding component codes when arrays are used. 
+ * TODO array example 110S7 110S7 110S8 111S1
+ * <p>
+ * You can add skip rules to skip columns when arrays are used. See the component code column skip section for more information.  
+ * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
+ * <p>
  * 
  * <p>
  * 

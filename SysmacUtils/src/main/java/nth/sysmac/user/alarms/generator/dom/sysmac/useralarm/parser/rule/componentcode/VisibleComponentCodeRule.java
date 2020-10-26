@@ -35,6 +35,10 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert VisbleComponentCodeGroupExampleTest}
  * <p>
+ * The {@link SysmacUserAlarmsGenerator} will generate succeeding component codes when arrays are used. 
+ * TODO array example 110S7 110S7 110S8 111S1
+ * <p>
+ * You can add skip rules to skip columns when arrays are used. See the component code column skip section for more information.  
  * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
  * <p>
  * 

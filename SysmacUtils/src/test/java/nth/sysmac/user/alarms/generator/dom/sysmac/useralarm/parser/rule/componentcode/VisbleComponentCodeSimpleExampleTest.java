@@ -38,7 +38,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * <td align="left"></td>
 * <td align="left">&nbsp;&nbsp;airPressureLow</td>
 * <td align="left">BOOL</td>
-* <td align="left" colspan=3 >110S3 System air pressure too low</td>
+* <td align="left" colspan=3 >110s3 system air pressure too low</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Results in UserAlarm(s):</th>
@@ -63,6 +63,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
+
 public class VisbleComponentCodeSimpleExampleTest extends ExampleTest {
 
 	private static final String AIR_PRESSURE_LOW_MSG = "System air pressure too low";
@@ -73,7 +74,7 @@ public class VisbleComponentCodeSimpleExampleTest extends ExampleTest {
 	public VisbleComponentCodeSimpleExampleTest() {
 		addGivenDataType(ExampleTest.NO_NAMESPACE, "sEvent", BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, AIR_PRESSURE_LOW_VAR, OmronBaseType.BOOL.toString(),
-				AIR_PRESSURE_LOW_CODE_MSG);
+				AIR_PRESSURE_LOW_CODE_MSG.toLowerCase());
 		addExpectedUserAlarm(ExampleTest.NO_NAMESPACE, variableName + "." + AIR_PRESSURE_LOW_VAR,
 				AIR_PRESSURE_LOW_CODE_MSG, Priority.MEDIUM, ExampleTest.NO_ACKNOWLEDGE, ExampleTest.NO_DETAILS);
 	}

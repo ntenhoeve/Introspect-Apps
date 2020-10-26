@@ -13,11 +13,10 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.ExampleTest;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
-
 /**
 *
-* <h3>Visble component code groups example</h3>
-* Note that the component code moves to the front!
+* <h3>Visble component code group example</h3>
+* Note that the component code moves to the front! <br>Also Note that data type comments normaly start with a lowercase character unles it starts with an abbreviation. User alarm texts are generated, starting with a uppercase character.
 * <table cellspacing="1" cellpadding="4" bgcolor="#000000">
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Variable: EventGlobal of type: sEvent<br>Data Type's:</th>
@@ -38,13 +37,13 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * <td align="left"></td>
 * <td align="left">&nbsp;&nbsp;Venter</td>
 * <td align="left">Venter\sEvent</td>
-* <td align="left" colspan=3 >Venter</td>
+* <td align="left" colspan=3 >venter</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left"></td>
 * <td align="left">&nbsp;&nbsp;Maestro</td>
 * <td align="left">Maestro\sEvent</td>
-* <td align="left" colspan=3 >Maestro</td>
+* <td align="left" colspan=3 >maestro</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Venter</td>
@@ -68,7 +67,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * <td align="left">Maestro</td>
 * <td align="left">&nbsp;&nbsp;airPressureLow</td>
 * <td align="left">BOOL</td>
-* <td align="left" colspan=3 >120S3 System air pressure too low</td>
+* <td align="left" colspan=3 >120S3 system air pressure too low</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Maestro</td>
@@ -99,7 +98,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * <td align="left">Maestro</td>
 * <td align="left">EventGlobal.Maestro.airPressureLow</td>
 * <td align="left">false</td>
-* <td align="left">120S3 Maestro System air pressure too low</td>
+* <td align="left">120S3 Maestro system air pressure too low</td>
 * <td align="left">UserFaultLevel5</td>
 * <td align="left"></td>
 * </tr>
@@ -115,12 +114,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
+
+
 public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
 
 	private static final String _110S1 = "110S1";
 	private static final String _120S3 = "120S3";
 	private static final String _120S4 = "120S4";
-	private static final String AIR_PRESSURE_LOW_MSG = "System air pressure too low";
+	private static final String AIR_PRESSURE_LOW_MSG = "system air pressure too low";
 	private static final String AIR_PRESSURE_LOW_VAR = "airPressureLow";
 	private static final String WATER_LEVEL_LOW_VAR = "waterLevelLow";
 	private static final String WATER_LEVEL_LOW_MSG = "water level too low";
@@ -130,10 +131,10 @@ public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
 	
 
 	public VisbleComponentCodeGroupExampleTest() {
-		setNote("Note that the component code moves to the front!");
+		setNote("Note that the component code moves to the front! <br>Also Note that data type comments normaly start with a lowercase character unles it starts with an abbreviation. User alarm texts are generated, starting with a uppercase character.");
 		addGivenDataType(ExampleTest.NO_NAMESPACE, S_EVENT, BaseType.STRUCT, ExampleTest.NO_COMMENT);
-		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, VENTER, VENTER + "\\" + S_EVENT, VENTER);
-		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, MAESTRO, MAESTRO + "\\" + S_EVENT, MAESTRO);
+		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, VENTER, VENTER + "\\" + S_EVENT, VENTER.toLowerCase());
+		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, MAESTRO, MAESTRO + "\\" + S_EVENT, MAESTRO.toLowerCase());
 
 		addGivenDataType(VENTER, S_EVENT, BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		addGivenDataTypeChild(VENTER, WATER_LEVEL_LOW_VAR, OmronBaseType.BOOL.toString(),
@@ -146,7 +147,7 @@ public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
 				_120S4 + " " + WATER_LEVEL_LOW_MSG);
 
 		addExpectedUserAlarm(VENTER, variableName + "." + VENTER + "." + WATER_LEVEL_LOW_VAR,
-				_110S1 + " " + VENTER + " " + WATER_LEVEL_LOW_MSG, Priority.MEDIUM, ExampleTest.NO_ACKNOWLEDGE,
+				_110S1 + " " +  VENTER + " " + WATER_LEVEL_LOW_MSG, Priority.MEDIUM, ExampleTest.NO_ACKNOWLEDGE,
 				ExampleTest.NO_DETAILS);
 		addExpectedUserAlarm(MAESTRO, variableName + "." + MAESTRO + "." + AIR_PRESSURE_LOW_VAR,
 				_120S3 + " " + MAESTRO + " " + AIR_PRESSURE_LOW_MSG, Priority.MEDIUM, ExampleTest.NO_ACKNOWLEDGE,
