@@ -114,8 +114,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
-
-
 public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
 
 	private static final String _110S1 = "110S1";

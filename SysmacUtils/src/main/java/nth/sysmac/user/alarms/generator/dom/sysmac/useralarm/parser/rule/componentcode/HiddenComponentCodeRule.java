@@ -63,11 +63,11 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 			.firstMatchMustBeFirstNode()//
 			.add(WHITESPACE_PREDICATE,Repetition.zeroOrMore())//
 			.add(COMPONENT_CODE_RULES)//
-			.add(ANY_NODE)//
-			.add(WHITESPACE_PREDICATE,Repetition.zeroOrMore())//
+			.add(ANY_NODE,Repetition.zeroOrMore())//
+//			.add(WHITESPACE_PREDICATE,Repetition.zeroOrMore())//
 			//.add(SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE,Repetition.zeroOrMore())//
-			.add(ANY_NODE)//
-			.add(WHITESPACE_PREDICATE,Repetition.zeroOrMore())//
+//			.add(ANY_NODE)//
+//			.add(WHITESPACE_PREDICATE,Repetition.zeroOrMore())//
 			.lastMatchMustBeLastNode();
 	private static final NodeTypeAndMatchChildrenPredicate BRACE_PREDICATE = new NodeTypeAndMatchChildrenPredicate(
 			BraceNode.class, BRACE_NODE_ATTRIBUTE_RULES);
