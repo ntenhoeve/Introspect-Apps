@@ -28,10 +28,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert VisibleComponentCodeChangeLetterExampleTest}
  * <p>
- * TODO explain that component codes references make component codes between
- * curly brackets visible {30M1} Pump motor stop timeout {M} too warm {Q}
- * protector becomes: Pump motor stop timeout 30M1 Pump motor too warn 30Q1 Pump
- * motor protector
+ * {@insert HiddenComponentCodeChangeLetterExampleTest}
  * <p>
  * TODO explain that component codes references make component codes between
  * curly brackets visible {30M1} {110S1} {80K3} {80K4} Height adjustment stop
