@@ -30,17 +30,12 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert HiddenComponentCodeChangeLetterExampleTest}
  * <p>
- * TODO explain that component codes references make component codes between
- * curly brackets visible {30M1} {110S1} {80K3} {80K4} Height adjustment stop
- * timeout {M} motor too warm {Q} motor protector {S} disconnect switch {K1} up
- * contactor not closed {K2} down contactor not closed becomes: ...
+ * {@insert HiddenComponentCodeMultitudeExampleTest}
  * <p>
  * TODO Visible component codes are no longer displayed when a component code
  * reference is used. e.g. 30M1 110S1 Height adjustment {s} disconnect switch =>
  * 110S1 Height adjustment disconnect switch
  * <p>
- * TODO {30U1}{110S3} Line drive and ... ..{U} and {S] = Line Drive, 30U1 Line
- * drive trip and 110S3 Line drive motor switch<br>
  * 
  * @author nilsth
  *
