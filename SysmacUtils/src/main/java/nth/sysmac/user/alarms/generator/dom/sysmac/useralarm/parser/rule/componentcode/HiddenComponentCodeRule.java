@@ -39,8 +39,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
  * <p>
  * 
- * <p>
- * 
  * @author nilsth
  *
  */

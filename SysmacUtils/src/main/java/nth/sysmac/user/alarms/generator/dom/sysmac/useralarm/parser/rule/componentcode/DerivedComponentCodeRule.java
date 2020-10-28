@@ -28,14 +28,17 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert VisibleComponentCodeChangeLetterExampleTest}
  * <p>
- * {@insert HiddenComponentCodeChangeLetterExampleTest}
- * <p>
- * {@insert HiddenComponentCodeMultitudeExampleTest}
- * <p>
- * TODO Visible component codes are no longer displayed when a component code
+ * TODO VisibleComponentCodeMultipleExampleTest": Visible component codes are no longer displayed when a component code
  * reference is used. e.g. 30M1 110S1 Height adjustment {s} disconnect switch =>
  * 110S1 Height adjustment disconnect switch
  * <p>
+ * {@insert HiddenComponentCodeChangeLetterExampleTest}
+ * <p>
+ * {@insert HiddenComponentCodeMultipleExampleTest}
+ * <p>
+ * TODO HiddenComponentCodeMultipleArrayExampleTest
+ * <p>
+ * 
  * 
  * @author nilsth
  *

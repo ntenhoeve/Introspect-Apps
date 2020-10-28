@@ -143,7 +143,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
 
 
-public class HiddenComponentCodeMultitudeExampleTest extends ExampleTest {
+public class HiddenComponentCodeMultipleExampleTest extends ExampleTest {
 
 	
 	
@@ -179,7 +179,7 @@ public class HiddenComponentCodeMultitudeExampleTest extends ExampleTest {
 	private static final String MAESTRO = "Maestro";
 	
 
-	public HiddenComponentCodeMultitudeExampleTest() {
+	public HiddenComponentCodeMultipleExampleTest() {
 		setNote("You can use multiple hidden component codes. These are used by derived component codes.<br>Note that you can use a number when there are multiple component codes with the same letter: e.g.:<br>{k1} referes to the first hidden component code (with a K) = 60K3<br>{k2} referes to the second hidden component code (with a K) = 60K4");
 		
 		
@@ -221,13 +221,13 @@ public class HiddenComponentCodeMultitudeExampleTest extends ExampleTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		HiddenComponentCodeMultitudeExampleTest v = new HiddenComponentCodeMultitudeExampleTest();
+		HiddenComponentCodeMultipleExampleTest v = new HiddenComponentCodeMultipleExampleTest();
 		System.out.println(v.toJavaDoc());
 	}
 
 	@Test
 	void testExample() {
-		ExampleTest exampleTest = new HiddenComponentCodeMultitudeExampleTest();
+		ExampleTest exampleTest = new HiddenComponentCodeMultipleExampleTest();
 		Variable eventVariable = new Variable();
 		eventVariable.setName(exampleTest.getVariableName());
 		DataType eventDataType = exampleTest.getEventDataType();
