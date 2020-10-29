@@ -22,15 +22,12 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <h3>Component code references</h3>
  * <p>
  * A component reference is a letter (in some cases followed by a number)
- * between curly brackets in a data type comment, e.g.: {Q}. They refer to
- * component code that is already defined in one (or more) data type comments
- * 
+ * between curly brackets in a data type comment, e.g.: {Q}. Derived component code's are derived from
+ * visible or hidden component code that are already defined in one (or more) data type comments.
  * <p>
  * {@insert VisibleComponentCodeChangeLetterExampleTest}
  * <p>
- * TODO VisibleComponentCodeMultipleExampleTest": Visible component codes are no longer displayed when a component code
- * reference is used. e.g. 30M1 110S1 Height adjustment {s} disconnect switch =>
- * 110S1 Height adjustment disconnect switch
+ * {@insert VisibleComponentCodeMultipleExampleTest}
  * <p>
  * {@insert HiddenComponentCodeChangeLetterExampleTest}
  * <p>

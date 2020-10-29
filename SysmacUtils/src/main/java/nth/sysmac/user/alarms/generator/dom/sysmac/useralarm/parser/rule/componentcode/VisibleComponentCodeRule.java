@@ -31,9 +31,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * If you need to add multiple component codes you might want to consider using
  * HiddenComponentCode's and ComponentCodeReferences (see next chapters)
  * <p>
- * {@insert VisbleComponentCodeSimpleExampleTest}
+ * {@insert VisibleComponentCodeSimpleExampleTest}
  * <p>
- * {@insert VisbleComponentCodeGroupExampleTest}
+ * {@insert VisibleComponentCodeGroupExampleTest}
  * <p>
  * The {@link SysmacUserAlarmsGenerator} will generate succeeding component codes when arrays are used. 
  * TODO array example 110S7 110S7 110S8 111S1

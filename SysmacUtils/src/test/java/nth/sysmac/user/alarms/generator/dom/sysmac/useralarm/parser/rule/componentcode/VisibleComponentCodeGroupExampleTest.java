@@ -114,7 +114,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
-public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
+public class VisibleComponentCodeGroupExampleTest extends ExampleTest {
 
 	private static final String _110S1 = "110S1";
 	private static final String _120S3 = "120S3";
@@ -128,7 +128,7 @@ public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
 	private static final String VENTER = "Venter";
 	
 
-	public VisbleComponentCodeGroupExampleTest() {
+	public VisibleComponentCodeGroupExampleTest() {
 		setNote("Note that the component code moves to the front! <br>Also Note that data type comments normaly start with a lowercase character unles it starts with an abbreviation. User alarm texts are generated, starting with a uppercase character.");
 		addGivenDataType(ExampleTest.NO_NAMESPACE, S_EVENT, BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, VENTER, VENTER + "\\" + S_EVENT, VENTER.toLowerCase());
@@ -162,13 +162,13 @@ public class VisbleComponentCodeGroupExampleTest extends ExampleTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		VisbleComponentCodeGroupExampleTest v = new VisbleComponentCodeGroupExampleTest();
+		VisibleComponentCodeGroupExampleTest v = new VisibleComponentCodeGroupExampleTest();
 		System.out.println(v.toJavaDoc());
 	}
 
 	@Test
 	void testExample() {
-		ExampleTest exampleTest = new VisbleComponentCodeGroupExampleTest();
+		ExampleTest exampleTest = new VisibleComponentCodeGroupExampleTest();
 		Variable eventVariable = new Variable();
 		eventVariable.setName(exampleTest.getVariableName());
 		DataType eventDataType = exampleTest.getEventDataType();

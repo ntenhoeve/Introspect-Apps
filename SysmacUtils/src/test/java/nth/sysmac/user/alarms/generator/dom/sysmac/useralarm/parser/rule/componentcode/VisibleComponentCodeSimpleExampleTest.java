@@ -64,14 +64,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 */
 
 
-public class VisbleComponentCodeSimpleExampleTest extends ExampleTest {
+public class VisibleComponentCodeSimpleExampleTest extends ExampleTest {
 
 	private static final String AIR_PRESSURE_LOW_MSG = "System air pressure too low";
 	private static final String AIR_PRESSURE_LOW_VAR = "airPressureLow";
 	private static final String AIR_PRESSURE_LOW_CODE = "110S3";
 	private static final String AIR_PRESSURE_LOW_CODE_MSG = AIR_PRESSURE_LOW_CODE + " " + AIR_PRESSURE_LOW_MSG;
 
-	public VisbleComponentCodeSimpleExampleTest() {
+	public VisibleComponentCodeSimpleExampleTest() {
 		addGivenDataType(ExampleTest.NO_NAMESPACE, "sEvent", BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, AIR_PRESSURE_LOW_VAR, OmronBaseType.BOOL.toString(),
 				AIR_PRESSURE_LOW_CODE_MSG.toLowerCase());
@@ -85,7 +85,7 @@ public class VisbleComponentCodeSimpleExampleTest extends ExampleTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		VisbleComponentCodeSimpleExampleTest v = new VisbleComponentCodeSimpleExampleTest();
+		VisibleComponentCodeSimpleExampleTest v = new VisibleComponentCodeSimpleExampleTest();
 		System.out.println(v.toJavaDoc());
 	}
 
