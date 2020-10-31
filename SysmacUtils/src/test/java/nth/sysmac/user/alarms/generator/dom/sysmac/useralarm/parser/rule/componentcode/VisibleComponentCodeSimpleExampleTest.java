@@ -1,16 +1,16 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.BaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.OmronBaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroup;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroupFactory;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.ExampleTest;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.UserAlarmExampleTest;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
@@ -91,7 +91,7 @@ public class VisibleComponentCodeSimpleExampleTest extends ExampleTest {
 
 	@Test
 	void testExample() {
-		ExampleTest exampleTest = new UserAlarmExampleTest();
+		ExampleTest exampleTest = new VisibleComponentCodeSimpleExampleTest();
 		Variable eventVariable = new Variable();
 		eventVariable.setName(exampleTest.getVariableName());
 		DataType eventDataType = exampleTest.getEventDataType();

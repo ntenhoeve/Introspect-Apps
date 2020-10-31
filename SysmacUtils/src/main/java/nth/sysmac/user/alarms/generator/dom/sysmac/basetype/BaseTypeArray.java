@@ -92,6 +92,10 @@ public class BaseTypeArray {
 		String result = REGEX_FOR_ARRAY.removeAllFrom(baseTypeExpression);
 		return result;
 	}
+	
+	public List<BaseTypeArrayRange> getArrayRanges() {
+		return arrayRanges;
+	}
 
 	public String getValue() {
 		StringBuilder result=new StringBuilder();

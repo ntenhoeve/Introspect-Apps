@@ -1,5 +1,6 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,9 @@ import nth.reflect.util.parser.token.parser.Token;
 import nth.reflect.util.parser.token.parser.TokenParser;
 import nth.reflect.util.regex.Regex;
 import nth.reflect.util.regex.Repetition;
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.BaseTypeArray;
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.BaseTypeArrayRange;
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.GoToNextListener;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.NodeParserRules;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.acknowledge.AcknowledgeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.DerivedComponentCodeNode;
@@ -20,6 +24,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypePath;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
@@ -40,6 +45,33 @@ public class DataTypePathConverter {
 		this.eventVariable = eventVariable;
 		this.dataTypePath = dataTypePath;
 		this.parseTree = parse(dataTypePath);
+		addParseTreeGoToNextListenersToDataTypeArrayRanges();
+	}
+
+	private void addParseTreeGoToNextListenersToDataTypeArrayRanges() {
+		List<GoToNextListener> goToNextlisteners=findParseTreeListeners(parseTree);
+		Optional<BaseTypeArray> result = findArray();
+		if (result.isPresent()) {
+			BaseTypeArray array = result.get();
+			List<BaseTypeArrayRange> ranges = array.getArrayRanges();
+			for (BaseTypeArrayRange range : ranges) {
+				for (GoToNextListener goToNextListener : goToNextlisteners) {
+					range.addListener(goToNextListener);					
+				}
+			}
+		}
+	}
+
+	private List<GoToNextListener> findParseTreeListeners(Node node) {
+		List<GoToNextListener> goToNextListeners=new ArrayList<>();
+		if (node instanceof GoToNextListener) {
+			GoToNextListener goToNextListener=(GoToNextListener) node;
+			goToNextListeners.add(goToNextListener);
+		}
+		for (Node child : node.getNodes()) {
+			goToNextListeners.addAll(findParseTreeListeners(child));//recursive call
+		}
+		return goToNextListeners;
 	}
 
 	private ParseTree parse(DataTypePath dataTypePath) {
@@ -50,15 +82,37 @@ public class DataTypePathConverter {
 		return nodeParser.parse(tokens);
 	}
 
+	public boolean canGoToNext() {
+		Optional<BaseTypeArray> result = findArray();
+		if (result.isPresent()) {
+			BaseTypeArray array = result.get();
+			return array.canGoToNext();
+		} else {
+			return false;
+		}
+	}
 	
 	public void goToNext() {
-		//FIXME
+		Optional<BaseTypeArray> result = findArray();
+		if (result.isPresent()) {
+			BaseTypeArray array = result.get();
+			array.goToNext();
+		}
 	}
-	
-	public boolean canGoToNext() {
-return false;
-//FIXME
+
+
+	private Optional<BaseTypeArray> findArray() {
+		for (int i = dataTypePath.size() - 1; i > 0; i--) {
+			DataType dataType = dataTypePath.get(i);
+			Optional<BaseTypeArray> optionalArray = dataType.getBaseType().getArray();
+			if (optionalArray.isPresent()) {
+				BaseTypeArray array = optionalArray.get();
+				return Optional.of(array);
+			}
+		}
+		return Optional.empty();
 	}
+
 
 	public String getExpression() {
 		return dataTypePath.getVariableExpression(eventVariable);
@@ -81,8 +135,9 @@ return false;
 
 	public String getMessage() {
 		String message = NodesToTextConverter.convert(parseTree.getNodes()).trim();
-		String messageWithoutDoubleSpaces=message.replaceAll(new Regex().whiteSpace(Repetition.oneOrMoreTimes()).toString(), " ");
-		String capitalizedMessage=StringUtil.firstCharToUpperCase(messageWithoutDoubleSpaces);
+		String messageWithoutDoubleSpaces = message
+				.replaceAll(new Regex().whiteSpace(Repetition.oneOrMoreTimes()).toString(), " ");
+		String capitalizedMessage = StringUtil.firstCharToUpperCase(messageWithoutDoubleSpaces);
 		return capitalizedMessage;
 	}
 

@@ -32,7 +32,7 @@ public class DataTypePath extends ArrayList<DataType> {
 			if (!dataType.getBaseType().isStruct()) {
 				varExpression.append(dataType.getName());
 				if (dataType.getBaseType().getArray().isPresent()) {
-					varExpression.append(dataType.getBaseType().getArray().get());
+					varExpression.append("",dataType.getBaseType().getArray().get());
 				}
 			}
 		}
@@ -91,6 +91,8 @@ public class DataTypePath extends ArrayList<DataType> {
 		}
 		return reply.toString();
 	}
+
+
 
 //	/**
 //	 * @return Gets the minimum value in an array of one of the {@link DataType}s or

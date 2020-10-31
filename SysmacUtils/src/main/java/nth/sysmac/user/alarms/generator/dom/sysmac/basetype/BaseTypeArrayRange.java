@@ -44,6 +44,9 @@ public class BaseTypeArrayRange implements GoToNextListener {
 				value++;
 				invokeListeners(index);
 			} else {
+				if (index==0) {
+					invokeListeners(0);
+				}
 				invokeListeners(index+1);
 				value=min;
 			}
