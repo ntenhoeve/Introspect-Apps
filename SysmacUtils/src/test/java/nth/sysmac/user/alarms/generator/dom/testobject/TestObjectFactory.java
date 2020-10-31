@@ -154,7 +154,7 @@ public class TestObjectFactory {
 	public static ExpressionAndNodes detailsNode(ExpressionAndNodes details) {
 		ExpressionAndNodes expressionAndNodes = tokenNodeOpenBrace()//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
-				.append(tokenNodeRest(Random.letterCase(DetailsPredicate.DETAILS_ABBREVIATION).generate()))//
+				.append(tokenNodeRest(Random.letterCase(DetailsPredicate.DETAILS).generate()))//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
 				.append(tokenNodeEqual())//
 				.append(details)//

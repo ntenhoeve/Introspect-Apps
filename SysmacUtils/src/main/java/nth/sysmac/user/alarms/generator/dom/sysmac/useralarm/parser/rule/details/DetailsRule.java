@@ -19,7 +19,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
  * information on how to solve an alarm. Details are added by adding the
  * following text to the {@link DataType} comment:
  * <p>
- * {d=&lt;description&gt;} where &lt;description&gt; is replaced with your text.
+ * {details=&lt;solution&gt;} where &lt;solution&gt; is replaced with your additional information on how to solve a problem.
  * <p>
  * {insert DetailsRuleExampleTest}
  * <p>

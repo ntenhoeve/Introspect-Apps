@@ -17,7 +17,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 /**
 *
 * <h3>Details rule example</h3>
-* Note: a detailed message on how to solve the problem is set with the {desc=.} text
+* Note: a detailed message on how to solve the problem is set with the {details=.} text
 * <table cellspacing="1" cellpadding="4" bgcolor="#000000">
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Variable: EventGlobal of type: sEvent<br>Data Type's:</th>
@@ -44,13 +44,13 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * <td align="left"></td>
 * <td align="left">&nbsp;&nbsp;airPressureLow</td>
 * <td align="left">BOOL</td>
-* <td align="left" colspan=3 >{desc=Make sure that the compressor is on and the main valve is open.}Air pressure too low</td>
+* <td align="left" colspan=3 >{details=Make sure that the compressor is on and the main valve is open.}Air pressure too low</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left"></td>
 * <td align="left">&nbsp;&nbsp;levelLow</td>
 * <td align="left">BOOL</td>
-* <td align="left" colspan=3 >Level too low{desc=Make sure that the fill valve is open.}</td>
+* <td align="left" colspan=3 >Level too low{details=Make sure that the fill valve is open.}</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Results in UserAlarm(s):</th>
@@ -91,6 +91,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
+
 public class DetailsRuleExampleTest extends ExampleTest {
 
 	private static final String TEMPERATURE_LOW_MSG = "Temperature too low";
@@ -98,15 +99,15 @@ public class DetailsRuleExampleTest extends ExampleTest {
 	private static final String AIR_PRESSURE_LOW_MSG = "Air pressure too low";
 	private static final String AIR_PRESSURE_LOW_VAR = "airPressureLow";
 	private static final String AIR_PRESSURE_LOW_DESCRIPTION = "Make sure that the compressor is on and the main valve is open.";
-	private static final String AIR_PRESSURE_LOW_DESCRIPTION_TAG = "{desc=" + AIR_PRESSURE_LOW_DESCRIPTION + "}";
+	private static final String AIR_PRESSURE_LOW_DESCRIPTION_TAG = "{" + DetailsPredicate.DETAILS + "=" + AIR_PRESSURE_LOW_DESCRIPTION + "}";
 
 	private static final String LEVEL_LOW_MSG = "Level too low";
 	private static final String LEVEL_LOW_VAR = "levelLow";
 	private static final String LEVEL_LOW_DESCRIPTION = "Make sure that the fill valve is open.";
-	private static final String LEVEL_LOW_DESCRIPTION_TAG = "{desc=" + LEVEL_LOW_DESCRIPTION + "}";
+	private static final String LEVEL_LOW_DESCRIPTION_TAG = "{" + DetailsPredicate.DETAILS + "=" + LEVEL_LOW_DESCRIPTION + "}";
 
 	public DetailsRuleExampleTest() {
-		setNote("Note: a detailed message on how to solve the problem is set with the {desc=.} text");
+		setNote("Note: a detailed message on how to solve the problem is set with the {"+ DetailsPredicate.DETAILS + "=.} text");
 		addGivenDataType(ExampleTest.NO_NAMESPACE, "sEvent", BaseType.STRUCT, ExampleTest.NO_COMMENT);
 
 		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, TEMPERATURE_LOW_VAR, OmronBaseType.BOOL.toString(),
