@@ -37,7 +37,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert VisibleComponentCodeArrayExampleTest}
  * <p>
- * {@insert VisibleComponentCodeDoubleArrayExampleTest}
+ * {@insert VisibleComponentCodeArrayMultidimensionalExampleTest}
  * <p>
  * TODO  Array[1,4] OF ... <br>
   See {@link SkipRuleParsers}<br>

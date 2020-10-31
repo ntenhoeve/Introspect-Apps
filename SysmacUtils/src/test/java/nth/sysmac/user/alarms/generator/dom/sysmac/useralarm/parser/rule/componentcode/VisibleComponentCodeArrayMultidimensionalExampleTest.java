@@ -106,14 +106,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
 
 
-public class VisibleComponentCodeDoubleArrayExampleTest extends ExampleTest {
+public class VisibleComponentCodeArrayMultidimensionalExampleTest extends ExampleTest {
 
 	private static final String TORQUE_SENSOR_MSG = "Over torque detected";
 	private static final String TORQUE_SENSOR_VAR = "TorqueSensor";
 	private static final String COMPONENT_CODE_LETTER = "S";
 	private static final String TORQUE_SENSOR_CODE_MSG = createMessage(110, 4);
 
-	public VisibleComponentCodeDoubleArrayExampleTest() {
+	public VisibleComponentCodeArrayMultidimensionalExampleTest() {
 		setNote("Note that you can use multidimensional arrays.");
 		addGivenDataType(ExampleTest.NO_NAMESPACE, "sEvent", BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, TORQUE_SENSOR_VAR,
@@ -147,13 +147,13 @@ public class VisibleComponentCodeDoubleArrayExampleTest extends ExampleTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		VisibleComponentCodeDoubleArrayExampleTest v = new VisibleComponentCodeDoubleArrayExampleTest();
+		VisibleComponentCodeArrayMultidimensionalExampleTest v = new VisibleComponentCodeArrayMultidimensionalExampleTest();
 		System.out.println(v.toJavaDoc());
 	}
 
 	@Test
 	void testExample() {
-		ExampleTest exampleTest = new VisibleComponentCodeDoubleArrayExampleTest();
+		ExampleTest exampleTest = new VisibleComponentCodeArrayMultidimensionalExampleTest();
 		Variable eventVariable = new Variable();
 		eventVariable.setName(exampleTest.getVariableName());
 		DataType eventDataType = exampleTest.getEventDataType();
