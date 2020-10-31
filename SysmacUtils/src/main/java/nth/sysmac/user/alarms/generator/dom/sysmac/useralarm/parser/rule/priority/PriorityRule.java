@@ -27,7 +27,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
  * <p>
  * The {@link UserAlarm} will get {@link Priority#MEDIUM} by default.
  * <p>
- * {@link DetailsRuleExampleTest}
+ * {@link PriorityRuleExampleTest}
  * <p>
  * @author nilsth
  *

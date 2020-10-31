@@ -39,11 +39,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert VisibleComponentCodeArrayMultidimensionalExampleTest}
  * <p>
- * TODO  Array[1,4] OF ... <br>
-  See {@link SkipRuleParsers}<br>
- * <p>
- * You can add skip rules to skip columns when arrays are used. See the component code column skip section for more information.  
- * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
+ * {@insert VisibleComponentCodeArraySkipExampleTest}
  * <p>
  * 
  * @author nilsth

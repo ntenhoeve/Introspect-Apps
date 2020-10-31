@@ -27,7 +27,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
 /**
  * <h3>Hidden component codes</h3>
  * <p>
- * Hidden component codes are like Visible component codes, but they stay hidden until they are referred to in derived component codes.
+ * Hidden component codes are like visible component codes, but they stay hidden until they are referred to in derived component codes.
  * <p>
  * Hidden component codes are preferred over visible component code's when you need to use multiple component codes. e.g. when an motor 30M1 branches of in all type of {@link UserAlarm}s that refer to other component codes like 50K1 and 110S1:
  * <p>
