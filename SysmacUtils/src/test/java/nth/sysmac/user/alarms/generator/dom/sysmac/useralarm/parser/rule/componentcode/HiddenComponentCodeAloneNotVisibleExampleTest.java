@@ -17,6 +17,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 /**
 *
 * <h3>Hidden component code alone not visible example</h3>
+* Note that hidden component codes are not displayed unless derived component codes are used.
 * <table cellspacing="1" cellpadding="4" bgcolor="#000000">
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Variable: EventGlobal of type: sEvent<br>Data Type's:</th>
@@ -71,6 +72,7 @@ public class HiddenComponentCodeAloneNotVisibleExampleTest extends ExampleTest {
 	private static final String AIR_PRESSURE_LOW_CODE_MSG = AIR_PRESSURE_LOW_CODE + " " + AIR_PRESSURE_LOW_MSG;
 
 	public HiddenComponentCodeAloneNotVisibleExampleTest() {
+		setNote("Note that hidden component codes are not displayed unless derived component codes are used.");
 		addGivenDataType(ExampleTest.NO_NAMESPACE, "sEvent", BaseType.STRUCT, ExampleTest.NO_COMMENT);
 		addGivenDataTypeChild(ExampleTest.NO_NAMESPACE, AIR_PRESSURE_LOW_VAR, OmronBaseType.BOOL.toString(),
 				AIR_PRESSURE_LOW_CODE_MSG.toLowerCase());
