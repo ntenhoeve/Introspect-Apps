@@ -31,7 +31,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * Hidden component codes are preferred over visible component code's when you need to use multiple component codes. e.g. when an motor 30M1 branches of in all type of {@link UserAlarm}s that refer to other component codes like 50K1 and 110S1:
  * <p>
- * <p>
  * The {@link SysmacUserAlarmsGenerator} will generate succeeding component codes when arrays are used. 
  * TODO array example 110S7 110S7 110S8 111S1
  * <p>
