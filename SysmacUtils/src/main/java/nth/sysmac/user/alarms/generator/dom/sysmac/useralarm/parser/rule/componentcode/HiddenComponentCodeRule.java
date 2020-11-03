@@ -14,7 +14,6 @@ import nth.reflect.util.parser.node.matcher.predicate.NodeTypePredicate;
 import nth.reflect.util.parser.node.matcher.result.MatchResults;
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
 import nth.reflect.util.parser.node.matcher.rule.Repetition;
-import nth.sysmac.user.alarms.generator.SysmacUserAlarmsGenerator;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarm;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
@@ -31,12 +30,13 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * Hidden component codes are preferred over visible component code's when you need to use multiple component codes. e.g. when an motor 30M1 branches of in all type of {@link UserAlarm}s that refer to other component codes like 50K1 and 110S1:
  * <p>
- * The {@link SysmacUserAlarmsGenerator} will generate succeeding component codes when arrays are used. 
- * TODO array example 110S7 110S7 110S8 111S1
+ * {@link HiddenComponentCodeAloneNotVisibleExampleTest}
  * <p>
- * You can add skip rules to skip columns when arrays are used. See the component code column skip section for more information.  
- * TODO array example 110S2{s=u,110.6-112.2} 110S2 110S4 112S6
+ * TODO HiddenComponentCodeWithDerivedIsVisibleExampleTest
  * <p>
+ * TODO HiddenComponentCodeMultipleArrayExampleTest (with DOL)
+ * <p>
+ * See Derived for more examples
  * 
  * @author nilsth
  *

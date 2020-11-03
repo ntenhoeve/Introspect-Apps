@@ -18,7 +18,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 /**
 *
 * <h3>Visible component code array skip example</h3>
-* Note that you can add skip rules to skip columns when arrays are used. In this case we skip uneven columns and skip from page 110, column 6 until page 112 column 4 with:{s=u,110.6-112.4}. See the component code column skip section for more information.
+* Note that you can add skip rules to skip columns when arrays are used. In this case we skip uneven columns and skip from page 110, column 6 until page 112 column 4 with:{skip=u,110.6-112.4}. See the component code column skip section for more information.
 * <table cellspacing="1" cellpadding="4" bgcolor="#000000">
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Variable: EventGlobal of type: sEvent<br>Data Type's:</th>
@@ -39,7 +39,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * <td align="left"></td>
 * <td align="left">&nbsp;&nbsp;TorqueSensor</td>
 * <td align="left">ARRAY[2..4] OF BOOL</td>
-* <td align="left" colspan=3 >110s2{s=u,110.6-112.4} over torque detected</td>
+* <td align="left" colspan=3 >110s2{skip=u,110.6-112.4} over torque detected</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <th colspan=6>Results in UserAlarm(s):</th>
@@ -79,6 +79,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * </table>
 *
 */
+
 
 
 public class VisibleComponentCodeArraySkipExampleTest extends ExampleTest {

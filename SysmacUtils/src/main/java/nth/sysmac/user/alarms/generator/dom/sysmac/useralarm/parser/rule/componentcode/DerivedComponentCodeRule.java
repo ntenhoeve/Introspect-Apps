@@ -33,8 +33,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert HiddenComponentCodeMultipleExampleTest}
  * <p>
- * TODO HiddenComponentCodeMultipleArrayExampleTest
- * <p>
  * 
  * 
  * @author nilsth

@@ -15,7 +15,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 /**
 *
-* <h3>Visble component code group example</h3>
+* <h3>Visible component code group example</h3>
 * Note that the component code moves to the front! <br>Also Note that data type comments normaly start with a lowercase character unles it starts with an abbreviation. User alarm texts are generated, starting with a uppercase character.
 * <table cellspacing="1" cellpadding="4" bgcolor="#000000">
 * <tr bgcolor="#ffffff">
@@ -53,7 +53,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Venter</td>
-* <td align="left">&nbsp;&nbsp;waterLevelLow</td>
+* <td align="left">&nbsp;&nbsp;WaterLevelLow</td>
 * <td align="left">BOOL</td>
 * <td align="left" colspan=3 >110S1 water level too low</td>
 * </tr>
@@ -65,13 +65,13 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Maestro</td>
-* <td align="left">&nbsp;&nbsp;airPressureLow</td>
+* <td align="left">&nbsp;&nbsp;AirPressureLow</td>
 * <td align="left">BOOL</td>
 * <td align="left" colspan=3 >120S3 system air pressure too low</td>
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Maestro</td>
-* <td align="left">&nbsp;&nbsp;waterLevelLow</td>
+* <td align="left">&nbsp;&nbsp;WaterLevelLow</td>
 * <td align="left">BOOL</td>
 * <td align="left" colspan=3 >120S4 water level too low</td>
 * </tr>
@@ -88,7 +88,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Venter</td>
-* <td align="left">EventGlobal.Venter.waterLevelLow</td>
+* <td align="left">EventGlobal.Venter.WaterLevelLow</td>
 * <td align="left">false</td>
 * <td align="left">110S1 Venter water level too low</td>
 * <td align="left">UserFaultLevel5</td>
@@ -96,7 +96,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Maestro</td>
-* <td align="left">EventGlobal.Maestro.airPressureLow</td>
+* <td align="left">EventGlobal.Maestro.AirPressureLow</td>
 * <td align="left">false</td>
 * <td align="left">120S3 Maestro system air pressure too low</td>
 * <td align="left">UserFaultLevel5</td>
@@ -104,7 +104,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 * </tr>
 * <tr bgcolor="#ffffff">
 * <td align="left">Maestro</td>
-* <td align="left">EventGlobal.Maestro.waterLevelLow</td>
+* <td align="left">EventGlobal.Maestro.WaterLevelLow</td>
 * <td align="left">false</td>
 * <td align="left">120S4 Maestro water level too low</td>
 * <td align="left">UserFaultLevel5</td>
@@ -114,14 +114,15 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 *
 */
 
+
 public class VisibleComponentCodeGroupExampleTest extends ExampleTest {
 
 	private static final String _110S1 = "110S1";
 	private static final String _120S3 = "120S3";
 	private static final String _120S4 = "120S4";
 	private static final String AIR_PRESSURE_LOW_MSG = "system air pressure too low";
-	private static final String AIR_PRESSURE_LOW_VAR = "airPressureLow";
-	private static final String WATER_LEVEL_LOW_VAR = "waterLevelLow";
+	private static final String AIR_PRESSURE_LOW_VAR = "AirPressureLow";
+	private static final String WATER_LEVEL_LOW_VAR = "WaterLevelLow";
 	private static final String WATER_LEVEL_LOW_MSG = "water level too low";
 	private static final String S_EVENT = "sEvent";
 	private static final String MAESTRO = "Maestro";
