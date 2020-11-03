@@ -19,9 +19,9 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 
 /**
- * <h3>Component code references</h3>
+ * <h3>Derived component codes</h3>
  * <p>
- * A component reference is a letter (in some cases followed by a number)
+ * A derived component code is a letter (in some cases followed by a number)
  * between curly brackets in a data type comment, e.g.: {Q}. Derived component code's are derived from
  * visible or hidden component code that are already defined in one (or more) data type comments.
  * <p>

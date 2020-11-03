@@ -86,7 +86,7 @@ public class VisibleComponentCodeArraySkipExampleTest extends ExampleTest {
 	private static final String TORQUE_SENSOR_MSG = "Over torque detected";
 	private static final String TORQUE_SENSOR_VAR = "TorqueSensor";
 	private static final String COMPONENT_CODE_LETTER = "S";
-	private static final String COMPONENT_CODE_SKIP_RULES = "{"+BracedAttributeName.SKIP.getName()+"=u,110.6-112.4}";
+	private static final String COMPONENT_CODE_SKIP_RULES = "{"+BracedAttributeName.SKIP.lowerCase()+"=u,110.6-112.4}";
 	private static final String TORQUE_SENSOR_CODE_MSG = createMessageWithSkipRules(110, 2);
 
 	public VisibleComponentCodeArraySkipExampleTest() {

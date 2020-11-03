@@ -206,7 +206,7 @@ public class TestObjectFactory {
 	}
 
 	public static ExpressionAndNodes bracedAttribute(BracedAttributeName name, ExpressionAndNodes values) {
-		ExpressionAndNodes expressionAndNodes = tokenNodeRest(name.getName())//
+		ExpressionAndNodes expressionAndNodes = tokenNodeRest(name.lowerCase())//
 				.append(tokenNodeWhiteSpace().repeatRandomly(0, 3))//
 				.append(tokenNodeEqual());
 		expressionAndNodes = expressionAndNodes.append(values);
