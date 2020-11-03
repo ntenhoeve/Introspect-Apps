@@ -11,6 +11,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.OmronBaseType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroup;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.UserAlarmGroupFactory;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.ExampleTest;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
@@ -85,7 +86,7 @@ public class VisibleComponentCodeArraySkipExampleTest extends ExampleTest {
 	private static final String TORQUE_SENSOR_MSG = "Over torque detected";
 	private static final String TORQUE_SENSOR_VAR = "TorqueSensor";
 	private static final String COMPONENT_CODE_LETTER = "S";
-	private static final String COMPONENT_CODE_SKIP_RULES = "{s=u,110.6-112.4}";
+	private static final String COMPONENT_CODE_SKIP_RULES = "{"+BracedAttributeName.SKIP.getName()+"=u,110.6-112.4}";
 	private static final String TORQUE_SENSOR_CODE_MSG = createMessageWithSkipRules(110, 2);
 
 	public VisibleComponentCodeArraySkipExampleTest() {

@@ -1,21 +1,21 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces;
 
 public enum BracedAttributeName {
-	SKIP("s"); //
+	SKIP("skip"); //
 
-	private final String abbreviation;
+	private final String name;
 
-	BracedAttributeName(String abbreviation) {
-		this.abbreviation = abbreviation.toLowerCase();
+	BracedAttributeName(String name) {
+		this.name = name.toLowerCase();
 	}
 
-	public String getAbbreviation() {
-		return abbreviation;
+	public String getName() {
+		return name;
 	}
 
 	static BracedAttributeName getForAbbreviation(String abbreviationToFind) {
 		for (BracedAttributeName name : values()) {
-			if (name.getAbbreviation().equals(abbreviationToFind.toLowerCase()))
+			if (name.getName().equals(abbreviationToFind.toLowerCase()))
 				return name;
 		}
 		throw new RuntimeException(abbreviationToFind+" is not a valid attribute abreviation");

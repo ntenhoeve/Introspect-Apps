@@ -55,7 +55,7 @@ public class BracedAttributeRule implements NodeParserRule {
 	private static Regex createAttributeNamesRegex() {
 		List<Regex> attributeNameRegexes = new ArrayList<>();
 		for (BracedAttributeName name : BracedAttributeName.values()) {
-			Regex attributeNameRegex = new Regex().ignoreCase().beginOfLine().literal(name.getAbbreviation()).endOfLine();
+			Regex attributeNameRegex = new Regex().ignoreCase().beginOfLine().literal(name.getName()).endOfLine();
 			attributeNameRegexes.add(attributeNameRegex);
 		}
 		Regex attributeNamesRegex = new Regex().or(attributeNameRegexes);
