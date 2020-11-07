@@ -1,7 +1,12 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm;
 
+import java.util.Optional;
+
 import nth.reflect.fw.generic.util.TitleBuilder;
+import nth.sysmac.user.alarms.generator.dom.sysmac.basetype.BaseTypeArray;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.Priority;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataTypePath;
+import nth.sysmac.user.alarms.generator.dom.sysmac.xml.variable.Variable;
 
 public class UserAlarm {
 	private static final String SEPERATOR = ", ";
@@ -17,168 +22,127 @@ public class UserAlarm {
 	private boolean acknowledge;
 	private String page;
 	private String details;
-	
-	public UserAlarm(String groupName, DataTypePathConverter dataTypePathConverter) {
-		groupName1=groupName;
-		expression=dataTypePathConverter.getExpression();
-		message=dataTypePathConverter.getComponentCodeAndMessage();
-		priority=dataTypePathConverter.getPriority();
-		acknowledge=dataTypePathConverter.getAcknowlegde();
-		details=dataTypePathConverter.getDetails();
+	private DataTypePathConverter dataTypePathConverter;
+
+	public UserAlarm(String groupName, Variable eventVariable, DataTypePath dataTypePath) {
+		this(groupName, eventVariable, new DataTypePathConverter(eventVariable, dataTypePath));
 	}
 
-	public UserAlarm(String groupName, String expression, String message, Priority priority, boolean acknowledge, String details) {
-		this.groupName1=groupName;
-		this.expression=expression;
-		this.message=message;
-		this.priority=priority;
-		this.acknowledge=acknowledge;
-		this.details=details;
+	public UserAlarm(String groupName, String expression, String message, Priority priority, boolean acknowledge,
+			String details) {
+		this.groupName1 = groupName;
+		this.expression = expression;
+		this.message = message;
+		this.priority = priority;
+		this.acknowledge = acknowledge;
+		this.details = details;
 	}
-	
+
+	public UserAlarm(String groupName, Variable eventVariable, DataTypePathConverter dataTypePathConverter) {
+		this.dataTypePathConverter = dataTypePathConverter;
+		groupName1 = groupName;
+		expression = dataTypePathConverter.getExpression();
+		message = dataTypePathConverter.getComponentCodeAndMessage();
+		priority = dataTypePathConverter.getPriority();
+		acknowledge = dataTypePathConverter.getAcknowlegde();
+		details = dataTypePathConverter.getDetails();
+	}
 
 	public String getGroupName1() {
 		return groupName1;
 	}
 
-
-
 	public void setGroupName1(String groupName1) {
 		this.groupName1 = groupName1;
 	}
-
-
 
 	public String getGroupName2() {
 		return groupName2;
 	}
 
-
-
 	public void setGroupName2(String groupName2) {
 		this.groupName2 = groupName2;
 	}
-
-
 
 	public String getGroupName3() {
 		return groupName3;
 	}
 
-
-
 	public void setGroupName3(String groupName3) {
 		this.groupName3 = groupName3;
 	}
-
-
 
 	public String getAlarmID() {
 		return alarmID;
 	}
 
-
-
 	public void setAlarmID(String alarmID) {
 		this.alarmID = alarmID;
 	}
-
-
 
 	public String getAlarmCode() {
 		return alarmCode;
 	}
 
-
-
 	public void setAlarmCode(String alarmCode) {
 		this.alarmCode = alarmCode;
 	}
-
-
 
 	public String getExpression() {
 		return expression;
 	}
 
-
-
 	public void setExpression(String expression) {
 		this.expression = expression;
 	}
-
-
 
 	public String getPriority() {
 		return priority.getOmronPriority();
 	}
 
-
-
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
-
-
 
 	public String getMessage() {
 		return message;
 	}
 
-
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-
 
 	public boolean isPopup() {
 		return popup;
 	}
 
-
-
 	public void setPopup(boolean popup) {
 		this.popup = popup;
 	}
-
-
 
 	public boolean isAcknowledge() {
 		return acknowledge;
 	}
 
-
-
 	public void setAcknowledge(boolean acknowledge) {
 		this.acknowledge = acknowledge;
 	}
-
-
 
 	public String getPage() {
 		return page;
 	}
 
-
-
 	public void setPage(String page) {
 		this.page = page;
 	}
-
-
 
 	public String getDetails() {
 		return details;
 	}
 
-
-
 	public void setDetails(String details) {
 		this.details = details;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -245,21 +209,41 @@ public class UserAlarm {
 
 	@Override
 	public String toString() {
-		TitleBuilder title=new TitleBuilder();
+		TitleBuilder title = new TitleBuilder();
 		title.append(UserAlarm.class.getSimpleName());
-		title.append(SEPERATOR+"groupName1=",groupName1);
-		title.append(SEPERATOR+"groupName2=",groupName2);
-		title.append(SEPERATOR+"groupName3=",groupName3);
-		title.append(SEPERATOR+"alarmID=",alarmID);
-		title.append(SEPERATOR+"alarmCode=",alarmCode);
-		title.append(SEPERATOR+"expression=",expression);
-		title.append(SEPERATOR+"priority=",priority);
-		title.append(SEPERATOR+"message=",message);
-		title.append(SEPERATOR+"popup=",popup);
-		title.append(SEPERATOR+"acknowledge=",acknowledge);
-		title.append(SEPERATOR+"page=",page);
-		title.append(SEPERATOR+"details=",details);
+		title.append(SEPERATOR + "groupName1=", groupName1);
+		title.append(SEPERATOR + "groupName2=", groupName2);
+		title.append(SEPERATOR + "groupName3=", groupName3);
+		title.append(SEPERATOR + "alarmID=", alarmID);
+		title.append(SEPERATOR + "alarmCode=", alarmCode);
+		title.append(SEPERATOR + "expression=", expression);
+		title.append(SEPERATOR + "priority=", priority);
+		title.append(SEPERATOR + "message=", message);
+		title.append(SEPERATOR + "popup=", popup);
+		title.append(SEPERATOR + "acknowledge=", acknowledge);
+		title.append(SEPERATOR + "page=", page);
+		title.append(SEPERATOR + "details=", details);
 		return title.toString();
+	}
+
+	public boolean canGoToNext() {
+		if (getDataTypePathConverter() == null) {
+			return false;
+		} else {
+			return getDataTypePathConverter().canGoToNext();
+		}
+	}
+
+	public DataTypePathConverter getDataTypePathConverter() {
+		return dataTypePathConverter;
+	}
+
+	public Optional<BaseTypeArray> findArray() {
+		if (getDataTypePathConverter() == null) {
+			return Optional.empty();
+		} else {
+			return getDataTypePathConverter().findArray();
+		}
 	}
 
 }

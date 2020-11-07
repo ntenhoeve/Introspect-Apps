@@ -34,17 +34,19 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert HiddenComponentCodeWithDerivedIsVisibleExampleTest}
  * <p>
- * TODO HiddenComponentCodeMultipleArrayExampleTest (with DOL)
+ * {@insert HiddenComponentCodeArrayExampleTest}
  * <p>
- * See Derived for more examples
- * 
+ * TODO {@insert HiddenComponentCodeArraySkipExampleTest}
+ * <p>
+ * See derived component code for more hidden component code examples.
+ * <p>
  * @author nilsth
  *
  */
 public class HiddenComponentCodeRule implements NodeParserRule {
 
 	private static final Predicate<Node> ANY_NODE=new AnyNodePredicate();
-	private static final String SKIP_ATTRIBUTE_EXAMPLE = "{s=e,3-5,100.1}";
+	private static final String SKIP_ATTRIBUTE_EXAMPLE = "{"+BracedAttributeName.SKIP+"=e,3-5,100.1}";
 	private static final Predicate<Node> WHITESPACE_PREDICATE = TokenNodePredicate.whiteSpace();
 	private static final Predicate<Node> COMMA_PREDICATE = TokenNodePredicate.comma();
 	private static final NodeExactTypePredicate COMPONENT_CODE_PREDICATE = new NodeExactTypePredicate(

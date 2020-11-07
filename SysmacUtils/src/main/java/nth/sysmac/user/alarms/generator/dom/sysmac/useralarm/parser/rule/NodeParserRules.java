@@ -45,8 +45,6 @@ public enum NodeParserRules {
 	,DERIVED_COMPONENT_CODE(new DerivedComponentCodeRule())
 	;
 	
-	//TODO COMPONENT_CODE_REFERENCE
-
 	private final NodeParserRule nodeParserRule;
 
 	NodeParserRules(NodeParserRule nodeReplacement) {

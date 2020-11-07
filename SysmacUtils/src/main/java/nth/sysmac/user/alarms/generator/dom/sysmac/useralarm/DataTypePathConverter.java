@@ -101,7 +101,7 @@ public class DataTypePathConverter {
 	}
 
 
-	private Optional<BaseTypeArray> findArray() {
+	public Optional<BaseTypeArray> findArray() {
 		for (int i = dataTypePath.size() - 1; i > 0; i--) {
 			DataType dataType = dataTypePath.get(i);
 			Optional<BaseTypeArray> optionalArray = dataType.getBaseType().getArray();
@@ -174,6 +174,10 @@ public class DataTypePathConverter {
 			return "";
 		}
 
+	}
+
+	public DataTypePath getDataTypePath() {
+		return dataTypePath;
 	}
 
 }

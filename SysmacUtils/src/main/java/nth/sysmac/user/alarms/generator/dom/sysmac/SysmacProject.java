@@ -22,22 +22,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.entity.EntityService;
 
 public class SysmacProject {
 
-//	TODO 
-
-	// read Entities
-
-	// use jaxb https://www.javatpoint.com/jaxb-unmarshalling-example
-	// rename DataType to DataTypeFromXml
-	// rename NameSpace to DataTypeManifestFromXml
-
-	// create dom
-	// DataTypeNameSpace extends DataTypeNode that has dataTypes
-	// DataType
-
-	// {M=40M1 Q=40Q1 K1=80K1 K2=80K2}
-//	{Q} motor protection
-// {K1} motor contactor not activated
-
 	private final File file;
 	private final List<String> zipEntryNames;
 	private final Map<String, XmlFile> xmlFiles;
