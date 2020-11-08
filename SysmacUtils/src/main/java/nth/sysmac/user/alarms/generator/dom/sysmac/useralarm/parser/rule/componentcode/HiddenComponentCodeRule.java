@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.NodeParserRule;
 import nth.reflect.util.parser.node.matcher.NodeMatcher;
-import nth.reflect.util.parser.node.matcher.predicate.AnyNodePredicate;
 import nth.reflect.util.parser.node.matcher.predicate.NodeExactTypePredicate;
 import nth.reflect.util.parser.node.matcher.predicate.NodeTypeAndMatchChildrenPredicate;
 import nth.reflect.util.parser.node.matcher.predicate.NodeTypePredicate;
@@ -22,6 +21,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumnNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.SkipColumns;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.token.rule.TokenRules;
 
 /**
  * <h3>Hidden component codes</h3>
@@ -36,7 +36,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * <p>
  * {@insert HiddenComponentCodeArrayExampleTest}
  * <p>
- * TODO {@insert HiddenComponentCodeArraySkipExampleTest}
+ * {@insert HiddenComponentCodeArraySkipExampleTest}
  * <p>
  * See derived component code for more hidden component code examples.
  * <p>
@@ -45,7 +45,6 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  */
 public class HiddenComponentCodeRule implements NodeParserRule {
 
-	private static final Predicate<Node> ANY_NODE=new AnyNodePredicate();
 	private static final String SKIP_ATTRIBUTE_EXAMPLE = "{"+BracedAttributeName.SKIP+"=e,3-5,100.1}";
 	private static final Predicate<Node> WHITESPACE_PREDICATE = TokenNodePredicate.whiteSpace();
 	private static final Predicate<Node> COMMA_PREDICATE = TokenNodePredicate.comma();
@@ -56,13 +55,15 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 			SkipColumnNode.class);
 	private static final MatchRules SKIP_COLUMN_ATTRIBUTE_VALUE_RULES = new MatchRules()
 			.add(SKIP_COLUMN_ATTRIBUTE_VALUE_PREDICATE, Repetition.zeroOrMore());
-	private static final BracedAttributePredicate BRACED_NODE_ATTRIBUTE_PREDICATE = new BracedAttributePredicate(
+	private static final BracedAttributePredicate SKIP_COLUMN_PREDICATE = new BracedAttributePredicate(
 			BracedAttributeName.SKIP, SKIP_COLUMN_ATTRIBUTE_VALUE_RULES);
 	private static final MatchRules BRACE_NODE_ATTRIBUTE_RULES = new MatchRules()//
 			.firstMatchMustBeFirstNode()//
 			.add(WHITESPACE_PREDICATE,Repetition.zeroOrMore())//
 			.add(COMPONENT_CODE_RULES)//
-			.add(ANY_NODE,Repetition.zeroOrMore())//
+			.add(new TokenNodePredicate(TokenRules.WHITESPACE.get()),Repetition.zeroOrMore())//
+			.add(SKIP_COLUMN_PREDICATE,Repetition.zeroOrOnce())//
+			.add(new TokenNodePredicate(TokenRules.WHITESPACE.get()),Repetition.zeroOrMore())//
 			.lastMatchMustBeLastNode();
 	private static final NodeTypeAndMatchChildrenPredicate BRACE_PREDICATE = new NodeTypeAndMatchChildrenPredicate(
 			BraceNode.class, BRACE_NODE_ATTRIBUTE_RULES);
@@ -100,7 +101,7 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 	}
 
 	private SkipColumns getSkipColumns(MatchResults matchResults) {
-		if (matchResults.hasFoundRuleWithPredicate(BRACED_NODE_ATTRIBUTE_PREDICATE)) {
+		if (matchResults.hasFoundRuleWithPredicate(SKIP_COLUMN_PREDICATE)) {
 			SkipColumns skipColumns = createSkipColumns(matchResults);
 			return skipColumns;
 		} else {
@@ -133,9 +134,9 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 	}
 
 	private BracedAttributeNode findSkipAttribute(MatchResults matchResults) {
-		List<Node> nodes = matchResults.getFoundNodes(BRACE_NODE_ATTRIBUTE_RULES);
+		List<Node> nodes = matchResults.getFoundNodes(SKIP_COLUMN_PREDICATE);
 
-		List<Node> skipAttributeNodes = nodes.stream().filter(n -> BRACED_NODE_ATTRIBUTE_PREDICATE.test(n))
+		List<Node> skipAttributeNodes = nodes.stream().filter(n -> SKIP_COLUMN_PREDICATE.test(n))
 				.collect(Collectors.toList());
 		if (skipAttributeNodes.size() == 0) {
 			throw new RuntimeException("Could not find s (skip) attribute.");
@@ -143,7 +144,7 @@ public class HiddenComponentCodeRule implements NodeParserRule {
 		if (skipAttributeNodes.size() > 1) {
 			throw new RuntimeException("Found more than 1 s (skip) attributes.");
 		}
-		List<Node> illegalNodes = nodes.stream().filter(n -> !BRACED_NODE_ATTRIBUTE_PREDICATE.test(n)
+		List<Node> illegalNodes = nodes.stream().filter(n -> !SKIP_COLUMN_PREDICATE.test(n)
 				&& WHITESPACE_PREDICATE.test(n) && !COMMA_PREDICATE.test(n)).collect(Collectors.toList());
 		if (!illegalNodes.isEmpty()) {
 			throw new RuntimeException("Expecting component code skip information, e.g. " + SKIP_ATTRIBUTE_EXAMPLE
