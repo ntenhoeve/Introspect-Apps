@@ -45,7 +45,7 @@ public class PriorityRule implements NodeParserRule {
 
 	/**
 	 * Replaces {@link TokenNode}s that match {@link #getMatchRules()} and replaces
-	 * them with a {@link PriorityNode} containing the {@link TokenNode}s that match {@link PriorityPredicate#ATTRIBUTE_VALUE_RULES}
+	 * them with a {@link PriorityNode} containing the {@link TokenNode}s that match {@link CounterPredicate#ATTRIBUTE_VALUE_RULES}
 	 */
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {

@@ -1,5 +1,7 @@
 package nth.sysmac.user.alarms.generator;
 
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.CounterRule;
+
 /**
  * {@link SysmacUserAlarmsGeneratorDocumentation} is generated using the {@link ReflectUtilMavenPlugIn}
  * <p>
@@ -7,7 +9,7 @@ package nth.sysmac.user.alarms.generator;
  * <p>
  * {@insert AcknowledgeRule}
  * <p>
- * {@insert PriorityRule}
+ * {@insert CounterArrayRule}
  * <p>
  * {@insert DetailsRule}
  * <p>
@@ -20,7 +22,8 @@ package nth.sysmac.user.alarms.generator;
  * {@insert DerivedComponentCodeRule}
  * <p>
  * {@insert SkipColumnRule}
- * 
+ * <p>
+ * {@insert CounterRule}
  */
 
 public interface SysmacUserAlarmsGeneratorDocumentation {

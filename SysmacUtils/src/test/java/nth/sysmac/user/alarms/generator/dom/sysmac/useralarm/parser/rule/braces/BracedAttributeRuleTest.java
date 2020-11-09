@@ -24,7 +24,6 @@ class BracedAttributeRuleTest {
 		
 		
 		ExpressionAndNodes attribute = TestObjectFactory.bracedAttributeWithRandomValues(BracedAttributeName.SKIP);
-		//TODO test with multiple attributes
 		ExpressionAndNodes braced = TestObjectFactory.braceNode(attribute);
 		ExpressionAndNodes expressionAndNodes = TestObjectFactory.surroundWithRandomTokens(braced);
 

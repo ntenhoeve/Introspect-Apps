@@ -1,7 +1,7 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces;
 
 public enum BracedAttributeName {
-	SKIP; //
+	SKIP,ARRAY; //
 
 
 	public String lowerCase() {

@@ -34,7 +34,7 @@ public class AcknowledgeRule implements NodeParserRule {
 	}
 
 	/**
-	 * Replaces a {@link Node} that matches a {@link PriorityPredicate} with a
+	 * Replaces a {@link Node} that matches a {@link CounterPredicate} with a
 	 * {@link AcknowledgeNode}
 	 */
 	@Override

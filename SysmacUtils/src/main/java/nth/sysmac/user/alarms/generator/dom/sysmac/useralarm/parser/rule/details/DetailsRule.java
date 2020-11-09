@@ -15,11 +15,14 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priorit
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
 
 /**
- * <h2>Details</h2> You can add details to an {@link UserAlarm} to provide extra
- * information on how to solve an alarm. Details are added by adding the
- * following text to the {@link DataType} comment:
+ * <h2>Details</h2>
  * <p>
- * {details=&lt;solution&gt;} where &lt;solution&gt; is replaced with your additional information on how to solve a problem.
+ * You can add details to an {@link UserAlarm} to provide extra information on
+ * how to solve an alarm. Details are added by adding the following text to the
+ * {@link DataType} comment:
+ * <p>
+ * {details=&lt;solution&gt;} where &lt;solution&gt; is replaced with your
+ * additional information on how to solve a problem.
  * <p>
  * {insert DetailsRuleExampleTest}
  * <p>
@@ -41,7 +44,7 @@ public class DetailsRule implements NodeParserRule {
 	/**
 	 * Replaces {@link TokenNode}s that match {@link #getMatchRules()} and replaces
 	 * them with a {@link DetailsNode} containing the {@link TokenNode}s that match
-	 * {@link PriorityPredicate#ATTRIBUTE_VALUE_RULES}
+	 * {@link CounterPredicate#ATTRIBUTE_VALUE_RULES}
 	 */
 	@Override
 	public void removeOrReplace(MatchResults matchResults) {
