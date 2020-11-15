@@ -13,46 +13,50 @@ public class BaseTypeArrayRange implements GoToNextListener {
 
 	public BaseTypeArrayRange(int min, int max, int index) {
 		this.index = index;
-		validate(min,max);
+		validate(min, max);
 		this.min = min;
 		this.max = max;
-		this.value=min;
-		this.goToNextListeners=new ArrayList<>();
+		this.value = min;
+		this.goToNextListeners = new ArrayList<>();
 	}
 
 	private void validate(int min, int max) {
-		if (min<0) {
+		if (min < 0) {
 			throw new RuntimeException("Min value must be >=0");
 		}
-		if (max<0) {
+		if (max < 0) {
 			throw new RuntimeException("Max value must be >=0");
 		}
-		if (min>max) {
+		if (min > max) {
 			throw new RuntimeException("Min must be <=0 than max");
 		}
 	}
-	
+
 	public boolean canGoToNext() {
-		boolean canGoToNext=value<max;
+		boolean canGoToNext = value < max;
 		return canGoToNext;
 	}
-	
+
 	@Override
 	public void goToNext(int index) {
-		if (index==this.index) {
+		if (index == this.index) {
 			if (canGoToNext()) {
 				value++;
-				invokeListeners(index);
+				if (index == 0) {
+					// only doing this when index==0 otherwise this event is already being called
+					// when the previous array index is at is end (canGoToNext is false)
+					invokeListeners(index);
+				}
 			} else {
-				if (index==0) {
+				if (index == 0) {
 					invokeListeners(0);
 				}
-				invokeListeners(index+1);
-				value=min;
+				invokeListeners(index + 1);
+				value = min;
 			}
 		}
 	}
-	
+
 	public String getValue() {
 		return Integer.toString(value);
 	}
@@ -66,11 +70,11 @@ public class BaseTypeArrayRange implements GoToNextListener {
 			goToNextListener.goToNext(index);
 		}
 	}
-	
+
 	public void addListener(GoToNextListener goToNextListener) {
-		if (goToNextListener!=null) {
+		if (goToNextListener != null) {
 			goToNextListeners.add(goToNextListener);
 		}
 	}
-	
+
 }

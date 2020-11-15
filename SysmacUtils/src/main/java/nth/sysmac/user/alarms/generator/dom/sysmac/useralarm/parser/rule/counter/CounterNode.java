@@ -34,10 +34,10 @@ public class CounterNode extends Node implements GoToNextListener, TextProvider 
 
 	@Override
 	public void goToNext(int arrayThatHasIncreased) {
-		if (array == arrayThatHasIncreased) {
+		if ((array == 0 && array==arrayThatHasIncreased) || (array-1) == arrayThatHasIncreased) {
 			counterValue++;
 		}
-		if (array != 0 && (array + 1) == arrayThatHasIncreased) {
+		if (array != 0 && array  == arrayThatHasIncreased) {
 			counterValue = 0;
 		}
 		// TODO skip rules

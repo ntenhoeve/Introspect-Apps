@@ -1,18 +1,15 @@
 package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter;
 
-import java.util.function.Predicate;
+import java.util.List;
 
 import nth.reflect.util.parser.node.Node;
 import nth.reflect.util.parser.node.NodeParserRule;
-import nth.reflect.util.parser.node.matcher.predicate.NodeTypeAndMatchChildrenPredicate;
-import nth.reflect.util.parser.node.matcher.predicate.NodeTypePredicate;
+import nth.reflect.util.parser.node.TokenNode;
+import nth.reflect.util.parser.node.matcher.NodeMatcher;
 import nth.reflect.util.parser.node.matcher.result.MatchResults;
 import nth.reflect.util.parser.node.matcher.rule.MatchRules;
-import nth.reflect.util.parser.node.matcher.rule.Repetition;
-import nth.reflect.util.regex.Regex;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BraceNode;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeName;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributePredicate;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.braces.BracedAttributeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.ComponentCodeNode;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
 import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
@@ -42,7 +39,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.xml.datatype.DataType;
  * <p>
  * {insert CounterRuleExampleTest}
  * <p>
- * TODO {insert CounterRuleSkipExampleTest}
+ * TODO {insert CounterRuleArrayExampleTest}
  * <p>
  * TODO {insert CounterRuleArrayExampleTest}
  * <p>
@@ -108,8 +105,43 @@ public class CounterRule implements NodeParserRule {
 	}
 
 	private int getArray(MatchResults matchResults) {
-		// TODO Auto-generated method stub
+		List<Node> nodes = matchResults.getFoundNodes();
+		if (nodes.size()!=1) {
+			return 0;
+		}
+		Node node = nodes.get(0);
+		if (node instanceof BraceNode) {
+			BraceNode braceNode = (BraceNode) node;
+			return getArray(braceNode);
+		}
 		return 0;
 	}
+
+	private int getArray(BraceNode braceNode) {
+		List<Node> nodes = braceNode.getNodes();
+		MatchRules matchRules=new MatchRules().add(new CounterArrayPredicate());
+		NodeMatcher nodeMatcher=new NodeMatcher(matchRules);
+		MatchResults matchResult = nodeMatcher.match(nodes);
+		if (!matchResult.hasResults()) {
+			return 0;
+		}
+		BracedAttributeNode bracedAttributeNode = (BracedAttributeNode) matchResult.getFoundNodes().get(0);
+		return getArray(bracedAttributeNode);
+	}
+
+	private int getArray(BracedAttributeNode bracedAttributeNode) {
+		List<Node> nodes = bracedAttributeNode.getNodes();
+		MatchRules matchRules=new MatchRules().add(TokenNodePredicate.unsignedInteger());
+		NodeMatcher nodeMatcher=new NodeMatcher(matchRules);
+		MatchResults matchResult = nodeMatcher.match(nodes);
+		if (!matchResult.hasResults()) {
+			return 0;
+		}
+		TokenNode tokenNode = (TokenNode) matchResult.getFoundNodes().get(0);
+		String value = tokenNode.getValue();
+		int array=Integer.valueOf(value);
+		return array;
+	}
+
 
 }
