@@ -1,0 +1,35 @@
+package nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.skip.even;
+
+import nth.reflect.util.parser.node.matcher.result.MatchResults;
+import nth.reflect.util.parser.node.matcher.rule.MatchRules;
+import nth.reflect.util.regex.Regex;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.skip.SkipCounterNode;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.skip.SkipCounterRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predicate.TokenNodePredicate;
+
+/**
+ * s=e: skips even columns (of all pages)
+ * 
+ * @author nilsth
+ * @see SkipPageColumnRule
+ */
+public class SkipEvenCounterRule extends SkipCounterRule {
+
+	public static final String EVEN_ABBREVIATION = "e";
+
+	private static final Regex SKIP_EVEN_COLUMN_REGEX = new Regex().ignoreCase().beginOfLine()
+			.literal(EVEN_ABBREVIATION).endOfLine();
+
+	private static final MatchRules SKIP_EVEN_COLUMN_ATTRIBUTE_VALUE_RULES = new MatchRules()//
+			.add(TokenNodePredicate.rest(SKIP_EVEN_COLUMN_REGEX));
+
+	public SkipEvenCounterRule() {
+		super(SKIP_EVEN_COLUMN_ATTRIBUTE_VALUE_RULES);
+	}
+
+	@Override
+	protected SkipCounterNode createSkipCounterNode(MatchResults matchResults) {
+		return new SkipEvenCounterNode();
+	}
+
+}

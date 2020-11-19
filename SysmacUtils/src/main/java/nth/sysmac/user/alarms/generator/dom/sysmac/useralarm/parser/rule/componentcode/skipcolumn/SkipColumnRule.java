@@ -16,7 +16,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.predica
  * 
  * <h3>Skipping component numbers when using arrays:</h3>
  * <ul>
- * <li>{@insert SkipEvenColumnRule}</li>
+ * <li>{@insert SkipEvenCounterRule}</li>
  * <li>{@insert SkipUnevenColumnRule}</li>
  * <li>{@insert SkipSingleColumnRule}</li>
  * <li>{@insert SkipMaxColumnRule}</li>

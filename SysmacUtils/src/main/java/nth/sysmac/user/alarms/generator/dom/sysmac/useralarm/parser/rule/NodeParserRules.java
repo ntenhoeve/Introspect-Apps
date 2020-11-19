@@ -20,9 +20,10 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.compone
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipMinMaxPageColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.pagecolumnrange.SkipSinglePageColumnRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.componentcode.skipcolumn.uneven.SkipUnevenColumnRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.CounterRule;
+import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.skip.even.SkipEvenCounterRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.details.DetailsRule;
 import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.priority.PriorityRule;
-import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter.CounterRule;
 
 public enum NodeParserRules {
 
@@ -40,7 +41,8 @@ public enum NodeParserRules {
 	,SKIP_MIN_MAX_COLUMN_RULE(new SkipMinMaxColumnRule())
 	,SKIP_MAX_COLUMN_RULE(new SkipMaxColumnRule())
 	,SKIP_SINGLE_COLUMN_RULE(new SkipSingleColumnRule())
-	,COUNTER(new CounterRule())//: {cnt} increases for each array {cnt skip=0}: Starts at 1, {cnt skip=-9, u}: skips 0-9 and uneven numbers,  {cnt skip=0,10-14, e} skips 0, 10-14 and enven numbers, {cnt array=1} increases when the last array is increassed and restarts when the last array in in creases, TODO example of combination e.g. scalder tank{cnt array=2 skip=0} pump {cnt array=2 skip=0}
+	,SKIP_EVEN_COUNTER_RULE(new SkipEvenCounterRule())
+	,COUNTER(new CounterRule())
 	,HIDDEN_COMPONENT_CODE(new HiddenComponentCodeRule())
 	,VISIBLE_COMPONENT_CODE(new VisibleComponentCodeRule())
 	,DERIVED_COMPONENT_CODE(new DerivedComponentCodeRule())

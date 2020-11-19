@@ -21,7 +21,7 @@ import nth.sysmac.user.alarms.generator.dom.sysmac.useralarm.parser.rule.counter
  * <p>
  * {@insert DerivedComponentCodeRule}
  * <p>
- * {@insert SkipColumnRule}
+ * {@insert SkipCounterRule}
  * <p>
  * {@insert CounterRule}
  */
