@@ -16,8 +16,8 @@ public class CopyService {
 	@ParameterFactory
 	@ExecutionMode(mode = ExecutionModeType.EXECUTE_METHOD_DIRECTLY)
 	public void copy(SourceAndDestination sourceAndDestination) throws IOException {
-		Path sourcePath = sourceAndDestination.getVerifiedSourcePath();
-		Path destinationPath = sourceAndDestination.getVerifiedDestinationPath();
+		Path sourcePath = sourceAndDestination.getSource();
+		Path destinationPath = sourceAndDestination.getDestination();
 
 		if (new SiteFolderFilter().test(sourcePath)) {
 			SiteFolder siteFolder = new SiteFolder(sourcePath);
