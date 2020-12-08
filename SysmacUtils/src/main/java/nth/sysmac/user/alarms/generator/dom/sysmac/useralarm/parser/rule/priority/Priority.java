@@ -19,7 +19,7 @@ import nth.reflect.util.regex.Regex;
  * <td>F</td>
  * <td>fatal</td>
  * <td>UserFaultLevel1</td>
- * <td>A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop</td>
+ * <td>A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop, or an important fuse of the control system</td>
  * </tr>
  * <tr>
  * <td>C</td>
@@ -65,11 +65,12 @@ import nth.reflect.util.regex.Regex;
  * </tr>
  * </table>
  */
+
 public enum Priority {
 	FATAL(
 			"F",
 			1,
-			"A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop"),
+			"A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop, or an important fuse of the control system"),
 	CRITICAL(
 			"C", //
 			2, //
