@@ -19,49 +19,49 @@ import nth.reflect.util.regex.Regex;
  * <td>F</td>
  * <td>fatal</td>
  * <td>UserFaultLevel1</td>
- * <td>A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop, or an important fuse of the control system</td>
+ * <td>A fatal problem that prevents the system from working (fatal for system).<br>e.g. an EtherCAT error, an important fuse of the control system, missing IO cards, critical IO card errors, etc.</td>
  * </tr>
  * <tr>
  * <td>C</td>
  * <td>critical</td>
  * <td>UserFaultLevel2</td>
- * <td>A critical problem that stops the system but can be restarted, e.g. a motor overheating</td>
+ * <td>A critical problem that stops the system <br>e.g. an Emergency stop, a critical motor tripped, low hydraulic level, etc.</td>
  * </tr>
  * <tr>
  * <td>H</td>
  * <td>high</td>
  * <td>UserFaultLevel3</td>
- * <td>When immediate action is required by an operator, e.g. a a hot electric motor, a tripped knife motor</td>
+ * <td>A problem with major consequences, but system keeps running<br>Immediate action is required<br>e.g. an important motor tripped, etc.</td>
  * </tr>
  * <tr>
  * <td>MH</td>
  * <td>medium_hight</td>
  * <td>UserFaultLevel4</td>
- * <td></td>
+ * <td>A problem with moderate consequences<br>Urgent action is required</td>
  * </tr>
  * <tr>
  * <td>M</td>
  * <td>medium</td>
  * <td>UserFaultLevel5</td>
- * <td>When rapid action is required by an operator, e.g. a low temperature</td>
+ * <td>A problem with some consequences<br>Action within 5 minutes is required<br>e.g. a low temperature, etc.</td>
  * </tr>
  * <tr>
  * <td>ML</td>
  * <td>medium_low</td>
  * <td>UserFaultLevel6</td>
- * <td></td>
+ * <td>A problem with minor consequences<br>Action within 15 minutes is required</td>
  * </tr>
  * <tr>
  * <td>L</td>
  * <td>low</td>
  * <td>UserFaultLevel7</td>
- * <td>When no urgent action is required by an operator, e.g. a tripped plucker motor</td>
+ * <td>A problem with almost no consequences<br>Eventually action is required<br>e.g. a tripped plucker motor</td>
  * </tr>
  * <tr>
  * <td>I</td>
  * <td>info</td>
  * <td>UserInformation</td>
- * <td>All events that are not an error, e.g. when a stop button is pressed</td>
+ * <td>All events that are not an error<br>e.g. when a stop button is pressed, external stop. Etc.</td>
  * </tr>
  * </table>
  */
@@ -70,35 +70,46 @@ public enum Priority {
 	FATAL(
 			"F",
 			1,
-			"A critical problem that stops the system and can not be restarted before fixed, e.g Line drive trip, Ethercat error, Emergency stop, or an important fuse of the control system"),
+			"A fatal problem that prevents the system from working (fatal for system).\r\n" + 
+			"e.g. an EtherCAT error, an important fuse of the control system, missing IO cards, critical IO card errors, etc."),
 	CRITICAL(
 			"C", //
 			2, //
-			"A critical problem that stops the system but can be restarted, e.g. a motor overheating"),
+			"A critical problem that stops the system \r\n" + 
+			"e.g. an Emergency stop, a critical motor tripped, low hydraulic level, etc."),
 	HIGH(
 			"H",
 			3,
-			"When immediate action is required by an operator, e.g. a a hot electric motor, a tripped knife motor"),
+			"A problem with major consequences, but system keeps running\r\n" + 
+			"Immediate action is required\r\n" + 
+			"e.g. an important motor tripped, etc."),
 	MEDIUM_HIGHT(
 			"MH", //
 			4, //
-			""),
+			"A problem with moderate consequences\r\n" + 
+			"Urgent action is required"),
 	MEDIUM(
 			"M", //
 			5, //
-			"When rapid action is required by an operator, e.g. a low temperature"),
+			"A problem with some consequences\r\n" + 
+			"Action within 5 minutes is required\r\n" + 
+			"e.g. a low temperature, etc."),
 	MEDIUM_LOW(
 			"ML", //
 			6, //
-			""),
+			"A problem with minor consequences\r\n" + 
+			"Action within 15 minutes is required"),
 	LOW(
 			"L", //
 			7, //
-			"When no urgent action is required by an operator, e.g. a tripped plucker motor"),
+			"A problem with almost no consequences\r\n" + 
+			"Eventually action is required\r\n" + 
+			"e.g. a tripped plucker motor"),
 	INFO(
 			"I", //
 			9, //
-			"All events that are not an error, e.g. when a stop button is pressed");
+			"All events that are not an error\r\n" + 
+			"e.g. when a stop button is pressed, external stop. Etc.");
 
 	private final int level;
 	private final String description;
@@ -154,7 +165,7 @@ public enum Priority {
 					+ " * <td>" + priority.getAbbreviation() + "</td>\n" //
 					+ " * <td>" + priority.name().toLowerCase() + "</td>\n"//
 					+ " * <td>" + priority.getOmronPriority() + "</td>\n"//
-					+ " * <td>" + priority.getDescription() + "</td>\n"//
+					+ " * <td>" + priority.getDescription().replace("\r\n","<br>") + "</td>\n"//
 					+ " * </tr>\n");
 		}
 		javaDoc.append(" * </table>\n"//
